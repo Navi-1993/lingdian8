@@ -2,7 +2,7 @@
   "name": "lingdian8",
   "version": "1.0.0",
   "description": "a product of Ultron",
-  "main": "index.js",
+  "main": "main.js",
   "author": "Edmund",
   "license": "none",
   "dependencies": {
