@@ -20,6 +20,7 @@
             style="font-size: 40rpx;"
             class="iconfont">
       </view>
+    
     </uni-nav-bar>
     <!--  #endif -->
     <swiper-bar></swiper-bar>

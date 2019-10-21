@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 13:19:22
- * @LastEditTime: 2019-10-21 15:13:59
+ * @LastEditTime: 2019-10-21 18:03:08
  * @LastEditors: Edmund
  -->
 
@@ -210,7 +210,7 @@ $nav-height: 88rpx;
   }
 
   &--shadow {
-    box-shadow: 0 1px 6px #ccc;
+    box-shadow: 0 1rpx 6rpx #ccc;
   }
 
   &--border:after {
@@ -219,7 +219,7 @@ $nav-height: 88rpx;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 1px;
+    height: 1rpx;
     content: ' ';
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
