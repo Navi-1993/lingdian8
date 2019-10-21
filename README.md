@@ -10,7 +10,46 @@
 yarn
 ```
 
-## use the HBuilder-ide to complite this porject
+### 项目结构
+```
+├─api
+├─common
+├─components
+│  ├─gaoyia-parse
+│  │  ├─components
+│  │  └─libs
+│  ├─mobile-calendar-simple
+│  ├─neil-modal
+│  ├─uni-icons
+│  ├─uni-nav-bar
+│  └─uni-status-bar
+├─js_sdk
+│  └─luch-request
+│      └─luch-request-ts
+├─node_modules
+│  ├─underscore
+│  └─uni-simple-router
+│      ├─component
+│      ├─helpers
+│      ├─lifeCycle
+│      └─patch
+├─pages
+│  ├─home
+│  ├─mine
+│  ├─news
+│  └─video
+├─router
+│  └─modules
+├─static
+│  └─bottomBar
+│      ├─active
+│      └─sleep
+├─store
+│  └─modules
+└─unpackage
+```
+
+## use the HBuilder-ide to compile this porject
 - [hbuilder](https://dcloud.io/)
 
 ---
