@@ -49,7 +49,7 @@ yarn
 └─unpackage
 ```
 
-## use the HBuilder-ide to compile this porject
+## use the HBuilder-ide to compile this project
 - [hbuilder](https://dcloud.io/)
 
 ---

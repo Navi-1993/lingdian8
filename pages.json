@@ -23,13 +23,12 @@
 	  {
 		"path": "pages/video/index",
 		"style": {
-		  "app-plus": {
-			"titleNView": false,
-			"animationType": "zoom-fade-out",
-			"animationDuration": 300
-		  },
-		  "navigationBarTitleText": "视频",
-		  "enablePullDownRefresh": true
+			"navigationBarTitleText": "视频",
+			"app-plus": {
+				"titleNView": false,
+				"animationType": "zoom-fade-out",
+				"animationDuration": 300
+			}
 		}
 	  },
 	  {
@@ -48,7 +47,8 @@
 	  "navigationBarTitleText": "零点吧",
 	  "navigationBarBackgroundColor": "#1B1B30",
 	  "backgroundColor": "#1B1B30",
-	  "backgroundColorBottom":"#1B1B30" 
+	  "backgroundColorBottom":"#1B1B30",
+	  "position": "top"
 	},
 	"tabBar": {
 	  "color": "#FFFFFF",

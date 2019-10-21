@@ -6,6 +6,8 @@
   "author": "Edmund",
   "license": "none",
   "dependencies": {
+    "@dcloudio/uni-helper-json": "^1.0.3",
+    "moment": "^2.24.0",
     "underscore": "^1.9.1",
     "uni-simple-router": "^1.2.5"
   }
