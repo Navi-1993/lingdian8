@@ -4,13 +4,16 @@
 ### Author: Edmund
 > Email: q1592193221@gmail.com
 ## Project setup
+
+> check your node version ≥ 10.16
 ```js
 yarn
 ```
 
 ## use the HBuilder-ide to complite this porject
-- hbuilder [https://dcloud.io/]
+- [hbuilder](https://dcloud.io/)
 
+---
 
 ### Technology stack
 
@@ -21,7 +24,7 @@ yarn
 - [vuex](https://vuex.vuejs.org/zh/guide/)
 - [webpack](https://www.webpackjs.com/)
 - [underScore.js](https://www.html.cn/doc/underscore/)
+- [axios-likes](https://ext.dcloud.net.cn/plugin?id=392)
 
 
-begin 2019-10-21
-done ???
+> date: 2019-10-21 to ??? 
