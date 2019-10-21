@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+underscore@^1.9.1:
+  version "1.9.1"
+  resolved "https://registry.npm.taobao.org/underscore/download/underscore-1.9.1.tgz#06dce34a0e68a7babc29b365b8e74b8925203961"
+  integrity sha1-BtzjSg5op7q8KbNluOdLiSUgOWE=
+
 uni-simple-router@^1.2.5:
   version "1.2.5"
   resolved "https://registry.npm.taobao.org/uni-simple-router/download/uni-simple-router-1.2.5.tgz#2c71ff5c44639788776df96065e4d73378378483"

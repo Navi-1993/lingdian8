@@ -6,6 +6,7 @@
   "author": "Edmund",
   "license": "none",
   "dependencies": {
+    "underscore": "^1.9.1",
     "uni-simple-router": "^1.2.5"
   }
 }
