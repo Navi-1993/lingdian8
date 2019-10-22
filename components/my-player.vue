@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-22 16:33:21
- * @LastEditTime: 2019-10-22 18:25:08
+ * @LastEditTime: 2019-10-22 19:03:57
  * @LastEditors: Edmund
  -->
 
@@ -11,7 +11,10 @@
       <view class="player_container">
               <video  :src="src"
                       controls
-                      objectFit="fill">
+                      objectFit="fill"
+                      playsinline="true"
+                      webkit-playsinline="true"
+                      >
               </video>
       </view>
 </template>

@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 13:19:22
- * @LastEditTime: 2019-10-21 18:03:08
+ * @LastEditTime: 2019-10-22 18:39:18
  * @LastEditors: Edmund
  -->
 
@@ -206,7 +206,7 @@ $nav-height: 88rpx;
 
   &--fixed {
     position: fixed;
-    z-index: 998;
+    z-index: 99999;
   }
 
   &--shadow {
