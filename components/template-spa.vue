@@ -1,14 +1,15 @@
 <!--
- * @Description: vue文件模板
+ * @Description: 组件模板
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
- * @Date: 2019-10-21 14:16:12
- * @LastEditTime: 2019-10-21 14:20:02
+ * @Date: 2019-10-22 16:33:21
+ * @LastEditTime: 2019-10-22 16:35:23
  * @LastEditors: Edmund
  -->
 
 <template>
-    <view >
+    <view class="video_container">
+        
     </view>
 </template>
 
@@ -20,14 +21,8 @@ export default {
   props: {},
   created() {},
   onLoad() {},
-  onShow() {},
   onReady() {},
-  onHide() {},
   onUnload() {},
-  onPullDownRefresh() {},
-  onReachBottom() {},
-  onShareAppMessage() {},
-  onPageScroll() {},
   methods: {},
   computed: {},
   watch: {}

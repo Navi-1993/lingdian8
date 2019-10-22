@@ -1,13 +1,23 @@
+<!--
+ * @Description: 自定义滚动tab组件
+ * @Author: Edmund
+ * @Email: q1592193221@gmail.com
+ * @Date: 2019-10-21 15:41:34
+ * @LastEditTime: 2019-10-22 15:27:19
+ * @LastEditors: Edmund
+ * @scrolltop {Number} 值为200时，滚动条移出视图
+ * @styleObject {Object} 传入的样式，会覆盖掉当前默认样式
+ -->
 <template>
     <view class="container">
         <scroll-view scroll-x="true"
                     scroll-y="true">
                     <view   class="scroll-view-item"
-                            v-for="(item,idx) of 20"
-                            scroll-top="200"
-                            :style="[defaultStyle]"
+                            v-for="(item,idx) of renderData"
+                            :scroll-top="scrolltop"
+                            :style="[defaultStyle,styleObject]"
                             :key="idx">
-                      NBA大老粗
+                            {{item}}
                     </view>
                     
         </scroll-view>
@@ -16,6 +26,21 @@
 
 <script>
 export default {
+  name: '',
+  props: {
+    styleObject: {
+      type: Object,
+      default: {}
+    },
+    scrolltop: {
+      type: Number,
+      default: 0
+    },
+    renderData: {
+      type: Array,
+      default: []
+    }
+  },
   data() {
     return {
       defaultStyle: {

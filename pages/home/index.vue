@@ -3,12 +3,12 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:54:43
- * @LastEditTime: 2019-10-21 16:16:04
+ * @LastEditTime: 2019-10-22 17:13:46
  * @LastEditors: Edmund
  -->
 <template>
 	<view class="home_container">
-    <!--  #ifdef APP-PLUS  -->
+    <!--  #ifndef MP-WEIXIN  -->
     <!-- 状态栏 -->
     <uni-nav-bar  title="零点吧"
                   :fixed="true"
@@ -23,7 +23,10 @@
     
     </uni-nav-bar>
     <!--  #endif -->
-    <swiper-bar></swiper-bar>
+    <swiper-bar :styleObject="styleObject"
+                :renderData = "sportNameList"
+                scrollTop="200">
+    </swiper-bar>
 	</view>
 </template>
 
@@ -38,11 +41,47 @@ export default {
   data() {
     return {
       navBarBackColor: '#1B1B30',
-      navBarColor: '#FFFFFF'
+      navBarColor: '#FFFFFF',
+      styleObject: {
+        color: 'black'
+      },
+      faboriteData: [
+        {
+          name: 'wong'
+        },
+        {
+          name: 'xue'
+        },
+        {
+          name: 'feng'
+        },
+        {
+          name: 'niu'
+        },
+        {
+          name: 'xu'
+        },
+        {
+          name: 'feng'
+        },
+        {
+          name: 'jia'
+        },
+        {
+          name: 'SB'
+        }
+      ]
     }
   },
   onLoad() {},
-  methods: {}
+  methods: {},
+  computed: {
+    sportNameList() {
+      return this.$_.map(this.faboriteData, item => {
+        return item.name
+      })
+    }
+  }
 }
 </script>
 
