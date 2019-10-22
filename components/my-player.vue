@@ -3,13 +3,16 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-22 16:33:21
- * @LastEditTime: 2019-10-22 18:01:22
+ * @LastEditTime: 2019-10-22 18:25:08
  * @LastEditors: Edmund
  -->
 
 <template>
       <view class="player_container">
-              <video :src="src"></video>
+              <video  :src="src"
+                      controls
+                      objectFit="fill">
+              </video>
       </view>
 </template>
 
