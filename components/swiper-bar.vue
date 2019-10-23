@@ -3,15 +3,16 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 15:41:34
- * @LastEditTime: 2019-10-22 18:33:40
+ * @LastEditTime: 2019-10-23 11:39:17
  * @LastEditors: Edmund
  * @scrolltop {Number} 值为200时，滚动条移出视图
  * @styleObject {Object} 传入的样式，会覆盖掉当前默认样式
  -->
 <template>
     <view class="container">
-        <scroll-view scroll-x="true"
-                    scroll-y="true">
+        <scroll-view  scroll-x="true"
+                      class="scrollView"
+                      scroll-y="true">
                     <view   class="scroll-view-item"
                             v-for="(item,idx) of renderData"
                             :scroll-top="scrolltop"
@@ -54,7 +55,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-scroll-view {
+.scrollView {
   width: 100vw;
   display: flex;
   white-space: nowrap;

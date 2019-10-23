@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-22 16:33:21
- * @LastEditTime: 2019-10-22 19:03:57
+ * @LastEditTime: 2019-10-23 13:22:33
  * @LastEditors: Edmund
  -->
 
@@ -11,7 +11,7 @@
       <view class="player_container">
               <video  :src="src"
                       controls
-                      objectFit="fill"
+                      class="player"
                       playsinline="true"
                       webkit-playsinline="true"
                       >
@@ -48,14 +48,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.player_container {
-  video {
-    display: block;
-    padding: 0;
-    margin: 0 auto;
-    width: 710rpx;
-    height: 487rpx;
-    border-radius: 10rpx;
-  }
+.player {
+  margin-left: 20rpx;
+  width: 710rpx;
+  height: 486rpx;
+  border-radius: 20rpx;
 }
 </style>

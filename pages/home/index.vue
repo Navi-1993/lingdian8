@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:54:43
- * @LastEditTime: 2019-10-22 17:13:46
+ * @LastEditTime: 2019-10-23 11:02:33
  * @LastEditors: Edmund
  -->
 <template>
@@ -86,4 +86,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.home_container {
+  height: 100vh;
+}
 </style>
