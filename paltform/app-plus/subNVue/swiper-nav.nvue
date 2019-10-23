@@ -7,37 +7,25 @@
  * @LastEditors: Edmund
  -->
 <template>
-    <view class="container">
-       <text class="text"></text>
-    </view>
+    <div class="container">
+		<scroll-view 	scroll-x="true"
+						class="scroll"
+						show-scrollbar="false">
+			<text 	v-for="(item,idx) of 20"
+					:key="idx"
+					class="text">NBA</text>
+		</scroll-view>
+    </div>
 </template>
 
 <script>
 export default {
   name: '',
-  props: {
-    styleObject: {
-      type: Object,
-      default: {}
-    },
-    scrolltop: {
-      type: Number,
-      default: 0
-    },
-    renderData: {
-      type: Array,
-      default: []
-    }
-  },
   components:{
 	
   },
   data() {
     return {
-      defaultStyle: {
-        color: 'red',
-        fontSize: 24 + 'rpx'
-      }
     }
   },
   methods: {}
@@ -45,11 +33,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.scroll {
+	width: 750rpx;
+	height: 76rpx;
+	flex-direction: row;
+	background-color: #FFFFFF;
+	
+}
 .text {
-    background-color: red;
-    height: 76rpx;
-    width:750rpx;
-    font-size: 24rpx;
-    line-height: 76rpx;
+	line-height: 76rpx;
+	font-size: 24rpx;
+	color: #0000FE;
+	margin: 10rpx;
 }
 </style>

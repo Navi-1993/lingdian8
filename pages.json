@@ -29,13 +29,13 @@
 				"animationType": "zoom-fade-out",
 				"animationDuration": 300,
 				"subNVues":[{  
-                    "id": "swiper-bar",
+                    "id": "swiper-nav",
                     "path": "paltform/app-plus/subNVue/swiper-nav",
                     "style": {  
                         "position": "absolute",  
                         "dock": "right",  
 						"width": "750upx",
-						"height": "76upx",
+						"height": "120upx",
 						"top": "96upx",
                         "background": "transparent"  
                     }  

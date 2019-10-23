@@ -9,11 +9,6 @@
 
 <template>
     <view class="video_container">
-      <swiper-bar   :styleObject="styleObject"
-                    :renderData = "sportNameList"
-                    :scrolltop = 200
-                    class="swiper-bar">
-      </swiper-bar>
         <my-player  class="player"
                     src="rtmp://live5.zdldwovldc.zhibo.tv/8live/s_248910?k=a5f4510b480416a2b33ccf4978809aeb&t=5db00648">
         </my-player>
@@ -22,14 +17,10 @@
 
 
 <script>
-import uniNavBar from 'components/uni-nav-bar/uni-nav-bar.vue'
-import swiperBar from 'components/swiper-bar.vue'
 import myPlayer from 'components/my-player.vue'
 export default {
   name: 'video',
   components: {
-    swiperBar,
-    uniNavBar,
     myPlayer
   },
   props: {},
@@ -38,7 +29,7 @@ export default {
   onShow() {
     // #ifdef APP-PLUS
     // 通过 id 获取 nvue 子窗体
-    const subNVue = uni.getSubNVueById('swiper-bar')
+    const subNVue = uni.getSubNVueById('swiper-nav')
     // 打开 nvue 子窗体
     subNVue.show('slide-in-left', 300, function() {
       console.log('the subNvue was opened')
