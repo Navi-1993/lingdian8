@@ -29,15 +29,14 @@
 				"animationType": "zoom-fade-out",
 				"animationDuration": 300,
 				"subNVues":[{  
-                    "id": "swiper-bar", // 唯一标识  
-                    "path": "paltform/app-plus/subNVue/swiper-nav", // 页面路径  
-                    /*"type": "popup",  这里不需要*/  
+                    "id": "swiper-bar",
+                    "path": "paltform/app-plus/subNVue/swiper-nav",
                     "style": {  
                         "position": "absolute",  
                         "dock": "right",  
 						"width": "750upx",
-						"height": "100upx",
-						"top": "108upx",
+						"height": "76upx",
+						"top": "96upx",
                         "background": "transparent"  
                     }  
                 }] 

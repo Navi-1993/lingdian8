@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-22 16:33:21
- * @LastEditTime: 2019-10-23 13:22:33
+ * @LastEditTime: 2019-10-23 15:35:17
  * @LastEditors: Edmund
  -->
 
@@ -12,6 +12,7 @@
               <video  :src="src"
                       controls
                       class="player"
+                      :objectFit="objectFit"
                       playsinline="true"
                       webkit-playsinline="true"
                       >
@@ -31,7 +32,13 @@ export default {
   },
   data() {
     return {
-      isShowPlayIcon: true
+      isShowPlayIcon: true,
+      // #ifdef APP-PLUS
+      objectFit: "fill"
+      // #endif
+      // #ifndef APP-PLUS
+      objectFit: "cover"
+      // #endif
     }
   },
   created() {
@@ -48,10 +55,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.player {
-  margin-left: 20rpx;
-  width: 710rpx;
-  height: 486rpx;
-  border-radius: 20rpx;
+.player_container {
+  video {
+    margin-left: 20rpx;
+    width: 710rpx;
+    height: 486rpx;
+  }
 }
 </style>
