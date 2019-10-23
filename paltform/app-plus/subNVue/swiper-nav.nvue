@@ -51,6 +51,5 @@ export default {
     width:750rpx;
     font-size: 24rpx;
     line-height: 76rpx;
-    position
 }
 </style>
