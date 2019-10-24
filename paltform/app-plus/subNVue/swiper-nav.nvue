@@ -36,7 +36,6 @@ export default {
 	  that = this
   	    uni.$on('test', data => {
 			this.title = data.title
-			console.log(this.title,'title')
   	    })
   },
   onShow() {
@@ -52,13 +51,16 @@ export default {
 
 <style lang="scss" scoped>
 .scroll {
+	padding: 0 35rpx;
 	width: 750rpx;
-	height: 76rpx;
 	flex-direction: row;
 	background-color: #FFFFFF;
+	height: 76rpx;
 	
 }
 .text {
+	text-align: center;
+	justify-content: center;
 	line-height: 76rpx;
 	font-size: 24rpx;
 	margin: 10rpx;
@@ -66,5 +68,6 @@ export default {
 }
 .active {
 	color: $default-text-color;
+	border-bottom-color: #1B1B30;
 }
 </style>

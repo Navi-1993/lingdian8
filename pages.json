@@ -35,7 +35,7 @@
                         "position": "absolute",  
                         "dock": "right",  
 						"width": "750upx",
-						"height": "120upx",
+						"height": "76upx",
 						"top": "96upx",
                         "background": "transparent"  
                     }  

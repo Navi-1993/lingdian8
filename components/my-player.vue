@@ -3,25 +3,27 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-22 16:33:21
- * @LastEditTime: 2019-10-23 15:35:17
+ * @LastEditTime: 2019-10-24 18:09:26
  * @LastEditors: Edmund
  -->
 
 <template>
       <view class="player_container">
               <video  :src="src"
-                      controls
+                      id="player"
                       class="player"
                       :objectFit="objectFit"
-                      playsinline="true"
-                      webkit-playsinline="true"
-                      >
+                      :show-center-play-btn="false">
+                <cover-view class="controls-title"
+                             @click="Play">
+                             简单的自定义 controls
+                </cover-view>
               </video>
+              
       </view>
 </template>
 
 <script>
-let that
 export default {
   name: 'my-player',
   props: {
@@ -34,18 +36,22 @@ export default {
     return {
       isShowPlayIcon: true,
       // #ifdef APP-PLUS
-      objectFit: "fill"
+      objectFit: 'fill',
       // #endif
       // #ifndef APP-PLUS
-      objectFit: "cover"
+      objectFit: 'cover'
       // #endif
     }
   },
-  created() {
-    that = this
+  created() {},
+  onReady() {
+    this.videoContext = uni.createVideoContext('player', this)
   },
-  onReady() {},
   methods: {
+    Play() {
+      console.log('start')
+      this.videoContext.play()
+    },
     sendDanmu() {},
     videoPlayCB() {},
     videoStopCB() {},
@@ -56,10 +62,23 @@ export default {
 
 <style lang="scss" scoped>
 .player_container {
-  video {
+  .player {
     margin-left: 20rpx;
     width: 710rpx;
     height: 486rpx;
+    position: relative;
+  }
+  .cover {
+    color: #fff;
+    display: inline-block;
+    position: absolute;
+    z-index: 999999;
+  }
+  .controls-title {
+    width: 100%;
+    margin-top: 200rpx;
+    text-align: center;
+    color: #ffffff;
   }
 }
 </style>
