@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:16:12
- * @LastEditTime: 2019-10-23 15:51:35
+ * @LastEditTime: 2019-10-24 14:38:33
  * @LastEditors: Edmund
  -->
 
@@ -37,13 +37,11 @@ export default {
     })
     // #endif
   },
-  onReady() {},
+  onReady() {
+    uni.$emit('test', { title: '你好' })
+  },
   onHide() {},
   onUnload() {},
-  onPullDownRefresh() {},
-  onReachBottom() {},
-  onShareAppMessage() {},
-  onPageScroll() {},
   data() {
     return {
       navBarBackColor: '#1B1B30',
@@ -79,7 +77,11 @@ export default {
       ]
     }
   },
-  methods: {},
+  methods: {
+    getMessage() {
+      uni.$emit('test', { title: '你好' })
+    }
+  },
   computed: {
     sportNameList() {
       return this.$_.map(this.faboriteData, item => {

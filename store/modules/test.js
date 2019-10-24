@@ -3,12 +3,12 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:57:08
- * @LastEditTime: 2019-10-21 13:00:51
+ * @LastEditTime: 2019-10-24 11:42:17
  * @LastEditors: Edmund
  */
 const app = {
   state: {
-    collection: [] // 文章收藏
+    collection: '文章' // 文章收藏
   },
   mutations: {
     // 命名规范为全大写_

@@ -1,5 +1,8 @@
 <script>
 export default {
+  globalData: {
+    vuex: 'hello'
+  },
   onLaunch: function() {
     console.log('App Launch')
     // #ifdef APP-PLUS
@@ -7,15 +10,16 @@ export default {
     plus.screen.lockOrientation('portrait-primary')
     // #endif
   },
-  onShow: function() {
-    console.log('App Show')
-  },
+  onShow: function() {},
   onHide: function() {
     console.log('App Hide')
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 /*每个页面公共css */
+page {
+  color: $default-text-color;
+}
 </style>
