@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-22 16:33:21
- * @LastEditTime: 2019-10-25 16:56:19
+ * @LastEditTime: 2019-10-25 17:35:25
  * @LastEditors: Edmund
  -->
 
@@ -18,6 +18,7 @@
                       :show-center-play-btn="false">
                 <cover-image  class="poster"
                               v-show="isShowPoster"
+                              v-cloak
                                src="https://pic1.zhimg.com/50/v2-3aff4f7ec4e3a677d0c88020989b9444_hd.jpg">
                 </cover-image>
                 <cover-image  class="controls-play img"
@@ -58,7 +59,6 @@ export default {
   methods: {
     play() {
       this.videoContext.play()
-      this.isShowPoster = false // 播放器隐藏当前封面
       console.log('player start')
     },
     pause() {
@@ -67,6 +67,7 @@ export default {
     },
     sendDanmu() {},
     videoPlayCB() {
+      this.isShowPoster = false // 播放器隐藏当前封面
       this.isPlayBtnShow = false // 播放器隐藏播放按钮
     },
     videoPauseCB() {
