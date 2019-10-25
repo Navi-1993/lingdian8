@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-22 16:33:21
- * @LastEditTime: 2019-10-25 14:55:04
+ * @LastEditTime: 2019-10-25 16:56:19
  * @LastEditors: Edmund
  -->
 
@@ -12,9 +12,16 @@
               <video  :src="src"
                       id="player"
                       class="player"
+                      @play="videoPlayCB"
+                      @pause="videoPauseCB"
                       :objectFit="objectFit"
                       :show-center-play-btn="false">
-                <cover-image  class="controls-play img" 
+                <cover-image  class="poster"
+                              v-show="isShowPoster"
+                               src="https://pic1.zhimg.com/50/v2-3aff4f7ec4e3a677d0c88020989b9444_hd.jpg">
+                </cover-image>
+                <cover-image  class="controls-play img"
+                              v-show="isPlayBtnShow"
                               @click="play"
                                src="static/controls/play.png">
                 </cover-image>
@@ -34,7 +41,8 @@ export default {
   },
   data() {
     return {
-      isShowPlayIcon: true,
+      isShowPoster: true,
+      isPlayBtnShow: true,
       // #ifdef APP-PLUS
       objectFit: 'fill',
       // #endif
@@ -49,12 +57,21 @@ export default {
   },
   methods: {
     play() {
-      console.log('controls start')
       this.videoContext.play()
+      this.isShowPoster = false // 播放器隐藏当前封面
+      console.log('player start')
+    },
+    pause() {
+      this.videoContext.pause()
+      console.log('player pause')
     },
     sendDanmu() {},
-    videoPlayCB() {},
-    videoStopCB() {},
+    videoPlayCB() {
+      this.isPlayBtnShow = false // 播放器隐藏播放按钮
+    },
+    videoPauseCB() {
+      this.isPlayBtnShow = true // 视频处于暂停时显示播放按钮
+    },
     videoErrorCallback() {}
   }
 }
@@ -72,6 +89,11 @@ export default {
     width: 160rpx;
     height: 160rpx;
     @include center;
+  }
+  .poster {
+    width: 100%;
+    height: 100%;
+    position: absolute;
   }
 }
 </style>

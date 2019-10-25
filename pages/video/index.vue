@@ -3,14 +3,14 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:16:12
- * @LastEditTime: 2019-10-25 10:45:04
+ * @LastEditTime: 2019-10-25 15:43:35
  * @LastEditors: Edmund
  -->
 
 <template>
     <view class="video_container">
         <my-player  class="player"
-                    src="https://r5---sn-i3b7knsl.googlevideo.com/videoplayback?expire=1571930596&ei=hG2xXaS6H5KHs8IPxIqOoAU&ip=103.35.74.224&id=o-AJskgsVg2yQ9FU2au-VyWEf5pRob6rD6RvmeE6iuNUKM&itag=22&source=youtube&requiressl=yes&mm=31%2C26&mn=sn-i3b7knsl%2Csn-a5mlrnek&ms=au%2Conr&mv=m&mvi=4&pl=24&initcwndbps=1150000&mime=video%2Fmp4&ratebypass=yes&dur=700.499&lmt=1571052307327041&mt=1571908898&fvip=5&fexp=23842630&c=WEB&txp=5535432&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cmime%2Cratebypass%2Cdur%2Clmt&sig=ALgxI2wwRgIhAJKD3grQ54XWtnp8vjgJTUiACQ_0a4OEIj9WAObvEIMhAiEAnoPzwq9fW5OuYWrhgePK-EEUJrbLF3yZgK1aNMiItb8%3D&lsparams=mm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=AHylml4wRAIgdCnWBGwuz6sCYnG-WVj2JN_eUWLlDmOElUqi0WqnngcCICS2oCETzoMrmRdnDNfkXM6_xoJbMQ6CwZ-mL83dA6_U">
+                    src="https://r1---sn-i3b7knlk.googlevideo.com/videoplayback?expire=1572010710&ei=dqayXfDiIoScqQHeipeYDw&ip=103.113.156.26&id=o-ALF07uAMmFs8UEcPdhyle4w3gYkZT-5OQVlsKujKOpNA&itag=18&source=youtube&requiressl=yes&mm=31%2C26&mn=sn-i3b7knlk%2Csn-npoeen7y&ms=au%2Conr&mv=m&mvi=0&pl=24&initcwndbps=1680000&mime=video%2Fmp4&gir=yes&clen=21537494&ratebypass=yes&dur=292.687&lmt=1540747309774125&mt=1571989007&fvip=1&fexp=23842630&c=WEB&txp=5531432&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cmime%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&lsparams=mm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=AHylml4wRAIgMaq8F_nLe96D6hId6sk6CSnziLOYSrfJ_12u2ObycnYCIGUi5_7r5c5bHNwgPrYe3BWI7hPxhQMI99OXHjakmaSm&sig=ALgxI2wwRgIhAP6DUzPpFDf9e9h2hirN_6Th1AXsDA2Y91KQfJcQl2k9AiEAzQZhoLsjcXNNE2USF4F10bC4qnp6swgvBeeQKhGWL4M=">
         </my-player>
         <view class="iconfont">&#xe604;123123</view>
     </view>
