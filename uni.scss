@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:54:43
- * @LastEditTime: 2019-10-24 14:51:37
+ * @LastEditTime: 2019-10-25 14:14:14
  * @LastEditors: Edmund
  */
 
@@ -73,3 +73,15 @@ $doc-color-subtitle: #555555; // 二级标题颜色
 $doc-font-size-subtitle:36rpx;
 $doc-color-paragraph: #3F536E; // 文章段落颜色
 $doc-font-size-paragraph:30rpx;
+
+
+
+/* 自定义常用样式 */
+
+/* 垂直居中 */
+@mixin center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }

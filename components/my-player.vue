@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-22 16:33:21
- * @LastEditTime: 2019-10-25 10:34:04
+ * @LastEditTime: 2019-10-25 14:55:04
  * @LastEditors: Edmund
  -->
 
@@ -14,10 +14,10 @@
                       class="player"
                       :objectFit="objectFit"
                       :show-center-play-btn="false">
-                <cover-view class="controls-title iconfont"
-                             @click="Play">
-                             &#xe606;
-                </cover-view>
+                <cover-image  class="controls-play img" 
+                              @click="play"
+                               src="static/controls/play.png">
+                </cover-image>
               </video>
               
       </view>
@@ -48,8 +48,8 @@ export default {
     this.videoContext = uni.createVideoContext('player', this)
   },
   methods: {
-    Play() {
-      console.log('start')
+    play() {
+      console.log('controls start')
       this.videoContext.play()
     },
     sendDanmu() {},
@@ -63,22 +63,15 @@ export default {
 <style lang="scss" scoped>
 .player_container {
   .player {
-    margin-left: 20rpx;
+    margin: 24rpx 0 0 20rpx;
     width: 710rpx;
     height: 486rpx;
     position: relative;
   }
-  .cover {
-    color: #fff;
-    display: inline-block;
-    position: absolute;
-    z-index: 999999;
-  }
-  .controls-title {
-    width: 100%;
-    margin-top: 200rpx;
-    text-align: center;
-    color: #ffffff;
+  .controls-play {
+    width: 160rpx;
+    height: 160rpx;
+    @include center;
   }
 }
 </style>
