@@ -19,6 +19,9 @@ export default {
 
 <style lang="scss">
 /*每个页面公共css */
+
+/* 阿里字体图标库引入（已使用项目管理） */
+@import url('common/css/font-family/iconfont.css');
 /* #ifndef APP-PLUS-NVUE */
 pages {
   color: $default-text-color;

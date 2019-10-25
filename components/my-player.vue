@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-22 16:33:21
- * @LastEditTime: 2019-10-24 18:09:26
+ * @LastEditTime: 2019-10-25 10:34:04
  * @LastEditors: Edmund
  -->
 
@@ -14,9 +14,9 @@
                       class="player"
                       :objectFit="objectFit"
                       :show-center-play-btn="false">
-                <cover-view class="controls-title"
+                <cover-view class="controls-title iconfont"
                              @click="Play">
-                             简单的自定义 controls
+                             &#xe606;
                 </cover-view>
               </video>
               
