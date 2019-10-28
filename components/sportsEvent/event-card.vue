@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-28 14:37:31
- * @LastEditTime: 2019-10-28 16:27:14
+ * @LastEditTime: 2019-10-28 17:07:38
  * @LastEditors: Edmund
  -->
 
@@ -21,7 +21,7 @@
               </view>
               <view class="controls">
                 <text class="iconfont">&#xe600;</text>
-                <button class="video">视频直播</button>
+                <text class="videoControls">视频直播</text>
               </view>
               <view class="teamB">
                 <image />
@@ -36,7 +36,6 @@
 <script>
 export default {
   name: 'eventCard',
-  components: {},
   props: {},
   created() {},
   onLoad() {},
@@ -81,21 +80,22 @@ export default {
     margin-left: 106rpx;
   }
   .controls {
-    width: 118rpx;
     margin: 46rpx 122rpx 0 122rpx;
+    width: 118rpx;
     color: $default-text-color-inverse;
     text {
       font-size: 40rpx;
     }
-    button {
-      width: 118rpx;
+    .videoControls {
+      display: inline-block;
       height: 30rpx;
+      padding: 0 20rpx;
       margin-top: 18rpx;
       line-height: 30rpx;
       border-radius: 15rpx;
       background-color: $default-bg-black;
       color: $default-text-color-white;
-      font-size: 20rpx;
+      font-size: 18rpx;
     }
   }
 }

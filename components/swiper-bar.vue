@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 15:41:34
- * @LastEditTime: 2019-10-28 16:14:16
+ * @LastEditTime: 2019-10-28 17:22:16
  * @LastEditors: Edmund
  * @scrolltop {Number} 值为200时，滚动条移出视图
  * @styleObject {Object} 传入的样式，会覆盖掉当前默认样式
@@ -12,10 +12,10 @@
     <view class="container">
         <scroll-view  scroll-x="true"
                       class="scrollView"
+                      :scroll-top="scrollXshow ? 1 : 0"
                       scroll-y="true">
             <view   class="scroll-view-item"
                     v-for="(item,idx) of renderData"
-                    :scroll-top="scrolltop"
                     :style="[defaultStyle,styleObject]"
                     :key="idx">
                     {{item}}
@@ -33,9 +33,9 @@ export default {
       type: Object,
       default: {}
     },
-    scrolltop: {
-      type: Number,
-      default: 0
+    scrollXshow: {
+      type: Boolean,
+      default: false
     },
     renderData: {
       type: Array,
@@ -55,6 +55,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container {
+  overflow: hidden;
+}
 .scrollView {
   position: fixed;
   width: 100vw;

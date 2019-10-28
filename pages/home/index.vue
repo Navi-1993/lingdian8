@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:54:43
- * @LastEditTime: 2019-10-28 16:55:22
+ * @LastEditTime: 2019-10-28 17:22:58
  * @LastEditors: Edmund
  -->
 <template>
@@ -26,7 +26,7 @@
     <!-- 赛事导航 -->
     <swiper-bar :styleObject="styleObject"
                 :renderData = "sportNameList"
-                scrollTop="200">
+                :scrollXshow ="true">
     </swiper-bar>
     <!-- 赛事列表 -->
     <view class="home_content">
