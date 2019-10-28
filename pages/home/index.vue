@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:54:43
- * @LastEditTime: 2019-10-23 11:02:33
+ * @LastEditTime: 2019-10-28 15:06:57
  * @LastEditors: Edmund
  -->
 <template>
@@ -27,16 +27,28 @@
                 :renderData = "sportNameList"
                 scrollTop="200">
     </swiper-bar>
+    <view class="home_content">
+      <calendar>
+        <text slot="date">11月6日  星期六</text>
+      </calendar>
+      <event-card>
+        <text slot="text">11月6日  星期六</text>
+      </event-card>
+    </view>
 	</view>
 </template>
 
 <script>
 import uniNavBar from 'components/uni-nav-bar/uni-nav-bar.vue' // 头部导航组件
 import swiperBar from 'components/swiper-bar.vue'
+import calendar from 'components/time_module/calendar.vue'
+import eventCard from 'components/sportsEvent/event-card.vue'
 export default {
   components: {
     uniNavBar,
-    swiperBar
+    swiperBar,
+    calendar,
+    eventCard
   },
   data() {
     return {

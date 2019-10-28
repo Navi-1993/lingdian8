@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-22 16:33:21
- * @LastEditTime: 2019-10-25 17:35:25
+ * @LastEditTime: 2019-10-28 15:37:41
  * @LastEditors: Edmund
  -->
 
@@ -18,7 +18,6 @@
                       :show-center-play-btn="false">
                 <cover-image  class="poster"
                               v-show="isShowPoster"
-                              v-cloak
                                src="https://pic1.zhimg.com/50/v2-3aff4f7ec4e3a677d0c88020989b9444_hd.jpg">
                 </cover-image>
                 <cover-image  class="controls-play img"
