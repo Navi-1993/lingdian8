@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-28 14:37:31
- * @LastEditTime: 2019-10-28 15:57:42
+ * @LastEditTime: 2019-10-28 16:27:14
  * @LastEditors: Edmund
  -->
 
@@ -90,6 +90,7 @@ export default {
     button {
       width: 118rpx;
       height: 30rpx;
+      margin-top: 18rpx;
       line-height: 30rpx;
       border-radius: 15rpx;
       background-color: $default-bg-black;

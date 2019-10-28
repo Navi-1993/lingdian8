@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:54:43
- * @LastEditTime: 2019-10-28 15:06:57
+ * @LastEditTime: 2019-10-28 16:55:22
  * @LastEditors: Edmund
  -->
 <template>
@@ -23,17 +23,23 @@
     
     </uni-nav-bar>
     <!--  #endif -->
+    <!-- 赛事导航 -->
     <swiper-bar :styleObject="styleObject"
                 :renderData = "sportNameList"
                 scrollTop="200">
     </swiper-bar>
+    <!-- 赛事列表 -->
     <view class="home_content">
-      <calendar>
-        <text slot="date">11月6日  星期六</text>
-      </calendar>
-      <event-card>
-        <text slot="text">11月6日  星期六</text>
-      </event-card>
+      <scroll-view  :scroll-y="true"
+                    class="scrollView">
+          <calendar>
+              <text slot="date">11月6日  星期六</text>
+          </calendar>
+          <event-card v-for="(item,idx) of 10"
+                      :key="idx">
+              <text slot="text">17:00   PCM大师赛-决赛</text>
+          </event-card>
+      </scroll-view>
     </view>
 	</view>
 </template>
@@ -100,5 +106,9 @@ export default {
 <style lang="scss" scoped>
 .home_container {
   height: 100vh;
+  .scrollView {
+    margin-top: 76rpx;
+    height: calc(84vh);
+  }
 }
 </style>
