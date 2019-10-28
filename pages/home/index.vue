@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:54:43
- * @LastEditTime: 2019-10-28 17:22:58
+ * @LastEditTime: 2019-10-28 17:29:26
  * @LastEditors: Edmund
  -->
 <template>
@@ -107,7 +107,6 @@ export default {
 .home_container {
   height: 100vh;
   .scrollView {
-    margin-top: 76rpx;
     height: calc(84vh);
   }
 }

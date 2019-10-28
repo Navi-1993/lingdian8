@@ -3,17 +3,16 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 15:41:34
- * @LastEditTime: 2019-10-28 17:22:16
+ * @LastEditTime: 2019-10-28 17:31:54
  * @LastEditors: Edmund
- * @scrolltop {Number} 值为200时，滚动条移出视图
+ * @scrollXshow {Boolean} 值为true时，通过设置scroll-y的位置，让scroll-x消失
  * @styleObject {Object} 传入的样式，会覆盖掉当前默认样式
  -->
 <template>
     <view class="container">
         <scroll-view  scroll-x="true"
                       class="scrollView"
-                      :scroll-top="scrollXshow ? 1 : 0"
-                      scroll-y="true">
+                      :scroll-top="scrollXshow ? 1 : 0">
             <view   class="scroll-view-item"
                     v-for="(item,idx) of renderData"
                     :style="[defaultStyle,styleObject]"
@@ -22,6 +21,7 @@
             </view>
                     
         </scroll-view>
+        <view class="stepping-stone"></view>
     </view>
 </template>
 
@@ -55,6 +55,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$height: 76rpx;
 .container {
   overflow: hidden;
 }
@@ -66,9 +67,14 @@ export default {
   align-items: center;
   .scroll-view-item {
     display: inline-block;
+    height: $height;
     margin: 0 58rpx;
     line-height: 76rpx;
     font-size: 36rpx;
   }
+}
+.stepping-stone {
+  width: 100vw;
+  height: $height;
 }
 </style>
