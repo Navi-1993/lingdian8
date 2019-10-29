@@ -18,6 +18,7 @@ module.exports = {
       .set('components', resolve('components'))
       .set('pages', resolve('pages'))
       .set('api', resolve('api'))
+			.set('paltform', resolve('paltform'))
     // .set('layout',resolve('src/layout'))
     // .set('static',resolve('src/static'))
   }
