@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 15:41:34
- * @LastEditTime: 2019-10-28 17:31:54
+ * @LastEditTime: 2019-10-29 16:07:10
  * @LastEditors: Edmund
  * @scrollXshow {Boolean} 值为true时，通过设置scroll-y的位置，让scroll-x消失
  * @styleObject {Object} 传入的样式，会覆盖掉当前默认样式
@@ -61,7 +61,9 @@ $height: 76rpx;
 }
 .scrollView {
   position: fixed;
+  z-index: 100;
   width: 100vw;
+  background: $default-bg-white;
   display: flex;
   white-space: nowrap;
   align-items: center;

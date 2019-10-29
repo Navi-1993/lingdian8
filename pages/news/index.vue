@@ -9,8 +9,9 @@
             :skip-hidden-item-layout='true'
             :scrollXshow ="true"
             display-multiple-items = 1
-            previous-margin = "72rpx"
-            next-margin = "72rpx"
+            duration = 100
+            previous-margin = "70rpx"
+            next-margin = "70rpx"
 						:autoplay='true'>
         <swiper-item  class="news_banner_item"
                       v-for="item of 10"
@@ -83,13 +84,14 @@ export default {
 
 <style lang="scss">
 .news_container {
+  height: 90vh;
   .news_banner {
     display: flex;
     align-items: center;
     width: 100vw;
     height: 320rpx;
-    border-top: 1rpx solid red;
-    border-bottom: 1rpx solid red;
+    border-top: 1rpx solid $default-border-color;
+    border-bottom: 1rpx solid $default-border-color;
     &_item {
       display: flex;
       justify-content: center;
@@ -100,12 +102,11 @@ export default {
       width: 586rpx;
       height: 280rpx;
       border-radius: 10rpx;
-      background: yellowgreen;
     }
     &_mask {
       position: absolute;
-      bottom: 22rpx;
-      left: 12rpx;
+      bottom: 24rpx;
+      left: 14rpx;
       width: 584rpx;
       height: 38rpx;
       background: $default-bg-black;
