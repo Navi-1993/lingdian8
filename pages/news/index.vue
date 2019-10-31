@@ -84,7 +84,7 @@ export default {
 
 <style lang="scss">
 .news_container {
-  height: 90vh;
+  height: 100vh;
   .news_banner {
     display: flex;
     align-items: center;
@@ -106,7 +106,7 @@ export default {
     &_mask {
       position: absolute;
       bottom: 24rpx;
-      left: 14rpx;
+      left: 16rpx;
       width: 584rpx;
       height: 38rpx;
       background: $default-bg-black;

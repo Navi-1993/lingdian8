@@ -28,18 +28,18 @@
 				"titleNView": true,
 				"animationType": "zoom-fade-out",
 				"animationDuration": 300,
-				"subNVues":[{  
-                    "id": "swiper-nav",
-                    "path": "paltform/app-plus/subNVue/swiper-nav",
-                    "style": {  
-                        "position": "absolute",  
-                        "dock": "right",  
-						"width": "750upx",
-						"height": "76px",
-						"top":"56px",
-						"background": "transparent"
-                    }  
-                }] 
+				"subNVues":[{
+					"id": "myplayer",
+					"path": "paltform/app-plus/subNVue/player/player",
+					"style": {
+							"position": "absolute",
+							"dock": "right",
+							"width": "750upx",
+							"height": "1334upx",
+							"top":"58px",
+							"backgroundColor":"red"
+					}  
+			}]  
 			}
 		}
 	  },

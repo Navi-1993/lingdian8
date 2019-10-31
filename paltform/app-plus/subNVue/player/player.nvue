@@ -1,0 +1,64 @@
+/*
+ * @Description: 播放器子窗体
+ * @Author: Edmund
+ * @Email: q1592193221@gmail.com
+ * @Date: 2019-10-31 10:07:23
+ * @LastEditTime: 2019-10-31 10:08:41
+ * @LastEditors: Edmund
+ */
+
+
+<template>
+    <div class="container">
+			<scroll-view scroll-y="true" >
+							<video 	src="http://pl-ali.youku.com/playlist/m3u8?vid=XNTQwMTgxMTE2&type=mp4hd3v3&ups_client_netip=716f7294&utid=Fz9BFpMvinoCAXFvcpSoJRrJ&ccode=0519&psid=73c0e304528cb8ed891835153d07d88d&duration=1419&expire=18000&drm_type=1&drm_device=0&ups_ts=1572491556&onOff=0&encr=0&ups_key=bda696ccd04695f960bf393393e853ce"
+											v-bind:controls="true"
+											class="video"
+											v-for="item in 10"
+											v-bind:key="item">
+							</video>						
+			</scroll-view>
+    </div>
+</template>
+
+<script>
+export default {
+  name: '',
+  components:{
+	
+  },
+  data() {
+    return {
+		title: getApp().globalData.vuex,
+		testFlag : 3
+    }
+  },
+  created() {
+  	    uni.$on('test', data => {
+			this.title = data.title
+  	    })
+  },
+  onShow() {
+  },
+  onUnload() {
+  	    uni.$off('test')
+  },
+  methods: {},
+  computed:{
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.container {
+	flex-direction: column;
+	width: 750rpx;
+	height: 1334rpx;
+	background-color: red;
+}
+.video {
+	height: 500rpx;
+	width: 700rpx;
+	margin: 0 15rpx;
+}
+</style>
