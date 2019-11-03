@@ -11,12 +11,16 @@
 <template>
     <div class="container">
 			<scroll-view scroll-y="true" >
+					<view class=""
+								v-for="item in 10"
+								v-bind:key="item">
 							<video 	src="http://pl-ali.youku.com/playlist/m3u8?vid=XNTQwMTgxMTE2&type=mp4hd3v3&ups_client_netip=716f7294&utid=Fz9BFpMvinoCAXFvcpSoJRrJ&ccode=0519&psid=73c0e304528cb8ed891835153d07d88d&duration=1419&expire=18000&drm_type=1&drm_device=0&ups_ts=1572491556&onOff=0&encr=0&ups_key=bda696ccd04695f960bf393393e853ce"
 											v-bind:controls="true"
 											class="video"
-											v-for="item in 10"
-											v-bind:key="item">
+											>
 							</video>						
+						
+					</view>
 			</scroll-view>
     </div>
 </template>
