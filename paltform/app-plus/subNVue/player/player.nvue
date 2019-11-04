@@ -18,7 +18,7 @@
 											v-bind:controls="true"
 											class="video"
 											>
-							</video>						
+							</video>
 						
 					</view>
 			</scroll-view>

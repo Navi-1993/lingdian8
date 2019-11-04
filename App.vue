@@ -22,7 +22,10 @@ export default {
 
 /* 阿里字体图标库引入（已使用项目管理） */
 @import url('common/css/font-family/iconfont.css');
+
 /* #ifndef APP-PLUS-NVUE */
+/* 富文本组件样式引入 */
+@import url('components/gaoyia-parse/parse.css');
 pages {
   color: $default-text-color;
 }
