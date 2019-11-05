@@ -1,94 +1,106 @@
 {
 	"pages": [
-	  {
-		"path": "pages/home/index",
-		"style": {
-		  "navigationBarTitleText": "零点吧",
-		  "app-plus": {
-			"titleNView": false
-		  }
-		}
-	  },
-	  {
-		"path": "pages/mine/index",
-		"style": {
-		  "navigationBarTitleText": "我的",
-		  "app-plus": {
-			"titleNView": false,
-			"animationType": "zoom-fade-out",
-			"animationDuration": 300
-		  }
-		}
-	  },
-	  {
-		"path": "pages/video/index",
-		"style": {
-			"navigationBarTitleText": "视频",
-			"app-plus": {
-				"titleNView": true,
-				"animationType": "zoom-fade-out",
-				"animationDuration": 300,
-				"subNVues":[{
-					"id": "myplayer",
-					"path": "paltform/app-plus/subNVue/player/player",
-					"style": {
-							"position": "absolute",
-							"dock": "right",
-							"width": "750upx",
-							"height": "1334upx",
-							"top":"58px",
-							"backgroundColor":"red"
-					}  
-			}]  
+		{
+			"path": "pages/home/index",
+			"style": {
+				"navigationBarTitleText": "零点吧",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
-		}
-	  },
-	  {
-		"path": "pages/news/index",
-		"style": {
-			  "navigationBarTitleText": "新闻",
-			  "app-plus": {
+		},
+		{
+			"path": "pages/mine/index",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"app-plus": {
+					"titleNView": false,
+					"animationType": "zoom-fade-out",
+					"animationDuration": 300
+				}
+			}
+		},
+		{
+			"path": "pages/video/index",
+			"style": {
+				"navigationBarTitleText": "视频",
+				"app-plus": {
+					"titleNView": true,
+					"animationType": "zoom-fade-out",
+					"animationDuration": 300,
+					"subNVues": [
+						{
+							"id": "myplayer",
+							"path": "paltform/app-plus/subNVue/player/player",
+							"style": {
+								"position": "absolute",
+								"dock": "right",
+								"width": "750upx",
+								"height": "1334upx",
+								"top": "58px",
+								"backgroundColor": "red"
+							}
+						}
+					]
+				}
+			}
+		},
+		{
+			"path": "pages/news/index",
+			"style": {
+				"navigationBarTitleText": "新闻",
+				"app-plus": {
 					"titleNView": true,
 					"animationType": "zoom-fade-out",
 					"animationDuration": 300
-			  }
+				}
+			}
+		},
+		{
+			"path": "pages/user/login",
+			"style": {
+				"navigationBarTitleText": "注册",
+				"app-plus": {
+					"titleNView": true,
+					"animationType": "zoom-fade-out",
+					"animationDuration": 300
+				}
+			}
 		}
-	  }
-    ],
+	],
 	"globalStyle": {
-	  "navigationBarTitleText": "零点吧",
-	  "navigationBarBackgroundColor": "#1B1B30",
-	  "backgroundColor": "#808080",
-	  "backgroundColorBottom":"#1B1B30",
-	  "position": "top"
+		"navigationBarTitleText": "零点吧",
+		"navigationBarBackgroundColor": "#1B1B30",
+		"backgroundColor": "#808080",
+		"backgroundColorBottom": "#1B1B30",
+		"position": "top"
 	},
 	"tabBar": {
-	  "color": "#FFFFFF",
-	  "selectedColor": "#000000",
-	  "borderStyle": "black",
-	  "backgroundColor":"#1B1B30",
-	  "list": [
-		{
-		  "pagePath": "pages/home/index",
-		  "iconPath": "static/bottomBar/sleep/home.png",
-		  "selectedIconPath": "static/bottomBar/active/home.png"
-		},
-		{
-		  "pagePath": "pages/video/index",
-		  "iconPath": "static/bottomBar/sleep/video.png",
-		  "selectedIconPath": "static/bottomBar/active/video.png"
-		},
-		{
-		  "pagePath": "pages/news/index",
-		  "iconPath": "static/bottomBar/sleep/news.png",
-		  "selectedIconPath": "static/bottomBar/active/news.png"
-		},
-		{
-		  "pagePath": "pages/mine/index",
-		  "iconPath": "static/bottomBar/sleep/mine.png",
-		  "selectedIconPath": "static/bottomBar/active/mine.png"
-		}
-	  ]
+		"color": "#FFFFFF",
+		"selectedColor": "#000000",
+		"borderStyle": "black",
+		"backgroundColor": "#1B1B30",
+		"list": [
+			{
+				"pagePath": "pages/home/index",
+				"iconPath": "static/bottomBar/sleep/home.png",
+				"selectedIconPath": "static/bottomBar/active/home.png"
+			},
+			{
+				"pagePath": "pages/video/index",
+				"iconPath": "static/bottomBar/sleep/video.png",
+				"selectedIconPath": "static/bottomBar/active/video.png"
+			},
+			{
+				"pagePath": "pages/news/index",
+				"iconPath": "static/bottomBar/sleep/news.png",
+				"selectedIconPath": "static/bottomBar/active/news.png"
+			},
+			{
+				"pagePath": "pages/user/login",
+				"iconPath": "static/bottomBar/sleep/mine.png",
+				"selectedIconPath": "static/bottomBar/active/mine.png"
+			}
+		]
 	}
-  }
-  
+}

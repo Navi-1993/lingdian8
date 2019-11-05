@@ -1,29 +1,6 @@
-<!--
- * @Description: 首页index
- * @Author: Edmund
- * @Email: q1592193221@gmail.com
- * @Date: 2019-10-21 12:54:43
- * @LastEditTime: 2019-11-05 18:15:54
- * @LastEditors: Edmund
- -->
 <template>
 	<view class="container">
-    <!--  #ifndef MP-WEIXIN  -->
-    <!-- 状态栏 -->
-    <uni-nav-bar  title="零点吧"
-                  :fixed="true"
-                  :color = "navBarColor"
-                  :background-color = "navBarBackColor"
-                  status-bar="true"
-                  :border="false">
-      <view slot="right"
-            style="font-size: 40rpx;"
-            class="iconfont">
-      </view>
-    
-    </uni-nav-bar>
-    <!--  #endif -->
-    <scroll-view  scroll-x 
+		<scroll-view  scroll-x 
                   scroll-with-animation 
                   class="tab-view" 
                   :scroll-left="scrollLeft">
@@ -61,14 +38,10 @@
 </template>
 
 <script>
-import uniNavBar from 'components/uni-nav-bar/uni-nav-bar.vue' // 头部导航组件
-import swiperBar from 'components/swiper-bar.vue'
 import calendar from 'components/time_module/calendar.vue'
 import eventCard from 'components/sportsEvent/event-card.vue'
 export default {
   components: {
-    uniNavBar,
-    swiperBar,
     calendar,
     eventCard
   },
@@ -116,6 +89,7 @@ export default {
     },
     // 点击标题切换当前页时改变样式
     swichNav: function(e) {
+      console.log(e, 'e')
       let cur = e.currentTarget.dataset.current
       if (this.currentTab == cur) {
         return false
@@ -147,7 +121,7 @@ export default {
 }
 .container {
   .tab-view {
-    width: 100vw;
+    width: 750rpx;
     font-size: 24rpx;
     overflow: hidden;
     box-sizing: border-box;
