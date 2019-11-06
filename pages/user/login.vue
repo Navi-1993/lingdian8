@@ -3,22 +3,31 @@
  * @Author: Edmund(q1592193221@gmail.com)
  * @LastEditors: Edmund
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-07 02:33:57
+ * @LastEditTime: 2019-11-07 03:43:40
  * @FilePath: \lingdian8\components\template-pages.vue
  -->
 <template>
     <view class="container">
-      <swiper style="height:300px;width:100vw">
-        1
+      <swiper style="height:500px;">
+        <swiper-item v-for="item in 10" :key="item">
+          <scroll-view>
+          <calendar v-for="item in 50" :key="item">
+              <text slot="date">11月6日  星期六</text>
+          </calendar>
+          </scroll-view>
+          </swiper-item>
       </swiper>
 	</view>
 </template>
 
 <script>
 let that
+import calendar from 'components/time_module/calendar.vue'
 export default {
   name: '',
-  components: {},
+  components: {
+    calendar
+  },
   props: {},
   data() {
     return {
