@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:54:43
- * @LastEditTime: 2019-11-05 18:15:54
+ * @LastEditTime: 2019-11-07 02:07:17
  * @LastEditors: Edmund
  -->
 <template>
@@ -40,9 +40,9 @@
 		</scroll-view>
 		<swiper class="tab-content" 
             :current="currentTab" 
-            duration="300" 
-            @change="switchTab" 
-            :style="{height:winHeight+'px'}">
+            duration="300"
+            :style="{height: windowHeight + 'px'}"
+            @change="switchTab" >
 			<swiper-item    v-for="(item,index) in tabbar" 
                       :key="index">
 				<scroll-view  scroll-y
@@ -61,6 +61,7 @@
 </template>
 
 <script>
+let that
 import uniNavBar from 'components/uni-nav-bar/uni-nav-bar.vue' // 头部导航组件
 import swiperBar from 'components/swiper-bar.vue'
 import calendar from 'components/time_module/calendar.vue'
@@ -92,45 +93,43 @@ export default {
         '教育',
         '汽车'
       ],
-      winHeight: '', //窗口高度
+      windowHeight: '', //窗口高度
       currentTab: 0, //预设当前tab项的值
       scrollLeft: 0 //tab标题的滚动条位置
     }
   },
   onLoad: function() {
-    let that = this
+    that = this
     // 高度自适应
     uni.getSystemInfo({
       success: function(res) {
-        let calc = res.windowHeight
-        that.winHeight = calc
+        that.windowHeight = res.windowHeight
       }
     })
   },
   methods: {
     // 滚动切换标签样式
     switchTab: function(e) {
-      let that = this
-      this.currentTab = e.detail.current
-      this.checkCor()
+      that.currentTab = e.detail.current
+      that.checkCor()
     },
     // 点击标题切换当前页时改变样式
     swichNav: function(e) {
       let cur = e.currentTarget.dataset.current
-      if (this.currentTab == cur) {
+      if (that.currentTab == cur) {
         return false
       } else {
-        this.currentTab = cur
+        that.currentTab = cur
       }
     },
     //判断当前滚动超过一屏时，设置tab标题滚动条。
     checkCor: function() {
       // 如果当前选项卡索引值大于5，设置横向滚动条
-      if (this.currentTab > 5) {
+      if (that.currentTab > 5) {
         //这里距离按实际计算
-        this.scrollLeft = 50 * this.currentTab
+        that.scrollLeft = 50 * that.currentTab
       } else {
-        this.scrollLeft = 0
+        that.scrollLeft = 0
       }
     }
   }
