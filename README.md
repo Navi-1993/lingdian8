@@ -64,6 +64,7 @@ yarn
 - [webpack](https://www.webpackjs.com/)
 - [underScore.js](https://www.html.cn/doc/underscore/)
 - [axios-likes](https://ext.dcloud.net.cn/plugin?id=392)
+- [ThorUI](http://www.donarui.com/)
 
 
 > date: 2019-10-21 to ??? 

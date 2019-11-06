@@ -1,23 +1,19 @@
 <template>
-    <view >
+    <view class="video_container">
+        
     </view>
 </template>
 
+
 <script>
 export default {
-  name: '1',
+  name: '',
   components: {},
   props: {},
+  beforeCreate() {},
   created() {},
-  onLoad() {},
-  onShow() {},
-  onReady() {},
-  onHide() {},
-  onUnload() {},
-  onPullDownRefresh() {},
-  onReachBottom() {},
-  onShareAppMessage() {},
-  onPageScroll() {},
+  beforeMount() {},
+  mounted() {},
   methods: {},
   computed: {},
   watch: {}
