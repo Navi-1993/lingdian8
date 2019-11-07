@@ -3,14 +3,14 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 11:10:23
- * @LastEditTime: 2019-11-07 15:44:32
+ * @LastEditTime: 2019-11-07 16:00:36
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\pages\user\login.vue
  -->
 
 <template>
     <view class="container">
-      <swiper style="height:500px;">
+      <swiper :style="{height: windowHeight + 'px'}">
         <swiper-item v-for="item in 10" :key="item">
           <scroll-view>
           <calendar v-for="item in 50" :key="item">
@@ -37,7 +37,9 @@ export default {
     }
   },
   beforeCreate() {
+    // #ifndef APP-PLUS
     console.time('renderTime') // 创建到渲染所耗时间，大于3秒则加入优化计划
+    // #endif
   },
   created() {
     that = this
@@ -60,7 +62,9 @@ export default {
   onLoad() {},
   onShow() {},
   onReady() {
+    // #ifndef APP-PLUS
     console.timeEnd('renderTime')
+    // #endif
   },
   onHide() {},
   onUnload() {},
@@ -75,7 +79,6 @@ export default {
 <style lang="scss" scoped>
 .container {
   height: 100vh;
-  background: red;
   overflow: auto;
 }
 </style>

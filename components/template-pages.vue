@@ -3,7 +3,7 @@
  * @Author: Edmund(q1592193221@gmail.com)
  * @LastEditors: Edmund
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-07 15:22:48
+ * @LastEditTime: 2019-11-07 15:55:26
  * @FilePath: \lingdian8\components\template-pages.vue
  -->
 <template>
@@ -19,7 +19,9 @@ export default {
   components: {},
   props: {},
   beforeCreate() {
+    // #ifndef APP-PLUS
     console.time('renderTime')
+    // #endif
   },
   created() {
     that = this
@@ -27,11 +29,13 @@ export default {
   onLoad() {},
   onShow() {},
   onReady() {
+    // #ifndef APP-PLUS
     console.log(
       '%c如果渲染用时超过3秒，则列入待优化项目',
       'color: yellow; background-color: black;padding: 2px'
     )
     console.timeEnd('renderTime')
+    // #endif
   },
   onHide() {},
   onUnload() {},
