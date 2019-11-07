@@ -1,10 +1,13 @@
 /*
- * @Description: webpack配置文件
- * @Author: Edmund(q1592193221@gmail.com)
+ * @Description: webpack 配置文件
+ * @Author: Edmund
+ * @Email: q1592193221@gmail.com
+ * @Date: 2019-10-21 13:50:21
+ * @LastEditTime: 2019-11-07 15:42:22
  * @LastEditors: Edmund
- * @Date: 2019-09-18 11:16:58
- * @LastEditTime: 2019-11-07 14:46:21
+ * @FilePath: \lingdian8\vue.config.js
  */
+
 
 const path = require('path')
 function resolve (dir) {
@@ -19,7 +22,7 @@ module.exports = {
       .set('pages', resolve('pages'))
       .set('api', resolve('api'))
       .set('paltform', resolve('paltform'))
-    // .set('layout',resolve('src/layout'))
+    // .set('common',resolve('common'))
     // .set('static',resolve('src/static'))
   }
 }

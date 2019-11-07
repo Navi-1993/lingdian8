@@ -3,9 +3,11 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:54:42
- * @LastEditTime: 2019-11-07 15:05:01
+ * @LastEditTime: 2019-11-07 15:42:31
  * @LastEditors: Edmund
+ * @FilePath: \lingdian8\main.js
  */
+
 import Vue from 'vue'
 import App from './App'
 import store from './store'

@@ -2,10 +2,12 @@
  * @Description: 首页index
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
- * @Date: 2019-10-21 12:54:43
- * @LastEditTime: 2019-11-07 15:21:59
+ * @Date: 2019-11-07 11:10:23
+ * @LastEditTime: 2019-11-07 15:42:54
  * @LastEditors: Edmund
+ * @FilePath: \lingdian8\pages\home\index.vue
  -->
+
 <template>
 	<view class="container">
     <!--  #ifndef MP-WEIXIN  -->

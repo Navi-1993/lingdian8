@@ -1,11 +1,13 @@
 /*
- * @Description: 路由阀与钩子
+ * @Description: 路由阀
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:57:53
- * @LastEditTime: 2019-10-21 13:14:10
+ * @LastEditTime: 2019-11-07 15:45:03
  * @LastEditors: Edmund
+ * @FilePath: \lingdian8\router\index.js
  */
+
 
 import Vue from 'vue'
 import Router from 'uni-simple-router'

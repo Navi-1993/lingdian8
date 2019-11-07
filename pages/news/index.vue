@@ -1,3 +1,12 @@
+<!--
+ * @Description: news默认索引页
+ * @Author: Edmund
+ * @Email: q1592193221@gmail.com
+ * @Date: 2019-10-31 09:53:30
+ * @LastEditTime: 2019-11-07 15:43:59
+ * @LastEditors: Edmund
+ * @FilePath: \lingdian8\pages\news\index.vue
+ -->
 <template>
 	<view class="news_container">
 		<swiper-bar :styleObject="styleObject"

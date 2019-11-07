@@ -1,11 +1,13 @@
 /*
- * @Description: 自动抽离模块
+ * @Description: 模块自动抽离文件
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:58:50
- * @LastEditTime: 2019-10-21 14:30:39
+ * @LastEditTime: 2019-11-07 15:46:38
  * @LastEditors: Edmund
+ * @FilePath: \lingdian8\router\modules\index.js
  */
+
 
 const files = require.context('.', false, /\.js$/)
 

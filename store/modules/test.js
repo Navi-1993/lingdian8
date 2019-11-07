@@ -1,11 +1,13 @@
 /*
- * @Description: 测试用状态机store
+ * @Description: 
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:57:08
- * @LastEditTime: 2019-10-24 11:42:17
+ * @LastEditTime: 2019-11-07 15:46:23
  * @LastEditors: Edmund
+ * @FilePath: \lingdian8\store\modules\test.js
  */
+
 const app = {
   state: {
     collection: '文章' // 文章收藏
