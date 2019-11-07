@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 11:10:23
- * @LastEditTime: 2019-11-07 15:55:03
+ * @LastEditTime: 2019-11-07 16:12:58
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\pages\home\index.vue
  -->
@@ -68,7 +68,7 @@ import uniNavBar from 'components/uni-nav-bar/uni-nav-bar.vue' // 头部导航�
 import swiperBar from 'components/swiper-bar.vue'
 import calendar from 'components/time_module/calendar.vue'
 import eventCard from 'components/sportsEvent/event-card.vue'
-import test from '@/api/fetch.js'
+// import test from '@/api/fetch.js'
 export default {
   components: {
     uniNavBar,
@@ -108,7 +108,6 @@ export default {
   },
   created() {
     that = this
-    test()
     uni.getSystemInfo({
       success: function(res) {
         that.windowHeight = res.windowHeight
