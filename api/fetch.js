@@ -4,11 +4,11 @@
 * @Author: Edmund
 * @Email: q1592193221@gmail.com
 * @Date: 2019-11-07 14:09:54
- * @LastEditTime: 2019-11-07 14:48:59
+ * @LastEditTime: 2019-11-07 14:56:09
  * @LastEditors: Edmund
 * @FilePath: \lingdian8\api\fetch.js
 */
-import axios from '@/common/plugins/request/index.js'
+import axios from '../common/plugins/axios/index'
 
 const service = axios()
 console.log('123123')
