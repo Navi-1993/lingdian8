@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 11:10:23
- * @LastEditTime: 2019-11-07 16:12:58
+ * @LastEditTime: 2019-11-07 17:01:02
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\pages\home\index.vue
  -->
@@ -113,6 +113,16 @@ export default {
         that.windowHeight = res.windowHeight
       }
     })
+    // axios 插件测试
+    this.$axios
+      .request({
+        url: '',
+        method: 'get',
+        params: {}
+      })
+      .then(res => {
+        console.log(res)
+      })
   },
   onReady() {
     // #ifndef APP-PLUS

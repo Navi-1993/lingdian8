@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:54:42
- * @LastEditTime: 2019-11-07 15:42:31
+ * @LastEditTime: 2019-11-07 16:53:46
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\main.js
  */
@@ -21,7 +21,7 @@ import underscore from 'underscore'
 
 Vue.prototype.$_ = underscore
 Vue.prototype.$store = store
-Vue.prototype.$http = axios()
+Vue.prototype.$axios = axios()
 
 
 Vue.config.productionTip = false
