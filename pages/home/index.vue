@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:54:43
- * @LastEditTime: 2019-11-07 02:07:17
+ * @LastEditTime: 2019-11-07 15:21:59
  * @LastEditors: Edmund
  -->
 <template>
@@ -66,6 +66,7 @@ import uniNavBar from 'components/uni-nav-bar/uni-nav-bar.vue' // 头部导航�
 import swiperBar from 'components/swiper-bar.vue'
 import calendar from 'components/time_module/calendar.vue'
 import eventCard from 'components/sportsEvent/event-card.vue'
+import test from '@/api/fetch.js'
 export default {
   components: {
     uniNavBar,
@@ -98,14 +99,24 @@ export default {
       scrollLeft: 0 //tab标题的滚动条位置
     }
   },
-  onLoad: function() {
+  beforeCreate() {
+    console.time('renderTime')
+  },
+  created() {
     that = this
-    // 高度自适应
+    test()
     uni.getSystemInfo({
       success: function(res) {
         that.windowHeight = res.windowHeight
       }
     })
+  },
+  onReady() {
+    console.log(
+      '%c如果渲染用时超过3秒，则列入待优化项目',
+      'color: yellow; background-color: black;padding: 2px'
+    )
+    console.timeEnd('renderTime')
   },
   methods: {
     // 滚动切换标签样式

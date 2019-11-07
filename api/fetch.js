@@ -4,15 +4,17 @@
 * @Author: Edmund
 * @Email: q1592193221@gmail.com
 * @Date: 2019-11-07 14:09:54
- * @LastEditTime: 2019-11-07 14:56:09
+ * @LastEditTime: 2019-11-07 14:59:50
  * @LastEditors: Edmund
 * @FilePath: \lingdian8\api\fetch.js
 */
-import axios from '../common/plugins/axios/index'
+import axios from '@/common/plugins/axios/index'
 
 const service = axios()
-console.log('123123')
-
+let test = function () {
+  console.log('api fetch test')
+}
+export default test
 /**
  * @Description: 全局 请求拦截器
  * @param {Object} config 发送请求的配置数据

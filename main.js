@@ -3,15 +3,16 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:54:42
- * @LastEditTime: 2019-11-07 14:56:17
+ * @LastEditTime: 2019-11-07 15:05:01
  * @LastEditors: Edmund
  */
 import Vue from 'vue'
 import App from './App'
 import store from './store'
 import router from './router'
-// 引入可用于uni-app的axios插件
-import axios from './common/plugins/request/index'
+
+// 引入封装好的可用于uni-app的axios插件
+import axios from '@/common/plugins/axios/index'
 
 // 引入underScore工具函数库
 import underscore from 'underscore'
