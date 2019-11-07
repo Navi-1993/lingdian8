@@ -1,6 +1,6 @@
 'use strict'
 /**
- * @Description: 版本转化code
+ * @Description: 版本名称转化versionCode
  * @param {String} code
  * @return: Number // 1007021
  */
