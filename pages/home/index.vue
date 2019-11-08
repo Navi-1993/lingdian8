@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 11:10:23
- * @LastEditTime: 2019-11-07 17:01:02
+ * @LastEditTime: 2019-11-08 14:50:34
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\pages\home\index.vue
  -->
@@ -68,7 +68,7 @@ import uniNavBar from 'components/uni-nav-bar/uni-nav-bar.vue' // 头部导航�
 import swiperBar from 'components/swiper-bar.vue'
 import calendar from 'components/time_module/calendar.vue'
 import eventCard from 'components/sportsEvent/event-card.vue'
-// import test from '@/api/fetch.js'
+import { test } from '@/api/fetch.js'
 export default {
   components: {
     uniNavBar,
@@ -76,7 +76,7 @@ export default {
     calendar,
     eventCard
   },
-  data() {
+  data () {
     return {
       tabbar: [
         '热门',
@@ -101,15 +101,18 @@ export default {
       scrollLeft: 0 //tab标题的滚动条位置
     }
   },
-  beforeCreate() {
+  beforeCreate () {
     // #ifndef APP-PLUS
     console.time('renderTime')
+    test().then((res) => {
+      console.log(res, 'api Fetch')
+    })
     // #endif
   },
-  created() {
+  created () {
     that = this
     uni.getSystemInfo({
-      success: function(res) {
+      success: function (res) {
         that.windowHeight = res.windowHeight
       }
     })
@@ -124,7 +127,7 @@ export default {
         console.log(res)
       })
   },
-  onReady() {
+  onReady () {
     // #ifndef APP-PLUS
     console.log(
       '%c如果渲染用时超过3秒，则列入待优化项目',
@@ -135,12 +138,12 @@ export default {
   },
   methods: {
     // 滚动切换标签样式
-    switchTab: function(e) {
+    switchTab: function (e) {
       that.currentTab = e.detail.current
       that.checkCor()
     },
     // 点击标题切换当前页时改变样式
-    swichNav: function(e) {
+    swichNav: function (e) {
       let cur = e.currentTarget.dataset.current
       if (that.currentTab == cur) {
         return false
@@ -149,7 +152,7 @@ export default {
       }
     },
     //判断当前滚动超过一屏时，设置tab标题滚动条。
-    checkCor: function() {
+    checkCor: function () {
       // 如果当前选项卡索引值大于5，设置横向滚动条
       if (that.currentTab > 5) {
         //这里距离按实际计算

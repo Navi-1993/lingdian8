@@ -1,12 +1,12 @@
 /*
- * @Description: 自定义请求config
+ * @Description: DIY http request config
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 14:44:56
- * @LastEditTime: 2019-11-07 17:03:28
+ * @LastEditTime: 2019-11-08 15:17:38
  * @LastEditors: Edmund
- * @FilePath: \lingdian8\common\plugins\axios\config.js
  */
+
 import Interceptor from "./core/interceptor"
 // import axios from "./index"
 
@@ -21,12 +21,14 @@ export const globalInterceptor = {
  * @param {String}  `content-type`设置特殊参数 或 配置其他会导致触发 跨域 问题，出现跨域会直接进入响应拦截器的catch函数中
  */
 export const config = {
-  baseURL: "https://www.baidu.com", // 请求的基础url
+  // baseURL: "https://www.baidu.com", // 请求的基础url
+  baseURL: "http://192.168.199.238:8088",
   header: { // 设置请求头
     // 'X-Auth-Token': 'xxxx',
-    contentType: "application/x-www-form-urlencoded"
+    contentType: "application/x-www-form-urlencoded",
     // 'Content-Type': 'application/json'
-  }
+    timeStamp: new Date() * 1
+  },
 }
 
 /**
@@ -38,7 +40,7 @@ export const config = {
  */
 globalInterceptor.request.use(
   config => {
-    console.log('is global request interceptorA')
+    // console.log('is global request interceptorA')
     return config
     // return false
     // return Promise.reject('is error')

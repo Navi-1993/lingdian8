@@ -1,3 +1,11 @@
+/**
+ * @Description: d.ts
+ * @Author: Edmund
+ * @Email: q1592193221@gmail.com
+ * @Date: 2019-11-07 14:44:56
+ * @LastEditTime: 2019-11-08 10:37:12
+ * @LastEditors: Edmund
+ */
 type Method =
     | 'get'
     | 'post'
