@@ -3,17 +3,14 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-10 19:52:06
+ * @LastEditTime: 2019-11-10 18:21:30
  * @LastEditors: Edmund
  -->
 
 
 <template>
-    <view class="container"
-          :style="{height: windowHeight + 'px'}">
-        <view class="bg_top">
-            <view></view>
-        </view>
+    <view class="container">
+     
 	</view>
 </template>
 
@@ -39,7 +36,14 @@ export default {
     // 测试时使用
     uni.getSystemInfo({
       success: res => {
+        console.log('手机品牌', res.brand) // 手机品牌
+        console.log('手机型号', res.model) // 手机型号
+        console.log('可使用窗口的顶部位置', res.windowTop)
         this.windowHeight = res.windowHeight
+        console.log('状态栏的高度', res.statusBarHeight)
+        console.log('可使用的窗口高度 = 100vh', res.windowHeight)
+        console.log('可使用窗口的底部位置', res.windowBottom)
+        console.log('导航栏的高度	', res.navigationBarHeight)
       }
     })
   },
@@ -64,9 +68,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  .bg_top {
-    background-color: $default-bg-black;
-    height: 495rpx;
-  }
+  height: 100vh;
+  overflow: auto;
 }
 </style>

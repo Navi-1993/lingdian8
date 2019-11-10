@@ -61,7 +61,7 @@
 			"style": {
 				"navigationBarTitleText": "注册",
 				"app-plus": {
-					"titleNView": true,
+					"titleNView": false,
 					"animationType": "zoom-fade-out",
 					"animationDuration": 300
 				}
