@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-10 21:42:14
- * @LastEditTime: 2019-11-10 22:22:57
+ * @LastEditTime: 2019-11-10 22:34:52
  * @LastEditors: Edmund
  -->
 
@@ -92,14 +92,14 @@ export default {
 
 <style lang="scss" scoped>
 page {
-  background-color: #f6f6f6;
+  background-color: $default-bg-white;
 }
 
 .topLayout {
-  background-color: #1b1b2f;
+  background-color: $default-bg-black;
   height: 360rpx;
   .iconLogo {
-    background-color: #f0ad4e;
+    background-color: $default-color-warning;
     width: 180rpx;
     height: 180rpx;
     border-radius: 8rpx;
@@ -109,21 +109,21 @@ page {
 }
 
 .contentLayout {
-  background-color: #ffffff;
+  background-color: $default-bg-white;
   border-radius: 10rpx;
   margin-top: -100rpx;
   width: 690rpx;
   margin-left: 30rpx;
-  -moz-box-shadow: 0px 0px 5px #a1a1a1;
-  -webkit-box-shadow: 0px 0px 5px #a1a1a1;
-  box-shadow: 0px 0px 5px #a1a1a1;
+  -moz-box-shadow: 0px 0px 5px $default-border-shadow;
+  -webkit-box-shadow: 0px 0px 5px $default-border-shadow;
+  box-shadow: 0px 0px 5px $default-border-shadow;
   padding-top: 40rpx;
   .input1 {
     width: 580rpx;
     height: 80rpx;
     line-height: 50rpx;
     margin-left: 45rpx;
-    border: solid 1px #eeeeee;
+    border: solid 1px $default-border-color;
     border-radius: 40rpx;
     font-size: 30rpx;
     text-align: center;
@@ -135,7 +135,7 @@ page {
     height: 80rpx;
     line-height: 50rpx;
     margin-left: 45rpx;
-    border: solid 1px #eeeeee;
+    border: solid 1px $default-border-color;
     border-radius: 40rpx;
     font-size: 30rpx;
     text-align: center;
@@ -147,22 +147,22 @@ page {
     height: calc(80rpx + 2px);
     line-height: calc(80rpx + 2px);
     text-align: center;
-    color: #ffffff;
+    color: $default-text-color-white;
     font-size: 30rpx;
-    background-color: #1b1b2f;
+    background-color: $default-bg-black;
     border-top-right-radius: 40rpx;
     border-bottom-right-radius: 40rpx;
     position: absolute;
     margin-left: 510rpx;
   }
   .btSubmit {
-    color: #ffffff;
+    color: $default-text-color-white;
     height: 80rpx;
     line-height: 80rpx;
     border-radius: 40rpx;
     font-size: 30rpx;
     width: 600rpx;
-    background-color: #1b1b2f;
+    background-color: $default-bg-black;
     margin-top: 120rpx;
   }
 }

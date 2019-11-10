@@ -3,126 +3,135 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-10 21:42:52
+ * @LastEditTime: 2019-11-10 22:39:07
  * @LastEditors: Edmund
  -->
-
-
 <template>
-    <view class="container">
-        <view class="bg_top">
-            <image  src=""
-                    class="logo"/>
+	<view class="container">
+		<view class="topLayout">
+			<image class="iconLogo"></image>
+		</view>
+		<view   class="contentLayout"
+            :style="[{'height':contentHeight}]">
+        <input  class="inputItem"
+                placeholder="请输入手机号"
+                type="number" />
+        <input  class="inputItem"
+                placeholder="请输入密码"
+                type="password" />
+        <button class="btLogin"
+                type="default">
+                登录
+        </button>
+        <view class="forgetText">
+              忘记密码?
         </view>
-        <view class="form-card">
-            <input  type="text"
-                    placeholder-class="placeholder"
-                    class="input-username"
-                    placeholder="请输入账号">
-            <input  type="password"
-                    class="input-psw"
-                    placeholder="请输入密码">
-        </view>
+        <button class="btRegister" 
+                type="default">
+                注册
+        </button>
+		</view>
 	</view>
 </template>
 
 <script>
 let that
 export default {
-  name: '',
-  components: {
-  },
-  props: {},
   data () {
     return {
-      windowHeight: 0
+      contentHeight: '0px'
     }
-  },
-  beforeCreate () {
-    // #ifndef APP-PLUS
-    console.time('renderTime') // 创建到渲染所耗时间，大于3秒则加入优化计划
-    // #endif
   },
   created () {
     that = this
-    // 测试时使用
-    // uni.getSystemInfo({
-    //   success: res => {
-    //     that.windowHeight = res.windowHeight
-    //   }
-    // })
+    uni.getSystemInfo({
+      success (res) {
+        let naviHeight = 45
+        if (res.platform == 'android') {
+          naviHeight = 50;
+        }
+        that.contentHeight = res.windowHeight - res.statusBarHeight - naviHeight - uni.upx2px(360 - 100 - 20) + "px";
+      }
+    })
   },
-  beforeMount () { },
-  mounted () { },
-  onLoad () { },
-  onShow () { },
-  onReady () {
-    // #ifndef APP-PLUS
-    console.timeEnd('renderTime')
-    // #endif
+  mounted () {
+
   },
-  onHide () { },
-  onUnload () { },
-  beforeDestroy () { },
-  destroyed () { },
-  methods: {},
-  computed: {},
-  watch: {}
+  onLoad () {
+
+  },
+  methods: {
+
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-.container {
-  position: relative;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  .bg_top {
+page {
+  background-color: $default-bg-white;
+}
+
+.topLayout {
+  background-color: $default-bg-black;
+  height: 360rpx;
+  .iconLogo {
+    background-color: $default-color-warning;
+    width: 180rpx;
+    height: 180rpx;
+    border-radius: 8rpx;
+    margin-top: 20rpx;
+    margin-left: 285rpx;
+  }
+}
+
+.contentLayout {
+  background-color: $default-bg-white;
+  border-radius: 10rpx;
+  margin-top: -100rpx;
+  width: 690rpx;
+  margin-left: 30rpx;
+  -moz-box-shadow: 0rpx 0rpx 5rpx $default-border-shadow;
+  -webkit-box-shadow: 0rpx 0rpx 5rpx $default-border-shadow;
+  box-shadow: 0rpx 0rpx 5rpx $default-border-shadow;
+  padding-top: 40rpx;
+  .inputItem {
+    width: 580rpx;
+    height: 80rpx;
+    line-height: 50rpx;
+    margin-left: 45rpx;
+    border: solid 1px $default-border-color;
+    border-radius: 40rpx;
+    font-size: 30rpx;
+    text-align: center;
+    padding: 0 10rpx;
+    margin-bottom: 20rpx;
+  }
+  .btLogin {
+    color: $default-text-color-white;
+    height: 80rpx;
+    line-height: 80rpx;
+    border-radius: 40rpx;
+    font-size: 30rpx;
+    width: 600rpx;
     background-color: $default-bg-black;
-    height: 366rpx;
-    display: flex;
-    justify-content: center;
-    .logo {
-      height: 196rpx;
-      width: 196rpx;
-      background-color: green;
-    }
+    margin-top: 80rpx;
   }
-  .placeholder {
-    padding: 0 50rpx;
-    color: red;
+  .btRegister {
+    color: $default-bg-black;
+    height: 80rpx;
+    line-height: 80rpx;
+    border-radius: 40rpx;
+    font-size: 30rpx;
+    width: 600rpx;
+    border: solid 1px $default-bg-black;
+    background-color: $default-bg-white;
   }
-  .form-card {
-    width: 690rpx;
-    height: 800rpx;
-    background: $default-bg-white;
-    box-shadow: 0rpx 0rpx 16rpx 0rpx rgba(0, 0, 0, 0.1);
-    border-radius: 12rpx;
-    @include center;
-    top: 600rpx;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .input-username {
-      width: 580rpx;
-      height: 78rpx;
-      border: 1rpx solid $default-border-color;
-      border-radius: 39rpx;
-      font-size: 26rpx;
-      margin: {
-        top: 50rpx;
-        right: auto;
-        bottom: 26rpx;
-        left: auto;
-      }
-    }
-    .input-psw {
-      width: 580rpx;
-      height: 78rpx;
-      border: 1rpx solid $default-border-color;
-      border-radius: 39rpx;
-      font-size: 26rpx;
-    }
+  .forgetText {
+    color: #a8a8a8;
+    font-size: 26rpx;
+    line-height: 60rpx;
+    float: right;
+    margin-right: 45rpx;
   }
 }
 </style>

@@ -119,7 +119,7 @@
 				"selectedIconPath": "static/bottomBar/active/news.png"
 			},
 			{
-				"pagePath": "pages/user/reset-psw",
+				"pagePath": "pages/user/login",
 				"iconPath": "static/bottomBar/sleep/mine.png",
 				"selectedIconPath": "static/bottomBar/active/mine.png"
 			}
