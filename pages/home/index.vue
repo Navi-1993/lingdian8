@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 11:10:23
- * @LastEditTime: 2019-11-08 14:50:34
+ * @LastEditTime: 2019-11-10 20:21:42
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\pages\home\index.vue
  -->
@@ -68,7 +68,7 @@ import uniNavBar from 'components/uni-nav-bar/uni-nav-bar.vue' // 头部导航�
 import swiperBar from 'components/swiper-bar.vue'
 import calendar from 'components/time_module/calendar.vue'
 import eventCard from 'components/sportsEvent/event-card.vue'
-import { test } from '@/api/fetch.js'
+// import { test } from '@/api/fetch.js'
 export default {
   components: {
     uniNavBar,
@@ -104,9 +104,6 @@ export default {
   beforeCreate () {
     // #ifndef APP-PLUS
     console.time('renderTime')
-    test().then((res) => {
-      console.log(res, 'api Fetch')
-    })
     // #endif
   },
   created () {
@@ -117,15 +114,15 @@ export default {
       }
     })
     // axios 插件测试
-    this.$axios
-      .request({
-        url: '',
-        method: 'get',
-        params: {}
-      })
-      .then(res => {
-        console.log(res)
-      })
+    // this.$axios
+    //   .request({
+    //     url: '',
+    //     method: 'get',
+    //     params: {}
+    //   })
+    //   .then(res => {
+    //     console.log(res)
+    //   })
   },
   onReady () {
     // #ifndef APP-PLUS

@@ -3,16 +3,25 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-10 19:52:06
+ * @LastEditTime: 2019-11-10 21:41:38
  * @LastEditors: Edmund
  -->
 
 
 <template>
-    <view class="container"
-          :style="{height: windowHeight + 'px'}">
+    <view class="container">
         <view class="bg_top">
-            <view></view>
+            <image  src=""
+                    class="logo"/>
+        </view>
+        <view class="form-card">
+            <input  type="text"
+                    placeholder-class="placeholder"
+                    class="input-username"
+                    placeholder="请输入账号">
+            <input  type="password"
+                    class="input-psw"
+                    placeholder="请输入密码">
         </view>
 	</view>
 </template>
@@ -37,11 +46,11 @@ export default {
   created () {
     that = this
     // 测试时使用
-    uni.getSystemInfo({
-      success: res => {
-        this.windowHeight = res.windowHeight
-      }
-    })
+    // uni.getSystemInfo({
+    //   success: res => {
+    //     that.windowHeight = res.windowHeight
+    //   }
+    // })
   },
   beforeMount () { },
   mounted () { },
@@ -64,9 +73,56 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   .bg_top {
     background-color: $default-bg-black;
-    height: 495rpx;
+    height: 366rpx;
+    display: flex;
+    justify-content: center;
+    .logo {
+      height: 196rpx;
+      width: 196rpx;
+      background-color: green;
+    }
+  }
+  .placeholder {
+    padding: 0 50rpx;
+    color: red;
+  }
+  .form-card {
+    width: 690rpx;
+    height: 800rpx;
+    background: $default-bg-white;
+    box-shadow: 0rpx 0rpx 16rpx 0rpx rgba(0, 0, 0, 0.1);
+    border-radius: 12rpx;
+    @include center;
+    top: 600rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .input-username {
+      width: 580rpx;
+      height: 78rpx;
+      border: 1rpx solid $default-border-color;
+      border-radius: 39rpx;
+      font-size: 26rpx;
+      margin: {
+        top: 50rpx;
+        right: auto;
+        bottom: 26rpx;
+        left: auto;
+      }
+    }
+    .input-psw {
+      width: 580rpx;
+      height: 78rpx;
+      border: 1rpx solid $default-border-color;
+      border-radius: 39rpx;
+      font-size: 26rpx;
+    }
   }
 }
 </style>

@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:54:43
- * @LastEditTime: 2019-10-28 16:22:49
+ * @LastEditTime: 2019-11-10 21:19:33
  * @LastEditors: Edmund
  */
 
@@ -12,7 +12,7 @@
 
 /* 0-背景颜色 */
 $default-bg-black: #1B1B30;
-$default-bg-white: #fff;
+$default-bg-white: rgba(255, 255, 255, 1);
 $default-bg-grey:#F7F7F7;
 $default-bg-hover:#f1f1f1;//点击状态颜色
 $default-bg-mask:rgba(0, 0, 0, 0.4);//遮罩颜色
@@ -34,7 +34,7 @@ $default-text-color-disable:#c0c0c0;
 
 
 /* 0-边框颜色 */
-$default-border-color:#F2F2F2;
+$default-border-color:rgba(204, 204, 204, 1);
 
 /* 尺寸变量 */
 

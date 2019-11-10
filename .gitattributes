@@ -1,4 +1,5 @@
 # Auto detect text files and perform LF normalization
+# 本文件使用git lfs 管理项目中的二进制文件
 * text=auto
 *.png filter=lfs diff=lfs merge=lfs -text
 *.jpg filter=lfs diff=lfs merge=lfs -text

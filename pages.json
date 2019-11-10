@@ -59,9 +59,9 @@
 		{
 			"path": "pages/user/login",
 			"style": {
-				"navigationBarTitleText": "注册",
+				"navigationBarTitleText": "",
 				"app-plus": {
-					"titleNView": false,
+					"titleNView": true,
 					"animationType": "zoom-fade-out",
 					"animationDuration": 300
 				}
