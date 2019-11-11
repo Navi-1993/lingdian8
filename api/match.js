@@ -4,7 +4,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 14:09:54
- * @LastEditTime: 2019-11-11 10:03:06
+ * @LastEditTime: 2019-11-11 11:30:49
  * @LastEditors: Edmund
  */
 
@@ -31,17 +31,46 @@ const fetch = axios()
 
 /**
  * @Description: 查询所有赛事类型专题项目
- * @param {number} limit
- * @param {number} offset
+ * @param {number} limit 每页请求多少条数据，不填则全部获取
+ * @param {number} offset 从第几页请求
  * @return: res
  */
-export function queryAllEvent (params) {
+export function queryAllEvent ({
+  limit,
+  offset
+}) {
   return fetch.request({
-    url: '/sport/matchSourceName/queryByAddMatch',
+    url: '/app/match/queryAllEventList',
     method: 'post', // 或者post
     data: {
-      limit: params.limit,
-      offset: params.offset
+      limit: limit,
+      offset: offset
+    }
+  })
+}
+
+/**
+ * @Description: 请求赛事数据
+ * @param {String} id 项目ID
+ * @param {Number} limit 每页请求多少条数据，不填则全部获取
+ * @param {Number} offset 从第几页请求
+ * @param {Number} type 赛事类型
+ * @return: 
+ */
+export function queryAllMatchList ({
+  id,
+  limit,
+  offset,
+  type
+}) {
+  return fetch.request({
+    url: '/app/match/queryAllMatchList',
+    method: 'post',
+    data: {
+      id: id,
+      limit: limit,
+      offset: offset,
+      type: type
     }
   })
 }

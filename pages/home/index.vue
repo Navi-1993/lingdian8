@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 11:10:23
- * @LastEditTime: 2019-11-11 10:05:18
+ * @LastEditTime: 2019-11-11 11:41:08
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\pages\home\index.vue
  -->
@@ -14,8 +14,8 @@
     <!-- 状态栏 -->
     <uni-nav-bar  title="零点吧"
                   :fixed="true"
-                  :color = "navBarColor"
-                  :background-color = "navBarBackColor"
+                  color = "yellow"
+                  background-color = "red"
                   status-bar="true"
                   :border="false">
       <view slot="right"
@@ -29,14 +29,14 @@
                   scroll-with-animation 
                   class="tab-view" 
                   :scroll-left="scrollLeft">
-			<view v-for="(item,index) in tabbar" 
+			<view v-for="(item,index) in tabbarList" 
             :key="index" 
             class="tab-bar-item" 
             :class="[currentTab == index ? 'active' : '']"
 			      :data-current="index"
             @tap.stop="swichNav">
         <text class="tab-bar-title">
-            {{item}}
+            {{item.name}}
         </text>
 			</view>
 		</scroll-view>
@@ -45,7 +45,7 @@
             duration="300"
             :style="{height: windowHeight + 'px'}"
             @change="switchTab" >
-			<swiper-item    v-for="(item,index) in tabbar" 
+			<swiper-item    v-for="(item,index) in tabbarList" 
                       :key="index">
 				<scroll-view  scroll-y
                       class="scoll-y">
@@ -68,7 +68,7 @@ import uniNavBar from 'components/uni-nav-bar/uni-nav-bar.vue' // 头部导航�
 import swiperBar from 'components/swiper-bar.vue'
 import calendar from 'components/time_module/calendar.vue'
 import eventCard from 'components/sportsEvent/event-card.vue'
-import { queryAllEvent } from '@/api/match.js'
+import { queryAllEvent, queryAllMatchList } from '@/api/match.js'
 export default {
   components: {
     uniNavBar,
@@ -78,7 +78,7 @@ export default {
   },
   data () {
     return {
-      tabbar: [
+      tabbarList: [
         '热门',
         '娱乐',
         '体育',
@@ -108,25 +108,16 @@ export default {
   },
   created () {
     that = this
-    queryAllEvent({
-      limit: 10,
-      offset: 0
-    })
+    async function initFetch () {
+      await that.fetchEvent()
+      await that.fetchMatchList()
+    }
+    initFetch()
     uni.getSystemInfo({
       success: function (res) {
         that.windowHeight = res.windowHeight
       }
     })
-    // axios 插件测试
-    // this.$axios
-    //   .request({
-    //     url: '',
-    //     method: 'get',
-    //     params: {}
-    //   })
-    //   .then(res => {
-    //     console.log(res)
-    //   })
   },
   onReady () {
     // #ifndef APP-PLUS
@@ -160,6 +151,35 @@ export default {
         that.scrollLeft = 50 * that.currentTab
       } else {
         that.scrollLeft = 0
+      }
+    },
+    /**
+     * @Description: 获取赛事项目的化异步作同步的方法，具体看match.js的api
+     * 模块
+     */
+    async fetchEvent (data) {
+      let res = await queryAllEvent({
+        // limit: 10,
+        offset: 1
+      })
+      if (res.statusCode === 200) {
+        that.tabbarList = res.data.data.list
+      }
+    },
+
+    /**
+     * @Description: 获取赛事展示数据
+     */
+    async fetchMatchList (data) {
+      let params = {
+        id: that.tabbarList[0].id,
+        limit: 10,
+        offset: 1,
+        type: that.tabbarList[0].type,
+      }
+      let res = await queryAllMatchList(params)
+      if (res.statusCode === 200) {
+        let data = res.data.data
       }
     }
   }

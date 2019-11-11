@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 14:44:56
- * @LastEditTime: 2019-11-08 15:17:38
+ * @LastEditTime: 2019-11-11 10:48:47
  * @LastEditors: Edmund
  */
 
@@ -25,8 +25,8 @@ export const config = {
   baseURL: "http://192.168.199.238:8088",
   header: { // 设置请求头
     // 'X-Auth-Token': 'xxxx',
-    contentType: "application/x-www-form-urlencoded",
-    // 'Content-Type': 'application/json'
+    // contentType: "application/x-www-form-urlencoded",
+    'Content-Type': 'application/json',
     timeStamp: new Date() * 1
   },
 }
