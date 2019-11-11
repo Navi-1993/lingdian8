@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-10 21:42:14
- * @LastEditTime: 2019-11-10 22:34:52
+ * @LastEditTime: 2019-11-11 17:12:21
  * @LastEditors: Edmund
  -->
 
@@ -16,6 +16,7 @@
               :style="[{'height':contentHeight}]">
             <input  class="input1" 
                     placeholder="请输入手机号"
+                    v-model="user"
                     type="number" />
           <view>
             <view   v-if="getCode"
@@ -24,11 +25,13 @@
             </view>
             <view v-else class="btGet">获取</view>
             <input  class="input2"
+                    v-model="verifiCode"
                     placeholder="请输入手机验证码"
                     type="text" />
           </view>
           <input  class="input1" 
                   placeholder="请输入密码"
+                  v-model="password"
                   type="password" />
           <button class="btSubmit"
                   type="default">
@@ -47,7 +50,10 @@ export default {
   data () {
     return {
       contentHeight: '0px',
-      getCode: false
+      getCode: false,
+      user: '',
+      password: '',
+      verifiCode: ''
     }
   },
   beforeCreate () {

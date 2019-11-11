@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-11 17:06:31
+ * @LastEditTime: 2019-11-11 17:35:17
  * @LastEditors: Edmund
  -->
 <template>
@@ -15,12 +15,16 @@
             :style="[{'height':contentHeight}]">
         <input  class="inputItem"
                 placeholder="请输入手机号"
+                v-model="userName"
+                @change="console.log(userName)"
                 type="number" />
         <input  class="inputItem"
                 placeholder="请输入密码"
+                v-model="password"
                 type="password" />
         <button class="btLogin"
-                type="default">
+                type="default"
+                @tap.stop="handleLogin">
                 登录
         </button>
         <navigator  class="forgetText"
@@ -41,7 +45,9 @@ let that
 export default {
   data () {
     return {
-      contentHeight: '0px'
+      contentHeight: '0px',
+      userName: '',
+      password: ''
     }
   },
   created () {
@@ -67,6 +73,9 @@ export default {
       uni.navigateTo({
         url: '/pages/user/register'
       })
+    },
+    handleLogin () {
+      console.log('handleLogin')
     }
 
   }
