@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-28 14:37:31
- * @LastEditTime: 2019-10-28 17:07:38
+ * @LastEditTime: 2019-11-11 14:13:24
  * @LastEditors: Edmund
  -->
 
@@ -17,15 +17,18 @@
             <view class="team">
               <view class="teamA">
                 <image />
-                <text>teamA</text>
+                <text>{{homeTeamName}}</text>
               </view>
               <view class="controls">
                 <text class="iconfont">&#xe600;</text>
-                <text class="videoControls">视频直播</text>
+                <text class="videoControls"
+                      v-if="livesUrl !== ''">
+                      视频直播
+                </text>
               </view>
               <view class="teamB">
                 <image />
-                <text>teamB</text>
+                <text>{{guestTeamName}}</text>
               </view>
             </view>
         </view>
@@ -36,11 +39,24 @@
 <script>
 export default {
   name: 'eventCard',
-  props: {},
-  created() {},
-  onLoad() {},
-  onReady() {},
-  onUnload() {},
+  props: {
+    homeTeamName: {
+      type: String,
+      default: 'homeTeamName'
+    },
+    guestTeamName: {
+      type: String,
+      default: 'guestTeamName'
+    },
+    livesUrl: {
+      type: String,
+      default: ''
+    }
+  },
+  created () { },
+  onLoad () { },
+  onReady () { },
+  onUnload () { },
   methods: {},
   computed: {},
   watch: {}

@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 11:10:23
- * @LastEditTime: 2019-11-11 11:41:08
+ * @LastEditTime: 2019-11-11 16:54:37
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\pages\home\index.vue
  -->
@@ -25,36 +25,43 @@
     
     </uni-nav-bar>
     <!--  #endif -->
+    <!-- tabbar -->
     <scroll-view  scroll-x 
                   scroll-with-animation 
                   class="tab-view" 
                   :scroll-left="scrollLeft">
-			<view v-for="(item,index) in tabbarList" 
-            :key="index" 
+			<view v-for="(item,idx) in tabbarList" 
+            :key="idx"
             class="tab-bar-item" 
             :class="[currentTab == index ? 'active' : '']"
 			      :data-current="index"
             @tap.stop="swichNav">
-        <text class="tab-bar-title">
+        <text class="tab-bar-title"
+              v-if="item">
             {{item.name}}
         </text>
 			</view>
+      <view class="tabbar-controls">+</view>
 		</scroll-view>
 		<swiper class="tab-content" 
             :current="currentTab" 
             duration="300"
             :style="{height: windowHeight + 'px'}"
             @change="switchTab" >
-			<swiper-item    v-for="(item,index) in tabbarList" 
-                      :key="index">
+			<swiper-item    v-for="(item,idx) in tabbarList" 
+                      :key="idx"
+                      v-show="item">
 				<scroll-view  scroll-y
                       class="scoll-y">
           <calendar>
               <text slot="date">11月6日  星期六</text>
           </calendar>
-          <event-card v-for="(item,idx) of 10"
-                      :key="idx">
-              <text slot="text">17:00   PCM大师赛-决赛</text>
+          <event-card v-for="(item,index) in matchList"
+                      :homeTeamName="item.homeTeamName"
+                      :guestTeamName="item.guestTeamName"
+                      :livesUrl="''"
+                      :key="index">
+              <text slot="text">{{item.matchBeginTime}}   {{item.matchTitle}}</text>
           </event-card>
 				</scroll-view>
 			</swiper-item>
@@ -78,24 +85,8 @@ export default {
   },
   data () {
     return {
-      tabbarList: [
-        '热门',
-        '娱乐',
-        '体育',
-        '国内',
-        '财经',
-        '科技',
-        '教育',
-        '汽车',
-        '热门',
-        '娱乐',
-        '体育',
-        '国内',
-        '财经',
-        '科技',
-        '教育',
-        '汽车'
-      ],
+      tabbarList: ['name'], // tabbar数据
+      matchList: [], // 赛事数据
       windowHeight: '', //窗口高度
       currentTab: 0, //预设当前tab项的值
       scrollLeft: 0 //tab标题的滚动条位置
@@ -110,7 +101,7 @@ export default {
     that = this
     async function initFetch () {
       await that.fetchEvent()
-      await that.fetchMatchList()
+      // await that.fetchMatchList()
     }
     initFetch()
     uni.getSystemInfo({
@@ -130,7 +121,7 @@ export default {
   },
   methods: {
     // 滚动切换标签样式
-    switchTab: function (e) {
+    switchTab: e => {
       that.currentTab = e.detail.current
       that.checkCor()
     },
@@ -157,32 +148,42 @@ export default {
      * @Description: 获取赛事项目的化异步作同步的方法，具体看match.js的api
      * 模块
      */
-    async fetchEvent (data) {
+    async fetchEvent () {
       let res = await queryAllEvent({
         // limit: 10,
         offset: 1
       })
       if (res.statusCode === 200) {
-        that.tabbarList = res.data.data.list
+        that.tabbarList = res.data.data.list || []
       }
     },
 
     /**
      * @Description: 获取赛事展示数据
      */
-    async fetchMatchList (data) {
+    async fetchMatchList () {
+      let idx = that.currentTab
       let params = {
-        id: that.tabbarList[0].id,
+        id: that.tabbarList[idx].id,
         limit: 10,
         offset: 1,
-        type: that.tabbarList[0].type,
+        type: that.tabbarList[idx].type,
       }
+      // TODO
       let res = await queryAllMatchList(params)
       if (res.statusCode === 200) {
-        let data = res.data.data
+        that.matchList = res.data.data.list || []
       }
     }
-  }
+  },
+  computed: {
+
+  },
+  watch: {
+    currentTab: (newValue, oldValue) => {
+      console.log(newValue, 'newValue')
+    }
+  },
 }
 </script>
 
@@ -209,6 +210,15 @@ export default {
     z-index: 99;
     background: $default-bg-white;
     white-space: nowrap;
+    .tabbar-controls {
+      height: 76rpx;
+      width: 76rpx;
+      // background: $default-bg-white;
+      background: red;
+      position: absolute;
+      // right: 0;
+      z-index: 200;
+    }
   }
 
   .tab-bar-item {

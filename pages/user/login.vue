@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-10 22:39:07
+ * @LastEditTime: 2019-11-11 17:06:31
  * @LastEditors: Edmund
  -->
 <template>
@@ -23,10 +23,12 @@
                 type="default">
                 登录
         </button>
-        <view class="forgetText">
+        <navigator  class="forgetText"
+                    url="/pages/user/reset-psw">
               忘记密码?
-        </view>
-        <button class="btRegister" 
+        </navigator>
+        <button class="btRegister"
+                @tap.stop="naviToRegister"
                 type="default">
                 注册
         </button>
@@ -61,6 +63,11 @@ export default {
 
   },
   methods: {
+    naviToRegister () {
+      uni.navigateTo({
+        url: '/pages/user/register'
+      })
+    }
 
   }
 }

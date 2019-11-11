@@ -4,7 +4,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 14:09:54
- * @LastEditTime: 2019-11-11 11:30:49
+ * @LastEditTime: 2019-11-11 16:52:43
  * @LastEditors: Edmund
  */
 
@@ -41,7 +41,7 @@ export function queryAllEvent ({
 }) {
   return fetch.request({
     url: '/app/match/queryAllEventList',
-    method: 'post', // 或者post
+    method: 'post',
     data: {
       limit: limit,
       offset: offset
