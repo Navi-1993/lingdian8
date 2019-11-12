@@ -3,14 +3,15 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 14:44:56
- * @LastEditTime: 2019-11-12 15:30:13
+ * @LastEditTime: 2019-11-13 02:54:38
  * @LastEditors: Edmund
  */
 
 import Interceptor from "./core/interceptor"
 import fetchConfig from 'api/fetch.config.json'
 import axios from "./index"
-
+// 拿取token
+const token = uni.getStorageSync('user').token
 export const globalInterceptor = {
   request: new Interceptor(),
   response: new Interceptor()
@@ -28,7 +29,8 @@ export const config = {
     // 'X-Auth-Token': 'xxxx',
     // contentType: "application/x-www-form-urlencoded",
     'Content-Type': 'application/json',
-    timeStamp: new Date() * 1
+    timeStamp: new Date() * 1,
+    token: token
   },
 }
 
