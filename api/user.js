@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-12 15:32:09
- * @LastEditTime: 2019-11-12 16:11:49
+ * @LastEditTime: 2019-11-13 00:21:04
  * @LastEditors: Edmund
  */
 'use strict'
@@ -41,7 +41,7 @@ export function sendSMS ({
  * @param {number} smsType 短信类型 1=注册，2=重置密码
  * @return: void
  */
-export function regist ({
+export function register ({
   code,
   password,
   phone,

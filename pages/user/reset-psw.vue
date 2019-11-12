@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-10 21:43:59
- * @LastEditTime: 2019-11-12 17:51:00
+ * @LastEditTime: 2019-11-13 02:25:01
  * @LastEditors: Edmund
  -->
 
@@ -14,11 +14,11 @@
                 v-model="phoneNo" 
                 type="number" />
             <view>
-                  <view v-if="getCode" class="btGet">60s</view>
+                  <view v-if="isGetCode" class="btGet">60s</view>
                   <view v-else 
-                        class="btnGet"
-                        @tap.stop="tapGetCode">
-                        获取
+						class="btnGet"
+                        @tap.stop="handleGetCode">
+                        {{count}}
                   </view>
                   <input  class="input2" 
                           placeholder="请输入手机验证码"
@@ -36,12 +36,14 @@
         <button class="btnSubmit" 
                 type="default"
                 @tap.stop="tapConfirm">
-                确定</button>
+                确定
+		</button>
     </view>
 </template>
 
 <script>
 let that
+import _ from 'underscore'
 import { resetPsw, sendSMS } from 'api/user.js'
 export default {
 	name: '',
@@ -49,7 +51,8 @@ export default {
 	props: {},
 	data() {
 		return {
-			getCode: false,
+			isGetCode: false,
+			count: '获取',
 			phoneNo: '', // input-手机号码
 			code: '', // input-验证码
 			newPsw: '', // input-新密码
@@ -85,14 +88,33 @@ export default {
 		/**
 		 * @Description: 点击获取按钮执行方法
 		 */
-		async tapGetCode() {
-			let params = {
+		handleGetCode: _.throttle(async () => {
+			if (that.isgetCode === false) return
+			that.isgetCode = false
+			that.count = 59
+			let timer = setInterval(() => {
+				that.count--
+				console.log(that.count, 'timer')
+				// 边界值处理
+				if (that.count === 0) {
+					that.count = '获取'
+					that.isgetCode = true
+					clearInterval(timer) // 到0清除定时器
+				}
+			}, 1000)
+			// 离开页面卸载定时器
+			that.$once('hook:beforeDestroy', () => {
+				clearInterval(timer)
+			})
+			let res = await sendSMS({
 				phone: that.phoneNo,
-				smsType: 2
+				smsType: 1 // 1 = 注册用短信类型
+			})
+			if (res.statusCode === 200) {
+				// do sth you want
+				console.log('验证信息已发送，请注意查收')
 			}
-			let res = await sendSMS(params)
-			console.log(res)
-		},
+		}, 5000),
 
 		/**
 		 * @Description: 点击`确认`按钮执行方法
