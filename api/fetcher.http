@@ -1,0 +1,13 @@
+# REST 风格请求测试文件
+## 使用前请使用`vscode`安装`REST Client` 插件
+GET https://www.baidu.com/ HTTP/1.1
+
+
+### 不同请求之间需要用`###`注释隔开
+
+POST https://www.baidu.com HTTP/1.1
+content-type: application/json
+
+{
+    "name": "sample"
+}

@@ -3,43 +3,57 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-10 21:43:59
- * @LastEditTime: 2019-11-10 22:07:45
+ * @LastEditTime: 2019-11-12 16:58:56
  * @LastEditors: Edmund
  -->
 
 <template>
     <view class="container">
         <input  class="input1" 
-                placeholder="请输入手机号" 
+                placeholder="请输入手机号"
+                v-model="phoneNo" 
                 type="number" />
             <view>
                   <view v-if="getCode" class="btGet">60s</view>
-                  <view v-else class="btnGet">获取</view>
+                  <view v-else 
+                        class="btnGet"
+                        @tap.stop="tapGetCode">
+                        获取
+                  </view>
                   <input  class="input2" 
                           placeholder="请输入手机验证码"
-                          type="text" />
+                          v-model="code"
+                          type="number" />
             </view>
         <input  class="input1" 
-                placeholder="重置密码" 
+                placeholder="新密码"
+                v-model="newPsw"
                 type="password" />
         <input  class="input1"
-                placeholder="确认密码" 
+                placeholder="确认密码"
+                v-model="confirmPsw"
                 type="password" />
         <button class="btnSubmit" 
-                type="default">
+                type="default"
+                @tap.stop="tapConfirm">
                 确定</button>
     </view>
 </template>
 
 <script>
 let that
+import { resetPsw, sendSMS } from 'api/user.js'
 export default {
   name: '',
   components: {},
   props: {},
   data () {
     return {
-      getCode: false
+      getCode: false,
+      phoneNo: '', // input-手机号码
+      code: '', // input-验证码
+      newPsw: '', // input-新密码
+      confirmPsw: '' //input-确认密码
     }
   },
   beforeCreate () {
@@ -67,7 +81,38 @@ export default {
   onReachBottom () { },
   onShareAppMessage () { },
   onPageScroll () { },
-  methods: {},
+  methods: {
+    /**
+     * @Description: 点击获取按钮执行方法
+     */
+    async tapGetCode () {
+      let params = {
+        phone: that.phoneNo,
+        smsType: 2
+      }
+      let res = await sendSMS(params)
+      console.log(res)
+    },
+
+
+
+
+    /**
+     * @Description: 点击`确认`按钮执行方法
+     * @param {number} smsType 短信类型，1=注册，2=重置密码
+     */
+    async tapConfirm () {
+      let params = {
+        code: that.code,
+        password: that.newPsw,
+        confirmPwd: that.confirmPsw,
+        phone: that.phoneNo,
+        smsType: 2
+      }
+      let res = await resetPsw(params)
+      console.log(res)  
+    }
+  },
   computed: {},
   watch: {}
 }

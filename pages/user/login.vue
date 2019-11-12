@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-11 17:35:17
+ * @LastEditTime: 2019-11-12 16:08:52
  * @LastEditors: Edmund
  -->
 <template>
@@ -42,6 +42,7 @@
 
 <script>
 let that
+import { login } from 'api/user.js'
 export default {
   data () {
     return {
@@ -69,13 +70,26 @@ export default {
 
   },
   methods: {
+    /**
+     * @Description: 跳转至注册页
+     */
     naviToRegister () {
       uni.navigateTo({
         url: '/pages/user/register'
       })
     },
-    handleLogin () {
-      console.log('handleLogin')
+    /**
+     * @Description: 点击登录按钮
+     */
+    async handleLogin () {
+      // 拼接参数
+      let params = {
+        password: that.password,
+        phone: that.userName
+      }
+      // 同步处理异步请求
+      let res = await login(params)
+      console.log(res)
     }
 
   }
@@ -143,7 +157,7 @@ page {
     background-color: $default-bg-white;
   }
   .forgetText {
-    color: #a8a8a8;
+    color: $default-text-color-inverse;
     font-size: 26rpx;
     line-height: 60rpx;
     float: right;

@@ -3,12 +3,13 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 14:44:56
- * @LastEditTime: 2019-11-11 10:48:47
+ * @LastEditTime: 2019-11-12 15:30:13
  * @LastEditors: Edmund
  */
 
 import Interceptor from "./core/interceptor"
-// import axios from "./index"
+import fetchConfig from 'api/fetch.config.json'
+import axios from "./index"
 
 export const globalInterceptor = {
   request: new Interceptor(),
@@ -17,12 +18,12 @@ export const globalInterceptor = {
 
 /**
  * @Description: 全局配置 (只能配置 静态数据)
+ * @param {String} `baseURL` 请求的基准url
  * @param {String} `content-type` 默认为 application/json
- * @param {String}  `content-type`设置特殊参数 或 配置其他会导致触发 跨域 问题，出现跨域会直接进入响应拦截器的catch函数中
+ * @param {String}  `content-type`设置特殊参数 或 配置其他会导致触发 跨域 问题,出现跨域会直接进入响应拦截器的catch函数中
  */
 export const config = {
-  // baseURL: "https://www.baidu.com", // 请求的基础url
-  baseURL: "http://192.168.199.238:8088",
+  baseURL: fetchConfig.baseUrl,
   header: { // 设置请求头
     // 'X-Auth-Token': 'xxxx',
     // contentType: "application/x-www-form-urlencoded",

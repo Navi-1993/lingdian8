@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-10 21:42:14
- * @LastEditTime: 2019-11-11 17:12:21
+ * @LastEditTime: 2019-11-12 15:55:17
  * @LastEditors: Edmund
  -->
 
@@ -21,9 +21,11 @@
           <view>
             <view   v-if="getCode"
                     class="btGet">
-                    60s
+                    {{count}}
             </view>
-            <view v-else class="btGet">获取</view>
+            <view v-else 
+                  class="btGet"
+                  @tap.stop="handleGetCode">获取</view>
             <input  class="input2"
                     v-model="verifiCode"
                     placeholder="请输入手机验证码"
@@ -34,7 +36,8 @@
                   v-model="password"
                   type="password" />
           <button class="btSubmit"
-                  type="default">
+                  type="default"
+                  @tap.stop="handleRegister">
                   注册
           </button>
         </view>
@@ -43,6 +46,7 @@
 
 <script>
 let that
+import { sendSMS, regist } from 'api/user.js'
 export default {
   name: '',
   components: {},
@@ -53,7 +57,8 @@ export default {
       getCode: false,
       user: '',
       password: '',
-      verifiCode: ''
+      verifiCode: '',
+      count: 60
     }
   },
   beforeCreate () {
@@ -90,7 +95,40 @@ export default {
   onReachBottom () { },
   onShareAppMessage () { },
   onPageScroll () { },
-  methods: {},
+  methods: {
+    async handleGetCode () {
+      await sendSMS({
+        phone: '13650970597',
+        smsType: 1
+      })
+      that.getCode = true
+      clearInterval(timer)
+      if (that.count !== 59) {
+        that.count = 59
+      }
+      let timer = setInterval(() => {
+        that.count--
+        if (that.count === 55) {
+          clearInterval(timer)
+          that.count = 60
+          that.getCode = false
+        }
+      }, 1000)
+    },
+    /**
+     * @Description: 点击注册按钮
+     */
+    async handleRegister () {
+      // 拼接参数
+      let params = {
+        code: that.verifiCode,
+        password: that.password,
+        phone: that.user,
+        smsType: 1
+      }
+      let res = await regist(params)
+    }
+  },
   computed: {},
   watch: {}
 }
