@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 11:10:23
- * @LastEditTime: 2019-11-13 16:42:17
+ * @LastEditTime: 2019-11-13 18:14:16
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\pages\home\index.vue
  -->
@@ -45,7 +45,7 @@
 		</scroll-view>
 		<swiper class="tab-content" 
 				:current="currentTab" 
-				duration="500"
+				duration="200"
 				:style="{height: windowHeight + 'px'}"
 				@change="switchTab" >
 			<swiper-item    v-for="(item,idx) in tabbarList" 
@@ -126,13 +126,15 @@ export default {
 		// 滚动切换标签样式
 		switchTab: (e) => {
 			console.log('changeTab', e.detail.current)
+			let scollWidth = currentTarget.offsetLeft
 			that.currentTab = e.detail.current
 			that.checkCor()
-			that.fetchEvent2()
+			that.fetchEvent()
 		},
 		// 点击标题切换当前页时改变样式
 		swichNav: function(e) {
 			let cur = e.currentTarget.dataset.current
+
 			if (that.currentTab == cur) {
 				return false
 			} else {
@@ -141,12 +143,12 @@ export default {
 		},
 		//判断当前滚动超过一屏时，设置tab标题滚动条。
 		checkCor: function() {
+			if (that.currentTab === 0) {
+				that.scrollLeft = 0
+			}
 			// 如果当前选项卡索引值大于5，设置横向滚动条
 			if (that.currentTab > 5) {
-				//这里距离按实际计算
-				that.scrollLeft = 50 * that.currentTab
-			} else {
-				that.scrollLeft = 0
+				that.scrollLeft = 30 * that.currentTab
 			}
 		},
 		/**
@@ -166,7 +168,7 @@ export default {
 		/**
 		 * @Description: 获取赛事展示数据,进行防抖处理
 		 */
-		fetchEvent2: _.debounce(async () => {
+		fetchEvent: _.debounce(async () => {
 			console.log('current', that.currentTab)
 			let idx = that.currentTab
 			let params = {
@@ -180,8 +182,7 @@ export default {
 			if (res.statusCode === 200) {
 				that.matchList = res.data.data.list || []
 			}
-		}, 1500),
-		async fetchMatchList() {}
+		}, 1500)
 	},
 	computed: {},
 	watch: {}
