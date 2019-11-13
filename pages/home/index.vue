@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 11:10:23
- * @LastEditTime: 2019-11-13 18:14:16
+ * @LastEditTime: 2019-11-13 22:53:33
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\pages\home\index.vue
  -->
@@ -69,6 +69,7 @@
 				</scroll-view>
 			</swiper-item>
 		</swiper>
+		<tui-loading :visible="isLoading"></tui-loading>
 	</view>
 </template>
 
@@ -78,6 +79,7 @@ import _ from 'underscore'
 import uniNavBar from 'components/uni-nav-bar/uni-nav-bar.vue' // 头部导航组件
 import swiperBar from 'components/swiper-bar.vue'
 import calendar from 'components/time_module/calendar.vue'
+import tuiLoading from 'components/loading/loading.vue'
 import eventCard from 'components/sportsEvent/event-card.vue'
 import { queryAllEvent, queryAllMatchList } from '@/api/match.js'
 export default {
@@ -85,7 +87,8 @@ export default {
 		uniNavBar,
 		swiperBar,
 		calendar,
-		eventCard
+		eventCard,
+		tuiLoading
 	},
 	data() {
 		return {
@@ -93,7 +96,8 @@ export default {
 			matchList: [], // 赛事数据
 			windowHeight: '', //窗口高度
 			currentTab: 0, //预设当前tab项的值
-			scrollLeft: 0 //tab标题的滚动条位置
+			scrollLeft: 0, //tab标题的滚动条位置
+			isLoading: false // 加载弹窗
 		}
 	},
 	beforeCreate() {
@@ -169,7 +173,8 @@ export default {
 		 * @Description: 获取赛事展示数据,进行防抖处理
 		 */
 		fetchEvent: _.debounce(async () => {
-			console.log('current', that.currentTab)
+			that.isLoading = true
+			// console.log('current', that.currentTab)
 			let idx = that.currentTab
 			let params = {
 				// id: that.tabbarList[idx].id,
@@ -177,11 +182,17 @@ export default {
 				offset: 1,
 				type: that.tabbarList[idx].type
 			}
-			// TODO
 			let res = await queryAllMatchList(params)
 			if (res.statusCode === 200) {
+				// when success ,do sth you want
+				that.isLoading = false
 				that.matchList = res.data.data.list || []
 			}
+			// 如果加载不到数据，关闭loading控件
+			clearTimeout(timer)
+			let timer = setTimeout(() => {
+				that.isLoading = false
+			}, 0)
 		}, 1500)
 	},
 	computed: {},
