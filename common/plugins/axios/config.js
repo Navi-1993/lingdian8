@@ -3,12 +3,12 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 14:44:56
- * @LastEditTime: 2019-11-13 10:35:11
+ * @LastEditTime: 2019-11-13 14:14:22
  * @LastEditors: Edmund
  */
 
 import Interceptor from "./core/interceptor"
-import fetchConfig from 'api/fetch.config.json'
+import envConfig from '@/config.js'
 import axios from "./index"
 // 拿取token
 const token = uni.getStorageSync('user').token
@@ -28,7 +28,7 @@ export const globalInterceptor = {
  * @param {String}  `content-type`设置特殊参数 或 配置其他会导致触发 跨域 问题,出现跨域会直接进入响应拦截器的catch函数中
  */
 export const config = {
-  baseURL: fetchConfig.baseUrl,
+  baseURL: envConfig.dev.BASE_URL,
   header: { // 设置请求头
     // 'X-Auth-Token': 'xxxx',
     // contentType: "application/x-www-form-urlencoded",
