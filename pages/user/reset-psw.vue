@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-10 21:43:59
- * @LastEditTime: 2019-11-13 02:25:01
+ * @LastEditTime: 2019-11-13 11:51:14
  * @LastEditors: Edmund
  -->
 
@@ -108,7 +108,7 @@ export default {
 			})
 			let res = await sendSMS({
 				phone: that.phoneNo,
-				smsType: 1 // 1 = 注册用短信类型
+				smsType: 2 // 2 = 重置短信
 			})
 			if (res.statusCode === 200) {
 				// do sth you want

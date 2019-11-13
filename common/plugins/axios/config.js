@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 14:44:56
- * @LastEditTime: 2019-11-13 02:54:38
+ * @LastEditTime: 2019-11-13 10:35:11
  * @LastEditors: Edmund
  */
 
@@ -12,6 +12,10 @@ import fetchConfig from 'api/fetch.config.json'
 import axios from "./index"
 // 拿取token
 const token = uni.getStorageSync('user').token
+console.log('global interceptor\'s token', token)
+// 拿取系统信息
+const systemInfo = uni.getSystemInfoSync()
+console.log('systemInfo', systemInfo)
 export const globalInterceptor = {
   request: new Interceptor(),
   response: new Interceptor()

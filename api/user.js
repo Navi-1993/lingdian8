@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-12 15:32:09
- * @LastEditTime: 2019-11-13 00:21:04
+ * @LastEditTime: 2019-11-13 10:30:16
  * @LastEditors: Edmund
  */
 'use strict'
@@ -72,7 +72,8 @@ export function login ({
   clientId,
   deviceType,
   password,
-  phone
+  phone,
+  registeIp
 }) {
   return fetch.request({
     url: '/app/login/userAccount/login',
@@ -81,7 +82,8 @@ export function login ({
       clientId: clientId,
       deviceType: deviceType,
       password: password,
-      phone: phone
+      phone: phone,
+      registeIp: registeIp
     }
   })
 }

@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-13 02:32:35
+ * @LastEditTime: 2019-11-13 10:52:51
  * @LastEditors: Edmund
  -->
 <template>
@@ -15,9 +15,8 @@
             :style="[{'height':contentHeight}]">
         <input  class="inputItem"
                 placeholder="请输入手机号"
-                v-model="userName"
-                @change="console.log(userName)"
-                type="number" />
+				type="number" 
+                v-model="phoneNo"/>
         <input  class="inputItem"
                 placeholder="请输入密码"
                 v-model="password"
@@ -47,7 +46,7 @@ export default {
 	data() {
 		return {
 			contentHeight: '0px',
-			userName: '',
+			phoneNo: '',
 			password: ''
 		}
 	},
@@ -86,24 +85,37 @@ export default {
 			// 拼接参数
 			let params = {
 				password: that.password,
-				phone: that.userName
+				phone: that.phoneNo,
+				registeIp: that.registeIp,
+				deviceType: that.deviceType
 			}
 			// 同步处理异步请求
 			let res = await login(params)
+			console.log(res)
 			if (res.statusCode === 200) {
 				// 登陆成功后更新本地user数据
 				uni.setStorage({
 					key: 'user',
 					data: {
-						userName: 'xuefeng',
-						phoneNo: '13650970597',
-						token: 'aaa'
+						phoneNo: that.phoneNo,
+						token: res.data.data.token,
+						registeIp: res.data.data.registeIp,
+						deviceType: that.deviceType,
+						systemInfo: uni.getSystemInfoSync()
 					},
 					success: function() {
-						console.log('success')
+						console.log('user info inject success', that.registeIp)
 					}
 				})
 			}
+		}
+	},
+	computed: {
+		registeIp() {
+			return uni.getStorageSync('user').registeIp || ''
+		},
+		deviceType() {
+			return uni.getSystemInfoSync().system
 		}
 	}
 }
