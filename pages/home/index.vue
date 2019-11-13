@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 11:10:23
- * @LastEditTime: 2019-11-13 11:11:08
+ * @LastEditTime: 2019-11-13 16:42:17
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\pages\home\index.vue
  -->
@@ -12,7 +12,7 @@
 	<view class="container">
     <!--  #ifndef MP-WEIXIN  -->
     <!-- 状态栏 -->
-    <uni-nav-bar  title="零点吧"
+    <!-- <uni-nav-bar  title="零点吧"
                   :fixed="true"
                   color = "yellow"
                   background-color = "red"
@@ -23,18 +23,18 @@
             class="iconfont">
       </view>
     
-    </uni-nav-bar>
+    </uni-nav-bar> -->
     <!--  #endif -->
     <!-- tabbar -->
     <scroll-view  scroll-x 
                   scroll-with-animation 
                   class="tab-view" 
                   :scroll-left="scrollLeft">
-			<view v-for="(item,idx) in tabbarList" 
-            :key="idx"
-            class="tab-bar-item" 
-            :class="[currentTab == index ? 'active' : '']"
-			      :data-current="index"
+			<view 	v-for="(item,idx) in tabbarList" 
+					:key="idx"
+					class="tab-bar-item" 
+					:class="[currentTab == idx ? 'active' : '']"
+			      :data-current="idx"
             @tap.stop="swichNav">
         <text class="tab-bar-title"
               v-if="item">
@@ -44,10 +44,10 @@
       <view class="tabbar-controls">+</view>
 		</scroll-view>
 		<swiper class="tab-content" 
-            :current="currentTab" 
-            duration="300"
-            :style="{height: windowHeight + 'px'}"
-            @change="switchTab" >
+				:current="currentTab" 
+				duration="500"
+				:style="{height: windowHeight + 'px'}"
+				@change="switchTab" >
 			<swiper-item    v-for="(item,idx) in tabbarList" 
                       :key="idx"
                       v-show="item">
@@ -61,7 +61,10 @@
                       :guestTeamName="item.guestTeamName"
                       :livesUrl="''"
                       :key="index">
-              <text slot="text">{{item.matchBeginTime}}   {{item.matchTitle}}</text>
+              	<text slot="text">
+					{{item.matchBeginTime}}
+					{{item.matchTitle}}
+				</text>
           </event-card>
 				</scroll-view>
 			</swiper-item>
@@ -71,6 +74,7 @@
 
 <script>
 let that
+import _ from 'underscore'
 import uniNavBar from 'components/uni-nav-bar/uni-nav-bar.vue' // 头部导航组件
 import swiperBar from 'components/swiper-bar.vue'
 import calendar from 'components/time_module/calendar.vue'
@@ -121,8 +125,10 @@ export default {
 	methods: {
 		// 滚动切换标签样式
 		switchTab: (e) => {
+			console.log('changeTab', e.detail.current)
 			that.currentTab = e.detail.current
 			that.checkCor()
+			that.fetchEvent2()
 		},
 		// 点击标题切换当前页时改变样式
 		swichNav: function(e) {
@@ -158,13 +164,14 @@ export default {
 		},
 
 		/**
-		 * @Description: 获取赛事展示数据
+		 * @Description: 获取赛事展示数据,进行防抖处理
 		 */
-		async fetchMatchList() {
+		fetchEvent2: _.debounce(async () => {
+			console.log('current', that.currentTab)
 			let idx = that.currentTab
 			let params = {
-				id: that.tabbarList[idx].id,
-				limit: 10,
+				// id: that.tabbarList[idx].id,
+				// limit: 10,
 				offset: 1,
 				type: that.tabbarList[idx].type
 			}
@@ -173,14 +180,11 @@ export default {
 			if (res.statusCode === 200) {
 				that.matchList = res.data.data.list || []
 			}
-		}
+		}, 1500),
+		async fetchMatchList() {}
 	},
 	computed: {},
-	watch: {
-		// currentTab: (newValue, oldValue) => {
-		//   console.log(newValue, 'newValue')
-		// }
-	}
+	watch: {}
 }
 </script>
 

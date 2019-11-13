@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-13 10:52:51
+ * @LastEditTime: 2019-11-13 15:01:37
  * @LastEditors: Edmund
  -->
 <template>
@@ -12,15 +12,19 @@
 			<image class="iconLogo"></image>
 		</view>
 		<view   class="contentLayout"
-            :style="[{'height':contentHeight}]">
+            	:style="[{'height':contentHeight}]">
         <input  class="inputItem"
                 placeholder="请输入手机号"
-				type="number" 
+				type="text"
+				maxlength="11"
+				confirm-type="确定"
                 v-model="phoneNo"/>
         <input  class="inputItem"
                 placeholder="请输入密码"
                 v-model="password"
-                type="password" />
+				password
+				maxlength="16"
+                type="text" />
         <button class="btLogin"
                 type="default"
                 @tap.stop="handleLogin">
@@ -30,7 +34,7 @@
                     url="/pages/user/reset-psw">
               忘记密码?
         </navigator>
-        <button class="btRegister"
+        <button	class="btRegister"
                 @tap.stop="naviToRegister"
                 type="default">
                 注册
@@ -152,7 +156,7 @@ page {
 	.inputItem {
 		width: 580rpx;
 		height: 80rpx;
-		line-height: 50rpx;
+		line-height: 1000rpx;
 		margin-left: 45rpx;
 		border: solid 1px $default-border-color;
 		border-radius: 40rpx;

@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 14:44:56
- * @LastEditTime: 2019-11-13 14:14:22
+ * @LastEditTime: 2019-11-13 16:13:10
  * @LastEditors: Edmund
  */
 
@@ -12,10 +12,8 @@ import envConfig from '@/config.js'
 import axios from "./index"
 // 拿取token
 const token = uni.getStorageSync('user').token
-console.log('global interceptor\'s token', token)
 // 拿取系统信息
 const systemInfo = uni.getSystemInfoSync()
-console.log('systemInfo', systemInfo)
 export const globalInterceptor = {
   request: new Interceptor(),
   response: new Interceptor()
@@ -34,7 +32,7 @@ export const config = {
     // contentType: "application/x-www-form-urlencoded",
     'Content-Type': 'application/json',
     timeStamp: new Date() * 1,
-    token: token
+    token: 1
   },
 }
 

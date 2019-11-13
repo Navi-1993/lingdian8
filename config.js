@@ -3,12 +3,13 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-12 15:21:49
- * @LastEditTime: 2019-11-13 14:11:33
+ * @LastEditTime: 2019-11-13 16:07:25
  * @LastEditors: Edmund
  */
 
 const dev = {
-  BASE_URL: 'http://192.168.199.245:8088/',
+  // BASE_URL: 'http://192.168.199.245:8088/',
+  BASE_URL: 'http://192.168.199.238:8088/',
   // EMB_URL: 'http://120.76.155.133:12010/', // 外网
   MODE: 'dev'
 }
