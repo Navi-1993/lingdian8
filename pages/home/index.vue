@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 11:10:23
- * @LastEditTime: 2019-11-13 22:53:33
+ * @LastEditTime: 2019-11-13 23:11:32
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\pages\home\index.vue
  -->
@@ -182,17 +182,17 @@ export default {
 				offset: 1,
 				type: that.tabbarList[idx].type
 			}
+			// 2秒后加载不到数据关闭loading控件
+			clearTimeout(timer)
+			let timer = setTimeout(() => {
+				that.isLoading = false
+			}, 2000)
 			let res = await queryAllMatchList(params)
 			if (res.statusCode === 200) {
 				// when success ,do sth you want
 				that.isLoading = false
 				that.matchList = res.data.data.list || []
 			}
-			// 如果加载不到数据，关闭loading控件
-			clearTimeout(timer)
-			let timer = setTimeout(() => {
-				that.isLoading = false
-			}, 0)
 		}, 1500)
 	},
 	computed: {},
