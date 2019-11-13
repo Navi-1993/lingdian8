@@ -3,50 +3,56 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-13 15:01:37
+ * @LastEditTime: 2019-11-13 22:14:46
  * @LastEditors: Edmund
  -->
 <template>
-	<view class="container">
-		<view class="topLayout">
-			<image class="iconLogo"></image>
-		</view>
-		<view   class="contentLayout"
-            	:style="[{'height':contentHeight}]">
-        <input  class="inputItem"
-                placeholder="请输入手机号"
-				type="text"
-				maxlength="11"
-				confirm-type="确定"
-                v-model="phoneNo"/>
-        <input  class="inputItem"
-                placeholder="请输入密码"
-                v-model="password"
-				password
-				maxlength="16"
-                type="text" />
-        <button class="btLogin"
-                type="default"
-                @tap.stop="handleLogin">
-                登录
-        </button>
-        <navigator  class="forgetText"
-                    url="/pages/user/reset-psw">
-              忘记密码?
-        </navigator>
-        <button	class="btRegister"
-                @tap.stop="naviToRegister"
-                type="default">
-                注册
-        </button>
-		</view>
-	</view>
+  <view class="container">
+    <view class="topLayout">
+      <image class="iconLogo"></image>
+    </view>
+    <view class="contentLayout" :style="[{ height: contentHeight }]">
+      <input
+        class="inputItem"
+        placeholder="请输入手机号"
+        type="text"
+        maxlength="11"
+        confirm-type="确定"
+        v-model="phoneNo"
+      />
+      <input
+        class="inputItem"
+        placeholder="请输入密码"
+        v-model="password"
+        password
+        maxlength="16"
+        type="text"
+      />
+      <button class="btLogin" type="default" @tap.stop="handleLogin">
+        登录
+      </button>
+      <navigator class="forgetText" url="/pages/user/reset-psw">
+        忘记密码?
+      </navigator>
+      <button class="btRegister" @tap.stop="naviToRegister" type="default">
+        注册
+      </button>
+    </view>
+    <!--toast提示-->
+    <tui-toast ref="toast"></tui-toast>
+  </view>
 </template>
 
 <script>
 let that
 import { login } from 'api/user.js'
+import tuiToast from 'components/extend/toast/toast.vue'
 export default {
+	name: 'login',
+	props: {},
+	components: {
+		tuiToast
+	},
 	data() {
 		return {
 			contentHeight: '0px',
@@ -97,6 +103,12 @@ export default {
 			let res = await login(params)
 			console.log(res)
 			if (res.statusCode === 200) {
+				// 登陆成功后给出toast提示
+				that.$refs.toast.show({
+					title: '登陆成功',
+					icon: false,
+					duration: 1000
+				})
 				// 登陆成功后更新本地user数据
 				uni.setStorage({
 					key: 'user',

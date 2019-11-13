@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-10 21:42:14
- * @LastEditTime: 2019-11-13 02:25:41
+ * @LastEditTime: 2019-11-13 22:18:46
  * @LastEditors: Edmund
  -->
 
@@ -39,16 +39,21 @@
                   注册
           </button>
         </view>
+		<!--toast提示-->
+		<tui-toast ref="toast"></tui-toast>
     </view>
 </template>
 
 <script>
 let that
 import _ from 'underscore'
+import tuiToast from 'components/extend/toast/toast.vue'
 import { sendSMS, register } from 'api/user.js'
 export default {
 	name: '',
-	components: {},
+	components: {
+		tuiToast
+	},
 	props: {},
 	data() {
 		return {
@@ -111,15 +116,16 @@ export default {
 			that.count = 59
 			let timer = setInterval(() => {
 				that.count--
-				console.log(that.count, 'timer')
+				// console.log(that.count, 'timer')
 				// 边界值处理
 				if (that.count === 0) {
 					that.count = '获取'
 					that.isgetCode = true
-					clearInterval(timer) // 到0清除定时器
+					// 到0清除定时器
+					clearInterval(timer)
 				}
 			}, 1000)
-			// 离开页面卸载定时器
+			// 离开页面清除定时器
 			that.$once('hook:beforeDestroy', () => {
 				clearInterval(timer)
 			})
@@ -129,7 +135,11 @@ export default {
 			})
 			if (res.statusCode === 200) {
 				// do sth you want
-				console.log('验证信息已发送，请注意查收')
+				that.$refs.toast.show({
+					title: '验证码已发送',
+					icon: false,
+					duration: 1000
+				})
 			}
 		}, 5000),
 

@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-10 21:43:59
- * @LastEditTime: 2019-11-13 11:51:14
+ * @LastEditTime: 2019-11-13 22:21:32
  * @LastEditors: Edmund
  -->
 
@@ -38,16 +38,21 @@
                 @tap.stop="tapConfirm">
                 确定
 		</button>
+		<!--toast提示-->
+    	<tui-toast ref="toast"></tui-toast>
     </view>
 </template>
 
 <script>
 let that
 import _ from 'underscore'
+import tuiToast from 'components/extend/toast/toast.vue'
 import { resetPsw, sendSMS } from 'api/user.js'
 export default {
 	name: '',
-	components: {},
+	components: {
+		tuiToast
+	},
 	props: {},
 	data() {
 		return {
@@ -67,8 +72,6 @@ export default {
 	created() {
 		that = this
 	},
-	onLoad() {},
-	onShow() {},
 	onReady() {
 		// #ifndef APP-PLUS
 		console.log(
@@ -78,12 +81,6 @@ export default {
 		console.timeEnd('renderTime')
 		// #endif
 	},
-	onHide() {},
-	onUnload() {},
-	onPullDownRefresh() {},
-	onReachBottom() {},
-	onShareAppMessage() {},
-	onPageScroll() {},
 	methods: {
 		/**
 		 * @Description: 点击获取按钮执行方法
@@ -112,7 +109,11 @@ export default {
 			})
 			if (res.statusCode === 200) {
 				// do sth you want
-				console.log('验证信息已发送，请注意查收')
+				that.$refs.toast.show({
+					title: '短信发送成功',
+					icon: false,
+					duration: 1000
+				})
 			}
 		}, 5000),
 
