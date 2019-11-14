@@ -10,7 +10,7 @@
 
 
 <template>
-    <view class="video_container">
+    <view class="container">
     </view>
 </template>
 
@@ -85,7 +85,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.video_container {
+.container {
   height: 400vh;
   width: 100vw;
   display: flex;

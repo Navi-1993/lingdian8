@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 11:10:23
- * @LastEditTime: 2019-11-13 23:11:32
+ * @LastEditTime: 2019-11-14 09:52:45
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\pages\home\index.vue
  -->
@@ -44,10 +44,10 @@
       <view class="tabbar-controls">+</view>
 		</scroll-view>
 		<swiper class="tab-content" 
-				:current="currentTab" 
-				duration="200"
-				:style="{height: windowHeight + 'px'}"
-				@change="switchTab" >
+						:current="currentTab" 
+						duration="200"
+						:style="{height: windowHeight + 'px'}"
+						@change="switchTab" >
 			<swiper-item    v-for="(item,idx) in tabbarList" 
                       :key="idx"
                       v-show="item">
@@ -62,8 +62,8 @@
                       :livesUrl="''"
                       :key="index">
               	<text slot="text">
-					{{item.matchBeginTime}}
-					{{item.matchTitle}}
+									{{item.matchBeginTime}}
+									{{item.matchTitle}}
 				</text>
           </event-card>
 				</scroll-view>
@@ -77,7 +77,6 @@
 let that
 import _ from 'underscore'
 import uniNavBar from 'components/uni-nav-bar/uni-nav-bar.vue' // 头部导航组件
-import swiperBar from 'components/swiper-bar.vue'
 import calendar from 'components/time_module/calendar.vue'
 import tuiLoading from 'components/loading/loading.vue'
 import eventCard from 'components/sportsEvent/event-card.vue'
@@ -85,7 +84,6 @@ import { queryAllEvent, queryAllMatchList } from '@/api/match.js'
 export default {
 	components: {
 		uniNavBar,
-		swiperBar,
 		calendar,
 		eventCard,
 		tuiLoading
@@ -177,6 +175,7 @@ export default {
 			// console.log('current', that.currentTab)
 			let idx = that.currentTab
 			let params = {
+				// TODO:数据太少，暂时作渲染用，预发版需要取消id与limit的注释
 				// id: that.tabbarList[idx].id,
 				// limit: 10,
 				offset: 1,
