@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-13 23:10:34
+ * @LastEditTime: 2019-11-15 12:10:51
  * @LastEditors: Edmund
  -->
 <template>
@@ -11,7 +11,8 @@
     <view class="topLayout">
       <image class="iconLogo"></image>
     </view>
-    <view class="contentLayout" :style="[{ height: contentHeight }]">
+    <view class="contentLayout"
+					:style="[{ height: contentHeight }]">
       <input
         class="inputItem"
         placeholder="请输入手机号"
@@ -28,18 +29,30 @@
         maxlength="16"
         type="text"
       />
-      <button class="btLogin" type="default" @tap.stop="handleLogin">
+      <button class="btLogin"
+							type="default"
+							@tap.stop="handleLogin">
         登录
       </button>
-      <navigator class="forgetText" url="/pages/user/reset-psw">
+      <navigator 	class="forgetText" 
+									url="/pages/user/reset-psw">
         忘记密码?
       </navigator>
-      <button class="btRegister" @tap.stop="naviToRegister" type="default">
+      <button 	class="btRegister"
+								@tap.stop="naviToRegister"
+								type="default">
         注册
       </button>
     </view>
     <!--toast提示-->
     <tui-toast ref="toast"></tui-toast>
+		<tui-fab 	:left="left"
+							:right="right"
+							:bottom="bottom"
+							:bgColor="bgColor"
+							:btnList="btnList"
+							>
+		</tui-fab>
   </view>
 </template>
 
@@ -47,14 +60,50 @@
 let that
 import { login } from 'api/user.js'
 import tuiToast from 'components/extend/toast/toast.vue'
+import tuiFab from 'components/tui-fab/tui-fab.vue'
 export default {
 	name: 'login',
 	props: {},
 	components: {
-		tuiToast
+		tuiToast,
+		tuiFab
 	},
 	data() {
 		return {
+			left: 0,
+			right: 80,
+			bottom: 100,
+			bgColor: '#5677fc',
+			btnList: [],
+			list2: [
+				{
+					bgColor: '#16C2C2',
+					//名称
+					text: '关于',
+					//字体大小
+					fontSize: 28,
+					//字体颜色
+					color: '#fff'
+				},
+				{
+					bgColor: '#64B532',
+					//名称
+					text: '分享',
+					//字体大小
+					fontSize: 28,
+					//字体颜色
+					color: '#fff'
+				},
+				{
+					bgColor: '#FFA000',
+					//名称
+					text: '赞赏',
+					//字体大小
+					fontSize: 28,
+					//字体颜色
+					color: '#fff'
+				}
+			],
 			contentHeight: '0px',
 			phoneNo: '',
 			password: ''
@@ -77,7 +126,9 @@ export default {
 			}
 		})
 	},
-	mounted() {},
+	mounted() {
+		that.btnList = [...that.list2]
+	},
 	onLoad() {},
 	methods: {
 		/**
@@ -120,7 +171,7 @@ export default {
 						systemInfo: uni.getSystemInfoSync()
 					},
 					success: function() {
-						console.log('user info inject success', that.registeIp)
+						console.log('user info inject success')
 					}
 				})
 			}

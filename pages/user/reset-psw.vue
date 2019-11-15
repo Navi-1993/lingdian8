@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-10 21:43:59
- * @LastEditTime: 2019-11-13 22:21:32
+ * @LastEditTime: 2019-11-15 10:42:50
  * @LastEditors: Edmund
  -->
 
@@ -11,12 +11,11 @@
     <view class="container">
         <input  class="input1" 
                 placeholder="请输入手机号"
+								maxlength="11"
                 v-model="phoneNo" 
                 type="number" />
             <view>
-                  <view v-if="isGetCode" class="btGet">60s</view>
-                  <view v-else 
-						class="btnGet"
+                  <view class="btnGet"
                         @tap.stop="handleGetCode">
                         {{count}}
                   </view>
@@ -91,7 +90,6 @@ export default {
 			that.count = 59
 			let timer = setInterval(() => {
 				that.count--
-				console.log(that.count, 'timer')
 				// 边界值处理
 				if (that.count === 0) {
 					that.count = '获取'

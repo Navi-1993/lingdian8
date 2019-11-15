@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-10 21:42:14
- * @LastEditTime: 2019-11-13 22:18:46
+ * @LastEditTime: 2019-11-15 10:40:06
  * @LastEditors: Edmund
  -->
 
@@ -17,6 +17,7 @@
             <input  class="input1" 
                     placeholder="请输入手机号"
                     v-model="phoneNo"
+										maxlength="11"
                     type="number" />
           <view>
             <!-- TODO:getCode btn -->
