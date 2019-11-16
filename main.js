@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:54:42
- * @LastEditTime: 2019-11-07 16:53:46
+ * @LastEditTime: 2019-11-16 18:31:51
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\main.js
  */
@@ -18,6 +18,7 @@ import axios from '@/common/plugins/axios/index'
 
 // 引入underScore工具函数库
 import underscore from 'underscore'
+
 
 Vue.prototype.$_ = underscore
 Vue.prototype.$store = store
