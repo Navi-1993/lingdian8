@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-16 18:28:05
- * @LastEditTime: 2019-11-16 21:31:32
+ * @LastEditTime: 2019-11-16 22:58:13
  * @LastEditors: Edmund
  -->
 <template>
@@ -187,8 +187,8 @@ export default {
         this.active > -1
       ) {
         this.$emit('change', {
-          // 操作值
-          data: (() => {
+          // 活动中的item
+          item: (() => {
             let data = {
               ...this.currentList[this.active]
             }
@@ -197,8 +197,8 @@ export default {
             delete data.animation
             return data
           })(),
-          // 插队的位置前面的值
-          frontData: (() => {
+          // 活动后item前面的元素
+          frontItem: (() => {
             for (const iterator of this.currentList) {
               if (this.currentList[this.active].index - 1 === iterator.index) {
                 let data = {
@@ -244,7 +244,7 @@ export default {
     flex: 1;
   }
   .touch-tight {
-    width: 24px;
+    width: 24rpx;
     display: flex;
     justify-content: center;
   }
@@ -256,7 +256,7 @@ export default {
 .ico_drag {
   display: inline-block;
   width: 24rpx;
-  height: 12rpx;
+  height: 12px;
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAYCAYAAAC8/X7cAAAAAXNSR0IArs4c6QAAAEtJREFUWAnt1cEJACAMA0B1/506moIr5FEK51+Jl0d2Vd01+JzB2X90H5jeoPwECBDIBLYlzgDj25Y4JvQAAQIERgtY4u76LHF3Aw8rGQnK3sYAXQAAAABJRU5ErkJggg==)
     0 0 no-repeat;
   background-size: 100% auto;

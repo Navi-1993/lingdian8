@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-16 20:26:48
+ * @LastEditTime: 2019-11-16 23:10:16
  * @LastEditors: Edmund
  -->
 
@@ -20,6 +20,7 @@
 let that
 import dragSort from 'components/drag-sort/index.vue'
 export default {
+  name: 'drag',
   components: { dragSort },
   props: {},
   data() {
@@ -74,6 +75,7 @@ export default {
   onReady() {
     // #ifndef APP-PLUS
     console.timeEnd('renderTime')
+    console.log(`%c${that.__route__}`, 'color:yellow;background-color:black')
     // #endif
   },
   onHide() {},
@@ -82,7 +84,10 @@ export default {
   destroyed() {},
   methods: {
     onDragSortChange(e) {
-      console.log('e', e)
+      let currentItem = e.item
+      let frontItem = e.frontItem
+      console.log('currentItem', currentItem)
+      console.log('frontItem', frontItem)
     }
   },
   computed: {},

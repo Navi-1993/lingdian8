@@ -3,13 +3,11 @@
  * @Author: Edmund(q1592193221@gmail.com)
  * @LastEditors: Edmund
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-07 15:55:26
+ * @LastEditTime: 2019-11-16 23:11:02
  * @FilePath: \lingdian8\components\template-pages.vue
  -->
 <template>
-    <view class="container">
-
-    </view>
+  <view class="container"> </view>
 </template>
 
 <script>
@@ -35,6 +33,7 @@ export default {
       'color: yellow; background-color: black;padding: 2px'
     )
     console.timeEnd('renderTime')
+    console.log(`%c${that.__route__}`, 'color:yellow;background-color:black')
     // #endif
   },
   onHide() {},
@@ -49,5 +48,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
