@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-16 18:37:19
+ * @LastEditTime: 2019-11-16 18:59:13
  * @LastEditors: Edmund
  -->
 
@@ -39,72 +39,6 @@ export default {
         },
         {
           label: '标题4'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
-        },
-        {
-          label: '标题5'
         },
         {
           label: '标题5'
@@ -148,9 +82,8 @@ export default {
   destroyed() {},
   methods: {
     onDragSortChange(e) {
-      console.log(e)
-      // frontData 插到谁后面
-      // data 操作的数据
+      console.log('list', list)
+      console.log('e', e)
     }
   },
   computed: {},

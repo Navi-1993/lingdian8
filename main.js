@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:54:42
- * @LastEditTime: 2019-11-16 18:31:51
+ * @LastEditTime: 2019-11-16 19:54:17
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\main.js
  */
@@ -33,4 +33,10 @@ const app = new Vue({
   ...App,
   router
 })
-app.$mount()
+// #ifdef H5
+RouterMount(app, '#app');
+// #endif
+
+// #ifndef H5
+app.$mount(); //为了兼容小程序及app端必须这样写才有效果
+// #endif

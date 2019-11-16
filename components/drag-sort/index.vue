@@ -1,3 +1,11 @@
+<!--
+ * @Description: 
+ * @Author: Edmund
+ * @Email: q1592193221@gmail.com
+ * @Date: 2019-11-16 18:28:05
+ * @LastEditTime: 2019-11-16 19:45:02
+ * @LastEditors: Edmund
+ -->
 <template>
   <movable-area
     class="drag-sort"
@@ -104,7 +112,7 @@ export default {
         this.topY = res[0].top
         let touchY = e.mp.touches[0].clientY - res[0].top
         this.deviationY = touchY % this.height
-        console.log(touchY)
+        // console.log(touchY)
         for (const key in this.currentList) {
           if (
             this.currentList[key].index * this.height < touchY &&
@@ -170,6 +178,9 @@ export default {
             delete data.y
             delete data.animation
             return data
+          })(),
+          list: (() => {
+            return this.currentList
           })(),
           // 插队的位置前面的值
           frontData: (() => {
