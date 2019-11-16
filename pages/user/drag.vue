@@ -3,15 +3,14 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-16 23:10:16
+ * @LastEditTime: 2019-11-17 00:12:43
  * @LastEditors: Edmund
  -->
 
 <template>
   <view class="container">
     <view class="color-list">
-      <drag-sort :list="list" :props="props" @change="onDragSortChange">
-      </drag-sort>
+      <drag-sort :list="list" :props="props" @change="itemChange"> </drag-sort>
     </view>
   </view>
 </template>
@@ -83,11 +82,26 @@ export default {
   beforeDestroy() {},
   destroyed() {},
   methods: {
-    onDragSortChange(e) {
+    /**
+     * @Description: drag-组件$emit change 时更改 Item
+     * @e {Object} drag-组件定义的事件值
+     * @return: void
+     */
+    itemChange(e) {
       let currentItem = e.item
       let frontItem = e.frontItem
+
+      // 刷新数据
+      that.updateList(currentItem, frontItem)
+    },
+    updateList(currentItem, frontItem) {
       console.log('currentItem', currentItem)
       console.log('frontItem', frontItem)
+      // TODO:从数组中找1个符合需求的元素，返回其索引
+      let idx = this.$_.findIndex(this.list, item => {
+        return item.key === currentItem.key
+      })
+      console.log('result', idx)
     }
   },
   computed: {},
