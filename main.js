@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:54:42
- * @LastEditTime: 2019-11-16 19:54:17
+ * @LastEditTime: 2019-11-16 22:36:09
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\main.js
  */
@@ -11,7 +11,9 @@
 import Vue from 'vue'
 import App from './App'
 import store from './store'
+// 引入配置好的路由模块
 import router from './router'
+import { RouterMount } from 'uni-simple-router'
 
 // 引入封装好的可用于uni-app的axios插件
 import axios from '@/common/plugins/axios/index'

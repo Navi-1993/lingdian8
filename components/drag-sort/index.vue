@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-16 18:28:05
- * @LastEditTime: 2019-11-16 19:45:02
+ * @LastEditTime: 2019-11-16 21:31:32
  * @LastEditors: Edmund
  -->
 <template>
@@ -12,30 +12,30 @@
     :style="{ height: currentListLength + 'px' }"
     id="drag"
   >
-    <movable-view
-      v-for="(item, index) in currentList"
-      :key="index"
-      :x="0"
-      :y="item.y"
-      direction="vertical"
-      disabled
-      damping="40"
-      :animation="active !== index"
-      class="drag-sort-item"
-      style="height:55px"
-      :class="{ active: active === index, 'vh-1px-t': item.index > 0 }"
-    >
-      <view class="item">{{ item[props.label] }}</view>
-      <view class="touch-tight">
-        <view class="ico_drag"></view>
-      </view>
-    </movable-view>
+    <block v-for="(item, index) in currentList" :key="index">
+      <movable-view
+        :x="0"
+        :y="item.y"
+        direction="vertical"
+        disabled
+        damping="0"
+        :animation="active !== index"
+        class="drag-sort-item"
+        style="height:55px"
+        :class="{ active: active === index, 'vh-1px-t': item.index > 0 }"
+      >
+        <view class="item" @tap="deleteItem">{{ item[props.label] }}</view>
+        <view class="touch-tight">
+          <view class="ico_drag"></view>
+        </view>
+      </movable-view>
+    </block>
     <movable-view
       class="touch"
       :x="2000"
-      @touchstart="touchstart"
-      @touchmove="touchmove"
-      @touchend="touchend"
+      @touchstart.stop="touchstart"
+      @touchmove.stop="touchmove"
+      @touchend.stop="touchend"
       catchtouchstart
       catchtouchmove
       catchtouchend
@@ -59,6 +59,7 @@ export default {
     }
   },
   computed: {
+    // 动态计算拖拽组件高度
     currentListLength() {
       return this.currentList.length * this.height
     }
@@ -81,6 +82,7 @@ export default {
     }
   },
   watch: {
+    // 对父组件来值list进行监听，当发生变化时，执行更新方法
     list(val) {
       this.onUpdateCurrentList()
     }
@@ -92,9 +94,18 @@ export default {
   updated() {},
   filters: {},
   methods: {
+    deleteItem() {
+      this.currentList.push({ key: `${new Date() * 1}` })
+      this.$forceUpdate()
+    },
+    /**
+     * @Description: 更新数据
+     * @param {type}
+     * @return:
+     */
     onUpdateCurrentList() {
       let arr = []
-      for (const key in this.list) {
+      for (let key in this.list) {
         arr.push({
           ...this.list[key],
           index: Number(key),
@@ -109,15 +120,18 @@ export default {
       var query = wx.createSelectorQuery().in(this)
       query.select('#drag').boundingClientRect()
       query.exec(res => {
+        console.log('点击元素信息:', res)
         this.topY = res[0].top
         let touchY = e.mp.touches[0].clientY - res[0].top
         this.deviationY = touchY % this.height
         // console.log(touchY)
-        for (const key in this.currentList) {
+        // 点击时对每个数组元素进行判断
+        for (let key in this.currentList) {
           if (
-            this.currentList[key].index * this.height < touchY &&
-            (this.currentList[key].index + 1) * this.height > touchY
+            this.currentList[key].index * this.height <= touchY &&
+            (this.currentList[key].index + 1) * this.height >= touchY
           ) {
+            console.log('seleted success')
             this.active = Number(key)
             this.itemIndex = this.currentList[key].index
             break
@@ -126,9 +140,11 @@ export default {
       })
     },
     touchmove(e) {
+      // 没有选中元素则退出
       if (this.active < 0) return
       let touchY = e.mp.touches[0].clientY - this.topY - this.deviationY
-      console.log(touchY)
+      console.log('鼠标当前y坐标', touchY)
+      // 更新激活item的y坐标
       this.currentList[this.active].y = touchY
       for (const key in this.currentList) {
         // 跳过当前操作的item
@@ -149,10 +165,12 @@ export default {
               break
             }
           } else {
+            // 若移动距离超过格子的一半，则更新所有元素的索引值
             if (
               touchY <
               this.currentList[key].index * this.height + this.height / 2
             ) {
+              console.log('activeItem idx', this.currentList[this.active].index)
               this.currentList[this.active].index = this.currentList[key].index
               this.currentList[key].index = this.currentList[key].index + 1
               this.currentList[key].y =
@@ -179,9 +197,6 @@ export default {
             delete data.animation
             return data
           })(),
-          list: (() => {
-            return this.currentList
-          })(),
           // 插队的位置前面的值
           frontData: (() => {
             for (const iterator of this.currentList) {
@@ -198,17 +213,20 @@ export default {
           })()
         })
       }
+      console.log('改变前item的y=', this.currentList[this.active].y)
       this.currentList[this.active].animation = true
       this.currentList[this.active].y =
         this.currentList[this.active].index * this.height
+      console.log('改变后item的y=', this.currentList[this.active].y)
       this.active = -1
+      // 修正拖拽后出错的高度
     }
   }
 }
 </script>
 
-<style lang="less" scoped>
-@import '~./1px.less';
+<style lang="scss" scoped>
+@import '~./1px.scss';
 .drag-sort {
   width: 100%;
 }
@@ -220,7 +238,7 @@ export default {
   padding: 0;
   margin: 0;
   background: #fff;
-  padding: 0 15px;
+  padding: 0 15rpx;
   box-sizing: border-box;
   .item {
     flex: 1;
@@ -233,12 +251,12 @@ export default {
 }
 .touch {
   height: 100%;
-  width: 50px;
+  width: 50rpx;
 }
 .ico_drag {
   display: inline-block;
-  width: 24px;
-  height: 12px;
+  width: 24rpx;
+  height: 12rpx;
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAYCAYAAAC8/X7cAAAAAXNSR0IArs4c6QAAAEtJREFUWAnt1cEJACAMA0B1/506moIr5FEK51+Jl0d2Vd01+JzB2X90H5jeoPwECBDIBLYlzgDj25Y4JvQAAQIERgtY4u76LHF3Aw8rGQnK3sYAXQAAAABJRU5ErkJggg==)
     0 0 no-repeat;
   background-size: 100% auto;

@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-16 18:59:13
+ * @LastEditTime: 2019-11-16 20:26:48
  * @LastEditors: Edmund
  -->
 
@@ -25,23 +25,23 @@ export default {
   data() {
     return {
       props: {
-        label: 'label'
+        label: 'key'
       },
       list: [
         {
-          label: '标题1'
+          key: '标题1'
         },
         {
-          label: '标题2'
+          key: '标题2'
         },
         {
-          label: '标题3'
+          key: '标题3'
         },
         {
-          label: '标题4'
+          key: '标题4'
         },
         {
-          label: '标题5'
+          key: '标题5'
         }
       ]
     }
@@ -82,7 +82,6 @@ export default {
   destroyed() {},
   methods: {
     onDragSortChange(e) {
-      console.log('list', list)
       console.log('e', e)
     }
   },
