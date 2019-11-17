@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 11:10:23
- * @LastEditTime: 2019-11-14 09:52:45
+ * @LastEditTime: 2019-11-18 00:18:21
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\pages\home\index.vue
  -->
@@ -12,7 +12,7 @@
 	<view class="container">
     <!--  #ifndef MP-WEIXIN  -->
     <!-- 状态栏 -->
-    <!-- <uni-nav-bar  title="零点吧"
+    <uni-nav-bar  title="零点吧"
                   :fixed="true"
                   color = "yellow"
                   background-color = "red"
@@ -23,34 +23,34 @@
             class="iconfont">
       </view>
     
-    </uni-nav-bar> -->
+    </uni-nav-bar>
     <!--  #endif -->
     <!-- tabbar -->
-    <scroll-view  scroll-x 
-                  scroll-with-animation 
-                  class="tab-view" 
-                  :scroll-left="scrollLeft">
-			<view 	v-for="(item,idx) in tabbarList" 
-					:key="idx"
-					class="tab-bar-item" 
-					:class="[currentTab == idx ? 'active' : '']"
+    <scroll-view  class="tab-view"
+									scroll-x
+									scroll-with-animation
+									:scroll-left="scrollLeft">
+			<view	class="tab-bar-item"
+						:class="[currentTab == idx ? 'active' : '']"
 			      :data-current="idx"
+						v-for="(item,idx) in tabbarList" :key="idx"
             @tap.stop="swichNav">
         <text class="tab-bar-title"
               v-if="item">
             {{item.name}}
         </text>
 			</view>
-      <view class="tabbar-controls">+</view>
+      <view class="tabbar-controls"
+						@click="naviToDrag">+</view>
 		</scroll-view>
 		<swiper class="tab-content" 
 						:current="currentTab" 
 						duration="200"
 						:style="{height: windowHeight + 'px'}"
 						@change="switchTab" >
-			<swiper-item    v-for="(item,idx) in tabbarList" 
-                      :key="idx"
-                      v-show="item">
+			<block 	v-for="(item,idx) in tabbarList" 
+							:key="idx">		
+			<swiper-item  v-show="item">
 				<scroll-view  scroll-y
                       class="scoll-y">
           <calendar>
@@ -64,10 +64,11 @@
               	<text slot="text">
 									{{item.matchBeginTime}}
 									{{item.matchTitle}}
-				</text>
+								</text>
           </event-card>
 				</scroll-view>
 			</swiper-item>
+			</block>
 		</swiper>
 		<tui-loading :visible="isLoading"></tui-loading>
 	</view>
@@ -125,6 +126,11 @@ export default {
 		// #endif
 	},
 	methods: {
+		naviToDrag() {
+			uni.navigateTo({
+				url: '/pages/user/drag'
+			})
+		},
 		// 滚动切换标签样式
 		switchTab: (e) => {
 			console.log('changeTab', e.detail.current)
@@ -214,21 +220,27 @@ export default {
 		overflow: hidden;
 		box-sizing: border-box;
 		position: fixed;
+		height: 76rpx;
 		top: 0;
 		/* #ifdef H5 */
-		// top: 44px;
+		top: 88rpx;
 		/* #endif */
 		left: 0;
 		z-index: 99;
-		background: $default-bg-white;
+		// background: $default-bg-white;
+		background: gray;
 		white-space: nowrap;
 		.tabbar-controls {
 			height: 76rpx;
 			width: 76rpx;
-			// background: $default-bg-white;
-			background: red;
+			background: $default-bg-white;
 			position: absolute;
-			// right: 0;
+			right: 0;
+			top: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 60rpx;
 			z-index: 200;
 		}
 	}
