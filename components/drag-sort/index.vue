@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-16 18:28:05
- * @LastEditTime: 2019-11-17 21:33:49
+ * @LastEditTime: 2019-11-17 21:38:01
  * @LastEditors: Edmund
  -->
 <template>
@@ -197,7 +197,7 @@ export default {
 					item: (() => {
 						let data = {
 							...this.currentList[this.active],
-							oldIdx: this.oldIdx
+							oldIdx: this.oldIdx // item在交换位置之前的idx值
 						}
 						return data
 					})()
