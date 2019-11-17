@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-17 21:55:59
+ * @LastEditTime: 2019-11-17 21:57:46
  * @LastEditors: Edmund
  -->
 
@@ -17,7 +17,7 @@
     <!-- #ifdef H5 -->
     <vuedraggable class="wrapper" v-model="list">
       <transition-group>
-        <div v-for="item in list" :key="item" class="item">
+        <div v-for="(item, idx) in list" :key="idx" class="item">
           <p>{{ item }}</p>
         </div>
       </transition-group>
