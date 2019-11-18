@@ -7,6 +7,9 @@
   "license": "none",
   "dependencies": {
     "@dcloudio/uni-helper-json": "^1.0.3",
+    "dplayer": "^1.25.0",
+    "flv.js": "^1.5.0",
+    "hls.js": "^0.12.4",
     "moment": "^2.24.0",
     "underscore": "^1.9.1",
     "uni-simple-router": "^1.3.6",

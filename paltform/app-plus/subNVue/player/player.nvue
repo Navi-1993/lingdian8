@@ -57,7 +57,7 @@
 	export default {
 		data() {
 			return {
-				testUrl: `http://cache.m.iqiyi.com/mus/202134201/d0e3abd96b115f3511fe847df3e943f5/afbe8fd3d73448c9/0/20191001/4b/a1/c91c6a7e912cc89ddcba86823061c8fe.m3u8?qd_originate=tmts_py&tvid=302725900&bossStatus=0&qd_vip=0&px=&src=3_31_312&prv=&previewType=&previewTime=&from=&qd_time=1573724439184&qd_p=716f70ba&qd_asc=8b620e43ae97ce611be8db78dd17e1d6&qypid=302725900_04022000001000000000_4&qd_k=59fefef028db0bc1579df2dea82ec66a&isdol=0&code=2&ff=f4v&iswb=0&qd_s=otv&vf=a1cd6061d71fdf2b0dcd51ff6653a80a&np_tag=nginx_part_tag`,
+				testUrl: `http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8`,
 				title: getApp().globalData.vuex,
 				testFlag: 3
 				// testObj: [

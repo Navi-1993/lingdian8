@@ -3,22 +3,30 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-07 15:44:50
+ * @LastEditTime: 2019-11-18 15:04:43
  * @LastEditors: Edmund
- * @FilePath: \lingdian8\pages\video\index.vue
  -->
 
-
 <template>
-    <view class="container">
-    </view>
+  <view class="container">
+    <!-- #ifdef H5 -->
+    <player-h5 class="player_H5"> </player-h5>
+
+    <!-- #endif -->
+  </view>
 </template>
 
-
 <script>
+// #ifdef H5
+import playerH5 from 'components/h5/player/player.vue'
+// #endif
 export default {
   name: 'video',
-  components: {},
+  components: {
+    // #ifdef H5
+    playerH5
+    // #endif
+  },
   props: {},
   created() {},
   onLoad() {},
@@ -86,17 +94,14 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  height: 400vh;
+  height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
   position: relative;
   overflow: auto;
-  .swiper-bar {
-    position: fixed;
-  }
-  .player {
-    border-radius: 20rpx;
+  .player_H5 {
+    background: red;
   }
 }
 </style>

@@ -5,7 +5,7 @@
       "style": {
         "navigationBarTitleText": "零点吧",
         "app-plus": {
-          "titleNView": false
+          "titleNView": true
         }
       }
     },
@@ -14,8 +14,8 @@
       "style": {
         "navigationBarTitleText": "我的",
         "app-plus": {
-          "titleNView": false,
-          "animationType": "zoom-fade-out",
+          "titleNView": true,
+          "animationType": "slide-in-left",
           "animationDuration": 300
         }
       }
@@ -26,7 +26,7 @@
         "navigationBarTitleText": "视频",
         "app-plus": {
           "titleNView": true,
-          "animationType": "zoom-fade-out",
+          "animationType": "slide-in-left",
           "animationDuration": 300,
           "subNVues": [
             {
@@ -51,7 +51,7 @@
         "navigationBarTitleText": "新闻",
         "app-plus": {
           "titleNView": true,
-          "animationType": "zoom-fade-out",
+          "animationType": "slide-in-right",
           "animationDuration": 300
         }
       }
@@ -62,7 +62,7 @@
         "navigationBarTitleText": "",
         "app-plus": {
           "titleNView": true,
-          "animationType": "zoom-fade-out",
+          "animationType": "slide-in-right",
           "animationDuration": 300
         }
       }
@@ -73,7 +73,7 @@
         "navigationBarTitleText": "重置密码",
         "app-plus": {
           "titleNView": true,
-          "animationType": "zoom-fade-out",
+          "animationType": "slide-in-right",
           "animationDuration": 300
         }
       }
@@ -84,7 +84,7 @@
         "navigationBarTitleText": "",
         "app-plus": {
           "titleNView": true,
-          "animationType": "zoom-fade-out",
+          "animationType": "slide-in-right",
           "animationDuration": 300
         }
       }
@@ -95,7 +95,7 @@
         "navigationBarTitleText": "拖拽组件测试",
         "app-plus": {
           "titleNView": true,
-          "animationType": "zoom-fade-out",
+          "animationType": "slide-in-right",
           "animationDuration": 300
         }
       }
