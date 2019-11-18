@@ -14,7 +14,7 @@ export default {
   components: {},
   data() {
     return {
-      url: `/static/assets/test.mp4`, // 链接地址
+      url: `https://media.w3.org/2010/05/sintel/trailer.mp4`, // 链接地址
       pic: `https://wongxuefeng.com/bg.jpg` //封面图
     }
   },

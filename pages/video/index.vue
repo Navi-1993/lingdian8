@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-18 15:04:43
+ * @LastEditTime: 2019-11-18 16:11:23
  * @LastEditors: Edmund
  -->
 
@@ -18,7 +18,7 @@
 
 <script>
 // #ifdef H5
-import playerH5 from 'components/h5/player/player.vue'
+import playerH5 from 'paltform/h5/player/dplayer.vue'
 // #endif
 export default {
   name: 'video',
