@@ -1,22 +1,21 @@
 <!--
- * @Description: H5播放器--xgplayer
+ * @Description: H5播放器--xgplayer FIXME:全局仅支持单例，页面需要有多个播放器，需到对应页面通过遍历反复创建实例
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 16:16:10
- * @LastEditTime: 2019-11-18 18:27:51
+ * @LastEditTime: 2019-11-18 19:00:50
  * @LastEditors: Edmund
  -->
 <template>
   <div class="container">
-    <!-- <div class="fluentBox"> -->
-    <div class="player" ref="player"></div>
-    <!-- </div> -->
+    <div class="fluentBox">
+      <div class="player" ref="player"></div>
+    </div>
   </div>
 </template>
 <script>
 let that
 // #ifdef H5
-
 import Player from 'xgplayer'
 let control
 // #endif
@@ -43,7 +42,7 @@ export default {
     that.playerInit()
     // 播放器实例控制器
     if (control) {
-      console.log(control, 'control')
+      // do sth for player
     }
   },
   methods: {

@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-18 18:15:22
+ * @LastEditTime: 2019-11-18 19:16:39
  * @LastEditors: Edmund
  -->
 
@@ -11,8 +11,9 @@
   <view class="container" :style="{ height: windowHeight + 'px' }">
     <!-- #ifdef H5 -->
     <!-- <d-player class="dplayer"> </d-player> -->
-
-    <xg-player class="xgplayer" src=""></xg-player>
+    <block v-for="item in 10" :key="item">
+      <div :id="'id' + item">{{ item }}</div>
+    </block>
     <!-- #endif -->
   </view>
 </template>
@@ -20,16 +21,12 @@
 <script>
 let that
 // #ifdef H5
-import dPlayer from 'paltform/h5/player/dplayer.vue'
-import xgPlayer from 'paltform/h5/player/xgplayer.vue'
+import Player from 'xgplayer'
 // #endif
 export default {
   name: 'video',
   components: {
     // #ifdef H5
-    dPlayer,
-    xgPlayer
-    // #endif
   },
   props: {},
   created() {
@@ -50,9 +47,9 @@ export default {
     uni.getSystemInfo({
       success: function(res) {
         that.windowHeight = res.windowHeight
-        console.log(that.windowHeight)
       }
     })
+    that.multiPlayerInit()
   },
   onHide() {},
   onUnload() {},
@@ -69,12 +66,11 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow: auto;
+  overflow-y: auto;
   background: gray;
 }
 </style>
