@@ -128,7 +128,7 @@ export default {
       switch (idx) {
         case 0:
           uni.navigateTo({
-            url: '/pages/user/drag'
+            url: '/pages/home/drag'
           })
           break
       }
