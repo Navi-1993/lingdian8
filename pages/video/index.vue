@@ -3,28 +3,30 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-18 16:11:23
+ * @LastEditTime: 2019-11-18 16:31:14
  * @LastEditors: Edmund
  -->
 
 <template>
   <view class="container">
     <!-- #ifdef H5 -->
-    <player-h5 class="player_H5"> </player-h5>
-
+    <!-- <d-player class="dplayer"> </d-player> -->
+    <xg-player class="xgplayer" src=""></xg-player>
     <!-- #endif -->
   </view>
 </template>
 
 <script>
 // #ifdef H5
-import playerH5 from 'paltform/h5/player/dplayer.vue'
+import dPlayer from 'paltform/h5/player/dplayer.vue'
+import xgPlayer from 'paltform/h5/player/xgplayer.vue'
 // #endif
 export default {
   name: 'video',
   components: {
     // #ifdef H5
-    playerH5
+    dPlayer,
+    xgPlayer
     // #endif
   },
   props: {},
@@ -100,7 +102,7 @@ export default {
   flex-direction: column;
   position: relative;
   overflow: auto;
-  .player_H5 {
+  .dplayer {
     background: red;
   }
 }
