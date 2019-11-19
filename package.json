@@ -14,6 +14,9 @@
     "underscore": "^1.9.1",
     "uni-simple-router": "^1.3.6",
     "vuedraggable": "^2.23.2",
-    "xgplayer": "^2.3.4"
+    "xgplayer": "^2.3.4",
+    "xgplayer-flv": "^2.2.0-alpha.3",
+    "xgplayer-hls": "^2.2.0-alpha.2",
+    "xgplayer-hls.js": "^2.1.4"
   }
 }

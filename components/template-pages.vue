@@ -13,38 +13,41 @@
 <script>
 let that
 export default {
-  name: '',
-  components: {},
-  props: {},
-  beforeCreate() {
-    // #ifndef APP-PLUS
-    console.time('renderTime')
-    // #endif
-  },
-  created() {
-    that = this
-  },
-  onLoad() {},
-  onShow() {},
-  onReady() {
-    // #ifndef APP-PLUS
-    console.log(
-      '%c如果渲染用时超过3秒，则列入待优化项目',
-      'color: yellow; background-color: black;padding: 2px'
-    )
-    console.timeEnd('renderTime')
-    console.log(`%c${that.__route__}`, 'color:yellow;background-color:black')
-    // #endif
-  },
-  onHide() {},
-  onUnload() {},
-  onPullDownRefresh() {},
-  onReachBottom() {},
-  onShareAppMessage() {},
-  onPageScroll() {},
-  methods: {},
-  computed: {},
-  watch: {}
+	name: '',
+	components: {},
+	props: {},
+	data() {
+		return {}
+	},
+	beforeCreate() {
+		// #ifndef APP-PLUS
+		console.time('renderTime')
+		// #endif
+	},
+	created() {
+		that = this
+	},
+	onLoad() {},
+	onShow() {},
+	onReady() {
+		// #ifndef APP-PLUS
+		console.log(
+			'%c如果渲染用时超过3秒，则列入待优化项目',
+			'color: yellow; background-color: black;padding: 2px'
+		)
+		console.timeEnd('renderTime')
+		console.log(`%c${that.__route__}`, 'color:yellow;background-color:black')
+		// #endif
+	},
+	onHide() {},
+	onUnload() {},
+	onPullDownRefresh() {},
+	onReachBottom() {},
+	onShareAppMessage() {},
+	onPageScroll() {},
+	methods: {},
+	computed: {},
+	watch: {}
 }
 </script>
 

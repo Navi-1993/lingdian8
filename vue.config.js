@@ -21,7 +21,7 @@ module.exports = {
       .set('components', resolve('components'))
       .set('pages', resolve('pages'))
       .set('api', resolve('api'))
-      .set('paltform', resolve('paltform'))
+      .set('platform', resolve('platform'))
     // .set('common',resolve('common'))
     // .set('static',resolve('src/static'))
   }

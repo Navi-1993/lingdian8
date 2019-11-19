@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-19 09:49:44
- * @LastEditTime: 2019-11-19 16:36:14
+ * @LastEditTime: 2019-11-20 01:15:09
  * @LastEditors: Edmund
  -->
 
@@ -54,18 +54,15 @@
 
 <script>
 let that
+import eventCard from 'components/sportsEvent/event-card.vue'
+import progressBar from 'components/sportsEvent/progress-bar.vue'
+import tuiActionsheet from 'components/actionsheet/actionsheet.vue'
 export default {
 	name: 'chatroom',
 	components: {
-		eventCard: () => {
-			return import('components/sportsEvent/event-card.vue')
-		},
-		progressBar: () => {
-			return import('components/sportsEvent/progress-bar.vue')
-		},
-		tuiActionsheet: () => {
-			return import('components/actionsheet/actionsheet.vue')
-		}
+		eventCard,
+		progressBar,
+		tuiActionsheet
 	},
 	props: {},
 	data() {
@@ -110,11 +107,7 @@ export default {
 	},
 	created() {
 		that = this
-		uni.getSystemInfo({
-			success: (res) => {
-				this.windowHeight = res.windowHeight
-			}
-		})
+		that.windowHeight = that.$sysCall.windowHeight()
 	},
 	onLoad() {},
 	onShow() {},
@@ -137,6 +130,7 @@ export default {
 		actionsheetOpen() {
 			that.showActionSheet = true
 			// do sth
+			uni.hideKeyboard() // 隐藏软键盘
 		},
 		/**
 		 * @Description: 关闭操作菜单
@@ -187,6 +181,9 @@ export default {
 		},
 		itemClick(e) {
 			that.$sysCall.toast(`当前点击的按钮索引为：${e.index}`)
+			uni.navigateTo({
+				url: '/pages/video/detail'
+			})
 			// do sth
 		}
 	},

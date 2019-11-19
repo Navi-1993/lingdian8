@@ -42,7 +42,7 @@
           "subNVues": [
             {
               "id": "myplayer",
-              "path": "paltform/app-plus/subNVue/player/player",
+              "path": "platform/app-plus/subNVue/player/player",
               "style": {
                 "position": "absolute",
                 "dock": "right",
@@ -53,6 +53,17 @@
               }
             }
           ]
+        }
+      }
+    },
+    {
+      "path": "pages/video/detail",
+      "style": {
+        "navigationBarTitleText": "视频详情",
+        "app-plus": {
+          "titleNView": false,
+          "animationType": "slide-in-right",
+          "animationDuration": 300
         }
       }
     },
