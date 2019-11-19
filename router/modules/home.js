@@ -13,7 +13,7 @@ let mainRouter = [
     },
     {
         path: '/pages/home/chatroom',
-        name: 'drag',
+        name: 'chatroom',
         meta: {
             title: '聊天室'
         }

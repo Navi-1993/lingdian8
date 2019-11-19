@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-19 09:49:44
- * @LastEditTime: 2019-11-19 10:55:51
+ * @LastEditTime: 2019-11-19 14:01:14
  * @LastEditors: Edmund
  -->
 
@@ -12,9 +12,15 @@
     <view class="header">
       <event-card :homeTeamName="'中国'"
                   :guestTeamName="'韩国'"
-                  :livesUrl="'www.baidu.com'"
-                  @toast="test"/>
-      <progress-bar></progress-bar>
+                  :livesUrl="'www.test.com'"
+                  @toast="actionsheetOpen"/>
+      <progress-bar class="progress"
+                    :leftNum="leftNum"
+                    :rightNum="rightNum"
+                    :percent ="percent"
+                    @leftTap="leftTap"
+                    @rightTap="rightTap">
+      </progress-bar>
     </view>
     <view class="body">
 
@@ -22,9 +28,20 @@
     <view class="footer">
       <input  type="text"
               class="input"
-              placeholder="功能尚未开放"
+              placeholder="聊天室尚未接入"
+              ref="input"
               v-model="value">
     </view>
+    <tui-actionsheet  :show="showActionSheet"
+                      :tips="tips"
+                      :item-list="actionsheetList" 
+                      :mask-closable="maskClosable"
+                      :color="color"
+                      :size="size" 
+                      :is-cancel="isCancel"
+                       @click="itemClick" 
+                       @cancel="closeActionSheet"
+                      />
   </view>
 </template>
 
@@ -32,17 +49,45 @@
 let that
 import eventCard from 'components/sportsEvent/event-card.vue'
 import progressBar from 'components/sportsEvent/progress-bar.vue'
+import tuiActionsheet from '@/components/actionsheet/actionsheet.vue'
 export default {
 	name: 'chatroom',
 	components: {
 		eventCard,
-		progressBar
+		progressBar,
+		tuiActionsheet
 	},
 	props: {},
 	data() {
 		return {
 			windowHeight: 0,
-			value: '' // 聊天框value
+			value: '', // 聊天框value
+			showActionSheet: false, // 是否显示操作栏
+			leftNum: 0,
+			rightNum: 0,
+			// 操作栏数据组
+			actionsheetList: [
+				{
+					text: '龙珠',
+					color: '#1a1a1a'
+				},
+				{
+					text: '斗鱼',
+					color: '#1a1a1a'
+				}
+			],
+			tips: '请选择一个播放源', //
+			maskClosable: true, // 点击蒙版是否可以关闭组件
+			color: '#9a9a9a',
+			size: 26,
+			isCancel: false, // 是否有取消选项
+			// 定义投票这一行为的对象
+			vote: {
+				times: 1,
+				able: true,
+				leftAble: true,
+				rightAble: true
+			}
 		}
 	},
 	beforeCreate() {
@@ -76,11 +121,66 @@ export default {
 	onShareAppMessage() {},
 	onPageScroll() {},
 	methods: {
-		test() {
-			this.value = parseInt(Math.random() * 100 + 1)
+		actionsheetOpen() {
+			that.showActionSheet = true
+		},
+		leftTap() {
+			if (!that.vote.leftAble) return
+			if (that.vote.able) {
+				that.leftNum++
+				that.vote.times--
+				that.vote.rightAble = false
+				that.vote.able = false
+			} else {
+				that.vote.times++
+				that.leftNum--
+				that.vote.rightAble = true
+				that.vote.able = true
+			}
+		},
+		rightTap() {
+			if (!that.vote.rightAble) return
+			if (that.vote.able) {
+				that.rightNum++
+				that.vote.times--
+				that.vote.leftAble = false
+				that.vote.able = false
+			} else {
+				that.vote.times++
+				that.rightNum--
+				that.vote.leftAble = true
+				that.vote.able = true
+			}
+		},
+		itemClick(e) {
+			console.log('item click')
+			let idx = e.index
+			that.$sysCall.toast(`您点击的按钮索引为：${idx}`)
+		},
+		closeActionSheet() {
+			that.showActionSheet = false
 		}
 	},
-	computed: {},
+	computed: {
+		/**
+		 * @Description: 计算评论比例
+		 * @return: number 0~100
+		 */
+		percent() {
+			// 正反方支持数相等时，返回50
+			if (that.leftNum === that.rightNum) return 50
+			// 正反方不对等时，根据正方计算进度条
+			return (that.leftNum / that.sum) * 100
+		},
+		/**
+		 * @Description: 计算评论总数
+		 * @return: number
+		 */
+		sum() {
+			// 返回当前正反方支持数的和
+			return that.leftNum + that.rightNum
+		}
+	},
 	watch: {}
 }
 </script>
@@ -97,6 +197,10 @@ export default {
 	height: 222rpx;
 	z-index: 100;
 	background: $default-bg-white;
+	.progress {
+		position: absolute;
+		bottom: 0;
+	}
 }
 .body {
 	flex: 1;
@@ -115,6 +219,7 @@ export default {
 	.input {
 		width: 670rpx;
 		height: 60rpx;
+		font-size: 24rpx;
 		border-radius: 30rpx;
 		background: $default-bg-grey;
 		padding-left: 40rpx;
