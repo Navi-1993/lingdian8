@@ -11,6 +11,13 @@ let mainRouter = [
             title: '拖拽测试'
         }
     },
+    {
+        path: '/pages/home/chatroom',
+        name: 'drag',
+        meta: {
+            title: '聊天室'
+        }
+    },
 ]
 
 export default mainRouter

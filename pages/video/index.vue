@@ -3,26 +3,21 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-19 01:45:11
+ * @LastEditTime: 2019-11-19 09:46:11
  * @LastEditors: Edmund
  -->
 
 <template>
   <view class="container" :style="{ height: windowHeight + 'px' }">
     <!-- #ifdef H5 -->
-    <!-- <d-player class="dplayer"> </d-player> -->
-    <block v-for="item in 10" :key="item">
-      <div :id="'id' + item">{{ item }}</div>
-    </block>
+    
     <!-- #endif -->
   </view>
 </template>
 
 <script>
 let that
-// #ifdef H5
-import Player from 'xgplayer'
-// #endif
+
 export default {
 	name: 'video',
 	components: {},
@@ -37,7 +32,7 @@ export default {
 		const playerNVue = uni.getSubNVueById('myplayer')
 		// 打开 nvue 子窗体
 		playerNVue.show('slide-in-right', 300, function() {
-			console.log('open')
+			console.log('nvue open')
 		})
 		// #endif
 	},

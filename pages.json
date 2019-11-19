@@ -10,12 +10,23 @@
       }
     },
     {
+      "path": "pages/home/chatroom",
+      "style": {
+        "navigationBarTitleText": "聊天室",
+        "app-plus": {
+          "titleNView": true,
+          "animationType": "slide-in-right",
+          "animationDuration": 300
+        }
+      }
+    },
+    {
       "path": "pages/mine/index",
       "style": {
         "navigationBarTitleText": "我的",
         "app-plus": {
           "titleNView": true,
-          "animationType": "slide-in-left",
+          "animationType": "slide-in-right",
           "animationDuration": 300
         }
       }
@@ -26,7 +37,7 @@
         "navigationBarTitleText": "视频",
         "app-plus": {
           "titleNView": true,
-          "animationType": "slide-in-left",
+          "animationType": "slide-in-right",
           "animationDuration": 300,
           "subNVues": [
             {
