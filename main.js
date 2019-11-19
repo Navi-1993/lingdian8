@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 10:44:20
- * @LastEditTime: 2019-11-19 16:33:25
+ * @LastEditTime: 2019-11-19 23:24:03
  * @LastEditors: Edmund
  */
 
@@ -21,20 +21,14 @@ import axios from '@/common/plugins/axios/index'
 // 引入underScore工具函数库
 import underscore from 'underscore'
 
-// 使用uni的api 自定义便捷性操作对象
-const sysCall = {
-  toast: (text, duration, success) => {
-    uni.showToast({
-      title: text,
-      icon: success ? 'success' : 'none',
-      duration: duration || 2000
-    })
-  }
-}
+// 引入自定义的系统命令函数库（基于uni-app封装）
+
+import sysCall from 'common/utils/sysCall.js'
 
 Vue.prototype.$_ = underscore
 Vue.prototype.$store = store
 Vue.prototype.$axios = axios()
+
 Vue.prototype.$sysCall = sysCall
 
 
