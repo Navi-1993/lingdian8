@@ -3,16 +3,18 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-19 09:49:44
- * @LastEditTime: 2019-11-19 14:01:14
+ * @LastEditTime: 2019-11-19 16:36:14
  * @LastEditors: Edmund
  -->
 
 <template>
   <view class="container" :style="{height: windowHeight + 'px'}">
+     <!-- HTML:header -->
+     
     <view class="header">
       <event-card :homeTeamName="'中国'"
                   :guestTeamName="'韩国'"
-                  :livesUrl="'www.test.com'"
+                  :livesUrl="'https://www.wongxuefeng.com'"
                   @toast="actionsheetOpen"/>
       <progress-bar class="progress"
                     :leftNum="leftNum"
@@ -22,15 +24,20 @@
                     @rightTap="rightTap">
       </progress-bar>
     </view>
+    <!-- HTML:body -->
+
     <view class="body">
 
     </view>
+
+    <!--  HTML:footer -->
+
     <view class="footer">
       <input  type="text"
               class="input"
               placeholder="聊天室尚未接入"
               ref="input"
-              v-model="value">
+              v-model="value" />
     </view>
     <tui-actionsheet  :show="showActionSheet"
                       :tips="tips"
@@ -39,32 +46,37 @@
                       :color="color"
                       :size="size" 
                       :is-cancel="isCancel"
-                       @click="itemClick" 
-                       @cancel="closeActionSheet"
+                      @click="itemClick" 
+                      @cancel="closeActionSheet"
                       />
   </view>
 </template>
 
 <script>
 let that
-import eventCard from 'components/sportsEvent/event-card.vue'
-import progressBar from 'components/sportsEvent/progress-bar.vue'
-import tuiActionsheet from '@/components/actionsheet/actionsheet.vue'
 export default {
 	name: 'chatroom',
 	components: {
-		eventCard,
-		progressBar,
-		tuiActionsheet
+		eventCard: () => {
+			return import('components/sportsEvent/event-card.vue')
+		},
+		progressBar: () => {
+			return import('components/sportsEvent/progress-bar.vue')
+		},
+		tuiActionsheet: () => {
+			return import('components/actionsheet/actionsheet.vue')
+		}
 	},
 	props: {},
 	data() {
 		return {
+			// TODO: 页面初始化数据
 			windowHeight: 0,
 			value: '', // 聊天框value
 			showActionSheet: false, // 是否显示操作栏
 			leftNum: 0,
 			rightNum: 0,
+			// TODO: 底部弹窗控件
 			// 操作栏数据组
 			actionsheetList: [
 				{
@@ -81,12 +93,13 @@ export default {
 			color: '#9a9a9a',
 			size: 26,
 			isCancel: false, // 是否有取消选项
-			// 定义投票这一行为的对象
+
+			// TODO: 定义投票这一行为的对象
 			vote: {
-				times: 1,
-				able: true,
-				leftAble: true,
-				rightAble: true
+				times: 1, // 可投票数
+				able: true, // 能否投票
+				leftAble: true, // 正方能否投票
+				rightAble: true // 反方能否投票
 			}
 		}
 	},
@@ -116,14 +129,29 @@ export default {
 	},
 	onHide() {},
 	onUnload() {},
-	onPullDownRefresh() {},
-	onReachBottom() {},
-	onShareAppMessage() {},
-	onPageScroll() {},
 	methods: {
+		/**
+		 * @Description: 打开操作菜单
+		 * @return: void
+		 */
 		actionsheetOpen() {
 			that.showActionSheet = true
+			// do sth
 		},
+		/**
+		 * @Description: 关闭操作菜单
+		 * @return: void
+		 */
+
+		closeActionSheet() {
+			that.showActionSheet = false
+			// do sth
+		},
+		/**
+		 * @Description: 点赞控件 left icon
+		 * @param {object} vote 投票这一行为的对象
+		 * @return: void
+		 */
 		leftTap() {
 			if (!that.vote.leftAble) return
 			if (that.vote.able) {
@@ -138,9 +166,14 @@ export default {
 				that.vote.able = true
 			}
 		},
+
+		/**
+		 * @Description: 点赞控件 right icon
+		 * @return: void
+		 */
 		rightTap() {
 			if (!that.vote.rightAble) return
-			if (that.vote.able) {
+			if (that.vote.leftAble) {
 				that.rightNum++
 				that.vote.times--
 				that.vote.leftAble = false
@@ -153,12 +186,8 @@ export default {
 			}
 		},
 		itemClick(e) {
-			console.log('item click')
-			let idx = e.index
-			that.$sysCall.toast(`您点击的按钮索引为：${idx}`)
-		},
-		closeActionSheet() {
-			that.showActionSheet = false
+			that.$sysCall.toast(`当前点击的按钮索引为：${e.index}`)
+			// do sth
 		}
 	},
 	computed: {
@@ -169,7 +198,7 @@ export default {
 		percent() {
 			// 正反方支持数相等时，返回50
 			if (that.leftNum === that.rightNum) return 50
-			// 正反方不对等时，根据正方计算进度条
+			// 正反方不对等时，根据正方计算进度条比例
 			return (that.leftNum / that.sum) * 100
 		},
 		/**
@@ -177,7 +206,6 @@ export default {
 		 * @return: number
 		 */
 		sum() {
-			// 返回当前正反方支持数的和
 			return that.leftNum + that.rightNum
 		}
 	},

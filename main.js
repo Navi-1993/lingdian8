@@ -2,11 +2,11 @@
  * @Description: app入口文件
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
- * @Date: 2019-10-21 12:54:42
- * @LastEditTime: 2019-11-19 13:07:24
+ * @Date: 2019-11-18 10:44:20
+ * @LastEditTime: 2019-11-19 16:33:25
  * @LastEditors: Edmund
- * @FilePath: \lingdian8\main.js
  */
+
 
 import Vue from 'vue'
 import App from './App'
@@ -48,9 +48,9 @@ const app = new Vue({
   router
 })
 // #ifdef H5
-RouterMount(app, '#app');
+RouterMount(app, '#app')
 // #endif
 
 // #ifndef H5
-app.$mount(); //为了兼容小程序及app端必须这样写才有效果
+app.$mount() //为了兼容小程序及app端必须这样写才有效果
 // #endif
