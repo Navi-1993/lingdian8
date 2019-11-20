@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-20 00:58:12
- * @LastEditTime: 2019-11-20 20:44:18
+ * @LastEditTime: 2019-11-20 20:47:16
  * @LastEditors: Edmund
  -->
 
@@ -67,7 +67,8 @@
 
     <!-- footer -->
     <view class="footer">
-        <input type="text">
+        <input  type="text"
+                v-model="inputValue"/>
     </view>
   </view>
 </template>
@@ -112,7 +113,9 @@ export default {
 			playTimes: 32221,
 			voteTimes: 99999,
 			commentTimes: 99999,
-			commentSum: 99999
+			commentSum: 99999,
+			// TODO: 输入框绑定数据
+			inputValue: ''
 		}
 	},
 	beforeCreate() {

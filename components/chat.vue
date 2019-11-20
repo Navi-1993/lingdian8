@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-20 17:32:51
- * @LastEditTime: 2019-11-20 20:26:50
+ * @LastEditTime: 2019-11-20 23:19:45
  * @LastEditors: Edmund
  -->
 
@@ -11,8 +11,11 @@
     <view class="container">
       <scroll-view  :scroll-y="true"
                     class="scroll-box"
+										@scroll="scroll"
+										@touchstart="touchStart"
+										@touchmove="touchMove"
                     :style="{height: height + 'rpx'}">
-          <loadmore :visible="loadding"
+          <loadmore :visible="loading"
                         :index="3"
                         type="primary"
                         text=" ">
@@ -21,7 +24,7 @@
               <block v-for="(item,idx) in chatDataList" :key="idx">
                 <view >
                   <view class="chat-center"
-                        v-if="time">
+                        v-if="item.time">
                     {{item.time}}
                   </view>
                   <!-- other people -->
@@ -51,12 +54,12 @@
 
 <script>
 let that
-import tuiLoadmore from '@/components/loadmore/loadmore'
-
+import _ from 'underscore'
+import loadmore from 'components/loadmore/loadmore.vue'
 export default {
-	name: '',
+	name: 'chat',
 	components: {
-		tuiLoadmore
+		loadmore
 	},
 	props: {
 		chatDataList: {
@@ -70,9 +73,11 @@ export default {
 	},
 	data() {
 		return {
-			loadding: true,
-			show: true,
-			bottom: 0
+			loading: false,
+			couldLoad: true,
+			// TODO: 记录触发操作
+			oldX: 0,
+			oldY: 0
 		}
 	},
 	beforeCreate() {},
@@ -83,7 +88,52 @@ export default {
 	mounted() {},
 	beforeDestroy() {},
 	destroyed() {},
-	methods: {},
+	methods: {
+		/**
+		 * @Description: 滚动容器滚动时触发
+		 * @param {type}
+		 * @return:
+		 */
+		scroll(e) {
+			let scrollTop = e.mp.target.scrollTop
+			if (scrollTop < 10) {
+				that.couldLoad = true
+			}
+			if (scrollTop > 10 && scrollTop <= 20) {
+				that.couldLoad = false
+			}
+		},
+
+		/**
+		 * @Description: 开始触摸盒子容器时触发
+		 */
+		touchStart(e) {
+			that.oldX = e.touches[0].pageX
+			that.oldY = e.touches[0].pageY
+		},
+		/**
+		 * @Description: 手指在盒子容器中滑动过程中触发
+		 */
+		touchMove(e) {
+			if (!that.couldLoad) return
+			let currentX = e.touches[0].pageX
+			let currentY = e.touches[0].pageY
+			let tx = currentX - that.oldX
+			let ty = currentY - that.oldY
+			if (Math.abs(tx) < 50) {
+				if (ty > 120) {
+					that.loadmore()
+				}
+			}
+		},
+		loadmore: _.debounce(() => {
+			that.$sysCall.toast('触发向下拉动加载更多')
+			that.loading = true
+			setTimeout(() => {
+				that.loading = false
+			}, 2000)
+		}, 300)
+	},
 	computed: {},
 	watch: {}
 }
