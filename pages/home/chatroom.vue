@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-19 09:49:44
- * @LastEditTime: 2019-11-20 11:26:11
+ * @LastEditTime: 2019-11-20 11:30:06
  * @LastEditors: Edmund
  -->
 
@@ -156,17 +156,19 @@ export default {
      * @return: void
      */
     leftTap() {
-      if (!that.vote.leftAble) return
+      if (!that.vote.leftAble) return that.$sysCall.toast('已点过赞')
       if (that.vote.able) {
         that.leftNum++
         that.vote.times--
         that.vote.rightAble = false
         that.vote.able = false
+        that.$sysCall.toast('成功点赞')
       } else {
         that.vote.times++
         that.leftNum--
         that.vote.rightAble = true
         that.vote.able = true
+        that.$sysCall.toast('已取消点赞')
       }
     },
 
@@ -175,17 +177,19 @@ export default {
      * @return: void
      */
     rightTap() {
-      if (!that.vote.rightAble) return
+      if (!that.vote.rightAble) return that.$sysCall.toast('已点过赞')
       if (that.vote.leftAble) {
         that.rightNum++
         that.vote.times--
         that.vote.leftAble = false
         that.vote.able = false
+        that.$sysCall.toast('成功点赞')
       } else {
         that.vote.times++
         that.rightNum--
         that.vote.leftAble = true
         that.vote.able = true
+        that.$sysCall.toast('已取消点赞')
       }
     },
     itemClick(e) {
