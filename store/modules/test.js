@@ -3,10 +3,10 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:57:08
- * @LastEditTime: 2019-11-07 15:46:23
+ * @LastEditTime: 2019-11-21 00:45:00
  * @LastEditors: Edmund
- * @FilePath: \lingdian8\store\modules\test.js
  */
+
 
 const app = {
   state: {
