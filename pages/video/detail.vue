@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-20 00:58:12
- * @LastEditTime: 2019-11-20 20:47:16
+ * @LastEditTime: 2019-11-21 03:02:14
  * @LastEditors: Edmund
  -->
 
@@ -106,7 +106,7 @@ export default {
 				{ otherText: '你吃饭了吗？' }
 			],
 			// TODO: 播放器组件所需数据
-			url: `http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8`,
+			url: `http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8`,
 			type: 2,
 			poster: `https://wongxuefeng.com/bg.jpg`,
 			time: '',
