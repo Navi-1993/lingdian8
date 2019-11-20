@@ -1,11 +1,12 @@
 <!--
  * @Description: 组件模板
- * @Author: Edmund(q1592193221@gmail.com)
+ * @Author: Edmund
+ * @Email: q1592193221@gmail.com
+ * @Date: 2019-11-18 22:07:02
+ * @LastEditTime: 2019-11-20 17:55:02
  * @LastEditors: Edmund
- * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-06 23:37:27
- * @FilePath: \lingdian8\components\template-components.vue
  -->
+
 <template>
     <view class="container">
         
@@ -16,20 +17,20 @@
 <script>
 let that
 export default {
-  name: '',
-  components: {},
-  props: {},
-  beforeCreate() {},
-  created() {
-    that = this
-  },
-  beforeMount() {},
-  mounted() {},
-  beforeDestroy() {},
-  destroyed() {},
-  methods: {},
-  computed: {},
-  watch: {}
+	name: '',
+	components: {},
+	props: {},
+	beforeCreate() {},
+	created() {
+		that = this
+	},
+	beforeMount() {},
+	mounted() {},
+	beforeDestroy() {},
+	destroyed() {},
+	methods: {},
+	computed: {},
+	watch: {}
 }
 </script>
 
