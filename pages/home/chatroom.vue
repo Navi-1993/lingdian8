@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-19 09:49:44
- * @LastEditTime: 2019-11-20 20:20:51
+ * @LastEditTime: 2019-11-20 20:33:07
  * @LastEditors: Edmund
  -->
 
@@ -162,15 +162,16 @@ export default {
 			// do sth
 			uni.hideKeyboard() // 隐藏软键盘
 		},
+
 		/**
 		 * @Description: 关闭操作菜单
 		 * @return: void
 		 */
-
 		closeActionSheet() {
 			that.showActionSheet = false
 			// do sth
 		},
+
 		/**
 		 * @Description: 点赞控件 left icon
 		 * @param {object} vote 投票这一行为的对象
@@ -213,6 +214,12 @@ export default {
 				that.$sysCall.toast('已取消点赞')
 			}
 		},
+
+		/**
+		 * @Description: 点击操作菜单item
+		 * @param {e} 点击事件中用闭包保存并返回出的一些数据对象
+		 * @return: void
+		 */
 		itemClick(e) {
 			that.$sysCall.toast(`当前点击的按钮索引为：${e.index}`)
 			uni.navigateTo({
@@ -232,6 +239,7 @@ export default {
 			// 正反方不对等时，根据正方计算进度条比例
 			return (that.leftNum / that.sum) * 100
 		},
+
 		/**
 		 * @Description: 计算评论总数
 		 * @return: number

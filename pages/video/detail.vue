@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-20 00:58:12
- * @LastEditTime: 2019-11-20 12:16:43
+ * @LastEditTime: 2019-11-20 20:44:18
  * @LastEditors: Edmund
  -->
 
@@ -15,12 +15,11 @@
       </text>
       <!-- TODO:player -->
       <player
-        :url="url"
-        :width="750"
-        :height="420"
-        :poster="poster"
-        :type="type"
-      />
+              :url="url"
+              :width="750"
+              :height="420"
+              :poster="poster"
+              :type="type"/>
 
       <!-- 文章详情 -->
       <view class="detail">
@@ -51,152 +50,178 @@
 
     <!-- body -->
     <view class="body">
-      <view class="title">
-        <view class="commentSum">
-          <text>全部评论 {{ commentSum }}</text>
+        <view class="title">
+            <view class="commentSum">
+              <text>全部评论 {{ commentSum }}</text>
+            </view>
+            <view class="hot">
+              <text>热门评论</text>
+              <text class="iconfont" style="font-size:22rpx;">&#xe684;</text>
+            </view>
         </view>
-        <view class="hot">
-          <text>热门评论</text>
-          <text class="iconfont" style="font-size:22rpx;">&#xe684;</text>
+        <view class="chatBox">
+          <chat :height="616"
+                :chatDataList="chatDataList"/>
         </view>
-      </view>
     </view>
 
     <!-- footer -->
-    <view class="footer"></view>
+    <view class="footer">
+        <input type="text">
+    </view>
   </view>
 </template>
 
 <script>
 let that
+import chat from 'components/chat.vue'
 export default {
-  name: 'video-detail',
-  components: {
-    // #ifdef H5
-    player: () => {
-      return import('platform/h5/player/xgplayer.vue')
-    }
-    // #endif
-  },
-  props: {},
-  data() {
-    return {
-      windowHeight: 0,
-      url: `http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8`,
-      type: 2,
-      poster: `https://wongxuefeng.com/bg.jpg`,
-      time: '',
-      playTimes: 32221,
-      voteTimes: 99999,
-      commentTimes: 99999,
-      commentSum: 99999
-    }
-  },
-  beforeCreate() {
-    // #ifndef APP-PLUS
-    console.time('renderTime')
-    // #endif
-  },
-  created() {
-    that = this
-    that.windowHeight = that.$sysCall.windowHeight()
-    setInterval(() => {
-      that.time = that.$sysCall.getHMS()
-    }, 1000)
-  },
-  onLoad() {},
-  onShow() {},
-  onReady() {
-    // #ifndef APP-PLUS
-    console.log(
-      '%c如果渲染用时超过3秒，则列入待优化项目',
-      'color: yellow; background-color: black;padding: 2px'
-    )
-    console.timeEnd('renderTime')
-    // #endif
-  },
-  methods: {
-    naviBack() {
-      that.$sysCall.naviBack()
-      console.log('taptaptap')
-    }
-  },
-  computed: {},
-  watch: {}
+	name: 'video-detail',
+	components: {
+		// #ifdef H5
+		player: () => {
+			return import('platform/h5/player/xgplayer.vue')
+		},
+		// #endif
+		chat
+	},
+	props: {},
+	data() {
+		return {
+			windowHeight: 0,
+			// TODO: 聊天室组件所需数据
+			chatDataList: [
+				{ otherText: '你吃饭了吗？' },
+				{ myText: '我吃了' },
+				{ myText: '我吃了' },
+				{ myText: '我吃了' },
+				{ myText: '我吃了' },
+				{ myText: '我吃了' },
+				{ myText: '我吃了' },
+				{ myText: '我吃了' },
+				{ otherText: '你吃饭了吗？' },
+				{ otherText: '你吃饭了吗？' },
+				{ otherText: '你吃饭了吗？' },
+				{ otherText: '你吃饭了吗？' }
+			],
+			// TODO: 播放器组件所需数据
+			url: `http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8`,
+			type: 2,
+			poster: `https://wongxuefeng.com/bg.jpg`,
+			time: '',
+			playTimes: 32221,
+			voteTimes: 99999,
+			commentTimes: 99999,
+			commentSum: 99999
+		}
+	},
+	beforeCreate() {
+		// #ifndef APP-PLUS
+		console.time('renderTime')
+		// #endif
+	},
+	created() {
+		that = this
+		that.windowHeight = that.$sysCall.windowHeight()
+		setInterval(() => {
+			that.time = that.$sysCall.getHMS()
+		}, 1000)
+	},
+	onLoad() {},
+	onShow() {},
+	onReady() {
+		// #ifndef APP-PLUS
+		console.log(
+			'%c如果渲染用时超过3秒，则列入待优化项目',
+			'color: yellow; background-color: black;padding: 2px'
+		)
+		console.timeEnd('renderTime')
+		// #endif
+	},
+	methods: {
+		naviBack() {
+			that.$sysCall.naviBack()
+		}
+	},
+	computed: {},
+	watch: {}
 }
 </script>
 
 <style lang="scss" scoped>
 .container {
-  display: flex;
-  flex-direction: column;
-  .header {
-    height: 564rpx;
-    .arrow-left {
-      position: fixed;
-      top: 66rpx;
-      left: 36rpx;
-      width: 36rpx;
-      height: 36rpx;
-      font-size: 36rpx;
-      z-index: 200;
-    }
-    .detail {
-      padding: 23rpx 20rpx 23rpx 20rpx;
-      .title {
-        white-space: nowrap;
-        font-size: 34rpx;
-      }
-      .controls {
-        display: flex;
-        width: 100%;
-        height: 30rpx;
-        line-height: 30rpx;
-        font-size: 22rpx;
-        margin-top: 20rpx;
-        &_left {
-          flex: 1;
-          display: flex;
-          justify-content: flex-start;
-          .playTimes {
-            margin-left: 20rpx;
-          }
-        }
-        &_right {
-          flex: 1;
-          display: flex;
-          justify-content: flex-end;
-          .comment {
-            margin-left: 20rpx;
-          }
-        }
-      }
-    }
-  }
-  .body {
-    flex: 1;
-    position: relative;
-    .title {
-      padding: 0 20rpx;
-      display: flex;
-      align-items: center;
-      font-size: 24rpx;
-      font-weight: bold;
-      height: 56rpx;
-      background: $default-bg-gray;
-      .hot {
-        flex: 1;
-        display: flex;
-        justify-content: flex-end;
-      }
-    }
-  }
-  .footer {
-    position: fixed;
-    bottom: 0;
-    height: 88rpx;
-    width: 100vw;
-    border-top: 1px solid $default-border-color-gray;
-  }
+	display: flex;
+	flex-direction: column;
+	.header {
+		height: 564rpx;
+		.arrow-left {
+			position: fixed;
+			top: 66rpx;
+			left: 36rpx;
+			width: 36rpx;
+			height: 36rpx;
+			font-size: 36rpx;
+			z-index: 200;
+		}
+		.detail {
+			padding: 23rpx 20rpx 23rpx 20rpx;
+			.title {
+				white-space: nowrap;
+				font-size: 34rpx;
+			}
+			.controls {
+				display: flex;
+				width: 100%;
+				height: 30rpx;
+				line-height: 30rpx;
+				font-size: 22rpx;
+				margin-top: 20rpx;
+				&_left {
+					flex: 1;
+					display: flex;
+					justify-content: flex-start;
+					.playTimes {
+						margin-left: 20rpx;
+					}
+				}
+				&_right {
+					flex: 1;
+					display: flex;
+					justify-content: flex-end;
+					.comment {
+						margin-left: 20rpx;
+					}
+				}
+			}
+		}
+	}
+	.body {
+		flex: 1;
+		position: relative;
+		.title {
+			padding: 0 20rpx;
+			display: flex;
+			align-items: center;
+			font-size: 24rpx;
+			font-weight: bold;
+			height: 56rpx;
+			background: $default-bg-gray;
+			.hot {
+				flex: 1;
+				display: flex;
+				justify-content: flex-end;
+			}
+		}
+		.chatBox {
+			flex: 1;
+		}
+	}
+	.footer {
+		position: fixed;
+		bottom: 0;
+		height: 88rpx;
+		width: 100vw;
+		border-top: 1px solid $default-border-color-gray;
+	}
 }
 </style>

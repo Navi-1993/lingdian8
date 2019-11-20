@@ -1,9 +1,9 @@
 <!--
- * @Description: 组件模板
+ * @Description: 聊天室组件
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
- * @Date: 2019-11-18 22:07:02
- * @LastEditTime: 2019-11-20 20:23:06
+ * @Date: 2019-11-20 17:32:51
+ * @LastEditTime: 2019-11-20 20:26:50
  * @LastEditors: Edmund
  -->
 
@@ -12,31 +12,31 @@
       <scroll-view  :scroll-y="true"
                     class="scroll-box"
                     :style="{height: height + 'rpx'}">
-          <tui-loadmore :visible="loadding"
+          <loadmore :visible="loadding"
                         :index="3"
                         type="primary"
                         text=" ">
-          </tui-loadmore>
-          <view class="tui-chat-content">
+          </loadmore>
+          <view class="chat-content">
               <block v-for="(item,idx) in chatDataList" :key="idx">
                 <view >
-                  <view class="tui-chat-center"
+                  <view class="chat-center"
                         v-if="time">
                     {{item.time}}
                   </view>
                   <!-- other people -->
-                  <view   class="tui-chat-right"
+                  <view   class="chat-right"
                           v-if="item.otherText">
-                    <view class="tui-chatbox tui-chatbox-right">
+                    <view class="chatbox chatbox-right">
                       {{item.otherText}}
                     </view>
-                    <image src="" class="tui-user-pic tui-left"></image>
+                    <image src="" class="user-pic left"></image>
                   </view>
                   <!-- mine -->
-                  <view   class="tui-chat-left"
+                  <view   class="chat-left"
                           v-if="item.myText">
-                    <image src="" class="tui-user-pic tui-right"></image>
-                    <view class="tui-chatbox tui-chatbox-left">
+                    <image src="" class="user-pic right"></image>
+                    <view class="chatbox chatbox-left">
                         {{item.myText}}
                     </view>
                   </view>
@@ -100,7 +100,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 }
-.tui-label {
+.label {
 	display: inline-block;
 	background: rgba(0, 0, 0, 0.4);
 	color: #fff;
@@ -113,7 +113,7 @@ export default {
 	margin-left: 50%;
 	transform: translateX(-50%);
 }
-.tui-chat-center {
+.chat-center {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -123,23 +123,24 @@ export default {
 	padding-top: 36rpx;
 }
 
-.tui-chat-left {
+.chat-left {
 	display: flex;
 	margin-left: 20rpx;
 	justify-content: flex-start;
 	padding-top: 36rpx;
 }
-.tui-chat-right {
+.chat-right {
 	display: flex;
 	margin-right: 20rpx;
 	justify-content: flex-end;
 	padding-top: 36rpx;
 }
 
-.tui-chatbox {
+.chatbox {
 	max-width: 66%;
 	border-radius: 10rpx;
 	position: relative;
+	margin: 0 20rpx;
 	padding: 20rpx 22rpx;
 	font-size: 32rpx;
 	color: #000;
@@ -147,12 +148,12 @@ export default {
 	word-break: break-all;
 	word-wrap: break-word;
 }
-.tui-chatbox-right {
+.chatbox-right {
 	background: #a0d5f3;
 	border: 1upx solid #a0d5f3;
 }
 
-.tui-user-pic {
+.user-pic {
 	width: 80rpx;
 	height: 80rpx;
 	flex-shrink: 0;
@@ -161,14 +162,14 @@ export default {
 	display: block;
 }
 
-// .tui-left {
+// .left {
 // 	margin-left: 26rpx;
 // }
-// .tui-right {
+// .right {
 // 	margin-right: 26rpx;
 // }
 
-.tui-chatbox-left {
+.chatbox-left {
 	background: #fff;
 	border: 1rpx solid #fff;
 	display: inline-block;
