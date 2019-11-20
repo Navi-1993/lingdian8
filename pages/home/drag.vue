@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 22:07:02
- * @LastEditTime: 2019-11-20 12:24:04
+ * @LastEditTime: 2019-11-20 12:30:58
  * @LastEditors: Edmund
  -->
 
@@ -11,7 +11,8 @@
   <view class="container" :style="{ height: windowHeight + 'px' }">
     <!-- #ifndef H5 -->
     <view class="header">
-      <drag-sort :list="list" :props="props" @change="itemChange"> </drag-sort>
+      <drag-sort :seletedList="seletedList" :props="props" @change="itemChange">
+      </drag-sort>
     </view>
     <!-- #endif -->
     <!-- #ifdef H5 -->
@@ -21,9 +22,9 @@
     </view>
 
     <!-- 可排序列表 -->
-    <vuedraggable class="wrapper" v-model="list" handle=".handle">
+    <vuedraggable class="wrapper" v-model="seletedList" handle=".handle">
       <transition-group>
-        <div v-for="(item, idx) in list" :key="idx" class="item">
+        <div v-for="(item, idx) in seletedList" :key="idx" class="item">
           <div class="sortItem">
             <text class="iconfont sub" @tap="removeItem(item)">
               &#xe605;
@@ -39,16 +40,13 @@
     <view class="seleted_title">
       <text class="strong">未选择</text>
     </view>
-    <vuedraggable class="wrapper" v-model="list" handle=".nonono">
+    <vuedraggable class="wrapper" v-model="unseletedList" handle=".nonono">
       <transition-group>
-        <div v-for="(item, idx) in list" :key="idx" class="item">
+        <div v-for="(item, idx) in unseletedList" :key="idx" class="item">
           <div class="sortItem">
-            <text class="iconfont sub" @tap="removeItem(item)">
-              &#xe605;
-            </text>
             <text class="">{{ item.name }}</text>
           </div>
-          <div class="handle iconfont">&#xe689;</div>
+          <div class="handle iconfont add">&#xe604;</div>
         </div>
       </transition-group>
     </vuedraggable>
@@ -77,10 +75,15 @@ export default {
       props: {
         label: 'name'
       },
-      list: [
+      seletedList: [
         { name: 'John', text: '', id: 0 },
         { name: 'Joao', text: '', id: 1 },
         { name: 'Jean', text: '', id: 2 }
+      ],
+      unseletedList: [
+        { name: 'nana', text: '', id: 4 },
+        { name: 'mimi', text: '', id: 5 },
+        { name: 'coco', text: '', id: 6 }
       ]
     }
   },
@@ -124,12 +127,12 @@ export default {
       let currentIdx = currentItem.index
       let frontIdx = currentItem.oldIdx
       // 交换数组元素位置
-      let temp = this.list[currentIdx]
-      this.list[currentIdx] = this.list[frontIdx]
-      this.list[frontIdx] = temp
+      let temp = this.seletedList[currentIdx]
+      this.seletedList[currentIdx] = this.seletedList[frontIdx]
+      this.seletedList[frontIdx] = temp
       console.log('result', currentIdx)
       console.log('front', frontIdx)
-      console.table('list', this.list)
+      console.table('seletedList', this.seletedList)
     },
     /**
      * @Description: 删除数组内元素
@@ -138,11 +141,11 @@ export default {
      */
     removeItem(item) {
       // 找到目标在原数组中的索引
-      let idx = that.list.findIndex(ele => {
+      let idx = that.seletedList.findIndex(ele => {
         return ele.id === item.id
       })
       // 删掉该元素
-      that.list.splice(idx, 1)
+      that.seletedList.splice(idx, 1)
     }
   },
   computed: {},
@@ -182,6 +185,7 @@ export default {
   display: flex;
   align-items: center;
   border-bottom: 1rpx solid $default-border-color;
+  .add,
   .sub {
     font-size: 38rpx;
     color: red;
