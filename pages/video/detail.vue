@@ -3,13 +3,16 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-20 00:58:12
- * @LastEditTime: 2019-11-20 10:21:06
+ * @LastEditTime: 2019-11-20 11:21:26
  * @LastEditors: Edmund
  -->
 
 <template>
   <view class="container" :style="{ height: windowHeight + 'px' }">
     <view class="header">
+      <text class="arrow-left iconfont" @tap.stop="naviBack">
+        &#xe602;
+      </text>
       <!-- TODO:player -->
       <player
         :url="url"
@@ -18,18 +21,49 @@
         :poster="poster"
         :type="type"
       />
+
+      <!-- 文章详情 -->
       <view class="detail">
         <view class="title">诺维奇如何破解卫冕冠军曼城的前场高位逼抢？</view>
+
+        <!-- 详情控件区 -->
         <view class="controls">
           <view class="controls_left">
-            <text class="time"></text>
-            <text class="playTimes"></text>
+            <text class="time">{{ time }}</text>
+            <text class="playTimes">{{ playTimes }}次播放</text>
           </view>
-          <view class="controls_right"></view>
+          <view class="controls_right">
+            <!-- 点赞 -->
+            <view class="vote">
+              <text class="iconfont">&#xe603;</text>
+              <text>{{ voteTimes }}</text>
+            </view>
+
+            <!-- 评论 -->
+            <view class="comment">
+              <text class="iconfont">&#xe642;</text>
+              <text>{{ commentTimes }}</text>
+            </view>
+          </view>
         </view>
       </view>
     </view>
-    <view class="body"> </view>
+
+    <!-- body -->
+    <view class="body">
+      <view class="title">
+        <view class="commentSum">
+          <text>全部评论 {{ commentSum }}</text>
+        </view>
+        <view class="hot">
+          <text>热门评论</text>
+          <text class="iconfont" style="font-size:22rpx;">&#xe684;</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- footer -->
+    <view class="footer"></view>
   </view>
 </template>
 
@@ -51,7 +85,11 @@ export default {
       url: `http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8`,
       type: 2,
       poster: `https://wongxuefeng.com/bg.jpg`,
-      time: ''
+      time: '',
+      playTimes: 32221,
+      voteTimes: 99999,
+      commentTimes: 99999,
+      commentSum: 99999
     }
   },
   beforeCreate() {
@@ -62,8 +100,9 @@ export default {
   created() {
     that = this
     that.windowHeight = that.$sysCall.windowHeight()
-    that.time = that.$sysCall.getYear()
-    console.log('moment', that.time)
+    setInterval(() => {
+      that.time = that.$sysCall.getHMS()
+    }, 1000)
   },
   onLoad() {},
   onShow() {},
@@ -76,7 +115,12 @@ export default {
     console.timeEnd('renderTime')
     // #endif
   },
-  methods: {},
+  methods: {
+    naviBack() {
+      that.$sysCall.naviBack()
+      console.log('taptaptap')
+    }
+  },
   computed: {},
   watch: {}
 }
@@ -86,10 +130,17 @@ export default {
 .container {
   display: flex;
   flex-direction: column;
-  background: red;
   .header {
     height: 564rpx;
-    background: gray;
+    .arrow-left {
+      position: fixed;
+      top: 66rpx;
+      left: 36rpx;
+      width: 36rpx;
+      height: 36rpx;
+      font-size: 36rpx;
+      z-index: 200;
+    }
     .detail {
       padding: 23rpx 20rpx 23rpx 20rpx;
       .title {
@@ -102,20 +153,49 @@ export default {
         height: 30rpx;
         line-height: 30rpx;
         font-size: 22rpx;
+        margin-top: 20rpx;
         &_left {
           flex: 1;
           display: flex;
           justify-content: flex-start;
+          .playTimes {
+            margin-left: 20rpx;
+          }
         }
         &_right {
           flex: 1;
+          display: flex;
+          justify-content: flex-end;
+          .comment {
+            margin-left: 20rpx;
+          }
         }
       }
     }
   }
   .body {
     flex: 1;
-    background: blue;
+    position: relative;
+    .title {
+      padding: 0 20rpx;
+      display: flex;
+      align-items: center;
+      font-size: 24rpx;
+      height: 56rpx;
+      background: $default-bg-gray;
+      .hot {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+  }
+  .footer {
+    position: fixed;
+    bottom: 0;
+    height: 88rpx;
+    width: 100vw;
+    border-top: 1px solid $default-border-color-gray;
   }
 }
 </style>

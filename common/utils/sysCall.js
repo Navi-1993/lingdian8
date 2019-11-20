@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-19 23:20:37
- * @LastEditTime: 2019-11-20 10:21:56
+ * @LastEditTime: 2019-11-20 11:21:06
  * @LastEditors: Edmund
  */
 'use strict'
@@ -62,9 +62,7 @@ const sysCall = {
       duration: duration
     })
   },
-  getYear () {
-    return moment().year()
-  },
+
   /**
    * @Description: 基础请求封装
    */
@@ -99,7 +97,24 @@ const sysCall = {
         }
       })
     })
-  }
+  },
+  naviBack (step, duration) {
+    return uni.navigateBack({
+      delta: step,
+      animationType: 'slide-out-left',
+      animationDuration: duration || 300
+    })
+  },
+  /**
+   * 从这里开始为moment.js的封装----------------------------------------------------------------------------------------------------------------------------------------------------------
+   */
+
+  /**
+ * @Description: 返回当前时分秒
+ */
+  getHMS () {
+    return moment().format('H:mm:ss')
+  },
 }
 
 

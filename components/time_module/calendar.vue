@@ -8,13 +8,12 @@
  -->
 
 <template>
-    <view class="calendar_container">
-        <view class="calendar_content">
-            <slot name="date"></slot>
-        </view>
+  <view class="calendar_container">
+    <view class="calendar_content">
+      <slot name="date"></slot>
     </view>
+  </view>
 </template>
-
 
 <script>
 export default {
@@ -34,7 +33,7 @@ export default {
 <style lang="scss" scoped>
 .calendar_container {
   position: relative;
-  background-color: $default-bg-grey;
+  background-color: $default-bg-gray;
   display: flex;
   //   justify-items: center;
   justify-content: center;
