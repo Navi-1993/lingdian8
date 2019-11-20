@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-20 00:58:12
- * @LastEditTime: 2019-11-20 11:21:26
+ * @LastEditTime: 2019-11-20 12:16:43
  * @LastEditors: Edmund
  -->
 
@@ -181,6 +181,7 @@ export default {
       display: flex;
       align-items: center;
       font-size: 24rpx;
+      font-weight: bold;
       height: 56rpx;
       background: $default-bg-gray;
       .hot {

@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:54:43
- * @LastEditTime: 2019-11-20 11:03:38
+ * @LastEditTime: 2019-11-20 12:16:09
  * @LastEditors: Edmund
  */
 
@@ -25,7 +25,7 @@ $default-color-error: #dd524d;
 /* 0-文字基本颜色 */
 $default-text-color: #000000; //基本色
 $default-text-color-white: #fefefe; // 白色字体
-$default-text-color-inverse: #999999; //反色
+$default-text-color-inverse: rgba(153, 153, 153, 1); //反色
 $default-text-color-grey: #999; //辅助灰色，如加载更多的提示信息
 $default-text-color-placeholder: #808080;
 $default-text-color-disable: #c0c0c0;
