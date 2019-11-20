@@ -3,10 +3,11 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-19 23:20:37
- * @LastEditTime: 2019-11-20 01:16:49
+ * @LastEditTime: 2019-11-20 10:21:56
  * @LastEditors: Edmund
  */
 'use strict'
+import moment from 'moment'
 const sysCall = {
   context: function () {
     console.log('this as sysCall itSelf', this)
@@ -61,6 +62,12 @@ const sysCall = {
       duration: duration
     })
   },
+  getYear () {
+    return moment().year()
+  },
+  /**
+   * @Description: 基础请求封装
+   */
   request: function (url, postData, method, type, hideLoading) {
     //接口请求
     if (!hideLoading) {
