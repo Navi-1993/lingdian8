@@ -3,28 +3,28 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-12 19:54:12
- * @LastEditTime: 2019-11-19 01:47:29
+ * @LastEditTime: 2019-11-21 00:39:35
  * @LastEditors: Edmund
  */
 
 const user = [
     {
         path: '/pages/user/login',
-        name: 'user',
+        name: 'user-login',
         meta: {
             title: '登陆'
         }
     },
     {
         path: '/pages/user/register',
-        name: 'register',
+        name: 'user-register',
         meta: {
             title: '注册'
         }
     },
     {
         path: '/pages/user/reset-psw',
-        name: 'reset-psw',
+        name: 'user-reset-psw',
         meta: {
             title: '重置密码'
         }

@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-20 17:32:51
- * @LastEditTime: 2019-11-20 23:19:45
+ * @LastEditTime: 2019-11-20 23:22:09
  * @LastEditors: Edmund
  -->
 
@@ -127,7 +127,7 @@ export default {
 			}
 		},
 		loadmore: _.debounce(() => {
-			that.$sysCall.toast('触发向下拉动加载更多')
+			that.$sysCall.toast('使用防抖控制loadmore行为加载更多')
 			that.loading = true
 			setTimeout(() => {
 				that.loading = false
