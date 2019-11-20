@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-19 09:49:44
- * @LastEditTime: 2019-11-21 02:21:10
+ * @LastEditTime: 2019-11-21 02:25:40
  * @LastEditors: Edmund
  -->
 
@@ -15,19 +15,17 @@
 
     <view class="header">
       <event-card
-        :homeTeamName="'中国'"
-        :guestTeamName="'韩国'"
-        :livesUrl="'https://www.wongxuefeng.com'"
-        @toast="actionsheetOpen"
-      />
+									:homeTeamName="'中国'"
+									:guestTeamName="'韩国'"
+									:livesUrl="'https://www.wongxuefeng.com'"
+									@toast="actionsheetOpen"/>
       <progress-bar
-        class="progress"
-        :leftNum="leftNum"
-        :rightNum="rightNum"
-        :percent="percent"
-        @leftTap="leftTap"
-        @rightTap="rightTap"
-      >
+										class="progress"
+										:leftNum="leftNum"
+										:rightNum="rightNum"
+										:percent="percent"
+										@leftTap="leftTap"
+										@rightTap="rightTap">
       </progress-bar>
     </view>
     <view class="stepStone"></view>
@@ -42,24 +40,22 @@
 
     <view class="footer">
       <input
-        type="text"
-        class="input"
-        placeholder="聊天室尚未接入"
-        ref="input"
-        v-model="value"
-      />
+							type="text"
+							class="input"
+							placeholder="聊天室尚未接入"
+							ref="input"
+							v-model="value"/>
     </view>
-    <tui-actionsheet
-      :show="showActionSheet"
-      :tips="tips"
-      :item-list="actionsheetList"
-      :mask-closable="maskClosable"
-      :color="color"
-      :size="size"
-      :is-cancel="isCancel"
-      @click="itemClick"
-      @cancel="closeActionSheet"
-    />
+    <actionsheet
+											:show="showActionSheet"
+											:tips="tips"
+											:item-list="actionsheetList"
+											:mask-closable="maskClosable"
+											:color="color"
+											:size="size"
+											:is-cancel="isCancel"
+											@click="itemClick"
+											@cancel="closeActionSheet"/>
   </view>
 </template>
 
@@ -67,14 +63,14 @@
 let that
 import eventCard from 'components/sportsEvent/event-card.vue'
 import progressBar from 'components/sportsEvent/progress-bar.vue'
-import tuiActionsheet from 'components/actionsheet/actionsheet.vue'
+import actionsheet from 'components/actionsheet/actionsheet.vue'
 import chat from 'components/chat.vue'
 export default {
 	name: 'chatroom',
 	components: {
 		eventCard,
 		progressBar,
-		tuiActionsheet,
+		actionsheet,
 		chat
 	},
 	props: {},

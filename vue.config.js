@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 13:50:21
- * @LastEditTime: 2019-11-07 15:42:22
+ * @LastEditTime: 2019-11-21 02:41:10
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\vue.config.js
  */
@@ -22,7 +22,7 @@ module.exports = {
       .set('pages', resolve('pages'))
       .set('api', resolve('api'))
       .set('platform', resolve('platform'))
+      .set('static', resolve('/static'))
     // .set('common',resolve('common'))
-    // .set('static',resolve('src/static'))
   }
 }
