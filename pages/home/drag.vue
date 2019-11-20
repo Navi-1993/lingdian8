@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 22:07:02
- * @LastEditTime: 2019-11-20 12:22:47
+ * @LastEditTime: 2019-11-20 12:24:04
  * @LastEditors: Edmund
  -->
 
@@ -37,8 +37,7 @@
 
     <!-- 不可排序列表 -->
     <view class="seleted_title">
-      <text class="strong">请选择</text>
-      <text class="mini">可长按并拖拽调整顺序</text>
+      <text class="strong">未选择</text>
     </view>
     <vuedraggable class="wrapper" v-model="list" handle=".nonono">
       <transition-group>
