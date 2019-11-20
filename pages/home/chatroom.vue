@@ -3,12 +3,14 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-19 09:49:44
- * @LastEditTime: 2019-11-20 20:33:07
+ * @LastEditTime: 2019-11-21 02:21:10
  * @LastEditors: Edmund
  -->
 
 <template>
-  <view class="container" :style="{ height: windowHeight + 'px' }">
+  <view class="container"
+				:style="{ height: windowHeight + 'px',
+									minHeight:windowHeight+ 'px'}">
     <!-- HTML:header -->
 
     <view class="header">
@@ -275,7 +277,6 @@ export default {
 }
 .body {
 	flex: 1;
-	background: $default-bg-gray;
 }
 .footer {
 	position: fixed;

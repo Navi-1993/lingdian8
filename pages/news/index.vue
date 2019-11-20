@@ -1,14 +1,15 @@
 <!--
- * @Description: news默认索引页
+ * @Description: 新闻首页
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
- * @Date: 2019-10-31 09:53:30
- * @LastEditTime: 2019-11-07 15:43:59
+ * @Date: 2019-11-18 22:07:02
+ * @LastEditTime: 2019-11-21 01:32:23
  * @LastEditors: Edmund
- * @FilePath: \lingdian8\pages\news\index.vue
  -->
+
 <template>
-	<view class="news_container">
+	<view class="container"
+        :style="{ height:windowHeight + 'px'}">
 		<swiper-bar :styleObject="styleObject"
                 :renderData = "sportNameList">
     </swiper-bar>
@@ -43,93 +44,93 @@
 <script>
 import swiperBar from 'components/swiper-bar.vue'
 export default {
-  name: 'news',
-  components: {
-    swiperBar
-  },
-  props: {},
-  data() {
-    return {
-      styleObject: {
-        color: 'black'
-      },
-      faboriteData: [
-        {
-          name: 'wong'
-        },
-        {
-          name: 'xue'
-        },
-        {
-          name: 'feng'
-        },
-        {
-          name: 'niu'
-        },
-        {
-          name: 'xu'
-        },
-        {
-          name: 'feng'
-        },
-        {
-          name: 'jia'
-        },
-        {
-          name: 'SB'
-        }
-      ]
-    }
-  },
-  computed: {
-    sportNameList() {
-      return this.$_.map(this.faboriteData, item => {
-        return item.name
-      })
-    }
-  }
+	name: 'news-index',
+	components: {
+		swiperBar
+	},
+	props: {},
+	data() {
+		return {
+			windowHeight: 0,
+			styleObject: {
+				color: 'black'
+			},
+			faboriteData: [
+				{
+					name: '1'
+				},
+				{
+					name: '2'
+				},
+				{
+					name: '3'
+				},
+				{
+					name: '4'
+				},
+				{
+					name: '5'
+				},
+				{
+					name: '6'
+				},
+				{
+					name: '7'
+				},
+				{
+					name: '8'
+				}
+			]
+		}
+	},
+	computed: {
+		sportNameList() {
+			return this.faboriteData.map((item) => {
+				return item.name
+			})
+		}
+	}
 }
 </script>
 
 <style lang="scss">
-.news_container {
-  height: 100vh;
-  .news_banner {
-    display: flex;
-    align-items: center;
-    width: 100vw;
-    height: 320rpx;
-    border-top: 1rpx solid $default-border-color;
-    border-bottom: 1rpx solid $default-border-color;
-    &_item {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-    &_img {
-      width: 586rpx;
-      height: 280rpx;
-      border-radius: 10rpx;
-    }
-    &_mask {
-      position: absolute;
-      bottom: 24rpx;
-      left: 16rpx;
-      width: 584rpx;
-      height: 38rpx;
-      background: $default-bg-black;
-      opacity: 0.3;
-      border-radius: 0 0 10rpx 10rpx;
-    }
-    &_title {
-      color: $default-text-color-white;
-      font-size: 24rpx;
-      height: 38rpx;
-      line-height: 38rpx;
-      @include center;
-      top: 276rpx;
-    }
-  }
+.container {
+	.news_banner {
+		display: flex;
+		align-items: center;
+		width: 100vw;
+		height: 320rpx;
+		border-top: 1rpx solid $default-border-color;
+		border-bottom: 1rpx solid $default-border-color;
+		&_item {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+		}
+		&_img {
+			width: 586rpx;
+			height: 280rpx;
+			border-radius: 10rpx;
+		}
+		&_mask {
+			position: absolute;
+			bottom: 24rpx;
+			left: 16rpx;
+			width: 584rpx;
+			height: 38rpx;
+			background: $default-bg-black;
+			opacity: 0.3;
+			border-radius: 0 0 10rpx 10rpx;
+		}
+		&_title {
+			color: $default-text-color-white;
+			font-size: 24rpx;
+			height: 38rpx;
+			line-height: 38rpx;
+			@include center;
+			top: 276rpx;
+		}
+	}
 }
 </style>

@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-19 09:46:11
+ * @LastEditTime: 2019-11-21 01:24:23
  * @LastEditors: Edmund
  -->
 
@@ -37,18 +37,13 @@ export default {
 		// #endif
 	},
 	mounted() {
-		uni.getSystemInfo({
-			success: function(res) {
-				that.windowHeight = res.windowHeight
-			}
-		})
-		that.multiPlayerInit()
+		that.windowHeight = that.$sysCall.windowHeight()
 	},
 	onHide() {},
 	onUnload() {},
 	data() {
 		return {
-			windowHeight: 0 // 设备可用高度
+			windowHeight: 0
 		}
 	},
 	methods: {},
@@ -63,7 +58,5 @@ export default {
 	display: flex;
 	flex-direction: column;
 	position: relative;
-	overflow-y: auto;
-	background: gray;
 }
 </style>

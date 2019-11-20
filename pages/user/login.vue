@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-19 10:02:37
+ * @LastEditTime: 2019-11-21 02:06:14
  * @LastEditors: Edmund
  -->
 <template>
@@ -39,32 +39,30 @@
       </button>
     </view>
     <!--toast提示-->
-    <tui-toast ref="toast"></tui-toast>
+    <toast ref="toast"></toast>
 
     <!-- 悬浮按钮 -->
-    <tui-fab
-      :left="left"
-      :right="right"
-      :bottom="bottom"
-      :bgColor="bgColor"
-      :btnList="btnList"
-      @click="fabClick"
-    >
-    </tui-fab>
+    <fab	:left="left"
+					:right="right"
+					:bottom="bottom"
+					:bgColor="bgColor"
+					:btnList="btnList"
+					@click="fabClick">
+    </fab>
   </view>
 </template>
 
 <script>
 let that
 import { login } from 'api/user.js'
-import tuiToast from 'components/extend/toast/toast.vue'
-import tuiFab from 'components/tui-fab/tui-fab.vue'
+import toast from 'components/extend/toast/toast.vue'
+import fab from 'components/tui-fab/tui-fab.vue'
 export default {
 	name: 'login',
 	props: {},
 	components: {
-		tuiToast,
-		tuiFab
+		toast,
+		fab
 	},
 	data() {
 		return {
@@ -73,7 +71,7 @@ export default {
 			bottom: 100,
 			bgColor: '#5677fc',
 			btnList: [],
-			list2: [
+			fabList: [
 				{
 					bgColor: '#16C2C2',
 					text: '去拖拽页',
@@ -88,8 +86,8 @@ export default {
 				},
 				{
 					bgColor: '#FFA000',
-					text: '赞赏',
-					fontSize: 28,
+					text: '待引入',
+					fontSize: 20,
 					color: '#fff'
 				}
 			],
@@ -116,7 +114,7 @@ export default {
 		})
 	},
 	mounted() {
-		that.btnList = [...that.list2]
+		that.btnList = [...that.fabList]
 	},
 	onLoad() {},
 	methods: {

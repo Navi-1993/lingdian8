@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-20 17:32:51
- * @LastEditTime: 2019-11-20 23:22:09
+ * @LastEditTime: 2019-11-21 02:17:05
  * @LastEditors: Edmund
  -->
 
@@ -14,7 +14,8 @@
 										@scroll="scroll"
 										@touchstart="touchStart"
 										@touchmove="touchMove"
-                    :style="{height: height + 'rpx'}">
+                    :style="{	height: height + 'rpx',
+															minHeight:height+ 'rpx'}">
           <loadmore :visible="loading"
                         :index="3"
                         type="primary"
@@ -55,7 +56,7 @@
 <script>
 let that
 import _ from 'underscore'
-import loadmore from 'components/loadmore/loadmore.vue'
+import loadmore from 'components/loadmore/loadmore'
 export default {
 	name: 'chat',
 	components: {
