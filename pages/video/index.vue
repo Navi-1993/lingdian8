@@ -3,29 +3,107 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-21 01:24:23
+ * @LastEditTime: 2019-11-22 02:07:18
  * @LastEditors: Edmund
  -->
 
 <template>
-  <view class="container" :style="{ height: windowHeight + 'px' }">
+  <view class="container" :style="{ height: windowHeight + 'px',
+																		minHeight: windowHeight + 'px'}">
     <!-- #ifdef H5 -->
-    
+		<!-- tabbar -->
+    <scroll-view	class="tab-view"
+									:scroll-x="true"
+									:scroll-with-animation="true"
+									:scroll-left="scrollLeft">
+			<block 	v-for="(item, idx) in tabbarList"
+							:key="idx">						
+				<view		class="tab-bar-item"
+								:class="[currentTab === idx ? 'active' : '']">
+						<text class="tab-bar-title">
+							{{ item.name }}
+						</text>
+				</view>
+			</block>
+      <view class="tabbar-controls" @click="navi2Drag">+</view>
+    </scroll-view>
+		<swiper		class="tab-content"
+							:current="currentTab"
+							duration="300"
+							@tap.stop="navi2"
+							:style="{ height: windowHeight + 'px',
+												minHeight: windowHeight + 'px'}"
+							@change="switchTab">
+				<block 	v-for="(item,idx) in 10"
+								:key="idx">
+						<swiper-item>
+								<scroll-view	:scroll-y="true"
+															:style="{height: windowHeight - 40  + 'px'}"
+															:scroll-with-animation="true"
+															:scroll-left="scrollLeft">
+										<block	v-for="(item,idx) in 10"
+														:key="idx">
+											<view class="card">
+													<view class="poster">
+															<image 	src="http://wongxuefeng.com/bg.jpg"
+																			class="image"
+																			mode="aspectFill">
+															</image>
+															<text class="playBtn iconfont">
+																&#xe620;
+															</text>
+													</view>
+													<view	class="controls">
+														<view class="sheet_l">
+															<view style="margin-right:10rpx"
+																		class="iconfont">
+																		&#xe61f;
+															</view>
+															<view >99999</view>
+														</view>
+														<view class="sheet_r">
+															<view style="margin-right:10rpx"
+																		class="iconfont">
+																		&#xe642;
+															</view>
+															<view >99999</view>
+														</view>
+													</view>
+													<view class="title">123123</view>
+											</view>
+										</block>
+								</scroll-view>
+						</swiper-item>
+				</block>
+    </swiper>
+    <tui-loading :visible="isLoading"></tui-loading>
     <!-- #endif -->
   </view>
 </template>
 
 <script>
 let that
-
+import _ from 'underscore'
+import tuiLoading from 'components/loading/loading.vue'
+import { queryAllEvent } from '@/api/match.js'
 export default {
 	name: 'video',
-	components: {},
+	components: {
+		tuiLoading
+	},
 	props: {},
+	data() {
+		return {
+			windowHeight: '', //窗口高度
+			tabbarList: [], // tabbar数据
+			currentTab: 0, //预设当前tab项的值
+			scrollLeft: 0, //tab标题的滚动条位置
+			isLoading: false // 加载弹窗
+		}
+	},
 	created() {
 		that = this
 	},
-	onLoad() {},
 	onShow() {
 		// #ifdef APP-PLUS
 		// 通过id获取nvue子窗体
@@ -38,15 +116,78 @@ export default {
 	},
 	mounted() {
 		that.windowHeight = that.$sysCall.windowHeight()
+		that._queryAllEvent()
 	},
-	onHide() {},
-	onUnload() {},
-	data() {
-		return {
-			windowHeight: 0
+	methods: {
+		async _queryAllEvent() {
+			let params = {
+				offset: 1,
+				limit: 30
+			}
+			let res = await queryAllEvent(params)
+			if (res.statusCode === 200) {
+				that.tabbarList = res.data.data.list
+			}
+		},
+		/**
+		 * @Description: 防抖请求
+		 * @param {type}
+		 * @return:
+		 */
+		// _queryAllMatchList: _.debounce(async () => {
+		// 	that.isLoading = true
+		// 	let params = {
+		// 		// id: `${that.tabbarList[that.currentTab].id}`,
+		// 		// limit: 20,
+		// 		offset: 1,
+		// 		type: 5
+		// 	}
+		// 	let res = await queryAllMatchList(params)
+		// 	if (res.statusCode === 200) {
+		// 		// when success ,do sth you want
+		// 		that.isLoading = false
+		// 		that.matchList = res.data.data.list || []
+		// 	}
+		// 	// 2秒后加载不到数据关闭loading控件
+		// 	clearTimeout(timer)
+		// 	let timer = setTimeout(() => {
+		// 		that.isLoading = false
+		// 	}, 2000)
+		// 	// 1.5秒防抖
+		// }, 1500),
+
+		navi2() {
+			that.$Router.push({ path: '/pages/video/detail' })
+		},
+
+		/**
+		 * @Description: 跳至拖拽排序页
+		 */
+		navi2Drag() {
+			that.$Router.push({ path: '/pages/home/drag' })
+		},
+
+		/**
+		 * @Description: 滚动切换标签样式
+		 */
+		switchTab: (e) => {
+			that.currentTab = e.target.current
+			that.checkCor()
+		},
+
+		/**
+		 * @Description: 判断当前滚动超过一屏时，设置tab标题滚动条
+		 */
+		checkCor: function() {
+			if (that.currentTab === 0) {
+				that.scrollLeft = 0
+			}
+			// 如果当前选项卡索引值大于5，设置横向滚动条
+			if (that.currentTab > 5) {
+				that.scrollLeft = 30 * that.currentTab
+			}
 		}
 	},
-	methods: {},
 	computed: {},
 	watch: {}
 }
@@ -54,9 +195,122 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-	width: 100vw;
 	display: flex;
 	flex-direction: column;
-	position: relative;
+	.tab-view {
+		width: 100vw;
+		font-size: 24rpx;
+		overflow: hidden;
+		box-sizing: border-box;
+		position: fixed;
+		height: 76rpx;
+		top: 0;
+		/* #ifdef H5 */
+		top: 88rpx;
+		/* #endif */
+		left: 0;
+		z-index: 99;
+		background: $default-bg-white;
+		// background: gray;
+		white-space: nowrap;
+		.tabbar-controls {
+			height: 76rpx;
+			width: 76rpx;
+			background: $default-bg-white;
+			position: fixed;
+			right: 0;
+			top: 88rpx;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 60rpx;
+			z-index: 200;
+		}
+	}
+	.tab-bar-item {
+		padding: 0;
+		height: 76rpx;
+		line-height: 76rpx;
+		margin: 0 28rpx;
+		display: inline-block;
+		text-align: center;
+		box-sizing: border-box;
+	}
+	.tab-content {
+		margin-top: 88rpx;
+		.card {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			height: 548rpx;
+			box-shadow: 0rpx 5rpx 5rpx 0rpx $default-border-color-gray,
+				5rpx 5rpx 5rpx 0rpx $default-border-color-gray,
+				7rpx -5rpx 5rpx -5rpx $default-border-color-gray,
+				1rpx 1rpx 7rpx 0rpx $default-border-color-gray;
+			margin: 10rpx 20rpx 20rpx 20rpx;
+			.poster {
+				position: relative;
+				height: 488rpx;
+				border-radius: 10rpx 10rpx 0 0;
+				background: red;
+				.image {
+					height: 100%;
+					width: 100%;
+					border-radius: 10rpx 10rpx 0 0;
+				}
+				.playBtn {
+					@include center;
+					font-size: 160rpx;
+					color: rgba(120, 120, 120, 0.7);
+				}
+			}
+			.controls {
+				flex: 1;
+				display: flex;
+				align-items: center;
+				background: $default-bg-white;
+				border-radius: 0 0 10rpx 10rpx;
+				font-size: 22rpx;
+				.sheet_l {
+					flex: 1;
+					display: flex;
+					justify-content: flex-start;
+					align-items: center;
+					margin-left: 20rpx;
+				}
+				.sheet_r {
+					flex: 1;
+					display: flex;
+					align-items: center;
+					margin-right: 20rpx;
+					justify-content: flex-end;
+				}
+			}
+			.title {
+				height: 88rpx;
+				width: 710rpx;
+				display: flex;
+				align-items: center;
+				background: transparent;
+				position: absolute;
+				z-index: 100;
+				top: 0;
+				color: $default-text-color-white;
+				font-size: 30rpx;
+				padding-left: 18rpx;
+			}
+		}
+	}
+	.tab-bar-title {
+		color: $default-text-color-inverse;
+	}
+	.active {
+		border-bottom: 2rpx solid $default-color-primary;
+		.tab-bar-title {
+			color: $default-text-color;
+			font-weight: bold;
+			transition: font-weight 0.5s;
+		}
+	}
 }
 </style>

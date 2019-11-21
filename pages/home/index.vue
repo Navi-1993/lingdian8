@@ -3,55 +3,38 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 11:10:23
- * @LastEditTime: 2019-11-21 23:02:44
+ * @LastEditTime: 2019-11-22 01:23:24
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\pages\home\index.vue
  -->
 
 <template>
-  <view class="container" :style="{ height: windowHeight + 'px' }">
-    <!--  #ifndef MP-WEIXIN  -->
-    <!-- 状态栏 -->
-    <!-- <uni-nav-bar  title="零点吧"
-                  :fixed="true"
-                  color = "yellow"
-                  background-color = "red"
-                  status-bar="true"
-                  :border="false">
-      <view slot="right"
-            style="font-size: 40rpx;"
-            class="iconfont">
-      </view>
-    
-    </uni-nav-bar> -->
-    <!--  #endif -->
+  <view class="container" :style="{ height: windowHeight + 'px',
+																		minHeight: windowHeight + 'px'}">
     <!-- tabbar -->
     <scroll-view
       class="tab-view"
-      scroll-x
-      scroll-with-animation
-      :scroll-left="scrollLeft"
-    >
+      :scroll-x="true"
+			:scroll-top="0"
+      :scroll-with-animation="true"
+      :scroll-left="scrollLeft">
       <view
         class="tab-bar-item"
-        :class="[currentTab == idx ? 'active' : '']"
+        :class="[currentTab === idx ? 'active' : '']"
         v-for="(item, idx) in tabbarList"
         :key="idx"
-        @tap.stop="swichNav(idx)"
-      >
+        @tap.stop="swichNav(idx)">
         <text class="tab-bar-title" v-if="item">
           {{ item.name }}
         </text>
       </view>
       <view class="tabbar-controls" @click="navi2Drag">+</view>
     </scroll-view>
-    <swiper
-      class="tab-content"
-      :current="currentTab"
-      duration="200"
-      :style="{ height: windowHeight + 'px' }"
-      @change="switchTab"
-    >
+    <swiper	class="tab-content"
+						:current="currentTab"
+						duration="300"
+						:style="{ height: windowHeight + 'px' }"
+						@change="switchTab">
       <block v-for="(item, idx) in tabbarList" :key="idx">
         <swiper-item v-show="item">
           <scroll-view scroll-y class="scoll-y">
@@ -82,23 +65,21 @@
 <script>
 let that
 import _ from 'underscore'
-import uniNavBar from 'components/uni-nav-bar/uni-nav-bar.vue' // 头部导航组件
 import calendar from 'components/time_module/calendar.vue'
 import tuiLoading from 'components/loading/loading.vue'
 import eventCard from 'components/sportsEvent/event-card.vue'
 import { queryAllEvent, queryAllMatchList } from '@/api/match.js'
 export default {
 	components: {
-		uniNavBar,
 		calendar,
 		eventCard,
 		tuiLoading
 	},
 	data() {
 		return {
-			tabbarList: ['name'], // tabbar数据
-			matchList: [], // 赛事数据
 			windowHeight: '', //窗口高度
+			tabbarList: [], // tabbar数据
+			matchList: [], // 赛事数据
 			currentTab: 0, //预设当前tab项的值
 			scrollLeft: 0, //tab标题的滚动条位置
 			isLoading: false // 加载弹窗
@@ -179,12 +160,9 @@ export default {
 		 */
 		fetchEvent: _.debounce(async () => {
 			that.isLoading = true
-			// console.log('current', that.currentTab)
-			let idx = that.currentTab
 			let params = {
-				// TODO:数据太少，暂时作渲染用，预发版需要取消id与limit的注释
-				id: `${that.tabbarList[idx].id}`,
-				limit: 20,
+				// id: `${that.tabbarList[that.currentTab].id}`,
+				// limit: 20,
 				offset: 1,
 				type: 5
 			}
@@ -238,9 +216,9 @@ export default {
 			height: 76rpx;
 			width: 76rpx;
 			background: $default-bg-white;
-			position: absolute;
+			position: fixed;
 			right: 0;
-			top: 0;
+			top: 88rpx;
 			display: flex;
 			justify-content: center;
 			align-items: center;
