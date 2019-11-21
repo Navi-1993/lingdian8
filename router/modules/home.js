@@ -3,14 +3,20 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 22:07:02
- * @LastEditTime: 2019-11-21 00:43:23
+ * @LastEditTime: 2019-11-21 22:33:04
  * @LastEditors: Edmund
  */
 
 let home = [
     {
         path: '/pages/home/index',
-        name: 'home-index'
+        name: 'home-index',
+        // #ifdef H5
+        aliasPath: '/',
+        // #endif
+        meta: {
+            title: '首页'
+        }
     },
     {
         path: '/pages/home/drag',

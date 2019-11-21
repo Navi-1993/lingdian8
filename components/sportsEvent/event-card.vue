@@ -3,13 +3,13 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-28 14:37:31
- * @LastEditTime: 2019-11-19 10:30:37
+ * @LastEditTime: 2019-11-21 23:01:21
  * @LastEditors: Edmund
  -->
 
 
 <template>
-    <view class="eventCard_container">
+    <view class="container">
         <view class="eventCard_content">
             <view class="eventCard_title">
               <slot name="text" />
@@ -75,7 +75,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.eventCard_container {
+.container {
 	display: flex;
 	flex-direction: column;
 	padding-top: 24rpx;

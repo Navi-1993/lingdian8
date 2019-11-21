@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 11:10:23
- * @LastEditTime: 2019-11-21 22:20:30
+ * @LastEditTime: 2019-11-21 23:02:44
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\pages\home\index.vue
  -->
@@ -43,7 +43,7 @@
           {{ item.name }}
         </text>
       </view>
-      <view class="tabbar-controls" @click="naviToDrag">+</view>
+      <view class="tabbar-controls" @click="navi2Drag">+</view>
     </scroll-view>
     <swiper
       class="tab-content"
@@ -58,18 +58,19 @@
             <calendar>
               <text slot="date">11月6日 星期六</text>
             </calendar>
-            <event-card
-              v-for="(item, index) in matchList"
-              :homeTeamName="item.homeTeamName"
-              :guestTeamName="item.guestTeamName"
-              :livesUrl="''"
-              :key="index"
-            >
-              <text slot="text">
-                {{ item.matchBeginTime }}
-                {{ item.matchTitle }}
-              </text>
-            </event-card>
+						<block 	v-for="(item, index) in matchList"
+										:key="index">
+								<view @tap.stop="navi2Chatroom(item)">
+										<event-card		:homeTeamName="item.homeTeamName"
+																	:guestTeamName="item.guestTeamName"
+																	:livesUrl="''">
+											<text slot="text" >
+												{{ item.matchBeginTime }}
+												{{ item.matchTitle }}
+											</text>
+										</event-card>
+								</view>
+						</block>
           </scroll-view>
         </swiper-item>
       </block>
@@ -137,10 +138,18 @@ export default {
 				that.tabbarList = res.data.data.list
 			}
 		},
-		naviToDrag() {
-			uni.navigateTo({
-				url: '/pages/home/drag'
-			})
+		/**
+		 * @Description: 跳至赛事聊天室页面
+		 */
+		navi2Chatroom(item) {
+			console.log('11111')
+			that.$Router.push({ path: '/pages/home/chatroom', params: item })
+		},
+		/**
+		 * @Description: 跳至拖拽排序页
+		 */
+		navi2Drag() {
+			that.$Router.push({ path: '/pages/home/drag' })
 		},
 		// 滚动切换标签样式
 		switchTab: (e) => {
