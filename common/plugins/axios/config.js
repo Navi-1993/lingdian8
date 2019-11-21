@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 14:44:56
- * @LastEditTime: 2019-11-21 17:48:44
+ * @LastEditTime: 2019-11-21 17:53:48
  * @LastEditors: Edmund
  */
 
@@ -31,8 +31,8 @@ export const config = {
     // 'X-Auth-Token': 'xxxx',
     // contentType: "application/x-www-form-urlencoded",
     'Content-Type': 'application/json',
-    // timeStamp: new Date() * 1,
-    // token: 1
+    timeStamp: new Date() * 1,
+    token: 1
   },
 }
 
