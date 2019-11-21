@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 22:07:02
- * @LastEditTime: 2019-11-21 16:59:50
+ * @LastEditTime: 2019-11-21 21:44:46
  * @LastEditors: Edmund
  -->
 
@@ -11,7 +11,7 @@
   <view class="container" :style="{ height: windowHeight + 'px' }">
     <!-- #ifndef H5 -->
     <view class="header">
-      <drag-sort :seletedList="seletedList" :props="props" @change="itemChange">
+      <drag-sort :selectedList="selectedList" :props="props" @change="itemChange">
       </drag-sort>
     </view>
     <!-- #endif -->
@@ -22,17 +22,19 @@
     </view>
 
     <!-- 可排序列表 -->
-    <vuedraggable class="wrapper" v-model="seletedList" handle=".handle">
+    <vuedraggable class="wrapper" v-model="selectedList" handle=".handle">
       <transition-group>
-        <div v-for="(item, idx) in seletedList" :key="idx" class="item">
+				<block  v-for="(item,idx) in selectedList" :key="idx">
+        <div class="item">
           <div class="sortItem">
-            <text class="iconfont sub" @tap="removeItem(item)">
+            <text class="iconfont sub" @tap="add2UnselectedList(item)">
               &#xe605;
             </text>
-            <text class="">{{ item.name }}</text>
+            {{ item.name }}
           </div>
           <div class="handle iconfont">&#xe689;</div>
         </div>
+				</block>
       </transition-group>
     </vuedraggable>
 
@@ -42,12 +44,15 @@
     </view>
     <vuedraggable class="wrapper" v-model="unseletedList" handle=".nonono">
       <transition-group>
-        <div v-for="(item, idx) in unseletedList" :key="idx" class="item">
-          <div class="sortItem">
-            <text class="">{{ item.name }}</text>
-          </div>
-          <div class="handle iconfont add">&#xe604;</div>
-        </div>
+				<block v-for="(item, idx) in unseletedList" :key="idx">
+						<div  class="item">
+								<div class="sortItem">
+										{{ item.name }}
+								</div>
+								<div 	class="handle iconfont add"
+											@tap.stop="add2SelectedList(item)">&#xe604;</div>
+						</div>
+				</block>
       </transition-group>
     </vuedraggable>
     <!-- #endif -->
@@ -57,7 +62,11 @@
 <script>
 let that
 import dragSort from 'components/drag-sort/index.vue'
-import { updateUserAttend, queryAllEvent } from 'api/match.js'
+import {
+	updateUserAttend,
+	queryAllEvent,
+	queryUserAttendEventList
+} from 'api/match.js'
 // #ifdef H5
 import vuedraggable from 'vuedraggable'
 // #endif
@@ -73,19 +82,9 @@ export default {
 	data() {
 		return {
 			windowHeight: 0,
-			props: {
-				label: 'name'
-			},
-			seletedList: [
-				{ name: 'John', text: '', id: 0 },
-				{ name: 'Joao', text: '', id: 1 },
-				{ name: 'Jean', text: '', id: 2 }
-			],
-			unseletedList: [
-				{ name: 'nana', text: '', id: 4 },
-				{ name: 'mimi', text: '', id: 5 },
-				{ name: 'coco', text: '', id: 6 }
-			]
+			// TODO: H5拖拽排序组件数据
+			selectedList: [],
+			unseletedList: []
 		}
 	},
 	beforeCreate() {
@@ -96,12 +95,12 @@ export default {
 	created() {
 		that = this
 		that.windowHeight = that.$sysCall.windowHeight()
-		queryAllEvent({
-			offset: 1
-		})
 	},
 	beforeMount() {},
-	mounted() {},
+	mounted() {
+		that._queryAllEvent()
+		that._updateUserAttend()
+	},
 	onLoad() {},
 	onShow() {},
 	onReady() {
@@ -115,13 +114,68 @@ export default {
 	destroyed() {},
 	methods: {
 		/**
+		 * @Description: 查询所有赛事项目接口
+		 */
+		async _queryAllEvent() {
+			let params = {
+				limit: 10,
+				offset: 1
+			}
+			let res = await queryAllEvent(params)
+			if (res.statusCode === 200) {
+				that.unseletedList = res.data.data.list
+			}
+		},
+		async _updateUserAttend(params) {
+			let res = updateUserAttend(params)
+			if (res.statusCode === 200) {
+				// do sth
+			}
+		},
+
+		/**
+		 * @Description: 添加至选择列表
+		 */
+		add2SelectedList(item) {
+			// 拼接参数
+			let params = {
+				attentedType: item.type,
+				controlType: 0,
+				id: item.id
+			}
+			// 请求更新接口
+			that._updateUserAttend(params)
+			let idx = that.unseletedList.findIndex((ele) => {
+				return ele.type === item.type && ele.id === item.id
+			})
+			that.selectedList.push(that.unseletedList[idx])
+			that.unseletedList.splice(idx, 1)
+		},
+		/**
+		 * @Description: 添加至未选择列表
+		 */
+		add2UnselectedList(item) {
+			// 拼接参数
+			let params = {
+				attentedId: item.id,
+				controlType: 1,
+				attentedType: item.type
+			}
+			// 请求更新接口
+			that._updateUserAttend(params)
+			let idx = that.selectedList.findIndex((ele) => {
+				return ele.type === item.type && ele.id === item.id
+			})
+			that.unseletedList.push(that.selectedList[idx])
+			that.selectedList.splice(idx, 1)
+		},
+		/**
 		 * @Description: drag-sort组件$emit change 时更改 Item
 		 * @e {Object} drag-组件定义的事件值
 		 * @return: void
 		 */
 		itemChange(e) {
 			let currentItem = e.item
-
 			// 刷新数据
 			that.updateList(currentItem)
 		},
@@ -131,25 +185,9 @@ export default {
 			let currentIdx = currentItem.index
 			let frontIdx = currentItem.oldIdx
 			// 交换数组元素位置
-			let temp = this.seletedList[currentIdx]
-			this.seletedList[currentIdx] = this.seletedList[frontIdx]
-			this.seletedList[frontIdx] = temp
-			console.log('result', currentIdx)
-			console.log('front', frontIdx)
-			console.table('seletedList', this.seletedList)
-		},
-		/**
-		 * @Description: 删除数组内元素
-		 * @param {object}  item 点击时返回的对应数据
-		 * @return: void
-		 */
-		removeItem(item) {
-			// 找到目标在原数组中的索引
-			let idx = that.seletedList.findIndex((ele) => {
-				return ele.id === item.id
-			})
-			// 删掉该元素
-			that.seletedList.splice(idx, 1)
+			let temp = this.selectedList[currentIdx]
+			this.selectedList[currentIdx] = this.selectedList[frontIdx]
+			this.selectedList[frontIdx] = temp
 		}
 	},
 	computed: {},
@@ -177,6 +215,7 @@ export default {
 	}
 }
 .wrapper {
+	max-width: 100vw;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;

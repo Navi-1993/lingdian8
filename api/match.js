@@ -4,7 +4,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 14:09:54
- * @LastEditTime: 2019-11-21 17:14:09
+ * @LastEditTime: 2019-11-21 19:45:14
  * @LastEditors: Edmund
  */
 
@@ -48,12 +48,21 @@ export function queryAllMatchList (data) {
  * @param {Number} attentedType 关注类型 0项目 1专题 2赛事类型 3热门 4完结 5全部
  * @param {Number} controlType 操作类型 0新增 1删除
  * @param {Number} id 数据id
- * @return: 
  */
 export function updateUserAttend (data) {
   return fetch.request({
     url: '/app/match/updateUserAttend',
     method: 'post',
     data: data
+  })
+}
+
+/**
+ * @Description: 查询用户关注的赛事栏目
+ */
+export function queryUserAttendEventList () {
+  return fetch.request({
+    url: '/app/match/queryUserAttendEventList',
+    method: 'post'
   })
 }

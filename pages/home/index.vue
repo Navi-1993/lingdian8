@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 11:10:23
- * @LastEditTime: 2019-11-21 16:48:01
+ * @LastEditTime: 2019-11-21 22:20:30
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\pages\home\index.vue
  -->
@@ -35,10 +35,9 @@
       <view
         class="tab-bar-item"
         :class="[currentTab == idx ? 'active' : '']"
-        :data-current="idx"
         v-for="(item, idx) in tabbarList"
         :key="idx"
-        @tap.stop="swichNav"
+        @tap.stop="swichNav(idx)"
       >
         <text class="tab-bar-title" v-if="item">
           {{ item.name }}
@@ -112,6 +111,7 @@ export default {
 	created() {
 		that = this
 		async function initFetch() {
+			await that._queryAllEvent()
 			await that.fetchEvent()
 		}
 		initFetch()
@@ -127,6 +127,16 @@ export default {
 		// #endif
 	},
 	methods: {
+		async _queryAllEvent() {
+			let params = {
+				offset: 1,
+				limit: 30
+			}
+			let res = await queryAllEvent(params)
+			if (res.statusCode === 200) {
+				that.tabbarList = res.data.data.list
+			}
+		},
 		naviToDrag() {
 			uni.navigateTo({
 				url: '/pages/home/drag'
@@ -134,21 +144,15 @@ export default {
 		},
 		// 滚动切换标签样式
 		switchTab: (e) => {
-			console.log('changeTab', e.detail.current)
-			let scollWidth = currentTarget.offsetLeft
-			that.currentTab = e.detail.current
+			// console.log('changeTab', e.detail.current)
+			console.log('changeTab', e)
+			that.currentTab = e.target.current
 			that.checkCor()
 			that.fetchEvent()
 		},
 		// 点击标题切换当前页时改变样式
-		swichNav: function(e) {
-			let cur = e.currentTarget.dataset.current
-
-			if (that.currentTab == cur) {
-				return false
-			} else {
-				that.currentTab = cur
-			}
+		swichNav: function(idx) {
+			that.currentTab = idx
 		},
 		//判断当前滚动超过一屏时，设置tab标题滚动条。
 		checkCor: function() {
@@ -170,22 +174,22 @@ export default {
 			let idx = that.currentTab
 			let params = {
 				// TODO:数据太少，暂时作渲染用，预发版需要取消id与limit的注释
-				// id: that.tabbarList[idx].id,
-				// limit: 10,
-				offset: 1
-				// type: that.tabbarList[idx].type
+				id: `${that.tabbarList[idx].id}`,
+				limit: 20,
+				offset: 1,
+				type: 5
 			}
-			// 2秒后加载不到数据关闭loading控件
-			clearTimeout(timer)
-			let timer = setTimeout(() => {
-				that.isLoading = false
-			}, 2000)
 			let res = await queryAllMatchList(params)
 			if (res.statusCode === 200) {
 				// when success ,do sth you want
 				that.isLoading = false
 				that.matchList = res.data.data.list || []
 			}
+			// 2秒后加载不到数据关闭loading控件
+			clearTimeout(timer)
+			let timer = setTimeout(() => {
+				that.isLoading = false
+			}, 2000)
 			// 1.5秒防抖
 		}, 1500)
 	},
