@@ -3,23 +3,32 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-20 00:58:12
- * @LastEditTime: 2019-11-21 03:02:14
+ * @LastEditTime: 2019-11-21 16:32:51
  * @LastEditors: Edmund
  -->
 
 <template>
   <view class="container" :style="{ height: windowHeight + 'px' }">
+		<web-view src="http://cbs.sports.cctv.com/match.html?id=4412084"></web-view>
     <view class="header">
       <text class="arrow-left iconfont" @tap.stop="naviBack">
         &#xe602;
       </text>
       <!-- TODO:player -->
-      <player
+			<!-- #ifdef H5 -->
+			<!-- <iframe src="http://cbs.sports.cctv.com/match.html?id=4412084"
+							frameborder="0" 
+							height="100%" 
+							scrolling='auto' 
+							style="width: 1px; min-width: 100%; *width: 100%;">
+			</iframe> -->
+			<!-- #endif -->
+      <!-- <player
               :url="url"
               :width="750"
               :height="420"
               :poster="poster"
-              :type="type"/>
+              :type="type"/> -->
 
       <!-- 文章详情 -->
       <view class="detail">
@@ -49,7 +58,7 @@
     </view>
 
     <!-- body -->
-    <view class="body">
+    <!-- <view class="body">
         <view class="title">
             <view class="commentSum">
               <text>全部评论 {{ commentSum }}</text>
@@ -63,7 +72,7 @@
           <chat :height="616"
                 :chatDataList="chatDataList"/>
         </view>
-    </view>
+    </view> -->
 
     <!-- footer -->
     <view class="footer">

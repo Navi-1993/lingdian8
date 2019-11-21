@@ -1,19 +1,25 @@
 <script>
 export default {
-  globalData: {
-    vuex: 'hello'
-  },
-  onLaunch: function() {
-    console.log('App Launch')
-    // #ifdef APP-PLUS
-    // 锁定app屏幕
-    plus.screen.lockOrientation('portrait-primary')
-    // #endif
-  },
-  onShow: function() {},
-  onHide: function() {
-    console.log('App Hide')
-  }
+	globalData: {
+		vuex: 'hello'
+	},
+	onLaunch: function() {
+		// #ifdef APP-PLUS
+		// 锁定app屏幕
+		plus.screen.lockOrientation('portrait-primary')
+		// #endif
+
+		/**
+		 * @Description: 每10分钟重新写入1次store到全局data
+		 */
+		// setInterval(() => {
+		//  do sth
+		// }, 3600000)
+	},
+	onShow: function() {},
+	onHide: function() {
+		console.log('App Hide')
+	}
 }
 </script>
 
@@ -26,8 +32,8 @@ export default {
 /* #ifndef APP-PLUS-NVUE */
 /* 富文本组件样式引入 */
 @import url('components/gaoyia-parse/parse.css');
-pages {
-  color: $default-text-color;
+page {
+	color: $default-text-color;
 }
 /* #endif */
 </style>
