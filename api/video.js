@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-22 14:09:09
- * @LastEditTime: 2019-11-22 15:33:38
+ * @LastEditTime: 2019-11-22 16:08:35
  * @LastEditors: Edmund
  */
 
@@ -39,5 +39,18 @@ export const updateLivelike = function (data) {
     url: '/app/match/Live/updateLivelike',
     method: 'post',
     data: data
+  })
+}
+
+
+/**
+ * @Description: 查询视频内容
+ * @param {String} liveId 视频id
+ */
+export const queryLiveContent = function (params) {
+  return fetch.request({
+    url: '/app/match/Live/updateLivelike',
+    method: 'get',
+    params: params
   })
 }

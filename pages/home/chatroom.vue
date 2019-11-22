@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-19 09:49:44
- * @LastEditTime: 2019-11-21 02:25:40
+ * @LastEditTime: 2019-11-22 17:06:09
  * @LastEditors: Edmund
  -->
 
@@ -84,18 +84,21 @@ export default {
 			rightNum: 0,
 			// TODO: 聊天数据组
 			chatDataList: [
-				{ otherText: '你吃饭了吗？' },
-				{ myText: '我吃了' },
-				{ myText: '我吃了' },
-				{ myText: '我吃了' },
-				{ myText: '我吃了' },
-				{ myText: '我吃了' },
-				{ myText: '我吃了' },
-				{ myText: '我吃了' },
-				{ otherText: '你吃饭了吗？' },
-				{ otherText: '你吃饭了吗？' },
-				{ otherText: '你吃饭了吗？' },
-				{ otherText: '你吃饭了吗？' }
+				{ otherText: '39其中冠亚和值6码，09至14..' },
+				{ myText: '1' },
+				{ myText: '2' },
+				{ myText: '3' },
+				{ myText: '4' },
+				{ myText: '5' },
+				{
+					myText:
+						'一阵大概率是詹姆斯、小卡、阿杜、哈登、库里一阵大概率是詹姆斯、小卡、阿杜、哈登、库里一阵大概率是詹姆斯、小卡、阿杜、哈登、库里一阵大概率是詹姆斯、小卡、阿杜、哈登、库里'
+				},
+				{ myText: '卢本伟牛逼' },
+				{ otherText: '我也觉得一阵大概率是詹姆斯、小卡、阿杜、哈 登、库里' },
+				{ otherText: '评论2' },
+				{ otherText: '评论3' },
+				{ otherText: '评论4' }
 			],
 			// TODO: 底部弹窗控件
 			// 操作栏数据组

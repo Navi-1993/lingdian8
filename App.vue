@@ -1,9 +1,11 @@
 <script>
 export default {
-	globalData: {
-		vuex: 'hello'
-	},
+	// 可以在此定义全局属性，常用于与nuve页面通讯
+	// globalData: {
+	// 	vuex: 'hello'
+	// },
 	onLaunch: function() {
+		console.log('App Launch')
 		// #ifdef APP-PLUS
 		// 锁定app屏幕
 		plus.screen.lockOrientation('portrait-primary')

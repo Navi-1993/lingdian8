@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-10 21:43:59
- * @LastEditTime: 2019-11-15 10:42:50
+ * @LastEditTime: 2019-11-22 16:34:10
  * @LastEditors: Edmund
  -->
 
@@ -57,6 +57,7 @@ export default {
 		return {
 			isGetCode: false,
 			count: '获取',
+			// TODO: 表单验证所用数据
 			phoneNo: '', // input-手机号码
 			code: '', // input-验证码
 			newPsw: '', // input-新密码
@@ -90,7 +91,7 @@ export default {
 			that.count = 59
 			let timer = setInterval(() => {
 				that.count--
-				// 边界值处理
+				// 倒计时边界值处理
 				if (that.count === 0) {
 					that.count = '获取'
 					that.isgetCode = true
@@ -107,11 +108,7 @@ export default {
 			})
 			if (res.statusCode === 200) {
 				// do sth you want
-				that.$refs.toast.show({
-					title: '短信发送成功',
-					icon: false,
-					duration: 1000
-				})
+				that.$sysCall.toast(res.data.resultMsg)
 			}
 		}, 5000),
 
@@ -125,10 +122,20 @@ export default {
 				password: that.newPsw,
 				confirmPwd: that.confirmPsw,
 				phone: that.phoneNo,
-				smsType: 2
+				smsType: 2 // 重置密码
 			}
 			let res = await resetPsw(params)
-			console.log(res)
+			if (res.statusCode === 200) {
+				that.$sysCall.toast(res.data.resultMsg)
+				if (res.data.resultCode === 1) {
+					// do sth TODO: 重新登录操作，更新token，vuex,再将vuex重新写入global
+
+					// 1秒后，使用replace方法不保留history回到登录页
+					setTimeout(() => {
+						that.$Router.replace({ path: '/pages/user/login' })
+					}, 1000)
+				}
+			}
 		}
 	},
 	computed: {},

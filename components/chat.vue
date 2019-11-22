@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-20 17:32:51
- * @LastEditTime: 2019-11-21 02:17:05
+ * @LastEditTime: 2019-11-22 16:50:44
  * @LastEditors: Edmund
  -->
 
@@ -146,6 +146,7 @@ export default {
 	width: 100vw;
 	height: 100%;
 	overflow: hidden;
+	background: $default-bg-gray;
 }
 .scroll-box {
 	display: flex;

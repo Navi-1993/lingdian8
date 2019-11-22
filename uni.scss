@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:54:43
- * @LastEditTime: 2019-11-20 12:16:09
+ * @LastEditTime: 2019-11-22 16:52:10
  * @LastEditors: Edmund
  */
 
@@ -33,9 +33,9 @@ $default-text-color-disable: #c0c0c0;
 /* 0-边框颜色 */
 $default-border-color: rgba(204, 204, 204, 1);
 $default-border-color-gray: rgba(234, 234, 234, 1);
-
-/* 0-边框颜色 */
 $default-border-shadow: #a1a1a1;
+
+/* 1-边框颜色 */
 
 /* 尺寸变量 */
 
@@ -78,7 +78,7 @@ $doc-font-size-paragraph: 30rpx;
 
 /* 自定义常用样式 */
 
-/* 垂直居中 */
+/* 于节点中垂直居中 + 水平居中 */
 @mixin center {
   position: absolute;
   top: 50%;

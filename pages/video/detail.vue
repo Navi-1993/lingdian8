@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-20 00:58:12
- * @LastEditTime: 2019-11-22 15:54:21
+ * @LastEditTime: 2019-11-22 17:19:40
  * @LastEditors: Edmund
  -->
 
@@ -69,7 +69,7 @@
             </view>
         </view>
         <view class="chatBox">
-          <chat :height="616"
+          <chat :height="626"
                 :chatDataList="chatDataList"/>
         </view>
     </view>
@@ -77,7 +77,12 @@
     <!-- footer -->
     <view class="footer">
         <input  type="text"
+								class="input"
+								placeholder="评论功能未接入"
                 v-model="inputValue"/>
+				<text class="iconfont vote">
+							&#xe603;
+				</text>
     </view>
   </view>
 </template>
@@ -101,18 +106,18 @@ export default {
 			windowHeight: 0,
 			// TODO: 聊天室组件所需数据
 			chatDataList: [
-				{ otherText: '你吃饭了吗？' },
-				{ myText: '我吃了' },
-				{ myText: '我吃了' },
-				{ myText: '我吃了' },
-				{ myText: '我吃了' },
-				{ myText: '我吃了' },
-				{ myText: '我吃了' },
-				{ myText: '我吃了' },
-				{ otherText: '你吃饭了吗？' },
-				{ otherText: '你吃饭了吗？' },
-				{ otherText: '你吃饭了吗？' },
-				{ otherText: '你吃饭了吗？' }
+				{ otherText: '39其中冠亚和值6码，09至14..' },
+				{ myText: '1' },
+				{ myText: '2' },
+				{ myText: '3' },
+				{ myText: '4' },
+				{ myText: '5' },
+				{ myText: '一阵大概率是詹姆斯、小卡、阿杜、哈登、库里' },
+				{ myText: '卢本伟牛逼' },
+				{ otherText: '我也觉得一阵大概率是詹姆斯、小卡、阿杜、哈 登、库里' },
+				{ otherText: '评论2' },
+				{ otherText: '评论3' },
+				{ otherText: '评论4' }
 			],
 			// TODO: 播放器组件所需数据
 			// url: `http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8`,
@@ -122,8 +127,8 @@ export default {
 			time: '',
 			playTimes: 32221,
 			voteTimes: 99999,
-			commentTimes: 99999,
-			commentSum: 99999,
+			commentTimes: 99999, // 评论次数
+			commentSum: 99999, // 评论总数
 			// TODO: 输入框绑定数据
 			inputValue: ''
 		}
@@ -138,9 +143,9 @@ export default {
 		// 配置页面容器自适应高度
 		that.windowHeight = that.$sysCall.windowHeight()
 		// 拿取路由传参
-		console.log(that.$Route)
+		console.log(that.$Route.query)
 
-		// 刷新时间控件
+		// 刷新时间展示组件
 		setInterval(() => {
 			that.time = that.$sysCall.getHMS()
 		}, 1000)
@@ -170,6 +175,7 @@ export default {
 .container {
 	display: flex;
 	flex-direction: column;
+	/* header */
 	.header {
 		height: 564rpx;
 		.arrow-left {
@@ -213,6 +219,7 @@ export default {
 			}
 		}
 	}
+	/* body */
 	.body {
 		flex: 1;
 		position: relative;
@@ -234,12 +241,29 @@ export default {
 			flex: 1;
 		}
 	}
+	/* footer */
 	.footer {
 		position: fixed;
 		bottom: 0;
 		height: 88rpx;
 		width: 100vw;
 		border-top: 1px solid $default-border-color-gray;
+		display: flex;
+		align-items: center;
+		padding-left: 20rpx;
+		.input {
+			width: 654rpx;
+			height: 68rpx;
+			padding-left: 17rpx;
+			background: $default-bg-gray;
+			border: 1rpx solid $default-border-color-gray;
+			border-radius: 12rpx;
+			font-size: 26rpx;
+		}
+		.vote {
+			margin-left: 20rpx;
+			font-size: 36rpx;
+		}
 	}
 }
 </style>

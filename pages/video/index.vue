@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-22 15:47:45
+ * @LastEditTime: 2019-11-22 16:11:02
  * @LastEditors: Edmund
  -->
 
@@ -86,7 +86,7 @@ let that
 import _ from 'underscore'
 import tuiLoading from 'components/loading/loading.vue'
 import { queryAllEvent } from '@/api/match.js'
-import { queryVideoTitle } from 'api/video.js'
+import { queryVideoTitle, queryLiveContent } from 'api/video.js'
 export default {
 	name: 'video',
 	components: {
@@ -107,6 +107,7 @@ export default {
 	created() {
 		that = this
 		that._queryVideoTitle()
+		that._queryLiveContent()
 	},
 	onShow() {
 		// #ifdef APP-PLUS
@@ -123,6 +124,18 @@ export default {
 		that._queryAllEvent()
 	},
 	methods: {
+		/**
+		 * @Description: 请求视频内容
+		 */
+		async _queryLiveContent() {
+			// TODO: 当前写死
+			let params = 6
+			let res = await queryLiveContent(params)
+			if (res.statusCode === 200) {
+				console.log('请求视频内容', res.data)
+			}
+		},
+
 		/**
 		 * @Description: 请求视频标题列表
 		 */
