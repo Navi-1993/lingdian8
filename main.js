@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 10:44:20
- * @LastEditTime: 2019-11-19 23:29:34
+ * @LastEditTime: 2019-11-22 10:16:03
  * @LastEditors: Edmund
  */
 
@@ -27,9 +27,7 @@ import sysCall from 'common/utils/sysCall.js'
 Vue.prototype.$_ = underscore
 Vue.prototype.$store = store
 Vue.prototype.$axios = axios()
-
 Vue.prototype.$sysCall = sysCall
-
 
 
 Vue.config.productionTip = false
@@ -40,10 +38,14 @@ const app = new Vue({
   ...App,
   router
 })
+
+// H5版客户端配置
 // #ifdef H5
 RouterMount(app, '#app')
 // #endif
 
-// #ifndef H5
-app.$mount() //为了兼容小程序及app端必须这样写才有效果
+
+//兼容小程序及app端
+// #ifdef APP-PLUS || MP
+app.$mount()
 // #endif

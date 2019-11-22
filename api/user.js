@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-12 15:32:09
- * @LastEditTime: 2019-11-13 10:30:16
+ * @LastEditTime: 2019-11-22 10:13:33
  * @LastEditors: Edmund
  */
 'use strict'
@@ -41,21 +41,11 @@ export function sendSMS ({
  * @param {number} smsType 短信类型 1=注册，2=重置密码
  * @return: void
  */
-export function register ({
-  code,
-  password,
-  phone,
-  smsType
-}) {
+export function register (data) {
   return fetch.request({
     url: '/app/login/userAccount/regist',
     method: 'post',
-    data: {
-      code: code,
-      password: password,
-      phone: phone,
-      smsType: smsType
-    }
+    data: data
   })
 }
 
@@ -68,23 +58,11 @@ export function register ({
  * @param {string} registeIp 注册ip
  * @return: void
  */
-export function login ({
-  clientId,
-  deviceType,
-  password,
-  phone,
-  registeIp
-}) {
+export function login (data) {
   return fetch.request({
     url: '/app/login/userAccount/login',
     method: 'post',
-    data: {
-      clientId: clientId,
-      deviceType: deviceType,
-      password: password,
-      phone: phone,
-      registeIp: registeIp
-    }
+    data: data
   })
 }
 
@@ -98,22 +76,10 @@ export function login ({
  * @param {string} smsType 注册ip
  * @return: void
  */
-export function resetPsw ({
-  code,
-  confirmPwd,
-  password,
-  phone,
-  smsType
-}) {
+export function resetPsw (data) {
   return fetch.request({
     url: '/app/login/userAccount/retrieve',
     method: 'post',
-    data: {
-      code: code,
-      confirmPwd: confirmPwd,
-      password: password,
-      phone: phone,
-      smsType: smsType
-    }
+    data: data
   })
 }

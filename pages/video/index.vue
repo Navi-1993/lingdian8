@@ -3,14 +3,14 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-22 02:07:18
+ * @LastEditTime: 2019-11-22 15:47:45
  * @LastEditors: Edmund
  -->
 
 <template>
   <view class="container" :style="{ height: windowHeight + 'px',
 																		minHeight: windowHeight + 'px'}">
-    <!-- #ifdef H5 -->
+    <!-- #ifdef H5 || MP -->
 		<!-- tabbar -->
     <scroll-view	class="tab-view"
 									:scroll-x="true"
@@ -41,11 +41,11 @@
 															:style="{height: windowHeight - 40  + 'px'}"
 															:scroll-with-animation="true"
 															:scroll-left="scrollLeft">
-										<block	v-for="(item,idx) in 10"
+										<block	v-for="(item,idx) in videoList"
 														:key="idx">
 											<view class="card">
 													<view class="poster">
-															<image 	src="http://wongxuefeng.com/bg.jpg"
+															<image 	:src="item.imgHref"
 																			class="image"
 																			mode="aspectFill">
 															</image>
@@ -69,7 +69,7 @@
 															<view >99999</view>
 														</view>
 													</view>
-													<view class="title">123123</view>
+													<view class="title">{{item.liveTitle}}</view>
 											</view>
 										</block>
 								</scroll-view>
@@ -86,6 +86,7 @@ let that
 import _ from 'underscore'
 import tuiLoading from 'components/loading/loading.vue'
 import { queryAllEvent } from '@/api/match.js'
+import { queryVideoTitle } from 'api/video.js'
 export default {
 	name: 'video',
 	components: {
@@ -98,11 +99,14 @@ export default {
 			tabbarList: [], // tabbar数据
 			currentTab: 0, //预设当前tab项的值
 			scrollLeft: 0, //tab标题的滚动条位置
-			isLoading: false // 加载弹窗
+			isLoading: false, // 加载弹窗
+			// TODO: 视频所用数据
+			videoList: []
 		}
 	},
 	created() {
 		that = this
+		that._queryVideoTitle()
 	},
 	onShow() {
 		// #ifdef APP-PLUS
@@ -119,6 +123,24 @@ export default {
 		that._queryAllEvent()
 	},
 	methods: {
+		/**
+		 * @Description: 请求视频标题列表
+		 */
+		async _queryVideoTitle() {
+			let params = {
+				id: '6',
+				offset: 1,
+				type: 4
+			}
+			let res = await queryVideoTitle(params)
+			if (res.statusCode === 200) {
+				console.log('请求视频标题列表', res)
+			}
+		},
+
+		/**
+		 * @Description: 请求所有项目
+		 */
 		async _queryAllEvent() {
 			let params = {
 				offset: 1,
@@ -157,7 +179,10 @@ export default {
 		// }, 1500),
 
 		navi2() {
-			that.$Router.push({ path: '/pages/video/detail' })
+			that.$Router.push({
+				path: '/pages/video/detail',
+				params: { name: 'hahaha' }
+			})
 		},
 
 		/**
@@ -252,7 +277,6 @@ export default {
 				position: relative;
 				height: 488rpx;
 				border-radius: 10rpx 10rpx 0 0;
-				background: red;
 				.image {
 					height: 100%;
 					width: 100%;

@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-21 02:06:14
+ * @LastEditTime: 2019-11-22 13:39:51
  * @LastEditors: Edmund
  -->
 <template>
@@ -158,15 +158,12 @@ export default {
 			}
 			// 同步处理异步请求
 			let res = await login(params)
-			console.log(res)
 			if (res.statusCode === 200) {
-				// 登陆成功后给出toast提示
-				that.$refs.toast.show({
-					title: '登陆成功',
-					icon: false,
-					duration: 1000
-				})
-				// 登陆成功后更新本地user数据
+				// 接口调用后返回提示内容
+				that.$sysCall.toast(res.data.resultMsg)
+				// 接口返回状态码不为1，则退出方法
+				if (res.data.resultCode !== 1) return
+				// TODO: 周一改为vuex 存储 登陆成功后更新本地user数据
 				uni.setStorage({
 					key: 'user',
 					data: {

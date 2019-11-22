@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-19 23:20:37
- * @LastEditTime: 2019-11-20 11:21:06
+ * @LastEditTime: 2019-11-22 12:42:05
  * @LastEditors: Edmund
  */
 'use strict'
@@ -101,7 +101,7 @@ const sysCall = {
   naviBack (step, duration) {
     return uni.navigateBack({
       delta: step,
-      animationType: 'slide-out-left',
+      animationType: 'slide-out-right',
       animationDuration: duration || 300
     })
   },

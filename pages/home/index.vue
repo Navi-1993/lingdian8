@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 11:10:23
- * @LastEditTime: 2019-11-22 01:23:24
+ * @LastEditTime: 2019-11-22 15:12:59
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\pages\home\index.vue
  -->
@@ -111,8 +111,8 @@ export default {
 	methods: {
 		async _queryAllEvent() {
 			let params = {
-				offset: 1,
-				limit: 30
+				offset: 1
+				// limit: 30
 			}
 			let res = await queryAllEvent(params)
 			if (res.statusCode === 200) {
@@ -123,7 +123,6 @@ export default {
 		 * @Description: 跳至赛事聊天室页面
 		 */
 		navi2Chatroom(item) {
-			console.log('11111')
 			that.$Router.push({ path: '/pages/home/chatroom', params: item })
 		},
 		/**

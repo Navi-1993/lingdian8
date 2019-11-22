@@ -3,13 +3,13 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-20 00:58:12
- * @LastEditTime: 2019-11-21 16:32:51
+ * @LastEditTime: 2019-11-22 15:54:21
  * @LastEditors: Edmund
  -->
 
 <template>
   <view class="container" :style="{ height: windowHeight + 'px' }">
-		<web-view src="http://cbs.sports.cctv.com/match.html?id=4412084"></web-view>
+		<!-- <web-view src="http://cbs.sports.cctv.com/match.html?id=4412084"></web-view> -->
     <view class="header">
       <text class="arrow-left iconfont" @tap.stop="naviBack">
         &#xe602;
@@ -22,13 +22,13 @@
 							scrolling='auto' 
 							style="width: 1px; min-width: 100%; *width: 100%;">
 			</iframe> -->
-			<!-- #endif -->
-      <!-- <player
+      <player
               :url="url"
               :width="750"
               :height="420"
               :poster="poster"
-              :type="type"/> -->
+              :type="type"/>
+			<!-- #endif -->
 
       <!-- 文章详情 -->
       <view class="detail">
@@ -58,7 +58,7 @@
     </view>
 
     <!-- body -->
-    <!-- <view class="body">
+    <view class="body">
         <view class="title">
             <view class="commentSum">
               <text>全部评论 {{ commentSum }}</text>
@@ -72,7 +72,7 @@
           <chat :height="616"
                 :chatDataList="chatDataList"/>
         </view>
-    </view> -->
+    </view>
 
     <!-- footer -->
     <view class="footer">
@@ -115,7 +115,8 @@ export default {
 				{ otherText: '你吃饭了吗？' }
 			],
 			// TODO: 播放器组件所需数据
-			url: `http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8`,
+			// url: `http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8`,
+			url: `http://120.24.206.16/videos/20191121/0/5a0dcb07c17908ac/5a0dcb07c17908ac.ts.m3u8`,
 			type: 2,
 			poster: `https://wongxuefeng.com/bg.jpg`,
 			time: '',
@@ -134,7 +135,12 @@ export default {
 	},
 	created() {
 		that = this
+		// 配置页面容器自适应高度
 		that.windowHeight = that.$sysCall.windowHeight()
+		// 拿取路由传参
+		console.log(that.$Route)
+
+		// 刷新时间控件
 		setInterval(() => {
 			that.time = that.$sysCall.getHMS()
 		}, 1000)
