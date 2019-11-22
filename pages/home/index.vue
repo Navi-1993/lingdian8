@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-07 11:10:23
- * @LastEditTime: 2019-11-22 15:12:59
+ * @LastEditTime: 2019-11-22 18:56:12
  * @LastEditors: Edmund
  * @FilePath: \lingdian8\pages\home\index.vue
  -->
@@ -36,7 +36,7 @@
 						:style="{ height: windowHeight + 'px' }"
 						@change="switchTab">
       <block v-for="(item, idx) in tabbarList" :key="idx">
-        <swiper-item v-show="item">
+        <swiper-item v-show="currentTab === idx">
           <scroll-view scroll-y class="scoll-y">
             <calendar>
               <text slot="date">11月6日 星期六</text>
@@ -111,8 +111,8 @@ export default {
 	methods: {
 		async _queryAllEvent() {
 			let params = {
-				offset: 1
-				// limit: 30
+				offset: 1,
+				limit: 7
 			}
 			let res = await queryAllEvent(params)
 			if (res.statusCode === 200) {
@@ -134,7 +134,6 @@ export default {
 		// 滚动切换标签样式
 		switchTab: (e) => {
 			// console.log('changeTab', e.detail.current)
-			console.log('changeTab', e)
 			that.currentTab = e.target.current
 			that.checkCor()
 			that.fetchEvent()
@@ -161,7 +160,7 @@ export default {
 			that.isLoading = true
 			let params = {
 				// id: `${that.tabbarList[that.currentTab].id}`,
-				// limit: 20,
+				limit: 20,
 				offset: 1,
 				type: 5
 			}
@@ -179,7 +178,15 @@ export default {
 			// 1.5秒防抖
 		}, 1500)
 	},
-	computed: {},
+	computed: {
+		itemShow(idx) {
+			return (
+				that.currentTab + 1 === idx ||
+				that.currentTab - 1 === idx ||
+				that.currentTab === idx
+			)
+		}
+	},
 	watch: {}
 }
 </script>

@@ -80,7 +80,7 @@
             "https" : false,
             "port" : ""
         },
-        "title" : "H5",
+        "title" : "",
         "router" : {
             "mode" : "hash",
             "base" : "H5"

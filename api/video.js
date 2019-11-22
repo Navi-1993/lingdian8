@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-22 14:09:09
- * @LastEditTime: 2019-11-22 16:08:35
+ * @LastEditTime: 2019-11-22 17:41:50
  * @LastEditors: Edmund
  */
 
@@ -49,7 +49,7 @@ export const updateLivelike = function (data) {
  */
 export const queryLiveContent = function (params) {
   return fetch.request({
-    url: '/app/match/Live/updateLivelike',
+    url: '/app/match/Live/queryLiveContent',
     method: 'get',
     params: params
   })

@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-22 16:11:02
+ * @LastEditTime: 2019-11-22 17:44:48
  * @LastEditors: Edmund
  -->
 
@@ -129,7 +129,9 @@ export default {
 		 */
 		async _queryLiveContent() {
 			// TODO: 当前写死
-			let params = 6
+			let params = {
+				liveId: 6
+			}
 			let res = await queryLiveContent(params)
 			if (res.statusCode === 200) {
 				console.log('请求视频内容', res.data)
