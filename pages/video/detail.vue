@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-20 00:58:12
- * @LastEditTime: 2019-11-24 00:37:29
+ * @LastEditTime: 2019-11-24 00:50:47
  * @LastEditors: Edmund
  -->
 
@@ -43,7 +43,7 @@
           </view>
           <view class="controls_right">
             <!-- 点赞 -->
-            <view class="vote" @tap.stop="vote">
+            <view class="vote" @tap.stop="handleVote">
               <text class="iconfont">&#xe603;</text>
               <text>{{ RouteData.likeNumber || 0 }}</text>
             </view>
@@ -134,6 +134,10 @@ export default {
       playTimes: 1,
       commentTimes: 0, // 评论次数
       commentSum: 0, // 评论总数
+      // TODO: vote行为对象
+      vote: {
+        able: true
+      },
       // TODO: 输入框绑定数据
       inputValue: ''
     }
@@ -148,7 +152,11 @@ export default {
     // 配置页面容器自适应高度
     that.windowHeight = that.$sysCall.windowHeight()
     // 拿取路由传参
-    console.log(that.$Route.query)
+    // console.log(that.$Route.query)
+    // TODO: 如果是对本页面进行刷新，让他回到视频首页
+    if (that.$Route.query.item === undefined) {
+      that.$Router.replace({ path: '/pages/video/index' })
+    }
     that.RouteData = that.$Route.query.item
   },
   onLoad() {},
@@ -166,7 +174,9 @@ export default {
     naviBack() {
       that.$sysCall.naviBack()
     },
-    vote() {
+    handleVote() {
+      if (!that.vote.able) return that.$sysCall.toast('已点过赞')
+      that.commentTimes++
       that.$sysCall.toast('点赞成功')
     },
     comment() {
