@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-10 21:42:14
- * @LastEditTime: 2019-11-22 14:02:07
+ * @LastEditTime: 2019-11-23 22:02:00
  * @LastEditors: Edmund
  -->
 
@@ -198,7 +198,6 @@ page {
 	.input1 {
 		width: 580rpx;
 		height: 80rpx;
-		line-height: 50rpx;
 		margin-left: 45rpx;
 		border: solid 1px $default-border-color;
 		border-radius: 40rpx;
@@ -210,12 +209,10 @@ page {
 	.input2 {
 		width: 320rpx;
 		height: 80rpx;
-		line-height: 50rpx;
 		margin-left: 45rpx;
 		border: solid 1px $default-border-color;
 		border-radius: 40rpx;
 		font-size: 30rpx;
-		text-align: center;
 		padding: 0 130rpx;
 		margin-bottom: 20rpx;
 	}

@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-28 14:37:31
- * @LastEditTime: 2019-11-21 23:01:21
+ * @LastEditTime: 2019-11-23 22:11:07
  * @LastEditors: Edmund
  -->
 
@@ -16,7 +16,7 @@
             </view>
             <view class="team">
               <view class="teamA">
-                <image src=""/>
+                <image :src="teamALogo"/>
                 <text>{{homeTeamName}}</text>
               </view>
               <view class="controls">
@@ -28,7 +28,7 @@
                 </text>
               </view>
               <view class="teamB">
-                <image src=""/>
+                <image :src="teamBLogo"/>
                 <text>{{guestTeamName}}</text>
               </view>
             </view>
@@ -50,6 +50,14 @@ export default {
 			default: 'guestTeamName'
 		},
 		livesUrl: {
+			type: String,
+			default: ''
+		},
+		teamALogo: {
+			type: String,
+			default: ''
+		},
+		teamBLogo: {
 			type: String,
 			default: ''
 		}

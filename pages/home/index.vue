@@ -2,22 +2,20 @@
  * @Description: 首页index
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
- * @Date: 2019-11-07 11:10:23
- * @LastEditTime: 2019-11-22 18:56:12
+ * @Date: 2019-11-18 22:07:02
+ * @LastEditTime: 2019-11-23 22:38:02
  * @LastEditors: Edmund
- * @FilePath: \lingdian8\pages\home\index.vue
  -->
 
 <template>
   <view class="container" :style="{ height: windowHeight + 'px',
 																		minHeight: windowHeight + 'px'}">
     <!-- tabbar -->
-    <scroll-view
-      class="tab-view"
-      :scroll-x="true"
-			:scroll-top="0"
-      :scroll-with-animation="true"
-      :scroll-left="scrollLeft">
+    <scroll-view	class="tab-view"
+									:scroll-x="true"
+									:scroll-top="0"
+									:scroll-with-animation="true"
+									:scroll-left="scrollLeft">
       <view
         class="tab-bar-item"
         :class="[currentTab === idx ? 'active' : '']"
@@ -26,6 +24,9 @@
         @tap.stop="swichNav(idx)">
         <text class="tab-bar-title" v-if="item">
           {{ item.name }}
+        </text>
+				<text class="tab-bar-title">
+					{{'      '}}
         </text>
       </view>
       <view class="tabbar-controls" @click="navi2Drag">+</view>
@@ -39,13 +40,15 @@
         <swiper-item v-show="currentTab === idx">
           <scroll-view scroll-y class="scoll-y">
             <calendar>
-              <text slot="date">11月6日 星期六</text>
+              <text slot="date">11月24日 星期天</text>
             </calendar>
 						<block 	v-for="(item, index) in matchList"
 										:key="index">
 								<view @tap.stop="navi2Chatroom(item)">
 										<event-card		:homeTeamName="item.homeTeamName"
 																	:guestTeamName="item.guestTeamName"
+																	:teamALogo="item.homeTeamLogoPath"
+																	:teamBLogo="item.guestTeamLogoPath"
 																	:livesUrl="''">
 											<text slot="text" >
 												{{ item.matchBeginTime }}
@@ -178,15 +181,7 @@ export default {
 			// 1.5秒防抖
 		}, 1500)
 	},
-	computed: {
-		itemShow(idx) {
-			return (
-				that.currentTab + 1 === idx ||
-				that.currentTab - 1 === idx ||
-				that.currentTab === idx
-			)
-		}
-	},
+	computed: {},
 	watch: {}
 }
 </script>
@@ -203,7 +198,6 @@ export default {
 	display: flex;
 	flex-direction: column;
 	.tab-view {
-		width: 100vw;
 		font-size: 24rpx;
 		overflow: hidden;
 		box-sizing: border-box;
@@ -216,7 +210,6 @@ export default {
 		left: 0;
 		z-index: 99;
 		background: $default-bg-white;
-		// background: gray;
 		white-space: nowrap;
 		.tabbar-controls {
 			height: 76rpx;

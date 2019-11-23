@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-22 13:39:51
+ * @LastEditTime: 2019-11-23 21:51:53
  * @LastEditors: Edmund
  -->
 <template>
@@ -20,14 +20,12 @@
         confirm-type="确定"
         v-model="phoneNo"
       />
-      <input
-        class="inputItem"
-        placeholder="请输入密码"
-        v-model="password"
-        password
-        maxlength="16"
-        type="text"
-      />
+      <input	class="inputItem"
+							placeholder="请输入密码"
+							v-model="password"
+							password
+							maxlength="16"
+							type="text"/>
       <button class="btLogin" type="default" @tap.stop="handleLogin">
         登录
       </button>
@@ -222,7 +220,6 @@ page {
 	.inputItem {
 		width: 580rpx;
 		height: 80rpx;
-		line-height: 1000rpx;
 		margin-left: 45rpx;
 		border: solid 1px $default-border-color;
 		border-radius: 40rpx;
