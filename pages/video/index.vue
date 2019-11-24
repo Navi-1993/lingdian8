@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-24 23:09:04
+ * @LastEditTime: 2019-11-24 23:23:14
  * @LastEditors: Edmund
  -->
 
@@ -131,6 +131,7 @@ export default {
 		 */
 
 		_queryVideoTitle: _.debounce(async () => {
+			that.isLoading = true
 			let params = {
 				id: that.tabbarList[that.currentTab].id,
 				// limit: 20,
@@ -142,7 +143,11 @@ export default {
 				// console.log('请求视频标题列表', res.data.data)
 
 				that.videoList = res.data.data.list
+				that.isLoading = false
 			}
+			setTimeout(() => {
+				that.isLoading = false
+			}, 3000)
 		}, 1000),
 		// 点击标题切换当前页时改变样式
 		swichNav: function(idx) {

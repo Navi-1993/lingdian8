@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-21 10:34:46
- * @LastEditTime: 2019-11-24 20:33:00
+ * @LastEditTime: 2019-11-24 23:35:14
  * @LastEditors: Edmund
  -->
 <template>
@@ -292,7 +292,6 @@ export default {
 				position: absolute;
 				bottom: 060rpx;
 				display: flex;
-
 				justify-content: center;
 				align-items: center;
 				font-size: 22rpx;
@@ -310,19 +309,22 @@ export default {
 					height: 280rpx;
 					border-radius: 10rpx;
 					&_title {
-						width: 100%;
 						opacity: 0.7;
 						width: 586rpx;
 						border-radius: 0 0 10rpx 10rpx;
 						background-color: rgba(0, 0, 0, 1);
 						position: absolute;
 						bottom: 20rpx;
-						display: flex;
-						justify-content: center;
-						align-items: center;
 						font-size: 22rpx;
+						text-indent: 20rpx;
+						line-height: 38rpx;
+						height: 38rpx;
 						color: $default-text-color-white;
-						word-wrap: none;
+						display: block;
+						word-break: keep-all;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
 					}
 				}
 			}
