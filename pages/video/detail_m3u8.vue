@@ -1,11 +1,12 @@
 <!--
- * @Description: 视频详情
+ * @Description: 视频详情m3u8
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
- * @Date: 2019-11-20 00:58:12
- * @LastEditTime: 2019-11-24 23:18:28
+ * @Date: 2019-11-24 23:10:59
+ * @LastEditTime: 2019-11-24 23:11:37
  * @LastEditors: Edmund
  -->
+
 
 <template>
   <view class="container" :style="{ height: windowHeight + 'px' }">
@@ -16,15 +17,13 @@
       </text>
       <!-- TODO:player -->
       <!-- #ifdef H5 -->
-      <iframe :src="RouteData.sourceLive"
-              v-if="RouteData.sourceLive.length > 1"
+      <!-- <iframe src="http://cbs.sports.cctv.com/match.html?id=4412084"
 							frameborder="0" 
-							height="100%"
+							height="100%" 
 							scrolling='auto' 
 							style="width: 1px; min-width: 100%; *width: 100%;">
-			</iframe>
+			</iframe> -->
       <player
-        v-else
         :url="url"
         :width="750"
         :height="420"
@@ -35,7 +34,7 @@
 
       <!-- 文章详情 -->
       <view class="detail">
-        <view class="title">{{RouteData.liveTitle}}</view>
+        <view class="title">诺维奇如何破解卫冕冠军曼城的前场高位逼抢？</view>
 
         <!-- 详情控件区 -->
         <view class="controls">
@@ -129,8 +128,9 @@ export default {
 				{ otherText: '评论4' }
 			],
 			// TODO: 播放器组件所需数据
-			url: '',
-			type: 1,
+			// url: `http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8`,
+			url: `http://120.24.206.16/videos/20191121/0/5a0dcb07c17908ac/5a0dcb07c17908ac.ts.m3u8`,
+			type: 2,
 			poster: `https://wongxuefeng.com/bg.jpg`,
 			playTimes: 1,
 			commentTimes: 0, // 评论次数
@@ -154,8 +154,6 @@ export default {
 		// 配置页面容器自适应高度
 		that.windowHeight = that.$sysCall.windowHeight()
 		that.RouteData = getApp().globalData.routerData
-		console.log(that.RouteData)
-		that.url = that.RouteData
 		// 赋值后，释放内存
 		getApp().globalData.routerData = null
 	},

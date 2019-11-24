@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-24 20:33:42
+ * @LastEditTime: 2019-11-24 23:09:04
  * @LastEditors: Edmund
  -->
 
@@ -52,7 +52,7 @@
               <view class="card" @tap.stop="navi2(item)">
                 <view class="poster">
                   <!-- item.imgHref -->
-                  <image src="http://47.112.131.52:83/1c9e79dd-2991-4efc-b719-b42783b346bf.jpg" class="image" mode="aspectFill">
+                  <image :src="item.imgHref" class="image" mode="aspectFill">
                   </image>
                   <text class="playBtn iconfont">
                     &#xe620;
@@ -165,9 +165,9 @@ export default {
 
 		navi2(item) {
 			that.$Router.push({
-				path: '/pages/video/detail',
-				params: { item: item }
+				path: '/pages/video/detail'
 			})
+			getApp().globalData.routerData = item
 		},
 
 		/**
