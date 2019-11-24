@@ -89,6 +89,7 @@
             "treeShaking" : {
                 "enable" : true
             }
-        }
+        },
+        "template" : "package.html"
     }
 }

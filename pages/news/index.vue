@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-21 10:34:46
- * @LastEditTime: 2019-11-24 18:43:14
+ * @LastEditTime: 2019-11-24 20:33:00
  * @LastEditors: Edmund
  -->
 <template>
@@ -21,6 +21,7 @@
       <block v-for="(item, idx) in tabbarList" :key="idx">
         <view
           class="tab-bar-item"
+					@tap.stop="swichNav"
           :class="[currentTab === idx ? 'active' : '']"
         >
           <text class="tab-bar-title">
@@ -215,6 +216,10 @@ export default {
 				url: `/pages/news/detail?id=${item.id}`
 			})
 			// #endif
+		},
+		// 点击标题切换当前页时改变样式
+		swichNav: function(idx) {
+			that.currentTab = idx
 		}
 	},
 	computed: {

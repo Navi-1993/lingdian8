@@ -154,10 +154,12 @@ export default {
     // 拿取路由传参
     // console.log(that.$Route.query)
     // TODO: 如果是对本页面进行刷新，让他回到视频首页
+    // #ifdef H5
     if (that.$Route.query.item === undefined) {
       that.$Router.replace({ path: '/pages/video/index' })
     }
     that.RouteData = that.$Route.query.item
+    // #endif
   },
   onLoad() {},
   onShow() {},

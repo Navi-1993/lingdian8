@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-24 18:41:43
+ * @LastEditTime: 2019-11-24 20:33:42
  * @LastEditors: Edmund
  -->
 
@@ -23,6 +23,7 @@
       <block v-for="(item, idx) in tabbarList" :key="idx">
         <view
           class="tab-bar-item"
+					@tap.stop="swichNav(idx)"
           :class="[currentTab === idx ? 'active' : '']"
         >
           <text class="tab-bar-title">
@@ -109,7 +110,6 @@ export default {
 	created() {
 		that = this
 		that._queryVideoTitle()
-		that._queryLiveContent()
 	},
 	onShow() {
 		// #ifdef APP-PLUS
@@ -127,34 +127,26 @@ export default {
 	},
 	methods: {
 		/**
-		 * @Description: 请求视频内容
-		 */
-		async _queryLiveContent() {
-			// TODO: 当前写死
-			let params = {
-				liveId: 6
-			}
-			let res = await queryLiveContent(params)
-			if (res.statusCode === 200) {
-				console.log('请求视频内容', res.data)
-			}
-		},
-
-		/**
 		 * @Description: 请求视频标题列表
 		 */
-		async _queryVideoTitle() {
+
+		_queryVideoTitle: _.debounce(async () => {
 			let params = {
-				id: '6',
+				id: that.tabbarList[that.currentTab].id,
+				// limit: 20,
 				offset: 1,
-				limit: 20,
-				type: 4
+				type: 5
 			}
 			let res = await queryVideoTitle(params)
 			if (res.statusCode === 200) {
-				console.log('请求视频标题列表', res.data.data)
+				// console.log('请求视频标题列表', res.data.data)
+
 				that.videoList = res.data.data.list
 			}
+		}, 1000),
+		// 点击标题切换当前页时改变样式
+		swichNav: function(idx) {
+			that.currentTab = idx
 		},
 
 		/**
@@ -170,32 +162,6 @@ export default {
 				that.tabbarList = res.data.data.list
 			}
 		},
-		/**
-		 * @Description: 防抖请求
-		 * @param {type}
-		 * @return:
-		 */
-		// _queryAllMatchList: _.debounce(async () => {
-		// 	that.isLoading = true
-		// 	let params = {
-		// 		// id: `${that.tabbarList[that.currentTab].id}`,
-		// 		// limit: 20,
-		// 		offset: 1,
-		// 		type: 5
-		// 	}
-		// 	let res = await queryAllMatchList(params)
-		// 	if (res.statusCode === 200) {
-		// 		// when success ,do sth you want
-		// 		that.isLoading = false
-		// 		that.matchList = res.data.data.list || []
-		// 	}
-		// 	// 2秒后加载不到数据关闭loading控件
-		// 	clearTimeout(timer)
-		// 	let timer = setTimeout(() => {
-		// 		that.isLoading = false
-		// 	}, 2000)
-		// 	// 1.5秒防抖
-		// }, 1500),
 
 		navi2(item) {
 			that.$Router.push({
@@ -216,7 +182,11 @@ export default {
 		 */
 		switchTab: (e) => {
 			that.currentTab = e.target.current
+			// #ifdef H5
+			that.videoList = []
+			// #endif
 			that.checkCor()
+			that._queryVideoTitle()
 		},
 
 		/**
