@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-21 10:34:46
- * @LastEditTime: 2019-11-24 14:28:12
+ * @LastEditTime: 2019-11-24 15:20:24
  * @LastEditors: Edmund
  -->
 <template>
@@ -51,7 +51,7 @@
             :scroll-left="scrollLeft"
           >
 						<!-- card_item -->
-            <block v-for="item in 10" :key="item">
+            <block v-for="(item,idx) in newsList" :key="idx">
 								<view class="card_item"
 											@tap.stop="navi2NewsDetail">
 									<view class="card_img">
@@ -60,15 +60,15 @@
 														class="img"/>
 									</view>
 									<view class="card_content">
-										<view class="card_content_top">套你猴子的</view>
+										<view class="card_content_top">{{item.newsTitle}}</view>
 										<view class="card_content_bottom">
 											<view class="card_content_bottom_left">
-												123
+												{{item.createdTime}}
 											</view >
 											<view class="card_content_bottom_right">
 												<text class="iconfont"
 															style="margin-right:20rpx;">&#xe642;</text>
-												commentTimes
+												{{item.commentNumber || 0}}
 											</view>
 										</view>
 									</view>
@@ -101,13 +101,18 @@ export default {
 			tabbarList: [], // tabbar数据
 			currentTab: 0, //预设当前tab项的值
 			scrollLeft: 0, //tab标题的滚动条位置
-			isLoading: false // 加载弹窗
+			isLoading: false, // 加载弹窗
+			// TODO: 新闻数据
+			newsList: []
 		}
 	},
 	created() {
 		that = this
-		that._queryAllEvent()
-		that._queryNewsTitle()
+		async function init() {
+			await that._queryAllEvent()
+			await that._queryNewsTitle()
+		}
+		init()
 	},
 	onShow() {},
 	mounted() {
@@ -117,17 +122,22 @@ export default {
 		/**
 		 * @Description: 请求新闻列表数据
 		 */
-		async _queryNewsTitle() {
+		_queryNewsTitle: _.debounce(async () => {
+			that.isLoading = true
+			console.log('id', that.tabbarList[that.currentTab].id)
 			let params = {
+				id: that.tabbarList[that.currentTab].id,
 				limit: 100,
 				offset: 1,
-				type: 0
+				type: 5
 			}
-			let res = await queryNewsTitle()
+			let res = await queryNewsTitle(params)
 			if (res.statusCode === 200) {
-				console.log(res.data)
+				that.newsList = res.data.data.list
+				that.isLoading = false
 			}
-		},
+			// 防抖间隔1秒
+		}, 1000),
 
 		/**
 		 * @Description: 请求所有项目
@@ -140,14 +150,8 @@ export default {
 			let res = await queryAllEvent(params)
 			if (res.statusCode === 200) {
 				that.tabbarList = res.data.data.list
+				console.log(res.data.data)
 			}
-		},
-
-		navi2(item) {
-			that.$Router.push({
-				path: '/pages/news/detail',
-				params: { item: item }
-			})
 		},
 
 		/**
@@ -162,7 +166,11 @@ export default {
 		 */
 		switchTab: (e) => {
 			that.currentTab = e.target.current
+			// #ifdef H5
+			that.newsList = []
+			// #endif
 			that.checkCor()
+			that._queryNewsTitle()
 		},
 
 		/**

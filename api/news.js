@@ -4,7 +4,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-24 12:43:17
- * @LastEditTime: 2019-11-24 12:54:09
+ * @LastEditTime: 2019-11-24 14:54:19
  * @LastEditors: Edmund
  */
 import axios from '@/common/plugins/axios/index'
@@ -37,5 +37,19 @@ export const updateNewslike = function (data) {
     url: '/app/match/news/updateNewslike',
     method: 'post',
     data: data
+  })
+}
+
+/**
+ * @Description: 查询新闻内容
+ */
+
+export const queryNewsContent = function (params) {
+  return fetch.request({
+    url: '/app/match/news/queryNewsContent',
+    method: 'get',
+    params: {
+      newsId: params
+    }
   })
 }
