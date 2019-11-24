@@ -172,7 +172,7 @@ export default {
 		fetchEvent: _.debounce(async () => {
 			that.isLoading = true
 			let params = {
-				id: `${that.tabbarList[that.currentTab].id}`,
+				id: that.tabbarList[that.currentTab].id,
 				// limit: 20,
 				offset: 1,
 				type: 5

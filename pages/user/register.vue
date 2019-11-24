@@ -210,6 +210,7 @@ page {
 		width: 320rpx;
 		height: 80rpx;
 		margin-left: 45rpx;
+		text-align: center;
 		border: solid 1px $default-border-color;
 		border-radius: 40rpx;
 		font-size: 30rpx;
