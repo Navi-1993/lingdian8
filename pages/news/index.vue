@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-21 10:34:46
- * @LastEditTime: 2019-11-24 15:20:24
+ * @LastEditTime: 2019-11-24 16:46:44
  * @LastEditors: Edmund
  -->
 <template>
@@ -41,7 +41,25 @@
       <block v-for="(item, idx) in 10" :key="idx">
         <swiper-item>
 					<!-- banner 轮播图 -->
-					<view class="banner">banner {{item}}</view>
+					<swiper :autoplay="true"
+									:interval="3000"
+									:duration="300"
+									:circular="true"
+									previous-margin="60rpx"
+									next-margin="60rpx"
+									class="banner">
+							<block v-for="(item,idx) in bannerList" :key="idx">
+								<swiper-item class="banner_item">
+									<image 	src="http://wongxuefeng.com/bg.jpg"
+													class="banner_item_img"
+													@tap.stop="navi2NewsDetail(item)"
+													mode="aspectFill">
+										<view class="banner_item_img_title">{{item.newsTitle}}</view>
+									</image>
+									
+								</swiper-item>
+							</block>
+      		</swiper>
 					<view class="bannerStepStone"></view>
 					<!-- 数据列表 -->
           <scroll-view
@@ -53,9 +71,9 @@
 						<!-- card_item -->
             <block v-for="(item,idx) in newsList" :key="idx">
 								<view class="card_item"
-											@tap.stop="navi2NewsDetail">
+											@tap.stop="navi2NewsDetail(item)">
 									<view class="card_img">
-										<image 	:src="'http://wongxuefeng.com/bg.jpg'"
+										<image 	src="http://wongxuefeng.com/bg.jpg"
 														mode="aspectFill"
 														class="img"/>
 									</view>
@@ -150,7 +168,6 @@ export default {
 			let res = await queryAllEvent(params)
 			if (res.statusCode === 200) {
 				that.tabbarList = res.data.data.list
-				console.log(res.data.data)
 			}
 		},
 
@@ -188,13 +205,21 @@ export default {
 		/**
 		 * @Description: 跳转到新闻详情页
 		 */
-		navi2NewsDetail() {
+		navi2NewsDetail(item) {
 			that.$Router.push({
-				path: '/pages/news/detail'
+				path: '/pages/news/detail',
+				item: item
 			})
 		}
 	},
-	computed: {},
+	computed: {
+		bannerList() {
+			return that.newsList.filter((item) => {
+				// 找出推荐数据
+				return item.isRecommend === null
+			})
+		}
+	},
 	watch: {}
 }
 </script>
@@ -247,11 +272,49 @@ export default {
 		.banner {
 			height: 316rpx;
 			width: 100vw;
-			background: red;
 			display: flex;
 			align-items: center;
+			justify-content: center;
 			position: absolute;
 			top: 0;
+			&_title {
+				position: absolute;
+				bottom: 060rpx;
+				display: flex;
+
+				justify-content: center;
+				align-items: center;
+				font-size: 22rpx;
+				background: $default-text-color-white;
+				word-wrap: none;
+			}
+			&_item {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				&_img {
+					display: inline-block;
+					position: relative;
+					width: 586rpx;
+					height: 280rpx;
+					border-radius: 10rpx;
+					&_title {
+						width: 100%;
+						opacity: 0.7;
+						width: 586rpx;
+						border-radius: 0 0 10rpx 10rpx;
+						background-color: rgba(0, 0, 0, 1);
+						position: absolute;
+						bottom: 20rpx;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						font-size: 22rpx;
+						color: $default-text-color-white;
+						word-wrap: none;
+					}
+				}
+			}
 		}
 		.bannerStepStone {
 			height: 316rpx;
