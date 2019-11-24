@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-21 10:34:46
- * @LastEditTime: 2019-11-24 16:46:44
+ * @LastEditTime: 2019-11-24 18:43:14
  * @LastEditors: Edmund
  -->
 <template>
@@ -11,7 +11,6 @@
     class="container"
     :style="{ height: windowHeight + 'px', minHeight: windowHeight + 'px' }"
   >
-    <!-- #ifdef H5 || MP -->
     <!-- tabbar -->
     <scroll-view
       class="tab-view"
@@ -97,7 +96,6 @@
       </block>
     </swiper>
     <tui-loading :visible="isLoading"></tui-loading>
-    <!-- #endif -->
   </view>
 </template>
 
@@ -142,7 +140,6 @@ export default {
 		 */
 		_queryNewsTitle: _.debounce(async () => {
 			that.isLoading = true
-			console.log('id', that.tabbarList[that.currentTab].id)
 			let params = {
 				id: that.tabbarList[that.currentTab].id,
 				limit: 100,
@@ -206,18 +203,27 @@ export default {
 		 * @Description: 跳转到新闻详情页
 		 */
 		navi2NewsDetail(item) {
+			console.log('navi2NewsDetail', item)
+			// #ifdef H5
 			that.$Router.push({
 				path: '/pages/news/detail',
-				item: item
+				params: { id: item.id }
 			})
+			// #endif
+			// #ifdef APP-PLUS || MP
+			uni.navigateTo({
+				url: `/pages/news/detail?id=${item.id}`
+			})
+			// #endif
 		}
 	},
 	computed: {
 		bannerList() {
-			return that.newsList.filter((item) => {
+			let list = that.newsList.filter((item) => {
 				// 找出推荐数据
-				return item.isRecommend === null
+				return item.isRecommend === '0'
 			})
+			return list
 		}
 	},
 	watch: {}
