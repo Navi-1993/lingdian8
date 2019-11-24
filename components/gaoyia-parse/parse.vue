@@ -109,6 +109,7 @@
 		},
 		computed: {},
 		mounted() {
+			this.setHtml()
 		},
 		methods: {
 			setHtml() {

@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 22:07:02
- * @LastEditTime: 2019-11-24 01:31:08
+ * @LastEditTime: 2019-11-24 11:08:10
  * @LastEditors: Edmund
  -->
 
@@ -175,7 +175,7 @@ export default {
 				id: `${that.tabbarList[that.currentTab].id}`,
 				// limit: 20,
 				offset: 1,
-				type: 0
+				type: 5
 			}
 			let res = await queryAllMatchList(params)
 			if (res.statusCode === 200) {

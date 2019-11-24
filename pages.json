@@ -79,6 +79,17 @@
       }
     },
     {
+      "path": "pages/news/detail",
+      "style": {
+        "navigationBarTitleText": "新闻详情",
+        "app-plus": {
+          "titleNView": true,
+          "animationType": "slide-in-right",
+          "animationDuration": 300
+        }
+      }
+    },
+    {
       "path": "pages/user/login",
       "style": {
         "navigationBarTitleText": "",

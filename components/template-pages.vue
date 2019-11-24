@@ -1,13 +1,17 @@
 <!--
  * @Description: 页面模板
- * @Author: Edmund(q1592193221@gmail.com)
+ * @Author: Edmund
+ * @Email: q1592193221@gmail.com
+ * @Date: 2019-11-20 09:39:27
+ * @LastEditTime: 2019-11-24 12:19:06
  * @LastEditors: Edmund
- * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-16 23:11:02
- * @FilePath: \lingdian8\components\template-pages.vue
  -->
+
 <template>
-  <view class="container"> </view>
+  <view class="container" :style="{	height: windowHeight + 'px',
+																		minHeight: windowHeight + 'px'}">
+
+	</view>
 </template>
 
 <script>
@@ -17,7 +21,9 @@ export default {
 	components: {},
 	props: {},
 	data() {
-		return {}
+		return {
+			windowHeight: 0
+		}
 	},
 	beforeCreate() {
 		// #ifndef APP-PLUS
@@ -26,6 +32,7 @@ export default {
 	},
 	created() {
 		that = this
+		that.windowHeight = that.$sysCall.windowHeight
 	},
 	onLoad() {},
 	onShow() {},
@@ -36,7 +43,7 @@ export default {
 			'color: yellow; background-color: black;padding: 2px'
 		)
 		console.timeEnd('renderTime')
-		console.log(`%c${that.__route__}`, 'color:yellow;background-color:black')
+		console.log(`%c${that.$Route.path}`, 'color:yellow;background-color:black')
 		// #endif
 	},
 	onHide() {},
