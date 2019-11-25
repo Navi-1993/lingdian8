@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-21 10:34:46
- * @LastEditTime: 2019-11-24 23:35:14
+ * @LastEditTime: 2019-11-25 12:00:19
  * @LastEditors: Edmund
  -->
 <template>
@@ -39,7 +39,7 @@
       @change="switchTab"
     >
       <block v-for="(item, idx) in 10" :key="idx">
-        <swiper-item>
+        <swiper-item >
 					<!-- banner 轮播图 -->
 					<swiper :autoplay="true"
 									:interval="3000"
@@ -50,7 +50,7 @@
 									class="banner">
 							<block v-for="(item,idx) in bannerList" :key="idx">
 								<swiper-item class="banner_item">
-									<image 	src="http://wongxuefeng.com/bg.jpg"
+									<image 	:src="'../../static/assets/default.png'"
 													class="banner_item_img"
 													@tap.stop="navi2NewsDetail(item)"
 													mode="aspectFill">
@@ -73,7 +73,7 @@
 								<view class="card_item"
 											@tap.stop="navi2NewsDetail(item)">
 									<view class="card_img">
-										<image 	src="http://wongxuefeng.com/bg.jpg"
+										<image 	:src="'../../static/assets/default.png'"
 														mode="aspectFill"
 														class="img"/>
 									</view>
@@ -140,16 +140,18 @@ export default {
 		 * @Description: 请求新闻列表数据
 		 */
 		_queryNewsTitle: _.debounce(async () => {
+			console.log(that.tabbarList[that.currentTab].type)
 			that.isLoading = true
 			let params = {
 				id: that.tabbarList[that.currentTab].id,
-				limit: 100,
+				limit: 20,
 				offset: 1,
-				type: 5
+				type: that.tabbarList[that.currentTab].type * 1
 			}
 			let res = await queryNewsTitle(params)
 			if (res.statusCode === 200) {
 				that.newsList = res.data.data.list
+				console.log('newsList', that.newsList)
 				that.isLoading = false
 			}
 			// 防抖间隔1秒

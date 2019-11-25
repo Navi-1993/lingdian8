@@ -21,17 +21,6 @@
       }
     },
     {
-      "path": "pages/mine/index",
-      "style": {
-        "navigationBarTitleText": "我的",
-        "app-plus": {
-          "titleNView": true,
-          "animationType": "slide-in-right",
-          "animationDuration": 300
-        }
-      }
-    },
-    {
       "path": "pages/video/index",
       "style": {
         "navigationBarTitleText": "视频",
@@ -123,6 +112,17 @@
       }
     },
     {
+      "path": "pages/user/center",
+      "style": {
+        "navigationBarTitleText": "",
+        "app-plus": {
+          "titleNView": false,
+          "animationType": "slide-in-right",
+          "animationDuration": 300
+        }
+      }
+    },
+    {
       "path": "pages/home/drag",
       "style": {
         "navigationBarTitleText": "拖拽组件测试",
@@ -163,7 +163,7 @@
         "selectedIconPath": "static/bottomBar/active/news.png"
       },
       {
-        "pagePath": "pages/user/login",
+        "pagePath": "pages/user/center",
         "iconPath": "static/bottomBar/sleep/mine.png",
         "selectedIconPath": "static/bottomBar/active/mine.png"
       }

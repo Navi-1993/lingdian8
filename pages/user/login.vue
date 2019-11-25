@@ -40,13 +40,14 @@
     <toast ref="toast"></toast>
 
     <!-- 悬浮按钮 -->
-    <fab	:left="left"
+		<!-- TODO: 交付时隐藏组件 -->
+    <!-- <fab	:left="left"
 					:right="right"
 					:bottom="bottom"
 					:bgColor="bgColor"
 					:btnList="btnList"
 					@click="fabClick">
-    </fab>
+    </fab> -->
   </view>
 </template>
 

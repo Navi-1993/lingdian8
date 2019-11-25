@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-24 23:23:14
+ * @LastEditTime: 2019-11-25 11:04:58
  * @LastEditors: Edmund
  -->
 
@@ -136,7 +136,7 @@ export default {
 				id: that.tabbarList[that.currentTab].id,
 				// limit: 20,
 				offset: 1,
-				type: 5
+				type: that.tabbarList[that.currentTab].type
 			}
 			let res = await queryVideoTitle(params)
 			if (res.statusCode === 200) {

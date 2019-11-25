@@ -13,6 +13,20 @@
       "unicode_decimal": 58880
     },
     {
+      "icon_id": "1068820",
+      "name": "积分商城",
+      "font_class": "weibiaoti2fuzhi14",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
+      "icon_id": "1207845",
+      "name": "setting",
+      "font_class": "setting",
+      "unicode": "e657",
+      "unicode_decimal": 58967
+    },
+    {
       "icon_id": "2076581",
       "name": "排序",
       "font_class": "shijian",
@@ -60,6 +74,13 @@
       "font_class": "shouye",
       "unicode": "e61b",
       "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "8766122",
+      "name": "任务",
+      "font_class": "renwu",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
     },
     {
       "icon_id": "8782644",

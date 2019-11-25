@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-24 10:20:42
- * @LastEditTime: 2019-11-24 18:36:33
+ * @LastEditTime: 2019-11-25 11:50:43
  * @LastEditors: Edmund
  -->
 
@@ -55,6 +55,12 @@ export default {
 							<meta http-equiv="X-UA-Compatible" content="ie=edge">
 							<title>Document</title>
 						</head>
+						<style>
+							img {
+								display:block;
+								width: 100%;
+							}
+						</style>
 						<body>`,
 			html_end: `	
 									<div style="height:100px;width:100%;"></div>
@@ -109,6 +115,9 @@ export default {
 		}
 	},
 	computed: {
+		/**
+		 * @Description: 拼接富文本
+		 */
 		html() {
 			return that.html_start + that.content + that.html_end
 		}

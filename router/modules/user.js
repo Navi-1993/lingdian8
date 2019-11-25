@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-12 19:54:12
- * @LastEditTime: 2019-11-21 00:39:35
+ * @LastEditTime: 2019-11-25 11:53:27
  * @LastEditors: Edmund
  */
 
@@ -25,6 +25,13 @@ const user = [
     {
         path: '/pages/user/reset-psw',
         name: 'user-reset-psw',
+        meta: {
+            title: '重置密码'
+        }
+    },
+    {
+        path: '/pages/user/center',
+        name: 'user-center',
         meta: {
             title: '重置密码'
         }
