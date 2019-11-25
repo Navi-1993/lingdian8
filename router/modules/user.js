@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-12 19:54:12
- * @LastEditTime: 2019-11-25 11:53:27
+ * @LastEditTime: 2019-11-26 02:19:44
  * @LastEditors: Edmund
  */
 
@@ -33,7 +33,14 @@ const user = [
         path: '/pages/user/center',
         name: 'user-center',
         meta: {
-            title: '重置密码'
+            title: '个人中心'
+        }
+    },
+    {
+        path: '/pages/user/information',
+        name: 'user-information',
+        meta: {
+            title: '修改个人信息'
         }
     },
 

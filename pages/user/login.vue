@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-25 17:57:15
+ * @LastEditTime: 2019-11-26 02:03:20
  * @LastEditors: Edmund
  -->
 <template>
@@ -164,6 +164,7 @@ export default {
 				if (res.data.resultCode !== 1) return
 				// 1秒后回到个人中心
 				setTimeout(() => {
+					getApp().globalData.isLogin = true
 					that.$Router.push({ path: '/pages/user/center' })
 				}, 1000)
 				// FIXME:改为vuex 存储 登陆成功后更新本地user数据

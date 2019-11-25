@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-17 22:07:02
- * @LastEditTime: 2019-11-21 22:48:20
+ * @LastEditTime: 2019-11-26 02:05:07
  * @LastEditors: Edmund
  */
 
@@ -37,7 +37,15 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
     console.log('从哪里来' + from.path)
     console.log('到哪里去:' + to.path)
-    next()
+    if (to.path === '/pages/user/center') {
+        if (getApp().globalData.isLogin) {
+            next()
+        } else {
+            next('/pages/user/login')
+        }
+    } else {
+        next()
+    }
 })
 
 export default router

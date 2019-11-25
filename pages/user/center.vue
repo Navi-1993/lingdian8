@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-25 11:06:28
- * @LastEditTime: 2019-11-25 14:43:20
+ * @LastEditTime: 2019-11-26 02:18:41
  * @LastEditors: Edmund
  -->
 
@@ -22,7 +22,8 @@
 								class="head"
 								mode="aspectFill"></image>
 				<text class="name">{{userName}}</text>
-				<text class="arrow_r iconfont">&#xe602;</text>
+				<text class="arrow_r iconfont"
+							@tap.stop="navi2Information">&#xe602;</text>
 			</view>
 			<view class="controls">
 				<view class="controls_l">
@@ -122,6 +123,11 @@ export default {
 	methods: {
 		sheetTap(item) {
 			that.$sysCall.toast(item.name + '功能未开放')
+		},
+		navi2Information() {
+			that.$Router.push({
+				path: '/pages/user/information'
+			})
 		}
 	},
 	computed: {},
@@ -181,6 +187,7 @@ export default {
 			align-items: center;
 			font-size: 24rpx;
 			color: $default-text-color-white;
+			background: url('../../static/assets/bg_mask.png') no-repeat;
 			&_l,
 			&_r {
 				flex: 1;
@@ -207,6 +214,9 @@ export default {
 			box-shadow: 0rpx 1rpx 10rpx 0rpx $default-shadow-color;
 			border-radius: 12rpx;
 			padding: 0 10rpx;
+			:nth-last-child(1) {
+				border-bottom: none;
+			}
 			&_item {
 				position: relative;
 				box-sizing: border-box;
@@ -217,12 +227,6 @@ export default {
 				font-size: 36rpx;
 				&_l {
 					margin-right: 20rpx;
-					font-size: 36rpx;
-					span {
-						width: 36rpx;
-						height: 36rpx;
-						font-size: 36rpx;
-					}
 				}
 				&_r {
 					transform: rotate(180deg);

@@ -132,6 +132,17 @@
           "animationDuration": 300
         }
       }
+    },
+    {
+      "path": "pages/user/information",
+      "style": {
+        "navigationBarTitleText": "修改个人信息",
+        "app-plus": {
+          "titleNView": true,
+          "animationType": "slide-in-right",
+          "animationDuration": 300
+        }
+      }
     }
   ],
   "globalStyle": {
@@ -163,7 +174,7 @@
         "selectedIconPath": "static/bottomBar/active/news.png"
       },
       {
-        "pagePath": "pages/user/login",
+        "pagePath": "pages/user/center",
         "iconPath": "static/bottomBar/sleep/mine.png",
         "selectedIconPath": "static/bottomBar/active/mine.png"
       }
