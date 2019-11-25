@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 22:07:02
- * @LastEditTime: 2019-11-25 17:16:07
+ * @LastEditTime: 2019-11-25 17:19:02
  * @LastEditors: Edmund
  -->
 
@@ -150,7 +150,8 @@ export default {
 		 * @Description: 跳至赛事聊天室页面
 		 */
 		navi2Chatroom(item) {
-			that.$Router.push({ path: '/pages/home/chatroom', params: item })
+			that.$Router.push({ path: '/pages/home/chatroom' })
+			getApp().globalData.routerData = item
 		},
 		/**
 		 * @Description: 跳至拖拽排序页

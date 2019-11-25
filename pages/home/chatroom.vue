@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-19 09:49:44
- * @LastEditTime: 2019-11-22 17:06:09
+ * @LastEditTime: 2019-11-25 17:25:08
  * @LastEditors: Edmund
  -->
 
@@ -15,8 +15,10 @@
 
     <view class="header">
       <event-card
-									:homeTeamName="'中国'"
-									:guestTeamName="'韩国'"
+									:homeTeamName="routerData.homeTeamName"
+									:guestTeamName="routerData.guestTeamName"
+									:teamALogo="routerData.homeTeamLogoPath"
+                  :teamBLogo="routerData.guestTeamLogoPath"
 									:livesUrl="'https://www.wongxuefeng.com'"
 									@toast="actionsheetOpen"/>
       <progress-bar
@@ -76,6 +78,8 @@ export default {
 	props: {},
 	data() {
 		return {
+			// TODO: 全局变量拿取路由传参数据
+			routerData: [],
 			// TODO: 页面初始化数据
 			windowHeight: 0,
 			value: '', // 聊天框value
@@ -135,6 +139,10 @@ export default {
 	created() {
 		that = this
 		that.windowHeight = that.$sysCall.windowHeight()
+		that.routerData = getApp().globalData.routerData
+		console.log('routerData', that.routerData)
+		// 释放全局变量内存
+		getApp().globalData.routerData = null
 	},
 	onLoad() {},
 	onShow() {},
