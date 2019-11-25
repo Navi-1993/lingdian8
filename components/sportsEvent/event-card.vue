@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-28 14:37:31
- * @LastEditTime: 2019-11-24 11:20:58
+ * @LastEditTime: 2019-11-25 15:42:13
  * @LastEditors: Edmund
  -->
 
@@ -16,7 +16,7 @@
             </view>
             <view class="team">
               <view class="teamA">
-                <image :src=" baseurl + teamALogo"/>
+                <image :src="teamALogo"/>
                 <text>{{homeTeamName}}</text>
               </view>
               <view class="controls">
@@ -28,7 +28,7 @@
                 </text>
               </view>
               <view class="teamB">
-                <image :src=" baseurl + teamBLogo"/>
+                <image :src="teamBLogo"/>
                 <text>{{guestTeamName}}</text>
               </view>
             </view>
@@ -38,7 +38,7 @@
 
 
 <script>
-import { dev } from 'config.js'
+// import { dev } from 'config.js'
 export default {
 	name: 'eventCard',
 	props: {
@@ -65,7 +65,7 @@ export default {
 	},
 	data() {
 		return {
-			baseurl: dev.BASE_URL
+			// baseurl: dev.BASE_URL
 		}
 	},
 	created() {},
@@ -108,7 +108,6 @@ export default {
 	image {
 		width: 88rpx;
 		height: 88rpx;
-		border: 1px solid #000;
 	}
 	.teamA,
 	.controls,

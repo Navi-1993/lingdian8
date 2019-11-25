@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-25 11:06:28
- * @LastEditTime: 2019-11-25 14:42:42
+ * @LastEditTime: 2019-11-25 14:43:20
  * @LastEditors: Edmund
  -->
 
@@ -181,8 +181,6 @@ export default {
 			align-items: center;
 			font-size: 24rpx;
 			color: $default-text-color-white;
-			&_c {
-			}
 			&_l,
 			&_r {
 				flex: 1;

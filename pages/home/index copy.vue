@@ -3,54 +3,61 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 22:07:02
- * @LastEditTime: 2019-11-25 16:34:09
+ * @LastEditTime: 2019-11-25 11:03:44
  * @LastEditors: Edmund
  -->
 
 <template>
   <view
     class="container"
-    :style="{ height: windowHeight + 'px', minHeight: windowHeight + 'px' }">
+    :style="{ height: windowHeight + 'px', minHeight: windowHeight + 'px' }"
+  >
     <!-- tabbar -->
-    <scroll-view	class="tab-view"
-									:scroll-x="true"
-									:show-scrollbar="false"
-									:scroll-into-view="scrollInto">
-			<!-- tabbar item -->
-			<block 	v-for="(item, idx) in tabbarList"
-							:key="idx">
-					<view	class="tab-bar-item"
-								:class="[currentTab === idx ? 'active' : '']"
-								@tap.stop="swichNav(idx)">
-						<text class="tab-bar-title" v-if="item">
-									{{ item.name }}
-						</text>
-					</view>
-			</block>
+    <scroll-view
+      class="tab-view"
+      :scroll-x="true"
+      :scroll-top="0"
+      :scroll-with-animation="true"
+      :scroll-left="scrollLeft"
+    >
+      <view
+        class="tab-bar-item"
+        :class="[currentTab === idx ? 'active' : '']"
+        v-for="(item, idx) in tabbarList"
+        :key="idx"
+        @tap.stop="swichNav(idx)"
+      >
+        <text class="tab-bar-title" v-if="item">
+          {{ item.name }}
+        </text>
+        <!-- <text class="tab-bar-title">
+          {{ '      ' }}
+        </text> -->
+      </view>
       <view class="tabbar-controls" @click="navi2Drag">+</view>
     </scroll-view>
-		<!-- 下层组件 -->
     <swiper
       class="tab-content"
       :current="currentTab"
-      duration="300"
+      duration="500"
       :style="{ height: windowHeight + 'px' }"
-      @change="switchTab">
-			<!-- item -->
+      @change="switchTab"
+    >
       <block v-for="(item, idx) in tabbarList" :key="idx">
-        <swiper-item >
+        <swiper-item v-show="currentTab === idx">
           <scroll-view scroll-y class="scoll-y">
             <calendar>
               <text slot="date">11月24日 星期天</text>
             </calendar>
-            <block v-for="(item, index) in matchList[idx].data" :key="index">
+            <block v-for="(item, index) in matchList" :key="index">
               <view @tap.stop="navi2Chatroom(item)">
                 <event-card
                   :homeTeamName="item.homeTeamName"
                   :guestTeamName="item.guestTeamName"
                   :teamALogo="item.homeTeamLogoPath"
                   :teamBLogo="item.guestTeamLogoPath"
-                  :livesUrl="''">
+                  :livesUrl="''"
+                >
                   <text slot="text">
                     {{ item.matchBeginTime }}
                     {{ item.matchTitle }}
@@ -73,8 +80,6 @@ import calendar from 'components/time_module/calendar.vue'
 import tuiLoading from 'components/loading/loading.vue'
 import eventCard from 'components/sportsEvent/event-card.vue'
 import { queryAllEvent, queryAllMatchList } from '@/api/match.js'
-const MAX_CACHE_DATA = 100
-const MAX_CACHE_PAGE = 3
 export default {
 	components: {
 		calendar,
@@ -88,9 +93,7 @@ export default {
 			matchList: [], // 赛事数据
 			currentTab: 0, //预设当前tab项的值
 			scrollLeft: 0, //tab标题的滚动条位置
-			isLoading: false, // 加载弹窗
-			scrollInto: '',
-			cacheTab: [] // 缓存tab
+			isLoading: false // 加载弹窗
 		}
 	},
 	beforeCreate() {
@@ -100,23 +103,13 @@ export default {
 	},
 	created() {
 		that = this
-		that.windowHeight = that.$sysCall.windowHeight()
 		async function initFetch() {
 			await that._queryAllEvent()
-			that.tabbarList.forEach((item) => {
-				that.matchList.push({
-					data: [],
-					isLoading: false,
-					refreshText: '',
-					loadingText: 'loading...'
-				})
-			})
-			that._queryAllMatchList(0)
-			// await that._queryAllMatchList()
+			await that.fetchEvent()
 		}
 		initFetch()
+		that.windowHeight = that.$sysCall.windowHeight()
 	},
-	onLoad() {},
 	onReady() {
 		// #ifndef APP-PLUS
 		console.log(
@@ -151,49 +144,32 @@ export default {
 		},
 		// 滚动切换标签样式
 		switchTab: (e) => {
+			// console.log('changeTab', e.detail.current)
+			// 切换tab时，让数据变为空，防止H5卡顿
+			that.matchList = []
 			that.currentTab = e.target.current
-			that.swichNav(that.currentTab)
-			that._queryAllMatchList(that.currentTab)
+			that.checkCor()
+			that.fetchEvent()
 		},
-		// 点击标题切换样式与下层组件数据
+		// 点击标题切换当前页时改变样式
 		swichNav: function(idx) {
 			that.currentTab = idx
-			if (that.matchList[idx].data.length === 0) {
-				that._queryAllMatchList(idx)
-			}
-			if (that.currentTab === idx) {
-				return
-			}
-			// 缓存 tabId
-			if (that.matchList[that.currentTab].length > MAX_CACHE_DATA) {
-				let isExist = that.cacheTab.indexOf(that.currentTab)
-				if (isExist < 0) {
-					that.cacheTab.push(that.currentTab)
-					console.log('cache index:: ' + that.currentTab)
-				}
-				console.log('that.matchList', that.matchList)
-			}
-
-			that.currentTab = index
-			that.scrollInto = that.tabBars[index].id
-
-			// 释放 tabId
-			if (that.cacheTab.length > MAX_CACHE_PAGE) {
-				let cacheIndex = that.cacheTab[0]
-				that.clearTabData(cacheIndex)
-				that.cacheTab.splice(0, 1)
-				//console.log("remove cache index:: " + cacheIndex);
-			}
 		},
-		clearTabData(idx) {
-			this.matchList[idx].data.length = 0
-			this.matchList[idx].loadingText = '加载更多...'
+		//判断当前滚动超过一屏时，设置tab标题滚动条。
+		checkCor: function() {
+			if (that.currentTab === 0) {
+				that.scrollLeft = 0
+			}
+			// 如果当前选项卡索引值大于5，设置横向滚动条
+			if (that.currentTab > 5) {
+				that.scrollLeft = 30 * that.currentTab
+			}
 		},
 
 		/**
 		 * @Description: 获取赛事展示数据,进行防抖处理
 		 */
-		_queryAllMatchList: _.debounce(async (idx) => {
+		fetchEvent: _.debounce(async () => {
 			that.isLoading = true
 			let params = {
 				id: that.tabbarList[that.currentTab].id,
@@ -205,8 +181,7 @@ export default {
 			if (res.statusCode === 200) {
 				// when success ,do sth you want
 				that.isLoading = false
-				that.matchList[idx].data = res.data.data.list || []
-				console.log(that.matchList)
+				that.matchList = res.data.data.list || []
 			}
 			// 2秒后加载不到数据关闭loading控件
 			clearTimeout(timer)
