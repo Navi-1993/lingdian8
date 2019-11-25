@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 22:07:02
- * @LastEditTime: 2019-11-25 16:34:09
+ * @LastEditTime: 2019-11-25 17:16:07
  * @LastEditors: Edmund
  -->
 
@@ -20,6 +20,7 @@
 			<block 	v-for="(item, idx) in tabbarList"
 							:key="idx">
 					<view	class="tab-bar-item"
+								:id="item.tabId"
 								:class="[currentTab === idx ? 'active' : '']"
 								@tap.stop="swichNav(idx)">
 						<text class="tab-bar-title" v-if="item">
@@ -104,6 +105,7 @@ export default {
 		async function initFetch() {
 			await that._queryAllEvent()
 			that.tabbarList.forEach((item) => {
+				// 为tabbarList 的每一个元素增加tabId(不以数字开头)
 				that.matchList.push({
 					data: [],
 					isLoading: false,
@@ -111,8 +113,7 @@ export default {
 					loadingText: 'loading...'
 				})
 			})
-			that._queryAllMatchList(0)
-			// await that._queryAllMatchList()
+			await that._queryAllMatchList(0)
 		}
 		initFetch()
 	},
@@ -134,7 +135,15 @@ export default {
 			}
 			let res = await queryAllEvent(params)
 			if (res.statusCode === 200) {
-				that.tabbarList = res.data.data.list
+				let obj = res.data.data.list
+				obj = obj.map((item) => {
+					return (item = {
+						...item,
+						tabId: `tabId${item.id}${parseInt(Math.random() * 10 + 1)}`
+					})
+				})
+				console.log('obj', obj)
+				that.tabbarList = obj
 			}
 		},
 		/**
@@ -153,7 +162,6 @@ export default {
 		switchTab: (e) => {
 			that.currentTab = e.target.current
 			that.swichNav(that.currentTab)
-			that._queryAllMatchList(that.currentTab)
 		},
 		// 点击标题切换样式与下层组件数据
 		swichNav: function(idx) {
@@ -161,21 +169,22 @@ export default {
 			if (that.matchList[idx].data.length === 0) {
 				that._queryAllMatchList(idx)
 			}
+			// 当前tab为5的倍数，则调整一次tab
+			// if (idx % 3 == 0) {
+			that.scrollInto = that.tabbarList[idx].tabId
+			console.log('that.scrollInto', that.tabbarList[idx].tabId)
+			// }
 			if (that.currentTab === idx) {
 				return
 			}
 			// 缓存 tabId
-			if (that.matchList[that.currentTab].length > MAX_CACHE_DATA) {
+			if (that.matchList[idx].data.length > MAX_CACHE_DATA) {
 				let isExist = that.cacheTab.indexOf(that.currentTab)
 				if (isExist < 0) {
 					that.cacheTab.push(that.currentTab)
-					console.log('cache index:: ' + that.currentTab)
 				}
-				console.log('that.matchList', that.matchList)
 			}
-
 			that.currentTab = index
-			that.scrollInto = that.tabBars[index].id
 
 			// 释放 tabId
 			if (that.cacheTab.length > MAX_CACHE_PAGE) {
@@ -206,7 +215,8 @@ export default {
 				// when success ,do sth you want
 				that.isLoading = false
 				that.matchList[idx].data = res.data.data.list || []
-				console.log(that.matchList)
+			} else {
+				that.$sysCall.toast('加载失败，请刷新重试')
 			}
 			// 2秒后加载不到数据关闭loading控件
 			clearTimeout(timer)
