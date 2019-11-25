@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-21 10:34:46
- * @LastEditTime: 2019-11-25 17:52:38
+ * @LastEditTime: 2019-11-25 22:07:22
  * @LastEditors: Edmund
  -->
 <template>
@@ -12,18 +12,18 @@
     :style="{ height: windowHeight + 'px', minHeight: windowHeight + 'px' }"
   >
     <!-- tabbar -->
-    <scroll-view
-      class="tab-view"
-      :scroll-x="true"
-      :scroll-with-animation="true"
-      :scroll-left="scrollLeft"
-    >
+    <scroll-view	class="tab-view"
+									:scroll-x="true"
+									:show-scrollbar="false"
+									:scroll-into-view="scrollInto"
+									:scroll-with-animation="true">
+			<!-- tabbar item -->
       <block v-for="(item, idx) in tabbarList" :key="idx">
         <view
-          class="tab-bar-item"
-					@tap.stop="swichNav"
-          :class="[currentTab === idx ? 'active' : '']"
-        >
+							class="tab-bar-item"
+							:id="item.tabId"
+							@tap.stop="swichNav"
+							:class="[currentTab === idx ? 'active' : '']">
           <text class="tab-bar-title">
             {{ item.name }}
           </text>
@@ -31,25 +31,24 @@
       </block>
       <view class="tabbar-controls" @click="navi2Drag">+</view>
     </scroll-view>
-    <swiper
-      class="tab-content"
-      :current="currentTab"
-      duration="300"
-      :style="{ height: windowHeight + 'px', minHeight: windowHeight + 'px' }"
-      @change="switchTab"
-    >
-      <block v-for="(item, idx) in 10" :key="idx">
+
+		<!-- 下层组件 -->
+    <swiper	class="tab-content"
+						:current="currentTab"
+						duration="300"
+						:style="{ height: windowHeight + 'px', minHeight: windowHeight + 'px' }"
+						@change="switchTab">
+      <block v-for="(item, idx) in tabbarList" :key="idx">
         <swiper-item >
 					<!-- banner 轮播图 -->
 					<swiper :autoplay="true"
 									:interval="3000"
 									:duration="300"
 									:circular="true"
-									v-if="bannerList.length > 0"
 									previous-margin="60rpx"
 									next-margin="60rpx"
 									class="banner">
-							<block v-for="(item,idx) in bannerList" :key="idx">
+							<block v-for="(item,index) in bannerList" :key="index">
 								<swiper-item class="banner_item" >
 									<image 	:src="'../../static/assets/default.png'"
 													class="banner_item_img"
@@ -61,7 +60,7 @@
 								</swiper-item>
 							</block>
       		</swiper>
-					<view class="bannerStepStone" v-if="bannerList.length > 0"></view>
+					<view class="bannerStepStone"></view>
 					<!-- 数据列表 -->
           <scroll-view
             :scroll-y="true"
@@ -70,7 +69,7 @@
             :scroll-left="scrollLeft"
           >
 						<!-- card_item -->
-            <block v-for="(item,idx) in newsList" :key="idx">
+            <block v-for="(item,index) in newsList[idx].data" :key="index">
 								<view class="card_item"
 											@tap.stop="navi2NewsDetail(item)">
 									<view class="card_img">
@@ -107,8 +106,11 @@ import _ from 'underscore'
 import tuiLoading from 'components/loading/loading.vue'
 import { queryAllEvent } from 'api/match.js'
 import { queryNewsTitle } from 'api/news.js'
+// 定义每页的缓存数据长度与在该清空下缓存的页码
+const MAX_CACHE_DATA = 100 // 默认100，测试写为8
+const MAX_CACHE_PAGE = 3
 export default {
-	name: 'video',
+	name: 'news-index',
 	components: {
 		tuiLoading
 	},
@@ -120,41 +122,56 @@ export default {
 			currentTab: 0, //预设当前tab项的值
 			scrollLeft: 0, //tab标题的滚动条位置
 			isLoading: false, // 加载弹窗
+			scrollInto: '',
+			cacheTab: [], // 缓存tab
 			// TODO: 新闻数据
 			newsList: []
 		}
 	},
 	created() {
 		that = this
+		that.windowHeight = that.$sysCall.windowHeight()
 		async function init() {
 			await that._queryAllEvent()
-			await that._queryNewsTitle()
+			that.tabbarList.forEach((item) => {
+				that.newsList.push({
+					data: [],
+					isLoading: false,
+					refreshText: '',
+					loadingText: 'loading...'
+				})
+			})
+			await that._queryNewsTitle(0)
 		}
 		init()
 	},
 	onShow() {},
-	mounted() {
-		that.windowHeight = that.$sysCall.windowHeight()
-	},
+	mounted() {},
 	methods: {
 		/**
 		 * @Description: 请求新闻列表数据
 		 */
-		_queryNewsTitle: _.debounce(async () => {
-			console.log(that.tabbarList[that.currentTab].type)
+		_queryNewsTitle: _.debounce(async (idx) => {
 			that.isLoading = true
 			let params = {
 				id: that.tabbarList[that.currentTab].id,
 				limit: 20,
 				offset: 1,
-				type: that.tabbarList[that.currentTab].type * 1
+				// type: that.tabbarList[that.currentTab].type * 1
+				type: 5
 			}
 			let res = await queryNewsTitle(params)
 			if (res.statusCode === 200) {
-				that.newsList = res.data.data.list
-				console.log('newsList', that.newsList)
 				that.isLoading = false
+				that.newsList[idx].data = res.data.data.list || []
+			} else {
+				that.$sysCall.toast('加载失败，请刷新重试')
 			}
+			// 2秒后加载不到数据关闭loading控件
+			clearTimeout(timer)
+			let timer = setTimeout(() => {
+				that.isLoading = false
+			}, 2000)
 			// 防抖间隔1秒
 		}, 1000),
 
@@ -168,7 +185,15 @@ export default {
 			}
 			let res = await queryAllEvent(params)
 			if (res.statusCode === 200) {
-				that.tabbarList = res.data.data.list
+				let arr = res.data.data.list
+				arr = arr.map((item) => {
+					return (item = {
+						...item,
+						tabId: `tabId${item.id}${parseInt(Math.random() * 10 + 1)}`
+					})
+				})
+				that.tabbarList = arr
+				console.log('arr', arr)
 			}
 		},
 
@@ -184,25 +209,38 @@ export default {
 		 */
 		switchTab: (e) => {
 			that.currentTab = e.target.current
-			// #ifdef H5
-			that.newsList = []
-			// #endif
-			that.checkCor()
-			that._queryNewsTitle()
+			that.swichNav(that.currentTab)
+		},
+		// 点击标题切换当前页时改变样式
+		swichNav: function(idx) {
+			that.currentTab = idx
+			if (that.newsList[idx].data.length === 0) {
+				that._queryNewsTitle(idx)
+			}
+			// 当前tab为5的倍数，则调整一次tab
+			// if (idx % 3 == 0) {
+			that.scrollInto = that.tabbarList[idx].tabId
+			// }
+
+			// TODO:当页面数据超过100条，则缓存该tab到cachetab
+			if (that.newsList[idx].data.length > MAX_CACHE_DATA) {
+				let isExist = that.cacheTab.indexOf(idx)
+				if (isExist < 0) {
+					that.cacheTab.push(idx)
+				}
+			}
+			// TODO:当cachetab的长度大于缓存页码数，则去掉对应的tab数据
+			if (that.cacheTab.length > MAX_CACHE_PAGE) {
+				let cacheIndex = that.cacheTab[0]
+				that.clearTabData(cacheIndex)
+				that.cacheTab.splice(0, 1)
+			}
+		},
+		clearTabData(idx) {
+			this.newsList[idx].data.length = 0
+			this.newsList[idx].loadingText = '加载更多...'
 		},
 
-		/**
-		 * @Description: 判断当前滚动超过一屏时，设置tab标题滚动条
-		 */
-		checkCor: function() {
-			if (that.currentTab === 0) {
-				that.scrollLeft = 0
-			}
-			// 如果当前选项卡索引值大于5，设置横向滚动条
-			if (that.currentTab > 5) {
-				that.scrollLeft = 30 * that.currentTab
-			}
-		},
 		/**
 		 * @Description: 跳转到新闻详情页
 		 */
@@ -219,10 +257,6 @@ export default {
 				url: `/pages/news/detail?id=${item.id}`
 			})
 			// #endif
-		},
-		// 点击标题切换当前页时改变样式
-		swichNav: function(idx) {
-			that.currentTab = idx
 		}
 	},
 	computed: {

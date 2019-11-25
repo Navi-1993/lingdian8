@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-25 11:04:58
+ * @LastEditTime: 2019-11-26 00:22:08
  * @LastEditors: Edmund
  -->
 
@@ -15,14 +15,16 @@
     <!-- #ifdef H5 || MP -->
     <!-- tabbar -->
     <scroll-view
-      class="tab-view"
-      :scroll-x="true"
-      :scroll-with-animation="true"
-      :scroll-left="scrollLeft"
-    >
-      <block v-for="(item, idx) in tabbarList" :key="idx">
+									class="tab-view"
+									:scroll-x="true"
+									:show-scrollbar="false"
+									:scroll-into-view="scrollInto"
+									:scroll-with-animation="true">
+      <block 	v-for="(item, idx) in tabbarList"
+							:key="idx">
         <view
           class="tab-bar-item"
+					:id="item.tabId"
 					@tap.stop="swichNav(idx)"
           :class="[currentTab === idx ? 'active' : '']"
         >
@@ -34,25 +36,25 @@
       <view class="tabbar-controls" @click="navi2Drag">+</view>
     </scroll-view>
     <swiper
-      class="tab-content"
-      :current="currentTab"
-      duration="300"
-      :style="{ height: windowHeight + 'px', minHeight: windowHeight + 'px' }"
-      @change="switchTab"
-    >
-      <block v-for="(item, idx) in 10" :key="idx">
+						class="tab-content"
+						:current="currentTab"
+						duration="300"
+						:style="{ height: windowHeight + 'px', minHeight: windowHeight + 'px' }"
+						@change="switchTab">
+      <block v-for="(item, idx) in tabbarList" :key="idx">
         <swiper-item>
           <scroll-view
-            :scroll-y="true"
-            :style="{ height: windowHeight - 40 + 'px' }"
-            :scroll-with-animation="true"
-            :scroll-left="scrollLeft"
-          >
-            <block v-for="(item, idx) in videoList" :key="idx">
-              <view class="card" @tap.stop="navi2(item)">
+												:scroll-y="true"
+												:style="{ height: windowHeight - 40 + 'px' }"
+												:scroll-with-animation="true">
+            <block v-for="(item, index) in videoList[idx].data" :key="index">
+              <view class="card" 
+										@tap.stop="navi2(item)">
                 <view class="poster">
                   <!-- item.imgHref -->
-                  <image :src="item.imgHref" class="image" mode="aspectFill">
+                  <image 	:src="item.imgHref"
+													class="image" 
+													mode="aspectFill">
                   </image>
                   <text class="playBtn iconfont">
                     &#xe620;
@@ -60,7 +62,8 @@
                 </view>
                 <view class="controls">
                   <view class="sheet_l">
-                    <view style="margin-right:10rpx" class="iconfont">
+                    <view 	style="margin-right:10rpx" 
+														class="iconfont">
                       &#xe61f;
                     </view>
                     <view>99999</view>
@@ -90,6 +93,9 @@ import _ from 'underscore'
 import tuiLoading from 'components/loading/loading.vue'
 import { queryAllEvent } from '@/api/match.js'
 import { queryVideoTitle, queryLiveContent } from 'api/video.js'
+// 定义每页的缓存数据长度与在该清空下缓存的页码
+const MAX_CACHE_DATA = 100 // 默认100，测试写为8
+const MAX_CACHE_PAGE = 3
 export default {
 	name: 'video',
 	components: {
@@ -101,15 +107,29 @@ export default {
 			windowHeight: '', //窗口高度
 			tabbarList: [], // tabbar数据
 			currentTab: 0, //预设当前tab项的值
-			scrollLeft: 0, //tab标题的滚动条位置
 			isLoading: false, // 加载弹窗
+			scrollInto: '',
+			cacheTab: [], // 缓存tab
 			// TODO: 视频所用数据
 			videoList: []
 		}
 	},
 	created() {
 		that = this
-		that._queryVideoTitle()
+		that.windowHeight = that.$sysCall.windowHeight()
+		async function init() {
+			await that._queryAllEvent()
+			that.tabbarList.forEach((item) => {
+				that.videoList.push({
+					data: [],
+					isLoading: false,
+					refreshText: '',
+					loadingText: 'loading...'
+				})
+			})
+			await that._queryVideoTitle(0)
+		}
+		init()
 	},
 	onShow() {
 		// #ifdef APP-PLUS
@@ -121,39 +141,29 @@ export default {
 		})
 		// #endif
 	},
-	mounted() {
-		that.windowHeight = that.$sysCall.windowHeight()
-		that._queryAllEvent()
-	},
+	mounted() {},
 	methods: {
 		/**
 		 * @Description: 请求视频标题列表
 		 */
 
-		_queryVideoTitle: _.debounce(async () => {
+		_queryVideoTitle: _.debounce(async (idx) => {
 			that.isLoading = true
 			let params = {
-				id: that.tabbarList[that.currentTab].id,
 				// limit: 20,
+				// type: that.tabbarList[that.currentTab].type
+				id: that.tabbarList[that.currentTab].id,
 				offset: 1,
-				type: that.tabbarList[that.currentTab].type
+				type: 5
 			}
 			let res = await queryVideoTitle(params)
 			if (res.statusCode === 200) {
-				// console.log('请求视频标题列表', res.data.data)
-
-				that.videoList = res.data.data.list
 				that.isLoading = false
+				that.videoList[idx].data = res.data.data.list
+			} else {
+				that.$sysCall.toast('加载失败，请刷新重试')
 			}
-			setTimeout(() => {
-				that.isLoading = false
-			}, 3000)
 		}, 1000),
-		// 点击标题切换当前页时改变样式
-		swichNav: function(idx) {
-			that.currentTab = idx
-		},
-
 		/**
 		 * @Description: 请求所有项目
 		 */
@@ -164,7 +174,14 @@ export default {
 			}
 			let res = await queryAllEvent(params)
 			if (res.statusCode === 200) {
-				that.tabbarList = res.data.data.list
+				let obj = res.data.data.list
+				obj = obj.map((item) => {
+					return (item = {
+						...item,
+						tabId: `tabId${item.id}${parseInt(Math.random() * 10 + 1)}`
+					})
+				})
+				that.tabbarList = obj
 			}
 		},
 
@@ -187,23 +204,29 @@ export default {
 		 */
 		switchTab: (e) => {
 			that.currentTab = e.target.current
-			// #ifdef H5
-			that.videoList = []
-			// #endif
-			that.checkCor()
-			that._queryVideoTitle()
+			that.swichNav(that.currentTab)
 		},
-
-		/**
-		 * @Description: 判断当前滚动超过一屏时，设置tab标题滚动条
-		 */
-		checkCor: function() {
-			if (that.currentTab === 0) {
-				that.scrollLeft = 0
+		swichNav: function(idx) {
+			that.currentTab = idx
+			if (that.videoList[idx].data.length === 0) {
+				that._queryVideoTitle(idx)
 			}
-			// 如果当前选项卡索引值大于5，设置横向滚动条
-			if (that.currentTab > 5) {
-				that.scrollLeft = 30 * that.currentTab
+			console.log('that.tabbarList[idx].tabId', that.tabbarList[idx].tabId)
+			// 调整页签
+			that.scrollInto = that.tabbarList[idx].tabId
+
+			// TODO:当页面数据超过100条，则缓存该tab到cachetab
+			if (that.videoList[idx].data.length > MAX_CACHE_DATA) {
+				let isExist = that.cacheTab.indexOf(idx)
+				if (isExist < 0) {
+					that.cacheTab.push(idx)
+				}
+			}
+			// TODO:当cachetab的长度大于缓存页码数，则去掉对应的tab数据
+			if (that.cacheTab.length > MAX_CACHE_PAGE) {
+				let cacheIndex = that.cacheTab[0]
+				that.clearTabData(cacheIndex)
+				that.cacheTab.splice(0, 1)
 			}
 		}
 	},

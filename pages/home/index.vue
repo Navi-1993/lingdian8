@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 22:07:02
- * @LastEditTime: 2019-11-25 17:41:37
+ * @LastEditTime: 2019-11-26 00:07:29
  * @LastEditors: Edmund
  -->
 
@@ -40,18 +40,18 @@
 			<!-- item -->
       <block v-for="(item, idx) in tabbarList" :key="idx">
         <swiper-item >
-          <scroll-view scroll-y class="scoll-y">
+          <scroll-view 	:scroll-y="true" 
+												class="scoll-y">
             <calendar>
               <text slot="date">11月24日 星期天</text>
             </calendar>
-            <block v-for="(item, index) in matchList[idx].data" :key="index">
+            <block v-for="(item, index) in matchList[currentTab].data" :key="index">
               <view @tap.stop="navi2Chatroom(item)">
-                <event-card
-                  :homeTeamName="item.homeTeamName"
-                  :guestTeamName="item.guestTeamName"
-                  :teamALogo="item.homeTeamLogoPath"
-                  :teamBLogo="item.guestTeamLogoPath"
-                  :livesUrl="''">
+                <event-card		:homeTeamName="item.homeTeamName"
+															:guestTeamName="item.guestTeamName"
+															:teamALogo="item.homeTeamLogoPath"
+															:teamBLogo="item.guestTeamLogoPath"
+															:livesUrl="''">
                   <text slot="text">
                     {{ item.matchBeginTime }}
                     {{ item.matchTitle }}
@@ -76,8 +76,8 @@ import eventCard from 'components/sportsEvent/event-card.vue'
 import { queryAllEvent, queryAllMatchList } from '@/api/match.js'
 
 // 定义每页的缓存数据长度与在该清空下缓存的页码
-const MAX_CACHE_DATA = 8 // 默认100，测试写为8
-const MAX_CACHE_PAGE = 5
+const MAX_CACHE_DATA = 100 // 默认100，测试写为8
+const MAX_CACHE_PAGE = 3
 export default {
 	components: {
 		calendar,
@@ -205,11 +205,10 @@ export default {
 				id: that.tabbarList[that.currentTab].id,
 				// limit: 20,
 				offset: 1,
-				type: that.tabbarList[that.currentTab].type
+				type: that.tabbarList[that.currentTab].type * 1
 			}
 			let res = await queryAllMatchList(params)
 			if (res.statusCode === 200) {
-				// when success ,do sth you want
 				that.isLoading = false
 				that.matchList[idx].data = res.data.data.list || []
 			} else {
