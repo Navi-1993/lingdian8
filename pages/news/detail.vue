@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-24 10:20:42
- * @LastEditTime: 2019-11-25 18:05:29
+ * @LastEditTime: 2019-11-26 00:46:45
  * @LastEditors: Edmund
  -->
 
@@ -56,6 +56,13 @@ export default {
 							<title>Document</title>
 						</head>
 						<style>
+							* {
+								max-width: 100%;
+							}
+							body {
+								width:100vw;
+								overflow-x: hidden;
+							}
 							img {
 								display:block;
 								width: 100%;
@@ -66,7 +73,7 @@ export default {
 									<div style="height:100px;width:100%;"></div>
 									</body>
 									</html>`,
-			content: `<div>该文章无最新数据</div>`,
+			content: `<div>loading...</div>`,
 			inputValue: ''
 		}
 	},
@@ -77,7 +84,6 @@ export default {
 	},
 	created() {
 		that = this
-		console.log('that.$Route.query.id', that.$Route)
 		that.windowHeight = that.$sysCall.windowHeight()
 		// #ifdef H5
 		that._queryNewsContent(that.$Route.query.id)
