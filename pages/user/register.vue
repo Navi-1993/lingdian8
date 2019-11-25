@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-10 21:42:14
- * @LastEditTime: 2019-11-23 22:02:00
+ * @LastEditTime: 2019-11-25 14:32:26
  * @LastEditors: Edmund
  -->
 
@@ -157,7 +157,7 @@ export default {
 				that.$sysCall.toast(res.data.resultMsg)
 				if (res.resultCode === 1) {
 					// do sth
-					console.log('success')
+					that.$Router.push({ path: '/pages/user/login' })
 				}
 			}
 		}

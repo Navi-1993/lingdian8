@@ -3,38 +3,46 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 12:54:43
- * @LastEditTime: 2019-11-25 11:11:57
+ * @LastEditTime: 2019-11-25 14:14:12
  * @LastEditors: Edmund
  */
 
 /* 默认主题颜色变量 */
 
 /* 0-背景颜色 */
-$default-bg-black: #1b1b30;
+$default-bg-black: rgba(27, 27, 48, 1);
 $default-bg-white: rgba(255, 255, 255, 1);
 $default-bg-gray: rgba(247, 247, 247, 1);
-$default-bg-hover: #f1f1f1; //点击状态颜色
+$default-bg-hover: rgba(241, 241, 241, 1); //点击状态颜色
 $default-bg-black1: rgba(27, 27, 48, 1);
 $default-bg-mask: rgba(0, 0, 0, 0.4); //遮罩颜色
 
 /* 0-行为相关颜色 */
-$default-color-primary: #007aff;
-$default-color-success: #4cd964;
-$default-color-warning: #f0ad4e;
-$default-color-error: #dd524d;
+$default-color-primary: rgba(0, 122, 255, 1);
+$default-color-success: rgba(76, 217, 100, 1);
+$default-color-warning: rgba(240, 173, 78, 1);
+$default-color-error: rgba(221, 82, 77, 1);
 
 /* 0-文字基本颜色 */
-$default-text-color: #000000; //基本色
-$default-text-color-white: #fefefe; // 白色字体
+$default-text-color: rgba(0, 0, 0, 1); //基本色
+$default-text-color-white: rgba(254, 254, 254, 1); // 白色字体
 $default-text-color-inverse: rgba(153, 153, 153, 1); //反色
-$default-text-color-grey: #999; //辅助灰色，如加载更多的提示信息
-$default-text-color-placeholder: #808080;
-$default-text-color-disable: #c0c0c0;
+$default-text-color-grey: rgba(
+  153,
+  153,
+  153,
+  1
+); //辅助灰色，如加载更多的提示信息
+$default-text-color-placeholder: rgba(128, 128, 128, 1);
+$default-text-color-disable: rgba(192, 192, 192, 1);
 
 /* 0-边框颜色 */
 $default-border-color: rgba(204, 204, 204, 1);
 $default-border-color-gray: rgba(234, 234, 234, 1);
-$default-border-shadow: #a1a1a1;
+$default-border-shadow: rgba(161, 161, 161, 1);
+
+/* 0-阴影颜色 */
+$default-shadow-color: rgba(85, 71, 71, 0.1);
 
 /* 1-边框颜色 */
 
@@ -70,11 +78,11 @@ $spacing-col-lg: 24rpx;
 $opacity-disabled: 0.3; // 组件禁用态的透明度
 
 /* 文章场景相关 */
-$doc-color-title: #2c405a; // 文章标题颜色
+$doc-color-title: rgba(44, 64, 90, 1); // 文章标题颜色
 $doc-font-size-title: 40rpx;
-$doc-color-subtitle: #555555; // 二级标题颜色
+$doc-color-subtitle: rgba(85, 85, 85, 1); // 二级标题颜色
 $doc-font-size-subtitle: 36rpx;
-$doc-color-paragraph: #3f536e; // 文章段落颜色
+$doc-color-paragraph: rgba(63, 83, 110, 1); // 文章段落颜色
 $doc-font-size-paragraph: 30rpx;
 
 /* 自定义常用样式 */

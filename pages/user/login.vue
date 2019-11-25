@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-23 21:51:53
+ * @LastEditTime: 2019-11-25 14:35:38
  * @LastEditors: Edmund
  -->
 <template>
@@ -162,7 +162,11 @@ export default {
 				that.$sysCall.toast(res.data.resultMsg)
 				// 接口返回状态码不为1，则退出方法
 				if (res.data.resultCode !== 1) return
-				// TODO: 周一改为vuex 存储 登陆成功后更新本地user数据
+				// 1秒后回到个人中心
+				setTimeout(() => {
+					that.$Router.push({ path: '/pages/user/center' })
+				}, 1000)
+				// FIXME:改为vuex 存储 登陆成功后更新本地user数据
 				uni.setStorage({
 					key: 'user',
 					data: {

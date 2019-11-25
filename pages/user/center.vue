@@ -3,15 +3,14 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-25 11:06:28
- * @LastEditTime: 2019-11-25 13:54:09
+ * @LastEditTime: 2019-11-25 14:42:42
  * @LastEditors: Edmund
  -->
 
 
 <template>
   <view class="container" :style="{	height: windowHeight + 'px',
-																		minHeight: windowHeight + 'px',
-																		background:'blue'}">
+																		minHeight: windowHeight + 'px',}">
 
     <view class="header">
 			<!-- #ifndef H5 -->
@@ -38,8 +37,15 @@
     </view>
     <view class="content">
 			<view class="sheet">
-				<block>
-					<view class="sheet_item"></view>
+				<block v-for="(item,idx) in sheetData" :key="idx">
+					<view class="sheet_item"
+								@tap.stop="sheetTap(item)">
+						<text class="sheet_item_l iconfont" :style="{	color:item.color}">
+							{{item.iconfont}}
+						</text>
+						<view class="sheet_item_c">{{item.name}}</view>
+						<view class="sheet_item_r iconfont"> &#xe602;</view>
+					</view>
 				</block>
 			</view>
     </view>
@@ -61,26 +67,26 @@ export default {
 			sheetData: [
 				{
 					name: '积分商城',
-					iconfont: '',
-					color: '',
+					iconfont: '\ue62b',
+					color: '#cc69d6',
 					url: ''
 				},
 				{
 					name: '任务大厅',
-					iconfont: '',
-					color: '',
+					iconfont: '\ue60b',
+					color: '#4191d2',
 					url: ''
 				},
 				{
 					name: '意见反馈',
-					iconfont: '',
-					color: '',
+					iconfont: '\ue607',
+					color: '#4191be',
 					url: ''
 				},
 				{
 					name: '邀请朋友赚积分',
-					iconfont: '',
-					color: '',
+					iconfont: '\ue608',
+					color: '#d0a5a1',
 					url: ''
 				}
 			]
@@ -113,7 +119,11 @@ export default {
 	onReachBottom() {},
 	onShareAppMessage() {},
 	onPageScroll() {},
-	methods: {},
+	methods: {
+		sheetTap(item) {
+			that.$sysCall.toast(item.name + '功能未开放')
+		}
+	},
 	computed: {},
 	watch: {}
 }
@@ -149,7 +159,8 @@ export default {
 			.head {
 				height: 118rpx;
 				width: 118rpx;
-				margin-right: 40rpx;
+				margin: 0 40rpx;
+				border-radius: 50%;
 			}
 			.name {
 				font-size: 34rpx;
@@ -187,8 +198,43 @@ export default {
 		}
 	}
 	.content {
-		background: red;
-		height: 884rpx;
+		padding: 20rpx 20rpx 0 20rpx;
+		height: 950rpx;
+		// flex: 1;
+		background: $default-bg-gray;
+		.sheet {
+			width: 690rpx;
+			height: 395rpx;
+			background: $default-bg-white;
+			box-shadow: 0rpx 1rpx 10rpx 0rpx $default-shadow-color;
+			border-radius: 12rpx;
+			padding: 0 10rpx;
+			&_item {
+				position: relative;
+				box-sizing: border-box;
+				height: 98rpx;
+				border-bottom: 1rpx solid $default-border-color-gray;
+				display: flex;
+				align-items: center;
+				font-size: 36rpx;
+				&_l {
+					margin-right: 20rpx;
+					font-size: 36rpx;
+					span {
+						width: 36rpx;
+						height: 36rpx;
+						font-size: 36rpx;
+					}
+				}
+				&_r {
+					transform: rotate(180deg);
+					position: absolute;
+					right: 0;
+					margin-right: 10rpx;
+					color: $default-text-color-inverse;
+				}
+			}
+		}
 	}
 }
 </style>
