@@ -3,13 +3,13 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-25 14:35:38
+ * @LastEditTime: 2019-11-25 17:57:15
  * @LastEditors: Edmund
  -->
 <template>
   <view class="container">
     <view class="topLayout">
-      <image class="iconLogo"></image>
+      <image class="iconLogo" src="/static/assets/logo.png"></image>
     </view>
     <view class="contentLayout" :style="[{ height: contentHeight }]">
       <input

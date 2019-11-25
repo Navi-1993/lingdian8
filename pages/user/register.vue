@@ -10,7 +10,7 @@
 <template>
   <view class="container">
     <view class="topLayout">
-      <image class="iconLogo"></image>
+      <image class="iconLogo" src="/static/assets/logo.png"></image>
     </view>
     <view class="contentLayout" :style="[{ height: contentHeight }]">
       <input

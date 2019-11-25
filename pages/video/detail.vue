@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-20 00:58:12
- * @LastEditTime: 2019-11-24 23:18:28
+ * @LastEditTime: 2019-11-25 18:02:00
  * @LastEditors: Edmund
  -->
 
@@ -74,7 +74,10 @@
         </view>
       </view>
       <view class="chatBox">
-        <chat :height="626" :chatDataList="chatDataList" />
+        <chat :height="626"
+							:chatDataList="chatDataList"
+							leftHead="/static/assets/logo.png"
+							rightHead="/static/assets/logo.png"/>
       </view>
     </view>
 

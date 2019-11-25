@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-21 10:34:46
- * @LastEditTime: 2019-11-25 12:00:19
+ * @LastEditTime: 2019-11-25 17:52:38
  * @LastEditors: Edmund
  -->
 <template>
@@ -45,11 +45,12 @@
 									:interval="3000"
 									:duration="300"
 									:circular="true"
+									v-if="bannerList.length > 0"
 									previous-margin="60rpx"
 									next-margin="60rpx"
 									class="banner">
 							<block v-for="(item,idx) in bannerList" :key="idx">
-								<swiper-item class="banner_item">
+								<swiper-item class="banner_item" >
 									<image 	:src="'../../static/assets/default.png'"
 													class="banner_item_img"
 													@tap.stop="navi2NewsDetail(item)"
@@ -60,7 +61,7 @@
 								</swiper-item>
 							</block>
       		</swiper>
-					<view class="bannerStepStone"></view>
+					<view class="bannerStepStone" v-if="bannerList.length > 0"></view>
 					<!-- 数据列表 -->
           <scroll-view
             :scroll-y="true"
