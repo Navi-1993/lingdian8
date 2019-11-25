@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-21 10:34:46
- * @LastEditTime: 2019-11-25 22:07:22
+ * @LastEditTime: 2019-11-26 00:26:14
  * @LastEditors: Edmund
  -->
 <template>
@@ -107,7 +107,7 @@ import tuiLoading from 'components/loading/loading.vue'
 import { queryAllEvent } from 'api/match.js'
 import { queryNewsTitle } from 'api/news.js'
 // 定义每页的缓存数据长度与在该清空下缓存的页码
-const MAX_CACHE_DATA = 100 // 默认100，测试写为8
+const MAX_CACHE_DATA = 50
 const MAX_CACHE_PAGE = 3
 export default {
 	name: 'news-index',

@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-26 00:22:08
+ * @LastEditTime: 2019-11-26 00:26:02
  * @LastEditors: Edmund
  -->
 
@@ -94,7 +94,7 @@ import tuiLoading from 'components/loading/loading.vue'
 import { queryAllEvent } from '@/api/match.js'
 import { queryVideoTitle, queryLiveContent } from 'api/video.js'
 // 定义每页的缓存数据长度与在该清空下缓存的页码
-const MAX_CACHE_DATA = 100 // 默认100，测试写为8
+const MAX_CACHE_DATA = 20
 const MAX_CACHE_PAGE = 3
 export default {
 	name: 'video',
