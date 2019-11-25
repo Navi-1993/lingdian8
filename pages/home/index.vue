@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 22:07:02
- * @LastEditTime: 2019-11-26 00:39:32
+ * @LastEditTime: 2019-11-26 00:49:23
  * @LastEditors: Edmund
  -->
 
@@ -76,7 +76,7 @@ import eventCard from 'components/sportsEvent/event-card.vue'
 import { queryAllEvent, queryAllMatchList } from '@/api/match.js'
 
 // 定义每页的缓存数据长度与在该清空下缓存的页码
-const MAX_CACHE_DATA = 20
+const MAX_CACHE_DATA = 5
 const MAX_CACHE_PAGE = 3
 export default {
 	components: {

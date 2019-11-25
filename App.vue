@@ -5,6 +5,10 @@ export default {
 	// 	vuex: 'hello'
 	// },
 	onLaunch: function() {
+		uni.onWindowResize((res) => {
+			console.log('变化后的窗口宽度=' + res.size)
+			console.log('变化后的窗口高度=' + res.size.windowHeight)
+		})
 		console.log('App Launch')
 		// #ifdef APP-PLUS
 		// 锁定app屏幕
