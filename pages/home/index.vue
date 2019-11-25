@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 22:07:02
- * @LastEditTime: 2019-11-25 17:19:02
+ * @LastEditTime: 2019-11-25 17:41:37
  * @LastEditors: Edmund
  -->
 
@@ -74,8 +74,10 @@ import calendar from 'components/time_module/calendar.vue'
 import tuiLoading from 'components/loading/loading.vue'
 import eventCard from 'components/sportsEvent/event-card.vue'
 import { queryAllEvent, queryAllMatchList } from '@/api/match.js'
-const MAX_CACHE_DATA = 100
-const MAX_CACHE_PAGE = 3
+
+// 定义每页的缓存数据长度与在该清空下缓存的页码
+const MAX_CACHE_DATA = 8 // 默认100，测试写为8
+const MAX_CACHE_PAGE = 5
 export default {
 	components: {
 		calendar,
@@ -142,7 +144,6 @@ export default {
 						tabId: `tabId${item.id}${parseInt(Math.random() * 10 + 1)}`
 					})
 				})
-				console.log('obj', obj)
 				that.tabbarList = obj
 			}
 		},
@@ -173,26 +174,21 @@ export default {
 			// 当前tab为5的倍数，则调整一次tab
 			// if (idx % 3 == 0) {
 			that.scrollInto = that.tabbarList[idx].tabId
-			console.log('that.scrollInto', that.tabbarList[idx].tabId)
 			// }
-			if (that.currentTab === idx) {
-				return
-			}
-			// 缓存 tabId
+
+			// TODO:当页面数据超过100条，则缓存该tab到cachetab
 			if (that.matchList[idx].data.length > MAX_CACHE_DATA) {
-				let isExist = that.cacheTab.indexOf(that.currentTab)
+				let isExist = that.cacheTab.indexOf(idx)
 				if (isExist < 0) {
-					that.cacheTab.push(that.currentTab)
+					that.cacheTab.push(idx)
 				}
 			}
-			that.currentTab = index
-
-			// 释放 tabId
+			// TODO:当cachetab的长度大于缓存页码数，则去掉对应的tab数据
 			if (that.cacheTab.length > MAX_CACHE_PAGE) {
 				let cacheIndex = that.cacheTab[0]
 				that.clearTabData(cacheIndex)
 				that.cacheTab.splice(0, 1)
-				//console.log("remove cache index:: " + cacheIndex);
+				// console.log('remove cache index:: ' + cacheIndex)
 			}
 		},
 		clearTabData(idx) {
