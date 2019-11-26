@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 22:07:02
- * @LastEditTime: 2019-11-26 00:49:23
+ * @LastEditTime: 2019-11-26 09:57:50
  * @LastEditors: Edmund
  -->
 
@@ -15,7 +15,8 @@
     <scroll-view	class="tab-view"
 									:scroll-x="true"
 									:show-scrollbar="false"
-									:scroll-into-view="scrollInto">
+									:scroll-into-view="scrollInto"
+									:scroll-with-animation="true">
 			<!-- tabbar item -->
 			<block 	v-for="(item, idx) in tabbarList"
 							:key="idx">
@@ -230,10 +231,12 @@ export default {
 <style lang="scss" scoped>
 /*tabbar start*/
 /* 该页面全局隐藏滚动条 */
-::-webkit-scrollbar {
-	width: 0;
-	height: 0;
-	color: transparent;
+page {
+	::-webkit-scrollbar {
+		width: 0;
+		height: 0;
+		color: transparent;
+	}
 }
 .container {
 	display: flex;

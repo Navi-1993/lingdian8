@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-26 00:26:02
+ * @LastEditTime: 2019-11-26 09:58:12
  * @LastEditors: Edmund
  -->
 
@@ -14,8 +14,7 @@
   >
     <!-- #ifdef H5 || MP -->
     <!-- tabbar -->
-    <scroll-view
-									class="tab-view"
+    <scroll-view	class="tab-view"
 									:scroll-x="true"
 									:show-scrollbar="false"
 									:scroll-into-view="scrollInto"
@@ -136,9 +135,7 @@ export default {
 		// 通过id获取nvue子窗体
 		const playerNVue = uni.getSubNVueById('myplayer')
 		// 打开 nvue 子窗体
-		playerNVue.show('slide-in-right', 300, function() {
-			console.log('nvue open')
-		})
+		playerNVue.show('slide-in-right', 300, function() {})
 		// #endif
 	},
 	mounted() {},
@@ -211,7 +208,7 @@ export default {
 			if (that.videoList[idx].data.length === 0) {
 				that._queryVideoTitle(idx)
 			}
-			console.log('that.tabbarList[idx].tabId', that.tabbarList[idx].tabId)
+			// console.log('that.tabbarList[idx].tabId', that.tabbarList[idx].tabId)
 			// 调整页签
 			that.scrollInto = that.tabbarList[idx].tabId
 
@@ -236,6 +233,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+page {
+	::-webkit-scrollbar {
+		width: 0;
+		height: 0;
+		color: transparent;
+	}
+}
 .container {
 	display: flex;
 	flex-direction: column;

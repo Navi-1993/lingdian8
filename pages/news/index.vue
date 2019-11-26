@@ -273,6 +273,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+page {
+	::-webkit-scrollbar {
+		width: 0;
+		height: 0;
+		color: transparent;
+	}
+}
 .container {
 	display: flex;
 	flex-direction: column;
