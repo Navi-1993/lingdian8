@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-20 17:32:51
- * @LastEditTime: 2019-11-25 18:02:31
+ * @LastEditTime: 2019-11-26 11:54:33
  * @LastEditors: Edmund
  -->
 
@@ -34,13 +34,14 @@
                     <view class="chatbox chatbox-right">
                       {{item.otherText}}
                     </view>
-                    <image 	:src="leftHead"
+                    <image 	:src="leftHead || '/static/assets/user_default.png'"
 														class="user-pic left"></image>
                   </view>
                   <!-- mine -->
                   <view   class="chat-left"
                           v-if="item.myText">
-                    <image :src="rightHead" class="user-pic right"></image>
+                    <image 	:src="rightHead || '/static/assets/user_default.png'" 
+														class="user-pic right"></image>
                     <view class="chatbox chatbox-left">
                         {{item.myText}}
                     </view>

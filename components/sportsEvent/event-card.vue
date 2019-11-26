@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-28 14:37:31
- * @LastEditTime: 2019-11-26 10:40:46
+ * @LastEditTime: 2019-11-26 11:52:08
  * @LastEditors: Edmund
  -->
 
@@ -16,7 +16,7 @@
             </view>
             <view class="team">
               <view class="teamA">
-                <image :src="teamALogo"/>
+                <image :src="teamALogo || '/static/assets/teamLogo_default.png'"/>
                 <text>{{homeTeamName}}</text>
               </view>
               <view class="controls">
@@ -31,7 +31,7 @@
                 </text>
               </view>
               <view class="teamB">
-                <image :src="teamBLogo"/>
+                <image :src="teamBLogo || '/static/assets/teamLogo_default.png'"/>
                 <text>{{guestTeamName}}</text>
               </view>
             </view>
