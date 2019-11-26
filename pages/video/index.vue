@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-26 22:18:56
+ * @LastEditTime: 2019-11-26 22:20:43
  * @LastEditors: Edmund
  -->
 
@@ -281,6 +281,7 @@ export default {
 			}
 		},
 		loadmore: _.debounce(() => {
+			that.pagesNum = 0
 			that._queryVideoTitle(that.currentTab)
 			that.loadingMore = true
 			setTimeout(() => {
