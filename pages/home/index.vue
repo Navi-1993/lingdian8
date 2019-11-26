@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 22:07:02
- * @LastEditTime: 2019-11-26 15:08:14
+ * @LastEditTime: 2019-11-26 17:08:25
  * @LastEditors: Edmund
  -->
 
@@ -276,7 +276,6 @@ export default {
 			}
 		},
 		loadmore: _.debounce(() => {
-			that.$sysCall.toast('使用防抖控制loadmore行为加载更多')
 			that.loadingMore = true
 			that._queryAllMatchList(that.currentTab)
 			setTimeout(() => {
