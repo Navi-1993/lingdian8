@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-28 14:37:31
- * @LastEditTime: 2019-11-25 15:42:13
+ * @LastEditTime: 2019-11-26 10:40:46
  * @LastEditors: Edmund
  -->
 
@@ -20,7 +20,10 @@
                 <text>{{homeTeamName}}</text>
               </view>
               <view class="controls">
-                <text class="iconfont">&#xe600;</text>
+                <text class="iconfont"
+											v-if="!isVsLogo">&#xe600;</text>
+								<view class="vsLogo"
+											v-if="isVsLogo">VS</view>
                 <text class="videoControls"
                       v-if="livesUrl !== ''"
                       @tap="bottomToast">
@@ -42,6 +45,10 @@
 export default {
 	name: 'eventCard',
 	props: {
+		isVsLogo: {
+			type: Boolean,
+			default: false
+		},
 		homeTeamName: {
 			type: String,
 			default: 'homeTeamName'
@@ -128,7 +135,7 @@ export default {
 		}
 		.videoControls {
 			display: flex;
-			height: 34rpx;
+			height: 40rpx;
 			padding: 0 20rpx;
 			width: 110rpx;
 			justify-content: center;
@@ -139,6 +146,9 @@ export default {
 			color: $default-text-color-white;
 			font-size: 18rpx;
 		}
+	}
+	.vsLogo {
+		font-size: 36rpx;
 	}
 }
 </style>

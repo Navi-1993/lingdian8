@@ -151,6 +151,13 @@
       "font_class": "icon-test1",
       "unicode": "e608",
       "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "11965929",
+      "name": "签到",
+      "font_class": "qiandao",
+      "unicode": "e609",
+      "unicode_decimal": 58889
     }
   ]
 }

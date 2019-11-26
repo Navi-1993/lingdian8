@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-12 19:54:12
- * @LastEditTime: 2019-11-26 02:19:44
+ * @LastEditTime: 2019-11-26 10:04:05
  * @LastEditors: Edmund
  */
 
@@ -41,6 +41,13 @@ const user = [
         name: 'user-information',
         meta: {
             title: '修改个人信息'
+        }
+    },
+    {
+        path: '/pages/user/options',
+        name: 'user-options',
+        meta: {
+            title: '设置'
         }
     },
 

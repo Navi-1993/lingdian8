@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-19 10:43:39
- * @LastEditTime: 2019-11-19 13:40:51
+ * @LastEditTime: 2019-11-26 11:01:21
  * @LastEditors: Edmund
  -->
 
@@ -23,6 +23,7 @@
                   :active="isAnimate"
                   :stroke-width="barHeight"
                   :activeColor="leftBgColor"
+									class="progress"
                   :backgroundColor="rightBgColor"/>
     </view>
 </template>
@@ -91,16 +92,23 @@ export default {
 	.leftNum {
 		position: absolute;
 		left: 20rpx;
-		top: 0;
+		top: -8rpx;
+		margin-bottom: 8rpx;
 		color: #ff8400;
 		font-size: 22rpx;
 	}
 	.rightNum {
 		position: absolute;
 		right: 20rpx;
-		top: 0;
+		top: -8rpx;
+		margin-bottom: 8rpx;
 		color: #1b1b30;
 		font-size: 22rpx;
+	}
+	.progress {
+		position: absolute;
+		bottom: 0;
+		width: 100vw;
 	}
 }
 </style>

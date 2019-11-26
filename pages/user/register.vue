@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-10 21:42:14
- * @LastEditTime: 2019-11-25 14:32:26
+ * @LastEditTime: 2019-11-26 11:40:08
  * @LastEditors: Edmund
  -->
 
@@ -155,9 +155,10 @@ export default {
 			let res = await register(params)
 			if (res.statusCode === 200) {
 				that.$sysCall.toast(res.data.resultMsg)
-				if (res.resultCode === 1) {
-					// do sth
-					that.$Router.push({ path: '/pages/user/login' })
+				if (res.data.resultCode === 1) {
+					setTimeout(() => {
+						that.$Router.push({ path: '/pages/user/login' })
+					}, 1000)
 				}
 			}
 		}

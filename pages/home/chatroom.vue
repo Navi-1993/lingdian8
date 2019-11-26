@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-19 09:49:44
- * @LastEditTime: 2019-11-25 17:25:08
+ * @LastEditTime: 2019-11-26 10:48:18
  * @LastEditors: Edmund
  -->
 
@@ -17,6 +17,7 @@
       <event-card
 									:homeTeamName="routerData.homeTeamName"
 									:guestTeamName="routerData.guestTeamName"
+									:isVsLogo="true"
 									:teamALogo="routerData.homeTeamLogoPath"
                   :teamBLogo="routerData.guestTeamLogoPath"
 									:livesUrl="'https://www.wongxuefeng.com'"
@@ -230,11 +231,13 @@ export default {
 		 * @return: void
 		 */
 		itemClick(e) {
-			that.$sysCall.toast(`当前点击的按钮索引为：${e.index}`)
+			// that.$sysCall.toast(`当前点击的按钮索引为：${e.index}`)
 			uni.navigateTo({
 				url: '/pages/video/detail'
 			})
-			// do sth
+			that.$Router({
+				path: '/pages/video/detail'
+			})
 		}
 	},
 	computed: {

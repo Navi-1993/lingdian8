@@ -101,6 +101,17 @@
       }
     },
     {
+      "path": "pages/user/options",
+      "style": {
+        "navigationBarTitleText": "设置",
+        "app-plus": {
+          "titleNView": true,
+          "animationType": "slide-in-right",
+          "animationDuration": 300
+        }
+      }
+    },
+    {
       "path": "pages/user/register",
       "style": {
         "navigationBarTitleText": "",

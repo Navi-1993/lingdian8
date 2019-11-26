@@ -3,20 +3,24 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-25 11:06:28
- * @LastEditTime: 2019-11-26 02:18:41
+ * @LastEditTime: 2019-11-26 11:47:05
  * @LastEditors: Edmund
  -->
 
 
 <template>
-  <view class="container" :style="{	height: windowHeight + 'px',
-																		minHeight: windowHeight + 'px',}">
+  <view class="container" :style="{	height: windowHeight  + 'px',
+																		minHeight: windowHeight  + 'px',
+																		maxHeight: windowHeight + 'px'}">
 
     <view class="header">
 			<!-- #ifndef H5 -->
 			<view class="status"></view>
 			<!-- #endif -->
-			<view class="setting iconfont">&#xe657;</view>
+			<view class="setting iconfont"
+						@tap.stop="navi2Options">
+						&#xe657;
+			</view>
 			<view class="user">
 				<image 	src="/static/assets/default.png"
 								class="head"
@@ -31,7 +35,7 @@
 				</view>
 				<view class="controls_c">|</view>
 				<view class="controls_r">
-					<text class="iconfont">&#xe659;</text>
+					<text class="iconfont">&#xe609;</text>
 					签到领积分
 				</view>
 			</view>
@@ -56,7 +60,7 @@
 <script>
 let that
 export default {
-	name: '',
+	name: 'user-center',
 	components: {},
 	props: {},
 	data() {
@@ -69,25 +73,25 @@ export default {
 				{
 					name: '积分商城',
 					iconfont: '\ue62b',
-					color: '#cc69d6',
+					color: '#4595ca',
 					url: ''
 				},
 				{
 					name: '任务大厅',
 					iconfont: '\ue60b',
-					color: '#4191d2',
+					color: '#f4a14e',
 					url: ''
 				},
 				{
 					name: '意见反馈',
 					iconfont: '\ue607',
-					color: '#4191be',
+					color: '#45b284',
 					url: ''
 				},
 				{
 					name: '邀请朋友赚积分',
 					iconfont: '\ue608',
-					color: '#d0a5a1',
+					color: '#ed7290',
 					url: ''
 				}
 			]
@@ -128,6 +132,11 @@ export default {
 			that.$Router.push({
 				path: '/pages/user/information'
 			})
+		},
+		navi2Options() {
+			that.$Router.push({
+				path: '/pages/user/options'
+			})
 		}
 	},
 	computed: {},
@@ -136,9 +145,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+page {
+	background: $default-bg-gray;
+}
 .container {
 	display: flex;
 	flex-direction: column;
+	overflow: hidden;
 	.header {
 		display: flex;
 		flex-direction: column;
@@ -155,7 +168,7 @@ export default {
 			margin-right: 20rpx;
 			align-items: center;
 			color: $default-text-color-white;
-			font-size: 36rpx;
+			font-size: 48rpx;
 		}
 		.user {
 			flex: 1;
@@ -175,7 +188,7 @@ export default {
 			.arrow_r {
 				@include center;
 				right: 40rpx;
-				top: 50%;
+				top: 40%;
 				color: $default-text-color-white;
 				font-size: 36rpx;
 				transform: rotate(180deg);
@@ -198,15 +211,14 @@ export default {
 			&_r {
 				.iconfont {
 					margin-right: 20rpx;
+					font-size: 24rpx;
 				}
 			}
 		}
 	}
 	.content {
+		flex: 1;
 		padding: 20rpx 20rpx 0 20rpx;
-		height: 950rpx;
-		// flex: 1;
-		background: $default-bg-gray;
 		.sheet {
 			width: 690rpx;
 			height: 395rpx;
@@ -224,9 +236,11 @@ export default {
 				border-bottom: 1rpx solid $default-border-color-gray;
 				display: flex;
 				align-items: center;
-				font-size: 36rpx;
+				color: $default-text-blackBold;
+				font-size: 30rpx;
 				&_l {
 					margin-right: 20rpx;
+					font-size: 44rpx;
 				}
 				&_r {
 					transform: rotate(180deg);

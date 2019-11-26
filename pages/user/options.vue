@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-20 09:39:27
- * @LastEditTime: 2019-11-26 02:26:58
+ * @LastEditTime: 2019-11-26 10:08:06
  * @LastEditors: Edmund
  -->
 
@@ -58,4 +58,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.container {
+	background: red;
+	width: 100vw;
+	display: flex;
+	flex-direction: column;
+	padding: 0 20rpx;
+}
+</style>
