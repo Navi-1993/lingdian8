@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-26 14:44:41
+ * @LastEditTime: 2019-11-26 16:53:30
  * @LastEditors: Edmund
  -->
 
@@ -19,14 +19,12 @@
 									:show-scrollbar="false"
 									:scroll-into-view="scrollInto"
 									:scroll-with-animation="true">
-      <block 	v-for="(item, idx) in tabbarList"
-							:key="idx">
-        <view
-          class="tab-bar-item"
-					:id="item.tabId"
-					@tap.stop="swichNav(idx)"
-          :class="[currentTab === idx ? 'active' : '']"
-        >
+      <block 	v-for="(item, index) in tabbarList"
+							:key="index">
+        <view	class="tab-bar-item"
+							:id="item.tabId"
+							@tap.stop="swichNav(index)"
+							:class="[currentTab === index ? 'active' : '']">
           <text class="tab-bar-title">
             {{ item.name }}
           </text>
@@ -217,14 +215,16 @@ export default {
 		 */
 		switchTab: (e) => {
 			that.currentTab = e.target.current
+			console.log('switchTab', that.currentTab)
 			that.swichNav(that.currentTab)
 		},
 		swichNav: function(idx) {
+			debugger
+			console.log('swichNav', idx)
 			that.currentTab = idx
 			if (that.videoList[idx].data.length === 0) {
 				that._queryVideoTitle(idx)
 			}
-			// console.log('that.tabbarList[idx].tabId', that.tabbarList[idx].tabId)
 			// 调整页签
 			that.scrollInto = that.tabbarList[idx].tabId
 
@@ -280,7 +280,6 @@ export default {
 			}
 		},
 		loadmore: _.debounce(() => {
-			that.$sysCall.toast('使用防抖控制loadmore行为加载更多')
 			that._queryVideoTitle(that.currentTab)
 			that.loadingMore = true
 			setTimeout(() => {

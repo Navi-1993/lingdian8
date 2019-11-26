@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-21 10:34:46
- * @LastEditTime: 2019-11-26 15:47:33
+ * @LastEditTime: 2019-11-26 16:54:17
  * @LastEditors: Edmund
  -->
 <template>
@@ -22,7 +22,7 @@
         <view
 							class="tab-bar-item"
 							:id="item.tabId"
-							@tap.stop="swichNav"
+							@tap.stop="swichNav(idx)"
 							:class="[currentTab === idx ? 'active' : '']">
           <text class="tab-bar-title">
             {{ item.name }}
