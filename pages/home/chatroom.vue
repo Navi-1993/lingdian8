@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-19 09:49:44
- * @LastEditTime: 2019-11-26 15:41:10
+ * @LastEditTime: 2019-11-26 15:44:00
  * @LastEditors: Edmund
  -->
 
@@ -164,7 +164,7 @@ export default {
 		 */
 		actionsheetOpen() {
 			if (that.routerData.matchLiveSourceDOS.length === 0)
-				return that.$sysCall.toast('该赛事没有直播源')
+				return that.$sysCall.toast('该赛事没有播放源')
 			that.showActionSheet = true
 			// do sth
 			uni.hideKeyboard() // 隐藏软键盘

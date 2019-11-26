@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 22:07:02
- * @LastEditTime: 2019-11-26 16:12:01
+ * @LastEditTime: 2019-11-26 15:48:57
  * @LastEditors: Edmund
  -->
 
@@ -62,7 +62,11 @@
 <script>
 let that
 import dragSort from 'components/drag-sort/index.vue'
-import { queryAllEvent } from 'api/match.js'
+import {
+	// updateUserAttend,
+	queryAllEvent
+	// queryUserAttendEventList
+} from 'api/match.js'
 // #ifdef H5
 import vuedraggable from 'vuedraggable'
 // #endif
@@ -95,6 +99,7 @@ export default {
 	beforeMount() {},
 	mounted() {
 		that._queryAllEvent()
+		that._updateUserAttend()
 	},
 	onLoad() {},
 	onShow() {},
@@ -103,14 +108,17 @@ export default {
 		console.timeEnd('renderTime')
 		// #endif
 	},
+	onHide() {},
 	onUnload() {},
 	beforeDestroy() {},
+	destroyed() {},
 	methods: {
 		/**
 		 * @Description: 查询所有赛事项目接口
 		 */
 		async _queryAllEvent() {
 			let params = {
+				limit: 10,
 				offset: 1
 			}
 			let res = await queryAllEvent(params)
@@ -118,48 +126,69 @@ export default {
 				that.unseletedList = res.data.data.list
 			}
 		},
+		async _updateUserAttend(params) {
+			let res = updateUserAttend(params)
+			if (res.statusCode === 200) {
+				// do sth
+			}
+		},
+
 		/**
 		 * @Description: 添加至选择列表
 		 */
 		add2SelectedList(item) {
+			// 拼接参数
+			let params = {
+				attentedType: item.type,
+				controlType: 0,
+				id: item.id
+			}
+			// 请求更新接口
+			that._updateUserAttend(params)
 			let idx = that.unseletedList.findIndex((ele) => {
 				return ele.type === item.type && ele.id === item.id
 			})
 			that.selectedList.push(that.unseletedList[idx])
 			that.unseletedList.splice(idx, 1)
-			uni.setStorageSync('localtab', that.selectedList)
-			// 存入uni的本地存储
 		},
 		/**
 		 * @Description: 添加至未选择列表
 		 */
 		add2UnselectedList(item) {
+			// 拼接参数
+			let params = {
+				attentedId: item.id,
+				controlType: 1,
+				attentedType: item.type
+			}
+			// 请求更新接口
+			that._updateUserAttend(params)
 			let idx = that.selectedList.findIndex((ele) => {
 				return ele.type === item.type && ele.id === item.id
 			})
 			that.unseletedList.push(that.selectedList[idx])
 			that.selectedList.splice(idx, 1)
-		}
+		},
 		/**
 		 * @Description: drag-sort组件$emit change 时更改 Item
 		 * @e {Object} drag-组件定义的事件值
 		 * @return: void
 		 */
-		// itemChange(e) {
-		// 	let currentItem = e.item
-		// 	// 刷新数据
-		// 	that.updateList(currentItem)
-		// },
-		// updateList(currentItem) {
-		// 	console.log('currentItem', currentItem)
-		// 	// TODO:从数组中找1个符合需求的元素，返回其索引
-		// 	let currentIdx = currentItem.index
-		// 	let frontIdx = currentItem.oldIdx
-		// 	// 交换数组元素位置
-		// 	let temp = this.selectedList[currentIdx]
-		// 	this.selectedList[currentIdx] = this.selectedList[frontIdx]
-		// 	this.selectedList[frontIdx] = temp
-		// }
+		itemChange(e) {
+			let currentItem = e.item
+			// 刷新数据
+			that.updateList(currentItem)
+		},
+		updateList(currentItem) {
+			console.log('currentItem', currentItem)
+			// TODO:从数组中找1个符合需求的元素，返回其索引
+			let currentIdx = currentItem.index
+			let frontIdx = currentItem.oldIdx
+			// 交换数组元素位置
+			let temp = this.selectedList[currentIdx]
+			this.selectedList[currentIdx] = this.selectedList[frontIdx]
+			this.selectedList[frontIdx] = temp
+		}
 	},
 	computed: {},
 	watch: {}
@@ -168,8 +197,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-	width: 750rpx;
-	overflow: auto;
+	overflow: hidden;
 	.seleted_title {
 		height: 58rpx;
 		padding: 0 38rpx;

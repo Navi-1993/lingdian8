@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-21 10:34:46
- * @LastEditTime: 2019-11-26 14:46:54
+ * @LastEditTime: 2019-11-26 15:47:33
  * @LastEditors: Edmund
  -->
 <template>
@@ -170,8 +170,8 @@ export default {
 				id: that.tabbarList[that.currentTab].id,
 				limit: 20,
 				offset: 1,
-				// type: that.tabbarList[that.currentTab].type * 1
-				type: 5
+				type: that.tabbarList[that.currentTab].type * 1
+				// type: 5
 			}
 			let res = await queryNewsTitle(params)
 			if (res.statusCode === 200) {
@@ -206,7 +206,6 @@ export default {
 					})
 				})
 				that.tabbarList = arr
-				console.log('arr', arr)
 			}
 		},
 
@@ -235,7 +234,7 @@ export default {
 			that.scrollInto = that.tabbarList[idx].tabId
 			// }
 
-			// TODO:当页面数据超过100条，则缓存该tab到cachetab
+			// TODO:当页面数据超过xx条，则缓存该tab到cachetab
 			if (that.newsList[idx].data.length > MAX_CACHE_DATA) {
 				let isExist = that.cacheTab.indexOf(idx)
 				if (isExist < 0) {
@@ -258,7 +257,6 @@ export default {
 		 * @Description: 跳转到新闻详情页
 		 */
 		navi2NewsDetail(item) {
-			console.log('navi2NewsDetail', item)
 			// #ifdef H5
 			that.$Router.push({
 				path: '/pages/news/detail',

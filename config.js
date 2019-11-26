@@ -3,14 +3,14 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-12 15:21:49
- * @LastEditTime: 2019-11-26 14:49:59
+ * @LastEditTime: 2019-11-26 15:44:37
  * @LastEditors: Edmund
  */
 
 const dev = {
   // BASE_URL: 'http://192.168.199.245:8088/', // LEO
-  BASE_URL: 'http://192.168.199.238:8088/', //
-  // BASE_URL: 'http://47.112.131.52:8090/', // 外网
+  // BASE_URL: 'http://192.168.199.238:8088/', //
+  BASE_URL: 'http://47.112.131.52:8090/', // 外网
   MODE: 'dev'
 }
 
