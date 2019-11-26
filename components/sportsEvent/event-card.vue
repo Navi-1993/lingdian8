@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-28 14:37:31
- * @LastEditTime: 2019-11-26 15:17:03
+ * @LastEditTime: 2019-11-26 15:32:10
  * @LastEditors: Edmund
  -->
 
@@ -149,6 +149,9 @@ export default {
 		margin: 0 122rpx 0 122rpx;
 		width: 118rpx;
 		color: $default-text-color-inverse;
+		.status {
+			font-size: 22rpx;
+		}
 		text {
 			font-size: 40rpx;
 		}

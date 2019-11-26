@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-19 09:49:44
- * @LastEditTime: 2019-11-26 15:29:57
+ * @LastEditTime: 2019-11-26 15:41:10
  * @LastEditors: Edmund
  -->
 
@@ -228,13 +228,12 @@ export default {
 		 * @return: void
 		 */
 		itemClick(e) {
-			// that.$sysCall.toast(`当前点击的按钮索引为：${e.index}`)
-			uni.navigateTo({
-				url: '/pages/video/detail'
+			let idx = e.index
+			that.$Router.push({
+				path: '/pages/video/detail_mp4'
 			})
-			that.$Router({
-				path: '/pages/video/detail'
-			})
+			getApp().globalData.routerData = that.actionsheetList[idx]
+			console.log(getApp().globalData.routerData)
 		}
 	},
 	computed: {
