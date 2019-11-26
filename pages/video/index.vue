@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-26 09:58:12
+ * @LastEditTime: 2019-11-26 14:14:03
  * @LastEditors: Edmund
  -->
 
@@ -48,7 +48,7 @@
 												:scroll-with-animation="true">
             <block v-for="(item, index) in videoList[idx].data" :key="index">
               <view class="card" 
-										@tap.stop="navi2(item)">
+										@tap.stop="navi2Player(item)">
                 <view class="poster">
                   <!-- item.imgHref -->
                   <image 	:src="item.imgHref"
@@ -147,8 +147,8 @@ export default {
 		_queryVideoTitle: _.debounce(async (idx) => {
 			that.isLoading = true
 			let params = {
-				// limit: 20,
-				// type: that.tabbarList[that.currentTab].type
+				limit: 20,
+				// type: that.tabbarList[that.currentTab].type,
 				id: that.tabbarList[that.currentTab].id,
 				offset: 1,
 				type: 5
@@ -182,10 +182,13 @@ export default {
 			}
 		},
 
-		navi2(item) {
-			that.$Router.push({
-				path: '/pages/video/detail'
-			})
+		navi2Player(item) {
+			let urlType = item.liveSuffix
+			if (urlType === 'mp4') {
+				that.$Router.push({ path: '/pages/video/detail_mp4' })
+			} else if (urlType === 'm3u8') {
+				that.$Router.push({ path: '/pages/video/detail_m3u8' })
+			}
 			getApp().globalData.routerData = item
 		},
 

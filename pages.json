@@ -46,7 +46,18 @@
       }
     },
     {
-      "path": "pages/video/detail",
+      "path": "pages/video/detail_mp4",
+      "style": {
+        "navigationBarTitleText": "视频详情",
+        "app-plus": {
+          "titleNView": false,
+          "animationType": "slide-in-right",
+          "animationDuration": 300
+        }
+      }
+    },
+    {
+      "path": "pages/video/detail_m3u8",
       "style": {
         "navigationBarTitleText": "视频详情",
         "app-plus": {

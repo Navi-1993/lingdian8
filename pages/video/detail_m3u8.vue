@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-24 23:10:59
- * @LastEditTime: 2019-11-24 23:11:37
+ * @LastEditTime: 2019-11-26 14:04:06
  * @LastEditors: Edmund
  -->
 
@@ -17,24 +17,24 @@
       </text>
       <!-- TODO:player -->
       <!-- #ifdef H5 -->
-      <!-- <iframe src="http://cbs.sports.cctv.com/match.html?id=4412084"
+      <iframe v-if="RouteData.playLive.length === 0 && RouteData.sourceLive.length > 1"
+							:src="RouteData.sourceLive"
 							frameborder="0" 
 							height="100%" 
 							scrolling='auto' 
 							style="width: 1px; min-width: 100%; *width: 100%;">
-			</iframe> -->
-      <player
-        :url="url"
-        :width="750"
-        :height="420"
-        :poster="poster"
-        :type="type"
-      />
+			</iframe>
+      <player	v-if="RouteData.playLive"
+							:url="RouteData.playLive"
+							:width="750"
+							:height="420"
+							:poster="poster"
+							:type="type"/>
       <!-- #endif -->
 
       <!-- 文章详情 -->
       <view class="detail">
-        <view class="title">诺维奇如何破解卫冕冠军曼城的前场高位逼抢？</view>
+        <view class="title">{{RouteData.liveTitle}}</view>
 
         <!-- 详情控件区 -->
         <view class="controls">
@@ -129,10 +129,9 @@ export default {
 			],
 			// TODO: 播放器组件所需数据
 			// url: `http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8`,
-			url: `http://120.24.206.16/videos/20191121/0/5a0dcb07c17908ac/5a0dcb07c17908ac.ts.m3u8`,
-			type: 2,
-			poster: `https://wongxuefeng.com/bg.jpg`,
-			playTimes: 1,
+			type: 2, // 播放器类型，2为hls，m3u8
+			poster: '', // 封面
+			playTimes: 1, // 播放次数
 			commentTimes: 0, // 评论次数
 			commentSum: 0, // 评论总数
 			// TODO: vote行为对象

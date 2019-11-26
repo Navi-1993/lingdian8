@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-20 00:58:12
- * @LastEditTime: 2019-11-25 18:02:00
+ * @LastEditTime: 2019-11-26 14:11:45
  * @LastEditors: Edmund
  -->
 
@@ -17,20 +17,18 @@
       <!-- TODO:player -->
       <!-- #ifdef H5 -->
       <iframe :src="RouteData.sourceLive"
-              v-if="RouteData.sourceLive.length > 1"
+              v-if="RouteData.playLive.length === 0 && RouteData.sourceLive.length > 1"
 							frameborder="0" 
 							height="100%"
 							scrolling='auto' 
 							style="width: 1px; min-width: 100%; *width: 100%;">
 			</iframe>
-      <player
-        v-else
-        :url="url"
-        :width="750"
-        :height="420"
-        :poster="poster"
-        :type="type"
-      />
+      <player	v-if="RouteData.playLive"
+							:url="RouteData.playLive"
+							:width="750"
+							:height="420"
+							:poster="poster"
+							:type="type"/>
       <!-- #endif -->
 
       <!-- 文章详情 -->
@@ -132,9 +130,8 @@ export default {
 				{ otherText: '评论4' }
 			],
 			// TODO: 播放器组件所需数据
-			url: '',
-			type: 1,
-			poster: `https://wongxuefeng.com/bg.jpg`,
+			type: 1, // 播放器类型，1为MP4
+			poster: '',
 			playTimes: 1,
 			commentTimes: 0, // 评论次数
 			commentSum: 0, // 评论总数
@@ -157,8 +154,6 @@ export default {
 		// 配置页面容器自适应高度
 		that.windowHeight = that.$sysCall.windowHeight()
 		that.RouteData = getApp().globalData.routerData
-		console.log(that.RouteData)
-		that.url = that.RouteData
 		// 赋值后，释放内存
 		getApp().globalData.routerData = null
 	},
@@ -213,8 +208,13 @@ export default {
 			background: rgba(255, 255, 255, 1);
 			padding: 23rpx 20rpx 23rpx 20rpx;
 			.title {
-				white-space: nowrap;
 				font-size: 34rpx;
+				display: block;
+				word-break: keep-all;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				font-weight: bold;
 			}
 			.controls {
 				display: flex;
