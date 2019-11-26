@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 22:07:02
- * @LastEditTime: 2019-11-26 18:05:16
+ * @LastEditTime: 2019-11-26 21:53:44
  * @LastEditors: Edmund
  -->
 
@@ -230,7 +230,8 @@ export default {
 			let res = await queryAllMatchList(params)
 			if (res.statusCode === 200) {
 				that.isLoading = false
-				that.matchList[idx].data = res.data.data.list || []
+				that.matchList[idx].data = res.data.data.list
+				console.log(that.matchList[idx].data)
 			} else {
 				that.$sysCall.toast('加载失败，请刷新重试')
 			}
@@ -258,8 +259,24 @@ export default {
 		/**
 		 * @Description: 触底时触发
 		 */
-		scroll2Bottom() {
-			console.log('到底了')
+		async scroll2Bottom() {
+			that.pagesNum++
+			let params = {
+				id: that.tabbarList[that.currentTab].id,
+				limit: 20,
+				offset: that.pagesNum,
+				type: that.tabbarList[that.currentTab].type * 1
+			}
+			that.isLoading = true
+			let res = await queryAllMatchList(params)
+			if (res.statusCode === 200) {
+				that.isLoading = false
+				res.data.data.list.map((item) => {
+					that.matchList[that.currentTab].data.push(item)
+				})
+			} else {
+				that.$sysCall.toast('加载失败，请刷新重试')
+			}
 		},
 
 		/**
@@ -280,6 +297,7 @@ export default {
 			let ty = currentY - that.oldY
 			if (Math.abs(tx) < 50) {
 				if (ty > 120) {
+					// 在此加载更多
 					that.loadmore()
 				}
 			}

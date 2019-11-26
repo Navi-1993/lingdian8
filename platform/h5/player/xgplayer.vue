@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 16:16:10
- * @LastEditTime: 2019-11-24 22:58:32
+ * @LastEditTime: 2019-11-26 21:16:30
  * @LastEditors: Edmund
  -->
 <template>
@@ -14,12 +14,11 @@
   </div>
 </template>
 <script>
-let that
 // #ifdef H5
 import 'xgplayer'
 import Player from 'xgplayer'
 import hlsPlayer from 'xgplayer-hls.js'
-let control
+let that
 // #endif
 export default {
 	name: 'xgPlayer',
@@ -50,18 +49,11 @@ export default {
 	},
 	created() {
 		that = this
-		uni.getSystemInfo({
-			success: function(res) {
-				that.windowWidth = res.windowWidth
-			}
-		})
+		that.windowWidth = that.$sysCall.windowWidth()
 	},
 	mounted() {
 		that.playerInit()
 		// 播放器实例控制器
-		if (control) {
-			// do sth for player
-		}
 	},
 	methods: {
 		/**
@@ -97,7 +89,7 @@ export default {
 				//   innerRotate: true, //只旋转内部video
 				//   clockwise: true // 旋转方向是否为顺时针
 				// }
-				cssFullscreen: true, // 是否开启css全屏样式，显示新控件
+				// cssFullscreen: true, // 是否开启css全屏样式，显示新控件
 				width: (that.width / 750) * that.windowWidth, // 默认600px
 				height:
 					(that.height / that.width) * (that.width / 750) * that.windowWidth // 默认375px

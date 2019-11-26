@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-06 17:16:48
- * @LastEditTime: 2019-11-26 02:03:20
+ * @LastEditTime: 2019-11-26 20:54:23
  * @LastEditors: Edmund
  -->
 <template>
@@ -204,7 +204,6 @@ page {
 	background-color: $default-bg-black;
 	height: 360rpx;
 	.iconLogo {
-		background-color: $default-color-warning;
 		width: 180rpx;
 		height: 180rpx;
 		border-radius: 8rpx;

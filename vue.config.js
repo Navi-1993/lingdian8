@@ -3,10 +3,10 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 13:50:21
- * @LastEditTime: 2019-11-21 02:41:10
+ * @LastEditTime: 2019-11-26 21:18:31
  * @LastEditors: Edmund
- * @FilePath: \lingdian8\vue.config.js
  */
+
 
 
 const path = require('path')

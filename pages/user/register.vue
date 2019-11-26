@@ -177,7 +177,6 @@ page {
 	background-color: $default-bg-black;
 	height: 360rpx;
 	.iconLogo {
-		background-color: $default-color-warning;
 		width: 180rpx;
 		height: 180rpx;
 		border-radius: 8rpx;
