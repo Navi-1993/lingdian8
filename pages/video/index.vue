@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-26 16:53:30
+ * @LastEditTime: 2019-11-26 17:59:32
  * @LastEditors: Edmund
  -->
 
@@ -219,7 +219,6 @@ export default {
 			that.swichNav(that.currentTab)
 		},
 		swichNav: function(idx) {
-			debugger
 			console.log('swichNav', idx)
 			that.currentTab = idx
 			if (that.videoList[idx].data.length === 0) {

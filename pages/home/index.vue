@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 22:07:02
- * @LastEditTime: 2019-11-26 17:08:25
+ * @LastEditTime: 2019-11-26 18:05:16
  * @LastEditors: Edmund
  -->
 
@@ -43,6 +43,7 @@
 					<!-- 在此容器中添加下拉刷新组件 -->
           <scroll-view 	:scroll-y="true" 
 												class="scoll-y"
+												@scrolltolower="scroll2Bottom"
 												@scroll="scroll"
 												@touchstart="touchStart"
 												@touchmove="touchMove">
@@ -110,7 +111,9 @@ export default {
 			couldLoad: true,
 			// TODO: 记录触发操作
 			oldX: 0,
-			oldY: 0
+			oldY: 0,
+			// TODO: 赛事数据请求页码
+			pagesNum: 1
 		}
 	},
 	beforeCreate() {
@@ -220,8 +223,8 @@ export default {
 			that.isLoading = true
 			let params = {
 				id: that.tabbarList[that.currentTab].id,
-				// limit: 20,
-				offset: 1,
+				limit: 20,
+				offset: that.pagesNum,
 				type: that.tabbarList[that.currentTab].type * 1
 			}
 			let res = await queryAllMatchList(params)
@@ -251,6 +254,12 @@ export default {
 			if (scrollTop > 10 && scrollTop <= 20) {
 				that.couldLoad = false
 			}
+		},
+		/**
+		 * @Description: 触底时触发
+		 */
+		scroll2Bottom() {
+			console.log('到底了')
 		},
 
 		/**
