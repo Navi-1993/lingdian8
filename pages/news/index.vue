@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-21 10:34:46
- * @LastEditTime: 2019-11-26 22:01:45
+ * @LastEditTime: 2019-11-26 23:17:46
  * @LastEditors: Edmund
  -->
 <template>
@@ -49,7 +49,7 @@
 									previous-margin="60rpx"
 									next-margin="60rpx"
 									class="banner">
-							<block v-for="(item,index) in bannerList" :key="index">
+							<block v-for="(item,index) in newsList[idx].data" :key="index">
 								<swiper-item class="banner_item" >
 									<image 	:src="'../../static/assets/default.png'"
 													class="banner_item_img"
@@ -335,11 +335,12 @@ export default {
 	},
 	computed: {
 		bannerList() {
-			let list = that.newsList.filter((item) => {
-				// 找出推荐数据
-				return item.isRecommend === '0'
-			})
-			return list
+			// let list = that.newsList.filter((item) => {
+			// 	// 找出推荐数据
+			// 	return item.isRecommend === '0'
+			// })
+			// return list
+			return that.newsList
 		}
 	},
 	watch: {}
@@ -409,10 +410,11 @@ page {
 			&_title {
 				position: absolute;
 				bottom: 060rpx;
+				z-index: 100;
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				font-size: 22rpx;
+				font-size: 88rpx;
 				background: $default-text-color-white;
 				word-wrap: none;
 			}
