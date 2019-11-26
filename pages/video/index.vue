@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-26 17:59:32
+ * @LastEditTime: 2019-11-26 22:18:56
  * @LastEditors: Edmund
  -->
 
@@ -43,6 +43,7 @@
 												:style="{ height: windowHeight - 40 + 'px' }"
 												:scroll-with-animation="true"
 												@scroll="scroll"
+												@scrolltolower="scroll2Bottom"
 												@touchstart="touchStart"
 												@touchmove="touchMove">
 							<loadmore :visible="loadingMore"
@@ -116,6 +117,7 @@ export default {
 			scrollInto: '',
 			loadingMore: false, // 显示下拉刷新
 			couldLoad: true,
+			pagesNum: 0,
 			// TODO: 记录触发操作
 			oldX: 0,
 			oldY: 0,
@@ -158,7 +160,7 @@ export default {
 		_queryVideoTitle: _.debounce(async (idx) => {
 			that.isLoading = true
 			let params = {
-				limit: 20,
+				limit: 10,
 				// type: that.tabbarList[that.currentTab].type,
 				id: that.tabbarList[that.currentTab].id,
 				offset: 1,
@@ -284,7 +286,26 @@ export default {
 			setTimeout(() => {
 				that.loadingMore = false
 			}, 2000)
-		}, 300)
+		}, 300),
+		async scroll2Bottom() {
+			that.pagesNum++
+			let params = {
+				id: that.tabbarList[that.currentTab].id,
+				limit: 10,
+				offset: that.pagesNum,
+				type: 5
+			}
+			that.isLoading = true
+			let res = await queryVideoTitle(params)
+			if (res.statusCode === 200) {
+				that.isLoading = false
+				res.data.data.list.map((item) => {
+					that.videoList[that.currentTab].data.push(item)
+				})
+			} else {
+				that.$sysCall.toast('加载失败，请刷新重试')
+			}
+		}
 	},
 	computed: {},
 	watch: {}

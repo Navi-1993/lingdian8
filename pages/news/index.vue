@@ -3,13 +3,14 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-21 10:34:46
- * @LastEditTime: 2019-11-26 16:54:17
+ * @LastEditTime: 2019-11-26 22:01:45
  * @LastEditors: Edmund
  -->
 <template>
   <view
     class="container"
-    :style="{ height: windowHeight + 'px', minHeight: windowHeight + 'px' }"
+    :style="{ height: windowHeight + 'px',
+							minHeight: windowHeight + 'px' }"
   >
     <!-- tabbar -->
     <scroll-view	class="tab-view"
@@ -67,6 +68,7 @@
 												:scroll-with-animation="true"
 												:scroll-left="scrollLeft"
 												@scroll="scroll"
+												@scrolltolower="scroll2Bottom"
 												@touchstart="touchStart"
 												@touchmove="touchMove">
 						<loadmore :visible="loadingMore"
@@ -131,6 +133,7 @@ export default {
 			scrollLeft: 0, //tab标题的滚动条位置
 			isLoading: false, // 加载弹窗
 			scrollInto: '',
+			pagesNum: 0,
 			cacheTab: [], // 缓存tab
 			// TODO: 新闻数据
 			newsList: [],
@@ -171,7 +174,6 @@ export default {
 				limit: 20,
 				offset: 1,
 				type: that.tabbarList[that.currentTab].type * 1
-				// type: 5
 			}
 			let res = await queryNewsTitle(params)
 			if (res.statusCode === 200) {
@@ -229,10 +231,7 @@ export default {
 			if (that.newsList[idx].data.length === 0) {
 				that._queryNewsTitle(idx)
 			}
-			// 当前tab为5的倍数，则调整一次tab
-			// if (idx % 3 == 0) {
 			that.scrollInto = that.tabbarList[idx].tabId
-			// }
 
 			// TODO:当页面数据超过xx条，则缓存该tab到cachetab
 			if (that.newsList[idx].data.length > MAX_CACHE_DATA) {
@@ -251,6 +250,25 @@ export default {
 		clearTabData(idx) {
 			this.newsList[idx].data.length = 0
 			this.newsList[idx].loadingText = '加载更多...'
+		},
+		async scroll2Bottom() {
+			that.pagesNum++
+			let params = {
+				id: that.tabbarList[that.currentTab].id,
+				limit: 20,
+				offset: that.pagesNum,
+				type: that.tabbarList[that.currentTab].type * 1
+			}
+			that.isLoading = true
+			let res = await queryNewsTitle(params)
+			if (res.statusCode === 200) {
+				that.isLoading = false
+				res.data.data.list.map((item) => {
+					that.newsList[that.currentTab].data.push(item)
+				})
+			} else {
+				that.$sysCall.toast('加载失败，请刷新重试')
+			}
 		},
 
 		/**
@@ -307,8 +325,8 @@ export default {
 			}
 		},
 		loadmore: _.debounce(() => {
-			that.$sysCall.toast('使用防抖控制loadmore行为加载更多')
 			that.loadingMore = true
+			that.pagesNum = 0
 			that._queryNewsTitle(that.currentTab)
 			setTimeout(() => {
 				that.loadingMore = false

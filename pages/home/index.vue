@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 22:07:02
- * @LastEditTime: 2019-11-26 21:53:44
+ * @LastEditTime: 2019-11-26 21:59:34
  * @LastEditors: Edmund
  -->
 
@@ -208,7 +208,6 @@ export default {
 				let cacheIndex = that.cacheTab[0]
 				that.clearTabData(cacheIndex)
 				that.cacheTab.splice(0, 1)
-				// console.log('remove cache index:: ' + cacheIndex)
 			}
 		},
 		clearTabData(idx) {
@@ -231,7 +230,6 @@ export default {
 			if (res.statusCode === 200) {
 				that.isLoading = false
 				that.matchList[idx].data = res.data.data.list
-				console.log(that.matchList[idx].data)
 			} else {
 				that.$sysCall.toast('加载失败，请刷新重试')
 			}
@@ -304,6 +302,7 @@ export default {
 		},
 		loadmore: _.debounce(() => {
 			that.loadingMore = true
+			that.pagesNum = 0
 			that._queryAllMatchList(that.currentTab)
 			setTimeout(() => {
 				that.loadingMore = false
