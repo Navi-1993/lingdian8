@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-28 14:37:31
- * @LastEditTime: 2019-11-26 11:52:08
+ * @LastEditTime: 2019-11-26 15:17:03
  * @LastEditors: Edmund
  -->
 
@@ -20,12 +20,12 @@
                 <text>{{homeTeamName}}</text>
               </view>
               <view class="controls">
+								<view class="status">{{matchStatement}}</view>
                 <text class="iconfont"
 											v-if="!isVsLogo">&#xe600;</text>
 								<view class="vsLogo"
 											v-if="isVsLogo">VS</view>
                 <text class="videoControls"
-                      v-if="livesUrl !== ''"
                       @tap="bottomToast">
                       视频直播
                 </text>
@@ -49,6 +49,9 @@ export default {
 			type: Boolean,
 			default: false
 		},
+		status: {
+			type: String
+		},
 		homeTeamName: {
 			type: String,
 			default: 'homeTeamName'
@@ -58,8 +61,8 @@ export default {
 			default: 'guestTeamName'
 		},
 		livesUrl: {
-			type: String,
-			default: ''
+			type: Array,
+			default: []
 		},
 		teamALogo: {
 			type: String,
@@ -90,7 +93,23 @@ export default {
 			this.$emit('toast', {})
 		}
 	},
-	computed: {},
+	computed: {
+		matchStatement() {
+			let str
+			switch (this.status) {
+				case '0':
+					str = '进行中'
+					break
+				case '1':
+					str = '未开始'
+					break
+				case '2':
+					str = '已结束'
+					break
+			}
+			return str
+		}
+	},
 	watch: {}
 }
 </script>
@@ -127,7 +146,7 @@ export default {
 		margin-left: 106rpx;
 	}
 	.controls {
-		margin: 46rpx 122rpx 0 122rpx;
+		margin: 0 122rpx 0 122rpx;
 		width: 118rpx;
 		color: $default-text-color-inverse;
 		text {

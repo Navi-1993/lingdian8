@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-19 09:49:44
- * @LastEditTime: 2019-11-26 10:48:18
+ * @LastEditTime: 2019-11-26 15:29:57
  * @LastEditors: Edmund
  -->
 
@@ -18,9 +18,10 @@
 									:homeTeamName="routerData.homeTeamName"
 									:guestTeamName="routerData.guestTeamName"
 									:isVsLogo="true"
+									:status="routerData.matchState"
 									:teamALogo="routerData.homeTeamLogoPath"
                   :teamBLogo="routerData.guestTeamLogoPath"
-									:livesUrl="'https://www.wongxuefeng.com'"
+									:livesUrl="routerData.matchLiveSourceDOS"
 									@toast="actionsheetOpen"/>
       <progress-bar
 										class="progress"
@@ -107,16 +108,7 @@ export default {
 			],
 			// TODO: 底部弹窗控件
 			// 操作栏数据组
-			actionsheetList: [
-				{
-					text: '龙珠',
-					color: '#1a1a1a'
-				},
-				{
-					text: '斗鱼',
-					color: '#1a1a1a'
-				}
-			],
+			actionsheetList: [],
 			tips: '请选择一个播放源', //
 			maskClosable: true, // 点击蒙版是否可以关闭组件
 			color: '#9a9a9a',
@@ -141,8 +133,11 @@ export default {
 		that = this
 		that.windowHeight = that.$sysCall.windowHeight()
 		that.routerData = getApp().globalData.routerData
-		console.log('routerData', that.routerData)
-		// 释放全局变量内存
+		that.routerData.matchLiveSourceDOS.map((item) => {
+			item.text = item.liveSourceName
+		})
+		that.actionsheetList = that.routerData.matchLiveSourceDOS
+		console.log('routerData', that.actionsheetList)
 		getApp().globalData.routerData = null
 	},
 	onLoad() {},
@@ -168,6 +163,8 @@ export default {
 		 * @return: void
 		 */
 		actionsheetOpen() {
+			if (that.routerData.matchLiveSourceDOS.length === 0)
+				return that.$sysCall.toast('该赛事没有直播源')
 			that.showActionSheet = true
 			// do sth
 			uni.hideKeyboard() // 隐藏软键盘

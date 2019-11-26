@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-21 10:34:46
- * @LastEditTime: 2019-11-26 00:26:14
+ * @LastEditTime: 2019-11-26 14:46:54
  * @LastEditors: Edmund
  -->
 <template>
@@ -62,12 +62,18 @@
       		</swiper>
 					<view class="bannerStepStone"></view>
 					<!-- 数据列表 -->
-          <scroll-view
-            :scroll-y="true"
-            style="height:720rpx;"
-            :scroll-with-animation="true"
-            :scroll-left="scrollLeft"
-          >
+          <scroll-view	:scroll-y="true"
+												style="height:720rpx;"
+												:scroll-with-animation="true"
+												:scroll-left="scrollLeft"
+												@scroll="scroll"
+												@touchstart="touchStart"
+												@touchmove="touchMove">
+						<loadmore :visible="loadingMore"
+											:index="3"
+											type="primary"
+											text=" ">
+          	</loadmore>
 						<!-- card_item -->
             <block v-for="(item,index) in newsList[idx].data" :key="index">
 								<view class="card_item"
@@ -104,15 +110,17 @@
 let that
 import _ from 'underscore'
 import tuiLoading from 'components/loading/loading.vue'
+import loadmore from 'components/loadmore/loadmore'
 import { queryAllEvent } from 'api/match.js'
 import { queryNewsTitle } from 'api/news.js'
 // 定义每页的缓存数据长度与在该清空下缓存的页码
-const MAX_CACHE_DATA = 50
-const MAX_CACHE_PAGE = 3
+const MAX_CACHE_DATA = 20
+const MAX_CACHE_PAGE = 1
 export default {
 	name: 'news-index',
 	components: {
-		tuiLoading
+		tuiLoading,
+		loadmore
 	},
 	props: {},
 	data() {
@@ -125,7 +133,12 @@ export default {
 			scrollInto: '',
 			cacheTab: [], // 缓存tab
 			// TODO: 新闻数据
-			newsList: []
+			newsList: [],
+			couldLoad: true,
+			loadingMore: false, // 显示下拉刷新
+			// TODO: 记录触发操作
+			oldX: 0,
+			oldY: 0
 		}
 	},
 	created() {
@@ -257,7 +270,52 @@ export default {
 				url: `/pages/news/detail?id=${item.id}`
 			})
 			// #endif
-		}
+		},
+		/**
+		 * @Description: 滚动容器滚动时触发
+		 * @param {type}
+		 * @return:
+		 */
+		scroll(e) {
+			let scrollTop = e.mp.target.scrollTop
+			if (scrollTop < 10) {
+				that.couldLoad = true
+			}
+			if (scrollTop > 10 && scrollTop <= 20) {
+				that.couldLoad = false
+			}
+		},
+
+		/**
+		 * @Description: 开始触摸盒子容器时触发
+		 */
+		touchStart(e) {
+			that.oldX = e.touches[0].pageX
+			that.oldY = e.touches[0].pageY
+		},
+		/**
+		 * @Description: 手指在盒子容器中滑动过程中触发
+		 */
+		touchMove(e) {
+			if (!that.couldLoad) return
+			let currentX = e.touches[0].pageX
+			let currentY = e.touches[0].pageY
+			let tx = currentX - that.oldX
+			let ty = currentY - that.oldY
+			if (Math.abs(tx) < 50) {
+				if (ty > 120) {
+					that.loadmore()
+				}
+			}
+		},
+		loadmore: _.debounce(() => {
+			that.$sysCall.toast('使用防抖控制loadmore行为加载更多')
+			that.loadingMore = true
+			that._queryNewsTitle(that.currentTab)
+			setTimeout(() => {
+				that.loadingMore = false
+			}, 2000)
+		}, 300)
 	},
 	computed: {
 		bannerList() {

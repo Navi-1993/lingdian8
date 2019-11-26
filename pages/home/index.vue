@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-11-18 22:07:02
- * @LastEditTime: 2019-11-26 09:57:50
+ * @LastEditTime: 2019-11-26 15:08:14
  * @LastEditors: Edmund
  -->
 
@@ -32,17 +32,25 @@
       <view class="tabbar-controls" @click="navi2Drag">+</view>
     </scroll-view>
 		<!-- 下层组件 -->
-    <swiper
-      class="tab-content"
-      :current="currentTab"
-      duration="300"
-      :style="{ height: windowHeight + 'px' }"
-      @change="switchTab">
+    <swiper	class="tab-content"
+						:current="currentTab"
+						duration="300"
+						:style="{ height: windowHeight + 'px' }"
+						@change="switchTab">
 			<!-- item -->
       <block v-for="(item, idx) in tabbarList" :key="idx">
         <swiper-item >
+					<!-- 在此容器中添加下拉刷新组件 -->
           <scroll-view 	:scroll-y="true" 
-												class="scoll-y">
+												class="scoll-y"
+												@scroll="scroll"
+												@touchstart="touchStart"
+												@touchmove="touchMove">
+						<loadmore :visible="loadingMore"
+											:index="3"
+											type="primary"
+											text=" ">
+          	</loadmore>
             <calendar>
               <text slot="date">11月24日 星期天</text>
             </calendar>
@@ -51,8 +59,9 @@
                 <event-card		:homeTeamName="item.homeTeamName"
 															:guestTeamName="item.guestTeamName"
 															:teamALogo="item.homeTeamLogoPath"
+															:status="item.matchState"
 															:teamBLogo="item.guestTeamLogoPath"
-															:livesUrl="''">
+															:livesUrl="['test']">
                   <text slot="text">
                     {{ item.matchBeginTime }}
                     {{ item.matchTitle }}
@@ -74,16 +83,18 @@ import _ from 'underscore'
 import calendar from 'components/time_module/calendar.vue'
 import tuiLoading from 'components/loading/loading.vue'
 import eventCard from 'components/sportsEvent/event-card.vue'
+import loadmore from 'components/loadmore/loadmore'
 import { queryAllEvent, queryAllMatchList } from '@/api/match.js'
 
 // 定义每页的缓存数据长度与在该清空下缓存的页码
 const MAX_CACHE_DATA = 5
-const MAX_CACHE_PAGE = 3
+const MAX_CACHE_PAGE = 1
 export default {
 	components: {
 		calendar,
 		eventCard,
-		tuiLoading
+		tuiLoading,
+		loadmore
 	},
 	data() {
 		return {
@@ -93,8 +104,13 @@ export default {
 			currentTab: 0, //预设当前tab项的值
 			scrollLeft: 0, //tab标题的滚动条位置
 			isLoading: false, // 加载弹窗
+			loadingMore: false, // 显示下拉刷新
 			scrollInto: '',
-			cacheTab: [] // 缓存tab
+			cacheTab: [], // 缓存tab
+			couldLoad: true,
+			// TODO: 记录触发操作
+			oldX: 0,
+			oldY: 0
 		}
 	},
 	beforeCreate() {
@@ -221,7 +237,52 @@ export default {
 				that.isLoading = false
 			}, 2000)
 			// 1秒防抖
-		}, 1000)
+		}, 1000),
+		/**
+		 * @Description: 滚动容器滚动时触发
+		 * @param {type}
+		 * @return:
+		 */
+		scroll(e) {
+			let scrollTop = e.mp.target.scrollTop
+			if (scrollTop < 10) {
+				that.couldLoad = true
+			}
+			if (scrollTop > 10 && scrollTop <= 20) {
+				that.couldLoad = false
+			}
+		},
+
+		/**
+		 * @Description: 开始触摸盒子容器时触发
+		 */
+		touchStart(e) {
+			that.oldX = e.touches[0].pageX
+			that.oldY = e.touches[0].pageY
+		},
+		/**
+		 * @Description: 手指在盒子容器中滑动过程中触发
+		 */
+		touchMove(e) {
+			if (!that.couldLoad) return
+			let currentX = e.touches[0].pageX
+			let currentY = e.touches[0].pageY
+			let tx = currentX - that.oldX
+			let ty = currentY - that.oldY
+			if (Math.abs(tx) < 50) {
+				if (ty > 120) {
+					that.loadmore()
+				}
+			}
+		},
+		loadmore: _.debounce(() => {
+			that.$sysCall.toast('使用防抖控制loadmore行为加载更多')
+			that.loadingMore = true
+			that._queryAllMatchList(that.currentTab)
+			setTimeout(() => {
+				that.loadingMore = false
+			}, 2000)
+		}, 300)
 	},
 	computed: {},
 	watch: {}

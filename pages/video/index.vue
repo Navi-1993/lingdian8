@@ -3,7 +3,7 @@
  * @Author: Edmund
  * @Email: q1592193221@gmail.com
  * @Date: 2019-10-21 14:20:23
- * @LastEditTime: 2019-11-26 14:14:03
+ * @LastEditTime: 2019-11-26 14:44:41
  * @LastEditors: Edmund
  -->
 
@@ -34,49 +34,55 @@
       </block>
       <view class="tabbar-controls" @click="navi2Drag">+</view>
     </scroll-view>
-    <swiper
-						class="tab-content"
+    <swiper	class="tab-content"
 						:current="currentTab"
 						duration="300"
 						:style="{ height: windowHeight + 'px', minHeight: windowHeight + 'px' }"
 						@change="switchTab">
       <block v-for="(item, idx) in tabbarList" :key="idx">
         <swiper-item>
-          <scroll-view
-												:scroll-y="true"
+          <scroll-view	:scroll-y="true"
 												:style="{ height: windowHeight - 40 + 'px' }"
-												:scroll-with-animation="true">
-            <block v-for="(item, index) in videoList[idx].data" :key="index">
-              <view class="card" 
-										@tap.stop="navi2Player(item)">
-                <view class="poster">
-                  <!-- item.imgHref -->
-                  <image 	:src="item.imgHref"
-													class="image" 
-													mode="aspectFill">
-                  </image>
-                  <text class="playBtn iconfont">
-                    &#xe620;
-                  </text>
-                </view>
-                <view class="controls">
-                  <view class="sheet_l">
-                    <view 	style="margin-right:10rpx" 
-														class="iconfont">
-                      &#xe61f;
-                    </view>
-                    <view>99999</view>
-                  </view>
-                  <view class="sheet_r">
-                    <view style="margin-right:10rpx" class="iconfont">
-                      &#xe642;
-                    </view>
-                    <view>{{ item.likeNumber || 0 }}</view>
-                  </view>
-                </view>
-                <view class="title">{{ item.liveTitle }}</view>
-              </view>
-            </block>
+												:scroll-with-animation="true"
+												@scroll="scroll"
+												@touchstart="touchStart"
+												@touchmove="touchMove">
+							<loadmore :visible="loadingMore"
+												:index="3"
+												type="primary"
+												text=" ">
+          		</loadmore>
+							<block v-for="(item, index) in videoList[idx].data" :key="index">
+								<view class="card" 
+											@tap.stop="navi2Player(item)">
+									<view class="poster">
+										<!-- item.imgHref -->
+										<image 	:src="item.imgHref"
+														class="image" 
+														mode="aspectFill">
+										</image>
+										<text class="playBtn iconfont">
+											&#xe620;
+										</text>
+									</view>
+									<view class="controls">
+										<view class="sheet_l">
+											<view 	style="margin-right:10rpx" 
+															class="iconfont">
+												&#xe61f;
+											</view>
+											<view>99999</view>
+										</view>
+										<view class="sheet_r">
+											<view style="margin-right:10rpx" class="iconfont">
+												&#xe642;
+											</view>
+											<view>{{ item.likeNumber || 0 }}</view>
+										</view>
+									</view>
+									<view class="title">{{ item.liveTitle }}</view>
+								</view>
+							</block>
           </scroll-view>
         </swiper-item>
       </block>
@@ -90,6 +96,7 @@
 let that
 import _ from 'underscore'
 import tuiLoading from 'components/loading/loading.vue'
+import loadmore from 'components/loadmore/loadmore'
 import { queryAllEvent } from '@/api/match.js'
 import { queryVideoTitle, queryLiveContent } from 'api/video.js'
 // 定义每页的缓存数据长度与在该清空下缓存的页码
@@ -98,7 +105,8 @@ const MAX_CACHE_PAGE = 3
 export default {
 	name: 'video',
 	components: {
-		tuiLoading
+		tuiLoading,
+		loadmore
 	},
 	props: {},
 	data() {
@@ -108,6 +116,11 @@ export default {
 			currentTab: 0, //预设当前tab项的值
 			isLoading: false, // 加载弹窗
 			scrollInto: '',
+			loadingMore: false, // 显示下拉刷新
+			couldLoad: true,
+			// TODO: 记录触发操作
+			oldX: 0,
+			oldY: 0,
 			cacheTab: [], // 缓存tab
 			// TODO: 视频所用数据
 			videoList: []
@@ -228,7 +241,52 @@ export default {
 				that.clearTabData(cacheIndex)
 				that.cacheTab.splice(0, 1)
 			}
-		}
+		},
+		/**
+		 * @Description: 滚动容器滚动时触发
+		 * @param {type}
+		 * @return:
+		 */
+		scroll(e) {
+			let scrollTop = e.mp.target.scrollTop
+			if (scrollTop < 10) {
+				that.couldLoad = true
+			}
+			if (scrollTop > 10 && scrollTop <= 20) {
+				that.couldLoad = false
+			}
+		},
+
+		/**
+		 * @Description: 开始触摸盒子容器时触发
+		 */
+		touchStart(e) {
+			that.oldX = e.touches[0].pageX
+			that.oldY = e.touches[0].pageY
+		},
+		/**
+		 * @Description: 手指在盒子容器中滑动过程中触发
+		 */
+		touchMove(e) {
+			if (!that.couldLoad) return
+			let currentX = e.touches[0].pageX
+			let currentY = e.touches[0].pageY
+			let tx = currentX - that.oldX
+			let ty = currentY - that.oldY
+			if (Math.abs(tx) < 50) {
+				if (ty > 120) {
+					that.loadmore()
+				}
+			}
+		},
+		loadmore: _.debounce(() => {
+			that.$sysCall.toast('使用防抖控制loadmore行为加载更多')
+			that._queryVideoTitle(that.currentTab)
+			that.loadingMore = true
+			setTimeout(() => {
+				that.loadingMore = false
+			}, 2000)
+		}, 300)
 	},
 	computed: {},
 	watch: {}
