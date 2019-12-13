@@ -1,5 +1,4 @@
 # lingdian8
-> One Product of Ultron
 
 ### Author: Edmund
 > Email: q1592193221@gmail.com
